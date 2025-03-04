@@ -6,6 +6,9 @@ function Home() {
   return (
     <div>
       <Header/>
+      <main>
+        
+      </main>
     </div>
   )
 }

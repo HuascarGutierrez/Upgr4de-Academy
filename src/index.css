@@ -1,0 +1,44 @@
+:root {
+  /* Paleta de colores */
+  --color-primary: #0B7077;
+  --color-secondary: #D2E6E4;
+  --color-accent: #E58200; 
+  --color-background: #F5F5F5;
+  --color-text: #333333;
+
+  /* Tipografía */
+  --font-size-base: 1em;
+  --font-size-lg: 1.25em;
+  --font-size-sm: 0.90em;
+  --font-family: "Arial", sans-serif;
+
+  /* Espaciado */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+
+  /* Bordes y sombras */
+  --border-radius: 8px;
+  --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: italic;
+  src: url('fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #D2E6E4;
+    --color-secondary: #0B7077;
+    --color-accent: #E58200; 
+    --color-background: #1e1e1e;
+    --color-text: #ffffff;
+  }
+}

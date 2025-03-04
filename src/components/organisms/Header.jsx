@@ -3,7 +3,7 @@ import './styles/Header.css'
 function Header() {
   return (
     <header className='header'>
-        <video muted loop className='header_video' src="video/header-video.mp4"></video>
+        <video autoPlay muted loop className='header_video' src="video/header-video.webm"></video>
         <div className="header_overlay"></div>
         
         <div className="header_content">

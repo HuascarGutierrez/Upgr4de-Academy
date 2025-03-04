@@ -3,6 +3,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: Raleway;
+  min-height: 100dvh;
 }
 
 h2 {

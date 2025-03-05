@@ -8,7 +8,7 @@
     backdrop-filter: blur(10px);
     background-color: #fff1;
     display: flex;
-    justify-content: space-around;
+    justify-content: stretch;
     align-items: center;
 }
 
@@ -23,12 +23,15 @@
 }
 
 .logo_title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--color-primary);
 }
 
 .nav_items {
     display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    flex: 1;
 }
 
 .nav_item {
@@ -36,6 +39,13 @@
     letter-spacing: 2px;
     transition: color .5s ease;
     color: #fff;
+}
+
+.nav_item>a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav_item:hover {
@@ -48,7 +58,7 @@
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
 
     .nav {
         justify-content: space-between;

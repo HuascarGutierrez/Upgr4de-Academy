@@ -1,6 +1,8 @@
 import "./styles/Nav.css";
+import { useNavigate } from 'react-router-dom'
 
 function Nav() {
+  const navigate = useNavigate()
   return (
     <nav className="nav">
       <div className="nav_logo">
@@ -8,18 +10,18 @@ function Nav() {
         <span className="logo_title">Upgr4de Academy</span>
       </div>
       <ul className="nav_items">
-        <ul className="nav_item">
+        <li onClick={() => {navigate('/')}} className="nav_item">
           <p>Home</p>
-        </ul>
-        <ul className="nav_item">
-          <p>SAPI</p>
-        </ul>
-        <ul className="nav_item">
+        </li>
+        <li className="nav_item">
+          <a href="https://sapi-education.netlify.app/">SAPI</a>
+        </li>
+        <li className="nav_item">
           <p>Blog</p>
-        </ul>
-        <ul className="nav_item">
+        </li>
+        <li onClick={() => {navigate('/')}} className="nav_item">
           <p>Sobre Nosotros</p>
-        </ul>
+        </li>
       </ul>
 
       {/**<button className="nav_list_icon" onClick={()=>{setShowList(!showList)}}>

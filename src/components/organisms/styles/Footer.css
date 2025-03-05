@@ -1,0 +1,38 @@
+.footer {
+    background-color: var(--color-primary);
+    height: fit-content;
+    padding: 2% 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer_section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer_section p{
+    color: var(--color-secondary);
+}
+
+.footer_section_title{
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-secondary);
+}
+
+@media (max-width: 500px) {
+    .footer{
+        height: 28vh;
+    }
+    .footer_section .main-logo{
+        display: none;
+    }
+    .footer_section_materias{
+        display: none;
+    }
+}

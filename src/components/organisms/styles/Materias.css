@@ -1,0 +1,29 @@
+.materias {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-inline: 1em;
+    gap: 1.5em;
+    align-items: stretch;
+}
+
+.materias_title {
+    font-size: 3em;
+}
+
+@media screen and (max-width: 500px) {
+    .materias {
+        gap: 10px;
+    }
+
+    .materias_title{
+        font-size: 2.5em;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .materias_title {
+        color: var(--color-secondary);
+    }
+}

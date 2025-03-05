@@ -1,0 +1,41 @@
+.list {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--color-secondary);
+    border-radius: 2.5em;
+}
+
+.list_title {
+    font-size: 3em;
+    min-height: min-content;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    text-wrap: balance;
+    text-align: center;
+}
+
+.list_ul {
+    display: block;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    flex-grow: 1;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+.list_item {
+    font-size: 2em;
+    text-shadow: 0 0 50px #777;
+    width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+    .list_item {
+        font-size: 1.5em;
+    }
+}

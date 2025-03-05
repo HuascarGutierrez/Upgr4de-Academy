@@ -1,0 +1,7 @@
+.padresTutores {
+    flex-direction: row-reverse;
+}
+
+.padresTutores_img {
+    object-position: center;
+}

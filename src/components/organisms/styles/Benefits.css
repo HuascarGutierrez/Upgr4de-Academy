@@ -1,0 +1,23 @@
+.benefits {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+.benefits_img {
+    display: block;
+    width: 40%;
+    background-color: var(--color-primary);
+    object-fit: cover;
+    object-position: 60%;
+    border-radius: 2.5em;
+}
+
+@media screen and (max-width: 500px) {
+    .benefits_img {
+        display: none;
+    }
+}

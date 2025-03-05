@@ -2,11 +2,11 @@
     width: 80%;
     display: grid;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(6, minmax(100px,1fr));
+    grid-template-columns: repeat(6, minmax(40px,1fr));
     grid-template-rows: minmax(100px, min-content) minmax(100px, min-content) minmax(100px, min-content);
     align-items: center;
+    margin: auto;
     gap: 20px;
-    align-content: center;
 }
 
 .sapi_element {
@@ -46,6 +46,14 @@
     display: block;
     width: min-content;
     margin: auto;
+}
+
+.sapi_materias {
+    text-align: center;
+}
+
+.sapi_materias span {
+    color: var(--color-primary);
 }
 
 .sapi_ceo {
@@ -92,7 +100,7 @@
     }
 
     .sapi_grid {
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-template-rows: none;
         grid-auto-rows: min-content;
         gap: 15px;

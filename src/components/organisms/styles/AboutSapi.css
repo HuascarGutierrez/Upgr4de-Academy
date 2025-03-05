@@ -1,0 +1,63 @@
+.sapi_grid {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(6, minmax(100px,1fr));
+    grid-template-rows: repeat(3, minmax(100px,1fr));
+    align-items: center;
+    gap: 10px;
+}
+
+.sapi_element {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f009;
+    border-radius: 50px;
+}
+
+.sapi_text {
+    grid-column: span 3;
+    grid-row: span 1;
+}
+
+.sapi_title {
+    grid-column: span 3;
+    grid-row: span 1;
+
+}
+
+.sapi_ceo {
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.sapi-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 40% 50%;
+}
+
+
+
+.sapi_materias, .sapi_description, .sapi_pet {
+    grid-column: span 2;
+}
+
+@media screen and (max-width: 500px) {
+    .sapi_element {
+        grid-area: span 1/ span 2;
+    }
+    .sapi_grid {
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: none;
+        grid-auto-rows: 150px;
+    }
+    .sapi_text {
+        grid-area: span 1/span 4;
+    }
+    .sapi_materias {
+        grid-area: span 1/span 4;
+        order: 1;
+    }
+}

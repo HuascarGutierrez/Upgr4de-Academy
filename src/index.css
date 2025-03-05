@@ -4,7 +4,7 @@
   --color-secondary: #393939;
   --color-accent: #E58200; 
   --color-background: #F5F6F5;
-  --color-text: #333;
+  --color-text: #111;
 
   /* Tipografía */
   --font-size-base: 1em;
@@ -38,7 +38,7 @@
     --color-primary: #E6C151;
     --color-secondary: #393939;
     --color-accent: #E58200; 
-    --color-background: #333;
+    --color-background: #111;
     --color-text: #F5F6F5;
   }
 }

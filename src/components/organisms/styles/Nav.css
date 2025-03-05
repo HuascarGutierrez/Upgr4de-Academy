@@ -68,6 +68,5 @@
     
     .nav_item {
         padding: 1px;
-        border-right: 2px solid var(--color-background);
     }
 }

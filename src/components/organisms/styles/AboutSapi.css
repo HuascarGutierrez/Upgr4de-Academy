@@ -1,18 +1,30 @@
 .sapi_grid {
+    width: 80%;
     display: grid;
     grid-auto-flow: dense;
     grid-template-columns: repeat(6, minmax(100px,1fr));
-    grid-template-rows: repeat(3, minmax(100px,1fr));
+    grid-template-rows: minmax(100px, min-content) minmax(100px, min-content) minmax(100px, min-content);
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    align-content: center;
 }
 
 .sapi_element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #f009;
-    border-radius: 50px;
+    background-color: #333;
+    border-radius: 2.5rem;
+    padding-inline: 20px;
+    text-wrap: pretty;
+}
+
+.sapi_element p{
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .sapi_text {
@@ -23,12 +35,26 @@
 .sapi_title {
     grid-column: span 3;
     grid-row: span 1;
+    color: #333;
+    font-weight: 900;
+    letter-spacing: 2px;
+    align-items: center;
+    font-size: 3em;
+}
 
+.sapi_title h2{
+    display: block;
+    width: min-content;
+    margin: auto;
 }
 
 .sapi_ceo {
     grid-column: span 3;
     grid-row: span 2;
+}
+
+.sapi_ceo, .sapi_pet{
+    padding: 0 !important;
 }
 
 .sapi-img{
@@ -38,7 +64,13 @@
     object-position: 40% 50%;
 }
 
+.sapi-yellow {
+    background-color: var(--color-primary);
+}
 
+.sapi_materias p, .sapi_description p{
+    font-size: 2.5rem;
+}
 
 .sapi_materias, .sapi_description, .sapi_pet {
     grid-column: span 2;
@@ -47,17 +79,28 @@
 @media screen and (max-width: 500px) {
     .sapi_element {
         grid-area: span 1/ span 2;
+        border-radius: 20px;
     }
+
+    .sapi_element p{
+        font-size: 1em;
+    }
+    
+    .sapi_title{
+        font-size: 1rem;
+        grid-area: span 1/span 4;
+    }
+
     .sapi_grid {
         grid-template-columns: repeat(4,1fr);
         grid-template-rows: none;
-        grid-auto-rows: 150px;
+        grid-auto-rows: min-content;
+        gap: 15px;
     }
     .sapi_text {
         grid-area: span 1/span 4;
     }
     .sapi_materias {
-        grid-area: span 1/span 4;
         order: 1;
     }
 }

@@ -9,7 +9,7 @@ function AboutSapi() {
         <div className="sapi_element sapi_ceo">
             <img className='sapi-img' src="images/ivan-ceo.webp" alt="" />
         </div>
-        <div className="sapi_element sapi_title">
+        <div className="sapi_element sapi_title sapi-yellow">
             <h2>PLATAFORMA EDUCATIVA (SAPI)</h2>
         </div>
         <div className="sapi_element sapi_materias">
@@ -18,7 +18,7 @@ function AboutSapi() {
         <div className="sapi_element sapi_description">
             <p>Cada materia se divide en unidades.</p>
         </div>
-        <div className="sapi_element sapi_pet">
+        <div className="sapi_element sapi_pet sapi-yellow">
             <img className='sapi-img' src="images/sapi-pet.webp" alt="" />
         </div>
     </section>

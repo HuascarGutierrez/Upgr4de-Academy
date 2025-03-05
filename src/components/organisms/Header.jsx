@@ -10,7 +10,7 @@ function Header() {
             <h2 className='header_title'>Únete a <span className='title-span'>Upgr4de</span><br />
             <span className='title-span'>Academy</span> y aprende<br />
             con nosotros.</h2>
-            <p className='header_text'>Somos una academia enfocada en ayudar a estudiantes con dificultades en materias STEM.</p>
+            {/**<p className='header_text'>Somos una academia enfocada en ayudar a estudiantes con dificultades en materias STEM.</p> */}
             <a className='header_btn' href="#SAPIGrid">Explora el lugar</a>
         </div>
     </header>

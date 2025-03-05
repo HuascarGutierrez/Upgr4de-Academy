@@ -1,10 +1,10 @@
 :root {
   /* Paleta de colores */
-  --color-primary: #0B7077;
-  --color-secondary: #D2E6E4;
+  --color-primary: #E6C151;
+  --color-secondary: #393939;
   --color-accent: #E58200; 
-  --color-background: #F5F5F5;
-  --color-text: #333333;
+  --color-background: #F5F6F5;
+  --color-text: #333;
 
   /* Tipografía */
   --font-size-base: 1em;
@@ -35,10 +35,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-primary: #D2E6E4;
-    --color-secondary: #0B7077;
+    --color-primary: #E6C151;
+    --color-secondary: #393939;
     --color-accent: #E58200; 
-    --color-background: #1e1e1e;
-    --color-text: #ffffff;
+    --color-background: #333;
+    --color-text: #F5F6F5;
   }
 }

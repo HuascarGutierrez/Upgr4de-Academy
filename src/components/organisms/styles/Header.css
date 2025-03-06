@@ -27,8 +27,28 @@
     width: 100%;
     height: 100%;
     background-color: #151515bb;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
+
+    animation-name: header-hide;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-timeline: view();
 }
+
+@keyframes header-hide {
+    from {
+    }
+    to {
+        filter: blur(30px);
+    }
+}
+
+@supports (animation-range: entry 0% exit 0%) {
+    .header_overlay {
+      animation-range: entry 0% exit 0%;
+    }
+  }
+  
 
 .header_content {
     width: 100%;

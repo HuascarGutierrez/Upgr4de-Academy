@@ -27,6 +27,7 @@
     width: 100%;
     height: 100%;
     background-color: #151515bb;
+    backdrop-filter: blur(2px);
 }
 
 .header_content {

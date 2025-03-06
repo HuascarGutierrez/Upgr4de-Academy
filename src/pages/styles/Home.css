@@ -8,6 +8,10 @@
     padding-bottom: min(50px,10dvh);
 }
 
+html {
+    overflow: auto;
+}
+
 @media screen and (max-width: 500px) {
     .home_main {
         width: 100%;

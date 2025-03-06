@@ -10,6 +10,7 @@
 
 .materias_title {
     font-size: 3em;
+    color: var(--color-accent);
 }
 
 @media screen and (max-width: 500px) {
@@ -23,7 +24,5 @@
 }
 
 @media (prefers-color-scheme: light) {
-    .materias_title {
-        color: var(--color-secondary);
-    }
+
 }

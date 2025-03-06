@@ -17,13 +17,13 @@
 }
 
 .footer_section p{
-    color: var(--color-secondary);
+    color: var(--color-dark);
 }
 
 .footer_section_title{
     font-weight: 700;
     font-size: 18px;
-    color: var(--color-secondary);
+    color: var(--color-dark);
 }
 
 @media (max-width: 500px) {

@@ -1,11 +1,16 @@
 :root {
   /* Paleta de colores */
   --color-primary: #E6C151;
-  --color-secondary: #393939;
+  /*--color-secondary: #393939;*/
+  --color-secondary: #e4e4e4;
   --color-accent: #E58200; 
   --color-background: #F5F6F5;
   /*--color-text: #111;*/
-  --color-text: #F5F6F5;
+  --color-text: #111;
+
+  /*colores irreemplazables*/
+  --color-dark: #333;
+  --color-white: #ccc;
 
   /* Tipografía */
   --font-size-base: 1em;
@@ -42,7 +47,7 @@ html {
   :root {
     --color-primary: #E6C151;
     --color-secondary: #393939;
-    --color-accent: #E58200; 
+    --color-accent: #c48430; 
     --color-background: #111;
     --color-text: #F5F6F5;
   }

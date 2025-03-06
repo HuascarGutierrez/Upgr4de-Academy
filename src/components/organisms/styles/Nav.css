@@ -80,3 +80,16 @@
         padding: 1px;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    .nav{
+        background-color: #0003;
+    }
+    .logo_title {
+        color: var(--color-background);
+    }
+    .logo_img {
+        border-radius: 100px;
+        filter: drop-shadow(0 0 1px #555);
+    }
+}

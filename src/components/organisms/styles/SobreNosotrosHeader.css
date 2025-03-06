@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    padding: 10% 0;
+    padding: 10% 20px;
 }
 
 .sn_title {
@@ -23,6 +23,7 @@
 }
 .sn_title>span {
     color: var(--color-primary);
+    font-size: 3.5rem;
 }
 
 .sn_text {

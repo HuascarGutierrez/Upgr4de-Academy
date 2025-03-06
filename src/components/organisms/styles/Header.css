@@ -65,7 +65,7 @@
     padding-inline: 2em;
     height: 10%;
     background-color: var(--color-primary);
-    color: #393939;
+    color: var(--color-text);
     font-weight: 700;
     text-transform: uppercase;
     display: flex;

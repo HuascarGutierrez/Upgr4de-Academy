@@ -1,0 +1,83 @@
+.gridSomos {
+    width: 70%;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-areas: 
+    'name image'
+    'title image'
+    'text1 text2';
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    grid-template-rows: 1fr 3fr 2fr;
+    gap: 1rem;
+}
+
+.gridSomos_element {
+    margin: 0;
+    padding: 0;
+    background-color: var(--black-800);
+    border-radius: 10px;
+    place-content: center;
+}
+
+.gridSomos_element:has(h2, p) {
+    padding-inline: 2em;
+}
+
+.gridSomos_logo_name {
+    grid-area: name;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gridSomos_name {
+    margin: 0;
+}
+
+.gridSomos_logo {
+    width: 70px;
+    height: 30px;
+}
+
+.gridSomos_img {
+    width: 100%;
+    grid-area: image;
+    overflow: hidden;
+}
+
+.gridSomos_img>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.gridSomos_title {
+    grid-area: title;
+    background-color: var(--brandy-punch-500);
+}
+
+.gridSomos_title>h2 {
+    width: fit-content;
+    font-size: 3em;
+    color: var(--black-900);
+}
+
+@media screen and (max-width: 500px) {
+    .gridSomos {
+        grid-template-areas: 
+        'name'
+        'title'
+        'image'
+        'text1'
+        'text2';
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(50px, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .gridSomos_title{
+        font-size: 0.65em;
+    }
+}

@@ -8,6 +8,7 @@ import Benefits from '../components/organisms/Benefits'
 import materias from '../assets/materias'
 import PadresYTutores from '../components/organisms/PadresYTutores'
 import Footer from '../components/organisms/Footer'
+import QuienesSomos from '../components/organisms/QuienesSomos'
 
 function Home() {
 
@@ -16,7 +17,7 @@ function Home() {
       <Header/>
       <main id='SAPIGrid' className='home_main'>
         <Nav/>
-        <AboutSapi/>
+        <QuienesSomos/>
         <Materias materias={materias}/>
         <Benefits/>
         <PadresYTutores/>

@@ -1,5 +1,5 @@
 .card {
-    background-color: var(--color-primary);
+    background-color: var(--brandy-punch-300);
     border-radius: 20px;
     flex: 1 1 150px;
     display: flex;
@@ -11,7 +11,7 @@
 }
 
 .card:nth-child(2n) {
-    background-color: var(--color-secondary);
+    background-color: var(--swans-down-400);
     color: var(--color-text);
 }
 
@@ -31,7 +31,7 @@
 }
 
 .card_btn {
-    background-color: var(--color-secondary);
+    background-color: var(--swans-down-800);
     color: var(--color-text);
     border: 0;
     height: 3em;
@@ -42,6 +42,6 @@
 }
 
 .card:nth-child(2n)>.card_btn{
-    background-color: var(--color-primary);
+    background-color: var(--brandy-punch-800);
     color: var(--color-secondary);
 }

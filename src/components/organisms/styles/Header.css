@@ -63,22 +63,22 @@
 }
 
 .header_title {
-    color: #F5F6F5;
+    color: var(--black-100);
     font-size: 4em;
     text-wrap: balance;
 }
 
-.header_title>.title-span {
+.header_title>p {
     position: relative;
-    color: var(--color-primary);
+    color: var(--brandy-punch-400);
 }
 
-
+/*deshabilitada*/
 .header_text {
     width: 50%;
     font-size: clamp(10px, 2em, 48px);
     text-wrap: pretty;
-    color: #F5F6F5;
+    color: var(--black-200);
 }
 
 .header_btn {
@@ -86,8 +86,8 @@
     width: max-content;
     padding-inline: 2em;
     height: 10%;
-    background-color: var(--color-primary);
-    color: var(--color-text);
+    background-color: var(--brandy-punch-400);
+    color: var(--black-100);
     font-weight: 700;
     text-transform: uppercase;
     display: flex;

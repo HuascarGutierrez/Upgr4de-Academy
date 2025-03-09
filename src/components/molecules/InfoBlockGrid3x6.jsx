@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import VariableProximity from '../atoms/VariableProximity'
 import './styles/InfoBlockGrid3x6.css'
 
-function InfoBlockGrid3x6({title, text1, text2, text3, imageLarge, imageSmall}) {
+function InfoBlockGrid3x6({title, text1, textetiqueta, text3, imageLarge, imageSmall}) {
   const containerRef = useRef(null);
   return (
     <section className="grid">
@@ -26,7 +26,7 @@ function InfoBlockGrid3x6({title, text1, text2, text3, imageLarge, imageSmall}) 
           />
       </div>
       <div className="grid_element grid_materias">
-          <p>{text2}</p>
+          {textetiqueta}
           {/**La plataforma cubre <span>álgebra, cálculo, física y química.</span> */}
       </div>
       <div className="grid_element grid_description">

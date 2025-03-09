@@ -1,4 +1,5 @@
 .header {
+    view-timeline: --header-view;
     width: 100%;
     height: 100dvh;
     position: relative;
@@ -28,26 +29,24 @@
     height: 100%;
     background-color: #151515bb;
     backdrop-filter: blur(1px);
-
+    animation-timeline: --header-view;
     animation-name: header-hide;
     animation-fill-mode: both;
-    animation-timing-function: linear;
-    animation-timeline: view();
+    animation-timing-function: view();
 }
 
 @keyframes header-hide {
     from {
+        backdrop-filter: blur(1px);
     }
     to {
-        filter: blur(30px);
+        backdrop-filter: blur(10px);
     }
 }
 
-@supports (animation-range: entry 0% exit 0%) {
     .header_overlay {
-      animation-range: entry 0% exit 0%;
+      animation-range: contain 0% cover 100%;
     }
-  }
   
 
 .header_content {

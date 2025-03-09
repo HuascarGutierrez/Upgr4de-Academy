@@ -6,6 +6,7 @@
     padding-top: min(50px,10dvh);
     gap: min(50px,10dvh);
     padding-bottom: min(50px,10dvh);
+    view-timeline: --home_main-view;
 }
 
 html {

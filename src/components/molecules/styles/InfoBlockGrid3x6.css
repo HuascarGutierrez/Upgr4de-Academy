@@ -1,0 +1,115 @@
+.grid {
+    width: 80%;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(6, minmax(40px,1fr));
+    grid-template-rows: minmax(100px, min-content) minmax(100px, min-content) minmax(100px, min-content);
+    align-items: center;
+    margin: auto;
+    gap: 20px;
+}
+
+.grid_element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--color-secondary);
+    border-radius: 2.5rem;
+    padding-inline: 20px;
+    text-wrap: pretty;
+}
+
+.grid_element p{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.grid_text {
+    grid-column: span 3;
+    grid-row: span 1;
+}
+
+.grid_title {
+    grid-column: span 3;
+    grid-row: span 1;
+    color: #333;
+    font-weight: 900;
+    letter-spacing: 2px;
+    align-items: center;
+    font-size: 3em;
+}
+
+.grid_title h2{
+    display: block;
+    width: min-content;
+    margin: auto;
+}
+
+.grid_materias {
+    text-align: center;
+}
+
+.grid_materias span {
+    color: var(--color-primary);
+}
+
+.grid_ceo {
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.grid_ceo, .grid_pet{
+    padding: 0 !important;
+}
+
+.grid-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 40% 50%;
+}
+
+.grid-yellow {
+    background-color: var(--color-primary);
+}
+
+.grid_materias p, .grid_description p{
+    font-size: 2.5rem;
+}
+
+.grid_materias, .grid_description, .grid_pet {
+    grid-column: span 2;
+}
+
+@media screen and (max-width: 500px) {
+    .grid_element {
+        grid-area: span 1/ span 2;
+        border-radius: 20px;
+    }
+
+    .grid_element p{
+        font-size: 1em;
+    }
+    
+    .grid_title{
+        font-size: 1rem;
+        grid-area: span 1/span 4;
+    }
+
+    .grid_grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: none;
+        grid-auto-rows: min-content;
+        gap: 15px;
+    }
+    .grid_text {
+        grid-area: span 1/span 4;
+    }
+    .grid_materias {
+        order: 1;
+    }
+}

@@ -1,5 +1,13 @@
 .sobreNosotros {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 6rem;
+}
+
+.sobreNosotros_main {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+    align-items: center;
 }

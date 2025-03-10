@@ -12,6 +12,15 @@
     object-position: center;
 }
 
+@media screen and (max-width: 500px) {
+    .padresTutores {
+        flex-direction: column;
+    }
+    .padresTutores_img{
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 900px) {
     .padresTutores {
         flex-direction: column;

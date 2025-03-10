@@ -16,9 +16,9 @@ function Nav() {
         <li onClick={() => {navigate('/SAPI')}} className="nav_item">
           <p>SAPI</p>
         </li>
-        <li className="nav_item">
+        {/**<li className="nav_item">
           <p>Blog</p>
-        </li>
+        </li> */}
         <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item">
           <p>Sobre Nosotros</p>
         </li>

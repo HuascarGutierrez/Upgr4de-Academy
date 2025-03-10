@@ -45,9 +45,11 @@
 .nav_items {
     display: flex;
     list-style-type: none;
-    justify-content: space-around;
+    justify-content: end;
     flex: 1;
     color: inherit;
+    gap: clamp(2rem, 10%, 10rem);
+    padding-right: 2rem;
 }
 
 .nav_item {
@@ -77,6 +79,11 @@
     .nav_item:hover {
         color: var(--brandy-punch-200);
         text-shadow: 0 0 5px var(--black-50);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .nav_items {
     }
 }
 

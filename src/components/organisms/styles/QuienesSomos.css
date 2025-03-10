@@ -81,3 +81,9 @@
         font-size: 0.65em;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    .gridSomos_element{
+        background-color: var(--black-200);
+    }
+}

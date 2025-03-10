@@ -25,12 +25,11 @@
     list-style-type: none;
     flex-grow: 1;
     justify-content: space-around;
-    gap: 1em;
+    gap: 2.5em;
 }
 
 .list_item {
     font-size: 2em;
-    text-shadow: 0 0 50px #777;
     width: 100%;
 }
 

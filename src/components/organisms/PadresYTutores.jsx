@@ -8,8 +8,8 @@ function PadresYTutores() {
         'Que tu hijo desarrolle habilidades STEM críticas para carreras universitarias y profesionales en auge.'
     ]
   return (
-    <section className="benefits padresTutores">
-        <img src="images/PadresYTutores.webp" alt="" className="benefits_img padresTutores_img" />
+    <section className="padresTutores">
+        <img src="images/PadresYTutores.webp" alt="" className="padresTutores_img" />
         <div className="benefits_container">
             <ListColumn title={title} list={list}/>
         </div>

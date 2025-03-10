@@ -18,7 +18,7 @@ function Home() {
       <main id='SAPIGrid' className='home_main'>
         <Nav/>
         <QuienesSomos/>
-        <Materias materias={materias}/>
+        {/**<Materias materias={materias}/> */}
         <Benefits/>
         <PadresYTutores/>
       </main>

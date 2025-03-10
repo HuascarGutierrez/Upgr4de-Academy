@@ -10,7 +10,7 @@ function GridVision() {
             <img src="images/kid_study_3.webp" alt="" className="image-img" />
         </div>
         <div className="vision_element vision_description">
-            <img src="" alt="" />
+            <img className='description-image' src="assets/zowl-white.svg" alt="zowl" />
             <p>Ser la plataforma líder en educación en línea en Bolivia.</p>
         </div>
         <div className="vision_element vision_description">

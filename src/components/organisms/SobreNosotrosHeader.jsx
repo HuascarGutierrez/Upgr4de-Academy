@@ -5,6 +5,7 @@ function SobreNosotrosHeader() {
   
   return (
     <header className='sn_header'>
+        <video className='sn_video' autoPlay muted loop src="video/sn_header_video.mp4"></video>
         <div className='sn_overlay'></div>
         <div className='sn_content'>
             <div className="sn_description">

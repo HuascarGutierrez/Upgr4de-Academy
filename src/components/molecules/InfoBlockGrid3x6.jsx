@@ -3,12 +3,12 @@ import { useRef } from 'react'
 import VariableProximity from '../atoms/VariableProximity'
 import './styles/InfoBlockGrid3x6.css'
 
-function InfoBlockGrid3x6({title, text1, textetiqueta, text3, imageLarge, imageSmall}) {
+function InfoBlockGrid3x6({title, text1, textetiqueta, text3, imageLarge, imageSmall, displayBuho= 1}) {
   const containerRef = useRef(null);
   return (
     <section className="grid">
       <div className="grid_element grid_text">
-          <img src="assets/zowl-white.svg" alt="" />
+          <img style={displayBuho? {display: 'block'}:{display: 'none'}} src="assets/zowl-white.svg" alt="" />
           <p>{text1}</p>
       </div>
       <div className="grid_element grid_ceo">

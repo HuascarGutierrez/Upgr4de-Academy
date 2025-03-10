@@ -1,13 +1,34 @@
 .sn_header{
     min-height: 100dvh;
+    position: relative;
+    z-index: 1;
+}
+
+.sn_overlay {
+    width: 100%;
+    height: 100%;
+    background-color: #3339;
+    position: absolute;
+    z-index: 20;
+}
+
+.sn_video {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    position: absolute;
+    z-index: 10;
 }
 
 .sn_content {
+    position: absolute;
     width: 100%;
     min-height: inherit;
     display: flex;
     align-items: stretch;
     justify-content: center;
+    z-index: 30;
 }
 
 .sn_description {

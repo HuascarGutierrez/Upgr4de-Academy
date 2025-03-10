@@ -13,8 +13,8 @@ function Nav() {
         <li onClick={() => {navigate('/')}} className="nav_item">
           <p>Home</p>
         </li>
-        <li className="nav_item">
-          <a href="https://sapi-education.netlify.app/">SAPI</a>
+        <li onClick={() => {navigate('/SAPI')}} className="nav_item">
+          <p>SAPI</p>
         </li>
         <li className="nav_item">
           <p>Blog</p>

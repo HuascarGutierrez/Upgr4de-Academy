@@ -45,3 +45,12 @@
     background-color: var(--brandy-punch-800);
     color: var(--color-secondary);
 }
+
+@media (prefers-color-scheme: light) {
+    .card_btn {
+        background-color: var(--swans-down-400);
+    }
+    .card:nth-child(2n)>.card_btn {
+        background-color: var(--brandy-punch-200);
+    }
+}

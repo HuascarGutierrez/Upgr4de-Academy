@@ -1,0 +1,88 @@
+.SAPIHeader {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    margin-bottom: 10dvw;
+}
+
+.SAPIHeader_bg {
+    position: absolute;
+    width: 100%;
+    height: 100dvh;
+    z-index: 1;
+    background-image: url('images/SAPI_header.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.SAPIHeader_bg>img {
+    width: 100%;
+    height: 100%;
+}
+
+.SAPIHeader_overlay {
+    position: absolute;
+    width: 100%;
+    height: 100dvh;
+    background-color: #0004;
+    backdrop-filter: blur(1px);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.SAPIHeader_circle {
+    position: absolute;
+    width: 20dvw;
+    aspect-ratio: 1/1;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    clip-path: circle();
+    background: transparent;
+    border-radius: 50%;
+    border: 0.35rem dotted var(--swans-down-400);
+    backdrop-filter: opacity(1);
+    background: radial-gradient(transparent, var(--swans-down-800));
+    z-index: 100;
+}
+
+.circle-rotation {
+    width: 100%;
+    height: 100%;
+}
+
+.SAPIHeader_contenido {
+    position: absolute;
+    left: 10%;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    color: var(--black-200);
+}
+
+.SAPIHeader_contenido > p {
+    display: block;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: var(--black-400);
+}
+
+@media screen and (max-width: 900px) {
+    .SAPIHeader_circle{
+        border-width: 0.2rem;
+        width: 15rem;
+    }
+
+    .SAPIHeader {
+        margin-bottom: 7.5rem;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .SAPIHeader_circle {
+        border: 0.35rem dotted var(--swans-down-800);
+        background: radial-gradient(transparent, var(--swans-down-400));
+    }
+}

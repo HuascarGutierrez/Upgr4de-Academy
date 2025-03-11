@@ -7,6 +7,10 @@ body {
   min-height: 100dvh;
 }
 
+main {
+  view-timeline: --main-view;
+}
+
 h2 {
   margin: 0;
 }

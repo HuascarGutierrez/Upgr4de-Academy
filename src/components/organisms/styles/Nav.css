@@ -11,7 +11,7 @@
     align-items: center;
     animation-name: nav-ch-bg;
     animation-fill-mode: both;
-    animation-timeline: --home_main-view;
+    animation-timeline: --main-view;
     animation-range: cover 0% contain 0%;
     color: var(--black-50);
 }

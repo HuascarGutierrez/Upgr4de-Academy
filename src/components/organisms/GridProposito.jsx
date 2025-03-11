@@ -1,4 +1,3 @@
-import InfoBlockGrid3x6 from "../molecules/InfoBlockGrid3x6";
 import "./styles/GridProposito.css";
 function GridProposito() {
   return (

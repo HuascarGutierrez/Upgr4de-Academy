@@ -65,6 +65,10 @@
     color: var(--brandy-punch-400);
 }
 
+.proposito_element:last-child {
+    background-color: var(--swans-down-700);
+}
+
 @media screen and (max-width: 900px) {
     .proposito {
         grid-template-areas: 
@@ -120,4 +124,9 @@
     .proposito_title {
         background-color: var(--brandy-punch-400);
     }
+
+    .proposito_element:last-child {
+        background-color: var(--swans-down-200);
+    }
+    
 }

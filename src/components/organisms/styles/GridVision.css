@@ -59,6 +59,18 @@
     color: var(--brandy-punch-400)
 }
 
+.vision_title {
+    background-color: var(--swans-down-700);
+}
+
+.vision_element:nth-child(3) {
+    background-color: var(--brandy-punch-400);
+}
+
+.vision_element:nth-child(5) {
+    background-color: var(--swans-down-700);
+}
+
 
 @media screen and (max-width: 500px) {
     .vision {
@@ -89,6 +101,14 @@
     }
 
     .vision_title {
-        background-color: var(--swans-down-400);
+        background-color: var(--swans-down-200);
+    }
+    
+    .vision_element:nth-child(3) {
+        background-color: var(--brandy-punch-300);
+    }
+    
+    .vision_element:nth-child(5) {
+        background-color: var(--swans-down-200);
     }
 }

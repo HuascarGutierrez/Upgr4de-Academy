@@ -85,6 +85,10 @@
     grid-column: span 2;
 }
 
+.grid_element:nth-child(4) {
+    background-color: var(--swans-down-700);
+}
+
 @media screen and (max-width: 900px) {
     .grid_element {
         border-radius: 20px;
@@ -148,5 +152,9 @@
 
     .grid_title {
         background-color: var(--brandy-punch-400);
+    }
+
+    .grid_element:nth-child(4) {
+        background-color: var(--swans-down-200);
     }
 }

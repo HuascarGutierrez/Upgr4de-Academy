@@ -64,6 +64,10 @@
     color: var(--black-900);
 }
 
+.gridSomos_logo_name:nth-child(1) {
+    background-color: var(--swans-down-700)
+}
+
 @media screen and (max-width: 500px) {
     .gridSomos {
         grid-template-areas: 
@@ -86,5 +90,13 @@
 @media (prefers-color-scheme: light) {
     .gridSomos_element{
         background-color: var(--black-200);
+    }
+
+    .gridSomos_logo_name:nth-child(1) {
+        background-color: var(--swans-down-300)
+    }
+    
+    .gridSomos_title:nth-child(3) {
+        background-color: var(--brandy-punch-300)
     }
 }

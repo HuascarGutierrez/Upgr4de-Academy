@@ -31,6 +31,18 @@
     border-radius: 1em;
 }
 
+.benefits>.benefits_text:nth-child(2) {
+    background-color: var(--swans-down-600);
+}
+
+.benefits>.benefits_text:nth-child(3) {
+    background-color: var(--brandy-punch-600);
+}
+
+.benefits>.benefits_text:nth-child(4) {
+    background-color: var(--black-600);
+}
+
 @media screen and (max-width: 500px) {
     .benefits {
         grid-template-areas: 
@@ -39,5 +51,19 @@
         'text2'
         'text3';
         grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .benefits>.benefits_text:nth-child(2) {
+        background-color: var(--swans-down-200);
+    }
+    
+    .benefits>.benefits_text:nth-child(3) {
+        background-color: var(--brandy-punch-200);
+    }
+    
+    .benefits>.benefits_text:nth-child(4) {
+        background-color: var(--black-200);
     }
 }

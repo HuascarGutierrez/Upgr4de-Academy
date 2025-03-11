@@ -57,7 +57,7 @@
     object-position: center;
 }
 
-.proposito_mainImage {
+.proposito_mainImage, .proposito_secondImage {
     aspect-ratio: 16/13;
 }
 

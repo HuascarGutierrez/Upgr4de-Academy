@@ -1,17 +1,20 @@
 import Footer from "../components/organisms/Footer"
 import Nav from "../components/organisms/Nav"
 import SAPIHeader from "../components/organisms/SAPIHeader"
+import Materias from "../components/organisms/Materias"
+import materias from "../assets/materias"
+import './styles/SAPI.css'
 
 function SAPI() {
   return (
-    <>
+    <section className="SAPI">
         <SAPIHeader/>
         <main id="SAPIMain">
         <Nav/>
-        <div style={{width: '100%', height: '100dvh', backgroundColor: 'red'}}></div>
+        <Materias materias={materias}/>
         </main>
         <Footer/>
-    </>
+    </section>
   )
 }
 

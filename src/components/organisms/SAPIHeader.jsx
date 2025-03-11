@@ -17,9 +17,10 @@ function SAPIHeader() {
             </div>
             <div className='SAPIHeader_contenido'>
                 <p>No pares de estudiar</p>
-                <h2>AYUDANOS A CUMPLIR TUS METAS</h2>
+                <h2>AYUDANOS A<br /> CUMPLIR TUS <span>METAS</span></h2>
                 <a href="#SAPIMain">EXPLORA EL LUGAR</a>
             </div>
+            <img src="images/veloz_buho.webp" alt="veloz" />
         </div>
     </header>
 )

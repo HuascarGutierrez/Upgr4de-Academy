@@ -1,0 +1,12 @@
+.SAPI {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+#SAPIMain {
+    padding-top: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+}

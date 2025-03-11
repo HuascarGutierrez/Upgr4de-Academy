@@ -11,6 +11,7 @@
 .materias_title {
     font-size: 3em;
     color: var(--brandy-punch-400);
+    text-align: center;
 }
 
 @media screen and (max-width: 500px) {

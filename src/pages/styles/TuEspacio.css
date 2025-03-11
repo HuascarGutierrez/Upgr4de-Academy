@@ -1,0 +1,8 @@
+.signup_tuEspacio {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/public/images/form-background.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat:  no-repeat;
+}

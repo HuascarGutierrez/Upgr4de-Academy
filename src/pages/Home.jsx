@@ -11,7 +11,6 @@ import Footer from '../components/organisms/Footer'
 import QuienesSomos from '../components/organisms/QuienesSomos'
 
 function Home() {
-
   return (
     <div className='home'>
       <Header/>

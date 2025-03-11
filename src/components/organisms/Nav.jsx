@@ -30,11 +30,11 @@ function Nav() {
           <p>Sobre Nosotros</p>
         </li>
 
-        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item item-login">
+        <li onClick={() => {navigate('/iniciodesesion')}} className="nav_item item-login">
           <p>Inicio de sesión</p>
         </li>
 
-        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item item-signup">
+        <li onClick={() => {navigate('/registro')}} className="nav_item item-signup">
           <p>Registrarse</p>
         </li>
       </ul>

@@ -5,7 +5,7 @@ import Materias from "../components/organisms/Materias"
 import materias from "../assets/materias"
 import './styles/SAPI.css'
 
-function SAPI() {
+function SAPI({user}) {
   return (
     <section className="SAPI">
         <SAPIHeader/>

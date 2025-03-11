@@ -1,15 +1,22 @@
 import "./styles/Nav.css";
 import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
 
 function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <nav className="nav">
       <div className="nav_logo">
         <img className="logo_img" src="assets/Zowl-icon.svg" alt="U4A" />
         <span className="logo_title">Upgr4de Academy</span>
       </div>
-      <ul className="nav_items">
+      <ul className={`nav_items ${menuOpen ? "open" : ""}`}>
         <li onClick={() => {navigate('/')}} className="nav_item">
           <p>Home</p>
         </li>
@@ -22,7 +29,19 @@ function Nav() {
         <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item">
           <p>Sobre Nosotros</p>
         </li>
+
+        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item item-login">
+          <p>Inicio de sesión</p>
+        </li>
+
+        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item item-signup">
+          <p>Registrarse</p>
+        </li>
       </ul>
+
+      <div className="nav_btn" onClick={toggleMenu}>
+        ☰
+      </div>
 
       {/**<button className="nav_list_icon" onClick={()=>{setShowList(!showList)}}>
         <svg

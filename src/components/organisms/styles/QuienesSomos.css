@@ -21,7 +21,7 @@
 }
 
 .gridSomos_element:has(h2, p) {
-    padding-inline: 2em;
+    padding-inline: 5%;
 }
 
 .gridSomos_logo_name {
@@ -60,7 +60,7 @@
 
 .gridSomos_title>h2 {
     width: fit-content;
-    font-size: 3em;
+    font-size: 2.5em;
     color: var(--black-900);
 }
 
@@ -82,8 +82,16 @@
 }
 
 @media screen and (max-width: 900px) {
-    .gridSomos_title{
-        font-size: 0.65em;
+    .gridSomos_title {
+        padding-left: 1rem !important;
+    }
+
+    .gridSomos_title>h2{
+        font-size: 2rem;
+    }
+
+    .gridSomos_element {
+        font-size: 1rem;
     }
 }
 

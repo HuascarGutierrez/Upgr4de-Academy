@@ -5,7 +5,7 @@ import AboutSapi from '../components/organisms/AboutSapi'
 import Materias from '../components/organisms/Materias'
 import Benefits from '../components/organisms/Benefits'
 
-import materias from '../assets/materias'
+//import materias from '../assets/materias'
 import PadresYTutores from '../components/organisms/PadresYTutores'
 import Footer from '../components/organisms/Footer'
 import QuienesSomos from '../components/organisms/QuienesSomos'

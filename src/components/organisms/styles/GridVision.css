@@ -8,7 +8,7 @@
     'title text1'
     'image text2'
     'image text3';
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .vision_element {
@@ -57,4 +57,34 @@
 
 .vision_description>p>span{
     color: var(--brandy-punch-400)
+}
+
+
+@media screen and (max-width: 500px) {
+    .vision {
+        grid-template-areas: 
+        'title'
+        'image'
+        'text1'
+        'text2'
+        'text3';
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5,minmax(50px, min-content));
+    }
+
+    .vision_element {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .description-image {
+        display: none;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .vision_element {
+        background-color: var(--black-200);
+    }
 }

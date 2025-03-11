@@ -6,7 +6,7 @@
     grid-template-rows: minmax(100px, min-content) minmax(100px, min-content) minmax(100px, min-content);
     align-items: center;
     margin: auto;
-    gap: 20px;
+    gap: 1rem;
 }
 
 .grid_element {
@@ -24,6 +24,7 @@
 }
 
 .grid_element p{
+    width: 100%;
     font-size: 1.5rem;
     font-weight: 700;
 }
@@ -85,10 +86,34 @@
     grid-column: span 2;
 }
 
+@media screen and (max-width: 900px) {
+    .grid_element {
+        border-radius: 20px;
+        order: 1;
+        font-size: 2.5rem;
+        text-wrap: pretty;
+        overflow-wrap: break-word;
+    }
+    .grid_element p{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+}
+
 @media screen and (max-width: 500px) {
+    .grid {
+        gap: 0.5rem;
+        grid-template-columns: repeat(2, minmax(40px,1fr));
+        grid-auto-rows: minmax(100px, min-content);
+    }
     .grid_element {
         grid-area: span 1/ span 2;
         border-radius: 20px;
+        order: 1;
+        font-size: 0.75rem;
+        padding: 0.75em;
+        text-wrap: pretty;
+        overflow-wrap: break-word;
     }
 
     .grid_element p{
@@ -98,6 +123,7 @@
     .grid_title{
         font-size: 1rem;
         grid-area: span 1/span 4;
+        order: 0;
     }
 
     .grid_grid {
@@ -114,8 +140,14 @@
     }
 }
 
+
+
 @media (prefers-color-scheme: light) {
     .grid_element {
         background-color: var(--black-200);
+    }
+
+    .grid_title {
+        background-color: var(--brandy-punch-400);
     }
 }

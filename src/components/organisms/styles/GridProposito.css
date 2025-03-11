@@ -112,4 +112,12 @@
     }
 }
 
+@media (prefers-color-scheme: light) {
+    .proposito_element {
+        background-color: var(--black-200);
+    }
 
+    .proposito_title {
+        background-color: var(--brandy-punch-400);
+    }
+}

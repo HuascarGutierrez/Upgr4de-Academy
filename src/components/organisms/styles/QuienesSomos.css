@@ -17,6 +17,7 @@
     background-color: var(--black-800);
     border-radius: 10px;
     place-content: center;
+    font-size: 1.5rem;
 }
 
 .gridSomos_element:has(h2, p) {

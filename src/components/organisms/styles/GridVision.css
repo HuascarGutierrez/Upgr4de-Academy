@@ -87,4 +87,8 @@
     .vision_element {
         background-color: var(--black-200);
     }
+
+    .vision_title {
+        background-color: var(--swans-down-400);
+    }
 }

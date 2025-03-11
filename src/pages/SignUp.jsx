@@ -17,11 +17,11 @@ function SignUp() {
             title: 'Cuidado',
             text: text,
             icon: 'question',
-            iconColor: 'var(--color-orange-secondary)',
+            iconColor: 'var(--brandy-punch-500)',
             confirmButtonText: 'Opps, Oki',
-            background: 'var(--color-white)',
-            color: 'var(--color-orange-secondary)',
-            confirmButtonColor: 'var(--color-orange-secondary)',
+            background: 'var(--black-50)',
+            color: 'var(--brandy-punch-500)',
+            confirmButtonColor: 'var(--brandy-punch-500)',
         })
     }
 
@@ -33,9 +33,9 @@ function SignUp() {
             iconColor: '#ffff00',
             confirmButtonText: 'Continuar',
             cancelButtonText: 'Cancelar',
-            background: 'var(--color-gray-medium)',
-            color: 'var(--color-green-primary)',
-            confirmButtonColor: 'var(--color-green-primary)',
+            background: 'var(--black-200)',
+            color: 'var(--swans-down-400)',
+            confirmButtonColor: 'var(--swans-down-200)',
         })
         
     }
@@ -47,7 +47,7 @@ function SignUp() {
             icon: 'warning',
             iconColor: '#ff0000',
             confirmButtonText: 'OK',
-            background: 'var(--color-blue)',
+            background: 'var(--black-900)',
             color: '#ff0000',
             confirmButtonColor: '#ff0000',
         })

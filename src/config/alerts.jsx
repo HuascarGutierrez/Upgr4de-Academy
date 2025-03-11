@@ -5,11 +5,11 @@ export const handleAlert = (text) => {
             title: 'Cuidado',
             text: text,
             icon: 'question',
-            iconColor: 'var(--color-orange-secondary)',
+            iconColor: 'var(--brandy-punch-500)',
             confirmButtonText: 'Opps, Oki',
-            background: 'var(--color-white)',
-            color: 'var(--color-orange-secondary)',
-            confirmButtonColor: 'var(--color-orange-secondary)',
+            background: 'var(--black-50)',
+            color: 'var(--brandy-punch-500)',
+            confirmButtonColor: 'var(--brandy-punch-500)',
         })
     }
 
@@ -18,11 +18,11 @@ export const handleSuccess = ({title='Perfecto', texto}) => {
             title: title,
             text: texto,
             icon: 'success',
-            iconColor: 'var(--color-green-primary)',
+            iconColor: 'var(--swans-down-500)',
             confirmButtonText: 'Continuar',
-            background: 'var(--color-gray-medium)',
-            color: 'var(--color-green-primary)',
-            confirmButtonColor: 'var(--color-green-primary)',
+            background: 'var(--black-200)',
+            color: 'var(--swans-down-500)',
+            confirmButtonColor: 'var(--swans-down-500)',
         })
     }
 
@@ -33,7 +33,7 @@ export const handleErrorNoti = ({texto, color= '#ff0000', title= 'Error'}) => {
             icon: 'warning',
             iconColor: color,
             confirmButtonText: 'OK',
-            background: 'var(--color-blue)',
+            background: 'var(--black-950)',
             color: color,
             confirmButtonColor: '#ff0000',
         })

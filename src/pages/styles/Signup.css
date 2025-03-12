@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: end;
     padding-right: 10%;
-    background-image: url('public/images/form-background.png');
+    background-image: url('/public/images/form-background.png');
     background-position: center;
     background-size: cover;
     background-repeat:  no-repeat;

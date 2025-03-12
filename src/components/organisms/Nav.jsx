@@ -8,6 +8,7 @@ import {alertSignOut, alertWarning} from '../../config/alerts'
 
 
 function Nav({user}) {
+  const [navUser, setNavUser] = useState(user)
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
 
@@ -18,7 +19,8 @@ function Nav({user}) {
   const handleSignOut = async() => {
     const auth = getAuth();
     signOut(auth).then(() => {
-      alertSignOut();
+      setNavUser(null)
+      alertSignOut()
       navigate('/');
     }).catch((error) => {
       alertWarning(`Error de logout: ${error}`);
@@ -47,10 +49,10 @@ function Nav({user}) {
         </li>
 
         {
-          user?
+          navUser?
           <>
             <li className="nav_item ">
-              <p>Hola {user.displayName}</p>
+              <p>Hola {navUser?.displayName}</p>
             </li>
             <li onClick={handleSignOut} className="nav_item item-signup">
               <p>Cerrar Sesión</p>

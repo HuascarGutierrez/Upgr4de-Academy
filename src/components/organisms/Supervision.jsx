@@ -4,6 +4,7 @@ import './styles/Supervision.css'
 import Elementsvg from '../atoms/Elementsvg'
 
 function Supervision() {
+    
   return (
     <section className='supervision'>
         <div className='supervision_element supervision_temas_section'>

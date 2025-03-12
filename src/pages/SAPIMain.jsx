@@ -2,11 +2,9 @@ import React from 'react'
 import NavLateral from '../components/organisms/NavLateral'
 import './styles/SAPIMain.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import Perfil from '../components/organisms/Perfil'
-import SignUp from './SignUp'
-import Login from './Login'
 import Supervision from '../components/organisms/Supervision'
-import CoursesCatalog from '../components/organisms/coursesCatalog'
 
 function SAPIMain() {
   return (
@@ -15,8 +13,8 @@ function SAPIMain() {
         <div className='SAPIContent'>
             <Routes>
                 <Route path='catalogo' element={<CoursesCatalog/>}/>
-                <Route path='supervision' element={<Supervision/>}/>
-                <Route path='/Perfil' element={<Perfil/>}/>
+                <Route path='supervision' element={<Supervision/>}/> 
+                <Route path='/Perfil' element={<Perfil/>}/> 
             </Routes>
         </div>
     </div>

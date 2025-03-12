@@ -20,13 +20,13 @@ function Perfil() {
     alert('Cambios guardados');
   };
 
-  const handleThemeChange = (e) => {
+  {/**const handleThemeChange = (e) => {
     setTheme(e.target.value);
   };
 
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
-  };
+  }; */}
 
   const handleNotificationChange = (e) => {
     setNotification(e.target.value);

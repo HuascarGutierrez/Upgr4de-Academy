@@ -14,11 +14,6 @@ function SAPIMain() {
         <NavLateral/>
         <div className='SAPIContent'>
             <Routes>
-                {/** EJEMPLOS
-                 * <Route path='hola' element={<SignUp/>}/>
-                  <Route path='adios' element={<Login/>}/>
-                 */
-              }
                 <Route path='catalogo' element={<CoursesCatalog/>}/>
                 <Route path='supervision' element={<Supervision/>}/>
                 <Route path='/Perfil' element={<Perfil/>}/>

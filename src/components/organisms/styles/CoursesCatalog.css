@@ -1,0 +1,133 @@
+.catalog-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.catalog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0B7077;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 40rem;
+}
+
+.nav-links span {
+    margin: 0 10px;
+    cursor: pointer;
+    color: black;
+}
+
+.catalog-banner {
+    background-color: #D2E6E4;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.title {
+    color: black;
+    font-size: 2rem;
+}
+
+.sub-title {
+    color: gray;
+    font-size: 1rem;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.filter-button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.filter-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.weekly-streak {
+    font-weight: bold;
+    margin-top: 20px;
+    color: black;
+}
+
+.weekly-description {
+    font-weight: normal;
+    margin-top: 20px;
+    color: black;
+}
+
+.course-grid {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.course-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px;
+    min-width: 250px;
+}
+
+.course-banner {
+    background-color: #0b2c48;
+    color: white;
+    padding: 15px;
+}
+
+.course-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.course-subtitle {
+    font-size: 14px;
+}
+
+.course-content {
+    padding: 15px;
+}
+
+.course-description {
+    color: black;
+}
+
+.course-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+}

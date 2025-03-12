@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SignUp from './SignUp'
 import Login from './Login'
 import Supervision from '../components/organisms/Supervision'
+import CoursesCatalog from '../components/organisms/coursesCatalog'
 
 function SAPIMain() {
   return (
@@ -15,7 +16,9 @@ function SAPIMain() {
                 {/** EJEMPLOS
                  * <Route path='hola' element={<SignUp/>}/>
                   <Route path='adios' element={<Login/>}/>
-                 */}
+                 */
+                  <Route path='catalogo' element={<CoursesCatalog/>}/>
+                }
                 <Route path='supervision' element={<Supervision/>}/>
             </Routes>
         </div>

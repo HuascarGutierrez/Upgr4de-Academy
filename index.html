@@ -9,5 +9,32 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '67d1253f756dab285ec6bcbe' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+              voice: {
+                url: "https://runtime-api.voiceflow.com"
+              }
+            }).then(() => {
+        window.voiceflow.chat.proactive.clear(); // 
+        window.voiceflow.chat.proactive.push({ 
+          //mensaje 1
+          type: 'text', 
+          payload: { message: 'Hey, tienes alguna duda?' }
+        }, { 
+          //mensaje 2
+          type: 'text', 
+          payload: { message: 'preguntame lo que quieras y te responderé lo mejor que pueda. 🤗' }
+        });
+    })
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script')
+    </script>
   </body>
 </html>

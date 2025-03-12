@@ -19,9 +19,9 @@ function SAPIMain() {
                  * <Route path='hola' element={<SignUp/>}/>
                   <Route path='adios' element={<Login/>}/>
                  */}
-                 <Route path='courses' element={<Courses/>}/>
-                <Route path='catalogo' element={<CoursesCatalog/>}/>
-                <Route path='supervision' element={<Supervision/>}/> 
+                 <Route path='/courses' element={<Courses/>}/>
+                <Route path='/catalogo' element={<CoursesCatalog/>}/>
+                <Route path='/supervision' element={<Supervision/>}/> 
                 <Route path='/Perfil' element={<Perfil/>}/> 
             </Routes>
         </div>

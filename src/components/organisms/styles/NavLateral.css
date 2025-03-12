@@ -2,11 +2,10 @@
     width: 100px;
     height: 100dvh;
     background-color: var(--swans-down-200);
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
     padding: 1.5rem;
-    gap: 2rem;
 }
 
 .navLateral_logo {

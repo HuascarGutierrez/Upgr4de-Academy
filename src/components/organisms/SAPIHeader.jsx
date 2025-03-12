@@ -1,9 +1,17 @@
 import './styles/SAPIHeader.css'
 import CircularText from '../atoms/CircularText'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { handleErrorNoti } from '../../config/alerts'
 
-function SAPIHeader() {
-    const navigate = Navigate
+function SAPIHeader({user}) {
+    const navigate = useNavigate()
+
+    const handleIngresa = () => {
+        user?
+        navigate('/main'):
+        handleErrorNoti({title: 'Alto', texto:'Primero debes iniciar sesión'})
+    }
+
   return (
     <header className='SAPIHeader'>
         <div className='SAPIHeader_bg'>
@@ -21,7 +29,7 @@ function SAPIHeader() {
             <div className='SAPIHeader_contenido'>
                 <p>No pares de estudiar</p>
                 <h2>AYUDANOS A<br /> CUMPLIR TUS <span>METAS</span></h2>
-                <a href='./main'>INGRESA A SAPI</a>
+                <a onClick={handleIngresa}>INGRESA A SAPI</a>
             </div>
             <img src="images/veloz_buho.webp" alt="veloz" />
         </div>

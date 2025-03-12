@@ -19,7 +19,7 @@ function GoogleButton() {
             const user = result.user;
             //console.log(user)
             if(user) {
-                navigate('/');
+                navigate('/main');
                 handleSuccess({texto: "Inicio de sesión exitoso."})
             }
             // IdP data available using getAdditionalUserInfo(result)

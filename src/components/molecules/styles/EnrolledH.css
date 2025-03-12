@@ -1,0 +1,65 @@
+.EnrolledHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Boton_vercatalogo{
+    background-color: #2D9CDB;
+    color: white;
+    display: flex;
+    width: 200px;
+    height: 36px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.CursoProgreso{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-bottom: 2px solid rgb(218, 210, 210);
+}
+
+.CursoProgreso .icono{
+width: 60px;height: 60px;
+}
+
+.TextoCursoProgreso{
+    margin-left: -40%;
+}
+.TextoCursoProgreso div{
+    display: flex;
+    margin-top: -20px;
+    font-size: 14px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.TextoCursoProgreso div img{
+    height: 5px;
+    margin: 5px;
+}
+
+.cursocomplet{
+    background-color: #2D9CDB;
+    color: white;
+    height: 30px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+
+}
+
+.inforcurso{
+    display: flex;
+    width: 230px;
+    justify-content: space-between;
+}

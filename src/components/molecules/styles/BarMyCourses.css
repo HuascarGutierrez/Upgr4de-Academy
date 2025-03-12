@@ -1,0 +1,18 @@
+.Cabecera_MyCourses{
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+
+.BarCourses{
+    display: flex;
+    padding-inline: 10px ;
+    align-items: center;
+}
+
+.BarCourses img{
+
+    margin: 5px;
+}

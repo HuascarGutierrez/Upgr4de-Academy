@@ -2,10 +2,11 @@
     width: 100px;
     height: 100dvh;
     background-color: var(--swans-down-200);
-    position: fixed !important;
+    position: fixed;
     top: 0;
     left: 0;
     padding: 1.5rem;
+    gap: 2rem;
 }
 
 .navLateral_logo {
@@ -24,7 +25,6 @@
 
 .navLateral_content{
     height: 100%;
-    padding: 15rem 0;
 }
 
 .navLateral_list {
@@ -34,7 +34,8 @@
     display: flex;
     height: 100%;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 1rem;
     align-items: center;
 }
 

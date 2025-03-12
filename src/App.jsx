@@ -9,19 +9,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './config/app'
-import { useNavigate } from 'react-router-dom'
 import SAPIMain from './pages/SAPIMain'
 
 function App() {
 
   const [user, setUser] = useState(null);
-  const navigate = useNavigate
 
   useEffect(()=> {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser){
         setUser(currentUser);
-        navigate('/SAPI')
         console.log('currentUser');
 
       } else {setUser(null);
@@ -46,8 +43,8 @@ function App() {
       <Router>
         <ScrollToTop/> {/**por temas del scroll */}
         <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/sobreNosotros' element={<SobreNosotros/>}/>
+          <Route path='/' element={<Home user={user}/>}/>
+          <Route path='/sobreNosotros' element={<SobreNosotros user={user}/>}/>
           <Route path='/SAPI' element={<SAPI user={user}/>}/>
           <Route path='/registro' element={<SignUp/>}/>
           <Route path='/iniciodesesion' element={<Login/>}/>

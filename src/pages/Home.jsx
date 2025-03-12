@@ -10,12 +10,12 @@ import PadresYTutores from '../components/organisms/PadresYTutores'
 import Footer from '../components/organisms/Footer'
 import QuienesSomos from '../components/organisms/QuienesSomos'
 
-function Home() {
+function Home({user}) {
   return (
     <div className='home'>
       <Header/>
       <main id='SAPIGrid' className='home_main'>
-        <Nav/>
+        <Nav user={user}/>
         <QuienesSomos/>
         {/**<Materias materias={materias}/> */}
         <Benefits/>

@@ -10,7 +10,7 @@ function SAPI({user}) {
     <section className="SAPI">
         <SAPIHeader/>
         <main id="SAPIMain">
-        <Nav/>
+        <Nav user={user}/>
         <Materias materias={materias}/>
         </main>
         <Footer/>

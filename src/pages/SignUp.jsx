@@ -81,7 +81,7 @@ function SignUp() {
 
             //console.log('Usuario registrado: ',userCRedential.user);
             handleSuccess();
-            navigate('/main')
+            navigate('/')
         } catch(error){
             handleErrorNoti(`error en el registro: ${error.message}`)
         }

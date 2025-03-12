@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './config/app'
 import { useNavigate } from 'react-router-dom'
+import SAPIMain from './pages/SAPIMain'
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route path='/SAPI' element={<SAPI user={user}/>}/>
           <Route path='/registro' element={<SignUp/>}/>
           <Route path='/iniciodesesion' element={<Login/>}/>
+          <Route path='/main/*' element={<SAPIMain/>}/>
         </Routes>
       </Router>
     </>

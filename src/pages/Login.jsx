@@ -30,7 +30,7 @@ function Login() {
             .then((userCredential) => {
                 if(userCredential.user.emailVerified){
                     handleSuccess({texto: "Inicio de sesión exitoso."})
-                    navigate('/main');
+                    navigate('/main/courses');
                 } else {
                     signOut(auth)
                     handleErrorNoti({texto: "Error al iniciar sesión", title: 'Error', color: '#ccccff'})

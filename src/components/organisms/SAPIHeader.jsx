@@ -8,7 +8,7 @@ function SAPIHeader({user}) {
 
     const handleIngresa = () => {
         user?
-        navigate('/main'):
+        navigate('/main/courses'):
         handleErrorNoti({title: 'Alto', texto:'Primero debes iniciar sesión'})
     }
 

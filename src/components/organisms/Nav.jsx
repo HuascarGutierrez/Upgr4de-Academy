@@ -8,9 +8,12 @@ import {alertSignOut, alertWarning} from '../../config/alerts'
 
 
 function Nav({user}) {
-  const [navUser, setNavUser] = useState(user)
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
+
+  const reloadPage = async() => {
+    location.reload()
+}
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -19,9 +22,7 @@ function Nav({user}) {
   const handleSignOut = async() => {
     const auth = getAuth();
     signOut(auth).then(() => {
-      setNavUser(null)
-      alertSignOut()
-      navigate('/');
+      alertSignOut({funcion: reloadPage})
     }).catch((error) => {
       alertWarning(`Error de logout: ${error}`);
     })
@@ -49,10 +50,10 @@ function Nav({user}) {
         </li>
 
         {
-          navUser?
+          user?
           <>
             <li className="nav_item ">
-              <p>Hola {navUser?.displayName}</p>
+              <p>Hola {user.displayName}</p>
             </li>
             <li onClick={handleSignOut} className="nav_item item-signup">
               <p>Cerrar Sesión</p>

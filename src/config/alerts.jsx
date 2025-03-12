@@ -39,16 +39,17 @@ export const handleErrorNoti = ({texto, color= '#ff0000', title= 'Error'}) => {
         })
     }
 
-export    const alertSignOut = () => {
+export    const alertSignOut = ({funcion=undefined}) => {
         Swal.fire({
           title: "Hasta pronto!",
-          text: "No te olvides de seguir adelante.",
+          text: 'No te olvides de dar lo mejor de tí',
           icon: "info",
           iconColor: 'var(--brandy-punch-500)',
           confirmButtonText: "OK",
           background: "var(--black-100)", 
           color: "var(--black-900)",
           confirmButtonColor: "var(--brandy-punch-500)",
+          preConfirm: funcion
         });
       }
 

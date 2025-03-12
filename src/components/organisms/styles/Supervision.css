@@ -28,8 +28,10 @@
 
 .supervision_temas {
     display: flex;
-    gap: 2rem;
     width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 .temas_element {
     display: flex;
@@ -37,7 +39,6 @@
     color: var(--black-900);
     font-weight: 500;
     padding: 5px 0;
-    max-width: 200px;
     flex: 1;
     border-radius: 10px;
     justify-content: center;
@@ -74,9 +75,11 @@
     gap: 1rem;
     background-color: var(--swans-down-100);
     color: var(--black-950);
-    width: fit-content;
+    width: 100%;
     padding: 0.5rem;
     border-radius: 1rem;
+    overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .supervision_info>p:nth-child(2) {
@@ -127,6 +130,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 1rem 1rem;
     color: var(--black-900);
     gap: 0.5rem;
@@ -166,7 +170,7 @@
         gap: 1px;
         flex-flow: wrap;
     }
-
+    
     .temas_element {
         font-size: 0.75em;
         flex: 1;

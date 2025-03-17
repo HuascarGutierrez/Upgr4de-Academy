@@ -1,8 +1,8 @@
 body {
   margin: 0;
   min-height: 100dvh;
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
   font-family: Raleway;
   min-height: 100dvh;
 }

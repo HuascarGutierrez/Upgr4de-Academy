@@ -8,14 +8,12 @@ import EnrolledCourses from './EnrolledCourses'
 
 function Courses() {
   return (
-    <>
-    <div>Courses</div>
+  <div style={{overflowX: 'hidden'}}>
     <BarMyCourses/>
     <ProgresoCurso />
     <AllStatus />
     <EnrolledCourses />
-    </>
-    
+  </div>
   )
 }
 

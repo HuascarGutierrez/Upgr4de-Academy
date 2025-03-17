@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './styles/Perfil.css';
+import { getAuth, signOut } from 'firebase/auth'
+import {alertSignOut, alertWarning} from '../../config/alerts'
+import { useNavigate } from 'react-router-dom';
+
 
 function Perfil() {
   const [activeView, setActiveView] = useState('myProfile');
@@ -10,6 +14,22 @@ function Perfil() {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
+
+  const navigate = useNavigate()
+  const reloadPage = async() => {
+    navigate('/');
+    location.reload()
+}
+
+
+  const handleSignOut = async() => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      alertSignOut({funcion: reloadPage})
+    }).catch((error) => {
+      alertWarning(`Error de logout: ${error}`);
+    })
+  }
 
   const handleViewChange = (view) => {
     setActiveView(view);
@@ -72,7 +92,7 @@ function Perfil() {
               <option value="Mute">Silenciar</option>
             </select>
           </div>
-          <div className="menu-item">
+          <div onClick={handleSignOut} className="menu-item">
             Cerrar Sesión
           </div>
         </div>

@@ -5,21 +5,19 @@ function Footer() {
   return (
     <footer className='footer'>
       <section className='footer_section'>
-        <FooterItem imageUrl={'assets/phone.svg'} text={'+591 12341234'}/>
-        <FooterItem imageUrl={'assets/clock.svg'} text={'Response hours: 8 to 20'}/>
+        <span className='footer_section_title'>Información</span>
+        <FooterItem imageUrl={'assets/phone.svg'} text={'Direccion: Ciudad Satelite, El Alto'}/>
+        <FooterItem imageUrl={'assets/phone.svg'} text={'Celular: +591 12341234'}/>
+        <FooterItem imageUrl={'assets/clock.svg'} text={'Horas de respuestar: 8 to 20'}/>
         <FooterItem imageUrl={'assets/mail.svg'} text={'Email: info@SAPI.edu.com'}/>
       </section>
       <section className='footer_section footer_section_materias'>
-        <span className='footer_section_title'>Materias</span>
-          <p>Algebra</p>
-          <p>Calculo</p>
-          <p>Fisica</p>
-          <p>Quimica</p>
+        <span className='footer_section_title'>Servicios</span>
+          <p>SAPI</p>
       </section>
       <section className='footer_section footer_section_links'>
         <span className='footer_section_title'>Links</span>
           <p>Sobre Nosotros</p>
-          <p>Por qué SAPI</p>
       </section>
     </footer>
   )

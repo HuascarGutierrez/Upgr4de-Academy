@@ -1,9 +1,4 @@
-body{
-    background-color: white;
-    color: black;
-}
-
-.Enrolled{
-    width: 920px;
-    margin: 25px;
+.SAPIcurses{
+    overflow-x: hidden;
+    color: #1C1B1F;
 }

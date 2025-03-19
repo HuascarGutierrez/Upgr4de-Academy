@@ -6,7 +6,7 @@ function Footer() {
     <footer className='footer'>
       <section className='footer_section'>
         <span className='footer_section_title'>Información</span>
-        <FooterItem imageUrl={'assets/phone.svg'} text={'Direccion: Ciudad Satelite, El Alto'}/>
+        <FooterItem imageUrl={'Icons/Location.svg'} text={' Direccion: Ciudad Satelite, El Alto'}/>
         <FooterItem imageUrl={'assets/phone.svg'} text={'Celular: +591 12341234'}/>
         <FooterItem imageUrl={'assets/clock.svg'} text={'Horas de respuestar: 8 to 20'}/>
         <FooterItem imageUrl={'assets/mail.svg'} text={'Email: info@SAPI.edu.com'}/>

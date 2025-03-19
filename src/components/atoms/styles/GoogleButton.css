@@ -1,16 +1,19 @@
 .googleButton{
-    width: 100%;
-    background-color: var(--black-50);
-    height: 10%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 80%;
+    min-width: 258px;
+    max-width: 400px;
+    height: 10%;
     gap: 10px;
     border: 1px solid var(--swans-down-900);
     border-radius: 10px;
-    font-size: 1.0em;
+    margin-inline: auto;
+    font-size: 1.2em;
     letter-spacing: 0.1em;
+    background-color: var(--black-50);
 }
 
 .googleButton img{
@@ -20,13 +23,4 @@
 .googleButton p{
     color: var(--black-950);
     text-transform: uppercase;
-}
-
-@media (max-height: 500px) and (orientation: landscape){
-    .googleButton{
-        max-height: 20px;
-    }   
-    .googleButton img{
-        height: 20px;
-    }
 }

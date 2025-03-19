@@ -1,5 +1,4 @@
 import './styles/Signup.css'
-import './styles/TuEspacio.css'
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { useState, useRef } from "react"
 import { auth } from '../config/app.js'
@@ -8,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import Swal from 'sweetalert2';
 import GoogleButton from '../components/atoms/GoogleButton.jsx';
+import Nav from '../components/organisms/Nav.jsx';
 
 function SignUp() {
     const [waiting, setWaiting] = useState(false)
@@ -54,9 +54,6 @@ function SignUp() {
     }
 
     const navigate = useNavigate();
-    const handleReturn = () => {
-        navigate('../');
-    }
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
@@ -88,26 +85,34 @@ function SignUp() {
         setWaiting(false)
     }
   return (
-    <section className="signup signup_tuEspacio">
-        <button onClick={handleReturn} className='signup_volver'>
-            <LeftArrow color={'var(--swans-down-200)'} size={'2em'}/>
-            Volver
-        </button>
-        <div className='signup_form'>
-            <form className='signup_form_formulario' onSubmit={handleSubmit}>
-                <h2 className='signup_form_h2'>Crea Una Cuenta</h2>
-                <p className='signup_form_p'>Inicia la experiencia donde aprenderás nuevas cosas junto con SAPI</p>
-                <section className='signup_form_inputs'> 
-                    <input className='signup_form_input'  type="email" placeholder="tucorreo@email.com" ref={emailRef} required/>
-                    <input className='signup_form_input' type="password" placeholder="Contraseña" ref={passwordRef} required/>
-                    <input className='signup_form_input' type="password" placeholder="Repita su contraseña" ref={passwordVerREf} required/>
+    <section className="signup">
+        <Nav/>
+        <div className="signup_container">
+            <h2 className="signup_title">Crea Una Cuenta</h2>
+            <form className="signup_form" onSubmit={handleSubmit}>
+                    <label htmlFor="fullName"> Nombre completo
+                        <input className="form_input" type="text" id="fullName" placeholder='Veliz Benavidez' required/>
+                    </label>
+                    <label htmlFor="email"> Correo Electrónico
+                        <input className="form_input"  type="email" id="email" placeholder="tucorreo@email.com" ref={emailRef} required/>
+                    </label>
+                    <label htmlFor="password"> Contraseña
+                        <input className="form_input" type="password" id="password" placeholder="Contraseña" ref={passwordRef} required/>
+                    </label>
+                    <label htmlFor="confirmPassword"> Confirmar contraseña
+                        <input className="form_input" type="password" id="confirmPassword" placeholder="Repita su contraseña" ref={passwordVerREf} required/>
+                    </label>
                     {
                         waiting ? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
-                        <button className='signup_form_button' type="submit">CREAR MI CUENTA</button>
+                        <button className="form_btn" type="submit">CREAR MI CUENTA</button>
                     }
-                </section>
             </form>
-            <GoogleButton/>
+        </div>
+        <div className='signup_message'>
+                    <span className='message_overlay'></span>
+                    <h3>"En algún lugar, algo increíble está esperando a ser conocido."</h3>
+                    <p>- Carl Sagan</p>
+                    <GoogleButton/>
         </div>
     </section>
   )

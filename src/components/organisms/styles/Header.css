@@ -1,38 +1,36 @@
 .header {
-    view-timeline: --header-view;
-    width: 100%;
-    height: 100dvh;
     position: relative;
     z-index: 20;
+    width: 100%;
+    height: 100dvh;
+    view-timeline: --header-view;
 }
 
-
-
 .header_video {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
     width: inherit;
     height: inherit;
     object-fit: cover;
     aspect-ratio: 16/9;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
 }
 
 .header_overlay {
     position: absolute;
-    z-index: 1;
     top: 0;
     left: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
     background-color: #151515bb;
     backdrop-filter: blur(1px);
-    animation-timeline: --header-view;
     animation-name: header-hide;
     animation-fill-mode: both;
     animation-timing-function: view();
+    animation-timeline: --header-view;
 }
 
 @keyframes header-hide {
@@ -50,16 +48,16 @@
   
 
 .header_content {
-    width: 100%;
-    padding-inline: 3rem;
-    height: inherit;
     position: absolute;
+    width: 100%;
+    height: inherit;
     z-index: 30;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     gap: 5%;
+    padding-inline: 3rem;
 }
 
 .header_title {
@@ -83,7 +81,7 @@
 
 .header_btn {
     display: block;
-    width: max-content;
+    width: fit-content;
     padding-inline: 2em;
     height: 10%;
     background-color: var(--brandy-punch-400);

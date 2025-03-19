@@ -47,6 +47,8 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 62.5%;
+  overscroll-behavior: none;
 }
 
 @font-face {

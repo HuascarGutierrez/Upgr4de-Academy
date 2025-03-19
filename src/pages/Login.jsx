@@ -1,12 +1,10 @@
 import { useState, useRef } from "react";
 import { useNavigate /**useSearchParams */ } from "react-router-dom";
-import { auth } from "../config/app";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { ClipLoader } from "react-spinners";
-import { handleErrorNoti, handleSuccess } from "../config/alerts";
 import GoogleButton from "../components/atoms/GoogleButton";
 import Nav from "../components/organisms/Nav";
 import './styles/Login.css'
+import { handleLogin } from "../config/auth_functions";
 
 function Login() {
     const [waiting, setWaiting] = useState(false);
@@ -16,27 +14,15 @@ function Login() {
     const passwordRef = useRef(null);
 
     const handleSubmit = async(e) => {
-        setWaiting(true)
+        setWaiting(true);
         e.preventDefault();
 
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        try{
-            await signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                if(userCredential.user.emailVerified){
-                    handleSuccess({texto: "Inicio de sesión exitoso."})
-                    navigate('/main/courses');
-                } else {
-                    signOut(auth)
-                    handleErrorNoti({texto: "Error al iniciar sesión", title: 'Error', color: '#ccccff'})
-                }
-            })
-            
-        } catch(error){
-            handleErrorNoti(`error en el registro: ${error.message}`)
-        }
-        setWaiting(false)
+
+        await handleLogin({email: email, password: password, funcion: ()=>{navigate('/')}})
+        
+        setWaiting(false);
     }
 
   return (
@@ -49,7 +35,7 @@ function Login() {
                     <GoogleButton/>
         </div>
         <div className="login_container">
-            <h2 className="login_title">Crea Una Cuenta</h2>
+            <h2 className="login_title">Iniciar Sesión</h2>
             <form className="login_formLogin" onSubmit={handleSubmit}>   
                     <label htmlFor="email"> Correo Electrónico
                         <input className="formLogin_input"  type="email" id="email" placeholder="tucorreo@email.com" ref={emailRef} required/>

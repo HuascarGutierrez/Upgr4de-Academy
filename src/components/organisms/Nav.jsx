@@ -11,10 +11,6 @@ function Nav({user}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
 
-  const reloadPage = async() => {
-    location.reload()
-}
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -22,7 +18,7 @@ function Nav({user}) {
   const handleSignOut = async() => {
     const auth = getAuth();
     signOut(auth).then(() => {
-      alertSignOut({funcion: reloadPage})
+      alertSignOut()
     }).catch((error) => {
       alertWarning(`Error de logout: ${error}`);
     })

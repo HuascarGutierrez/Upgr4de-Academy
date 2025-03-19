@@ -17,7 +17,7 @@ function App() {
 
   useEffect(()=> {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser.emailVerified){
+      if (currentUser?.emailVerified){
         setUser(currentUser);
         console.log(currentUser);
 

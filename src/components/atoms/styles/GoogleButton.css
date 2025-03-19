@@ -8,7 +8,6 @@
     max-width: 400px;
     height: 10%;
     gap: 10px;
-    border: 1px solid var(--swans-down-900);
     border-radius: 10px;
     margin-inline: auto;
     font-size: 1.2em;

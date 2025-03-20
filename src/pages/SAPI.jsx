@@ -8,9 +8,9 @@ import './styles/SAPI.css'
 function SAPI({user}) {
   return (
     <section className="SAPI">
-        <SAPIHeader/>
+        <SAPIHeader user={user}/>
         <main id="SAPIMain">
-        <Nav/>
+        <Nav user={user}/>
         <Materias materias={materias}/>
         </main>
         <Footer/>

@@ -1,0 +1,30 @@
+.AllStatus{
+    width: 920px;
+    margin: 30px;
+    
+}
+
+.StatusP{
+    display: flex;
+    margin: 20px;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgb(213, 205, 205);
+    padding: 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.StatusP div{
+    text-align: center;
+    width:25% ;
+    border-right: 2px solid rgb(206, 201, 201);
+}
+
+.StatusP div:nth-child(4){
+    text-align: center;
+    width:25% ;
+    border-right: 0px;
+}

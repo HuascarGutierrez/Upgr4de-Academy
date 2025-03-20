@@ -1,14 +1,29 @@
 import "./styles/Nav.css";
 import { useNavigate } from 'react-router-dom'
 import { useState } from "react";
+import { getAuth, signOut } from 'firebase/auth'
+import Swal from 'sweetalert2'
+import {alertSignOut, alertWarning} from '../../config/alerts'
 
-function Nav() {
+
+
+function Nav({user}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const handleSignOut = async() => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      alertSignOut()
+    }).catch((error) => {
+      alertWarning(`Error de logout: ${error}`);
+    })
+  }
+
 
   return (
     <nav className="nav">
@@ -30,13 +45,26 @@ function Nav() {
           <p>Sobre Nosotros</p>
         </li>
 
-        <li onClick={() => {navigate('/iniciodesesion')}} className="nav_item item-login">
-          <p>Inicio de sesión</p>
-        </li>
+        {
+          user?
+          <>
+            <li className="nav_item ">
+              <p>Hola {user.displayName}</p>
+            </li>
+            <li onClick={handleSignOut} className="nav_item item-signup">
+              <p>Cerrar Sesión</p>
+            </li>
+          </> :
+          <>
+            <li onClick={() => {navigate('/iniciodesesion')}} className="nav_item item-login">
+              <p>Iniciar sesión</p>
+            </li>
 
-        <li onClick={() => {navigate('/registro')}} className="nav_item item-signup">
-          <p>Registrarse</p>
-        </li>
+            <li onClick={() => {navigate('/registro')}} className="nav_item item-signup">
+              <p>Registrarse</p>
+            </li>
+          </>
+        }
       </ul>
 
       <div className="nav_btn" onClick={toggleMenu}>

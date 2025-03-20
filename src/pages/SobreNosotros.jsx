@@ -7,12 +7,12 @@ import SobreNosotrosHeader from "../components/organisms/SobreNosotrosHeader"
 
 import './styles/SobreNosotros.css'
 
-function SobreNosotros() {
+function SobreNosotros({user}) {
   return (
     <div className="sobreNosotros">
     <SobreNosotrosHeader/>
       <main id="snMain" className="sobreNosotros_main">
-        <Nav/>
+        <Nav user={user}/>
         <InfoBlockGrid3x6 
         title= 'MISIÓN'
         text1= 'Empoderar a estudiantes de Bolivia para superar sus desafíos en materias STEM'

@@ -1,0 +1,16 @@
+.buscar{
+    width: 215px;
+    height: 32px;
+    display: flex;
+    border:  2px solid gray;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    margin: 5px;
+}
+.buscar input{
+    border: 0px;
+
+}

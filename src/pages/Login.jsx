@@ -1,68 +1,54 @@
-import LeftArrow from "../components/atoms/LeftArrow"
 import { useState, useRef } from "react";
 import { useNavigate /**useSearchParams */ } from "react-router-dom";
-import { auth } from "../config/app";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { ClipLoader } from "react-spinners";
-import { handleErrorNoti, handleSuccess } from "../config/alerts";
 import GoogleButton from "../components/atoms/GoogleButton";
-import './styles/Signup.css'
-import './styles/TuEspacio.css'
+import Nav from "../components/organisms/Nav";
+import './styles/Login.css'
+import { handleLogin } from "../config/auth_functions";
 
 function Login() {
     const [waiting, setWaiting] = useState(false);
     const navigate = useNavigate();
-    const handleReturn = () => {
-        navigate('../');
-    }
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
     const handleSubmit = async(e) => {
-        setWaiting(true)
+        setWaiting(true);
         e.preventDefault();
 
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        try{
-            await signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                if(userCredential.user.emailVerified){
-                    handleSuccess({texto: "Inicio de sesión exitoso."})
-                    navigate('/SAPI');
-                } else {
-                    signOut(auth)
-                    handleErrorNoti({texto: "Error al iniciar sesión", title: 'Error', color: '#ccccff'})
-                }
-            })
-            
-        } catch(error){
-            handleErrorNoti(`error en el registro: ${error.message}`)
-        }
-        setWaiting(false)
+
+        await handleLogin({email: email, password: password, funcion: ()=>{navigate('/')}})
+        
+        setWaiting(false);
     }
 
   return (
-    <section className="signup">
-            <button onClick={handleReturn} className='signup_volver'>
-                <LeftArrow color={'var(--swans-down-200)'} size={'2em'}/>
-                Volver
-            </button>
-            <div className="signup_form">
-                <form className="signup_form_formulario" onSubmit={handleSubmit}>
-                    <h2 className='signup_form_h2'>Inicia Sesion</h2>
-                    <p className='signup_form_p'>Entra a los mejores recursos en el línea.</p>
-                    <section className='signup_form_inputs'> 
-                        <input className='signup_form_input'  type="email" placeholder="tucorreo@email.com" ref={emailRef} required/>
-                        <input className='signup_form_input' type="password" placeholder="Contraseña" ref={passwordRef} required/>
-                        {
-                            waiting? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> : <button className='signup_form_button' type="submit">INGRESAR</button>
-                        }
-                    </section>
-                </form>
-                <GoogleButton/>
-            </div>
+    <section className="login">
+        <Nav/>
+        <div className='login_message'>
+                    <span className='message_overlay'></span>
+                    <h3>"La mente que se abre a una nueva idea jamás volverá a su tamaño original."</h3>
+                    <p>- Albert Einstein</p>
+                    <GoogleButton/>
+        </div>
+        <div className="login_container">
+            <h2 className="login_title">Iniciar Sesión</h2>
+            <form className="login_formLogin" onSubmit={handleSubmit}>   
+                    <label htmlFor="email"> Correo Electrónico
+                        <input className="formLogin_input"  type="email" id="email" placeholder="tucorreo@email.com" ref={emailRef} required/>
+                    </label>
+                    <label htmlFor="password"> Contraseña
+                        <input className="formLogin_input" type="password" id="password" placeholder="Contraseña" ref={passwordRef} required/>
+                    </label>
+                    {
+                        waiting ? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
+                        <button className="formLogin_btn" type="submit">CREAR MI CUENTA</button>
+                    }
+            </form>
+        </div>
     </section>
   )
 }

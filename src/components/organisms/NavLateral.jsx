@@ -7,7 +7,7 @@ function NavLateral() {
   return (
     <div className='navLateral'>
         <div onClick={() => {navigate('/')}} className='navLateral_logo'>
-            <img src="assets/buho_verde.svg" alt="" />
+            <img src="/assets/buho_verde.svg" alt="" />
         </div>
         <div className='navLateral_content'>
             <ul className='navLateral_list'>

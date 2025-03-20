@@ -1,3 +1,8 @@
+.SAPIMain {
+    min-height: 100dvh;
+}
+
 .SAPIContent {
     margin-left: 100px;
+    background-color: white; /* Agrega un fondo blanco */
 }

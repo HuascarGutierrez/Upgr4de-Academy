@@ -9,7 +9,7 @@
     width: 100%;
     height: 100dvh;
     z-index: 1;
-    background-image: url('/public/images/SAPI_header.webp');
+    background-image: url('../../../assets/images/SAPI_header.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

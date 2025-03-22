@@ -6,7 +6,7 @@ function BarMyCourses() {
   return (
     <>
     <div className = "Cabecera_MyCourses">
-        <h2>My Courses</h2>
+        <h2>Mis Cursos</h2>
         <div className ="BarCourses">
             <Buscar/>
             <img src="/assets/settings.svg" alt="" />

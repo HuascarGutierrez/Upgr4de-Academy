@@ -1,16 +1,14 @@
 import './styles/SAPIHeader.css'
 import CircularText from '../atoms/CircularText'
-import { useNavigate } from 'react-router-dom'
-import { handleErrorNoti } from '../../config/alerts'
 
-function SAPIHeader({user}) {
+function SAPIHeader() {
+    {/**
     const navigate = useNavigate()
-
     const handleIngresa = () => {
         user?
         navigate('/main/courses'):
         handleErrorNoti({title: 'Alto', texto:'Primero debes iniciar sesión'})
-    }
+    } */}
 
   return (
     <header className='SAPIHeader'>

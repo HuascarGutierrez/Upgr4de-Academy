@@ -20,7 +20,7 @@ function Login() {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
-        await handleLogin({email: email, password: password, funcion: ()=>{navigate('/')}})
+        await handleLogin({email: email, password: password, funcion: ()=>{navigate('/main/courses')}})
         
         setWaiting(false);
     }

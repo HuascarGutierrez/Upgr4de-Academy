@@ -8,6 +8,7 @@ function NavLateral() {
     <div className='navLateral'>
         <div onClick={() => {navigate('/')}} className='navLateral_logo'>
             <img src="/assets/buho_verde.svg" alt="" />
+            <h2>SAPI</h2>
         </div>
         <div className='navLateral_content'>
             <ul className='navLateral_list'>

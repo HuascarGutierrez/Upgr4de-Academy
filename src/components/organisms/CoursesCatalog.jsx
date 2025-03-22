@@ -1,6 +1,6 @@
 import CourseModel from '../../models/course_model';
 import './styles/CoursesCatalog.css'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const courses = [
   new CourseModel({id: 1, title: 'Introducción a cálculo', description: 'Acompañame en este maravilloso mundo', lessons: 12, quiz: 3, teacher: 'Ing. Huascar Guitierrez'}),

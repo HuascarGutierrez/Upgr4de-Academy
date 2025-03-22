@@ -4,11 +4,9 @@
   justify-content: center;
   align-items: flex-start;
   font-family: 'Arial', sans-serif;
-  width: 100%;
   min-height: 100vh;
   padding: 20px;
-  background-color: #f0f4f8; /* Light background color */
-  overflow-x: hidden;
+  background-color: hsl(210, 36%, 96%); /* Light background color */
 }
 
 /* Responsive adjustments */
@@ -73,6 +71,8 @@
   border: 1px solid rgb(180, 178, 178);
   background-color: transparent;
   color: #495057;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
   text-align: left;
   border-radius: 5px;
   cursor: pointer;

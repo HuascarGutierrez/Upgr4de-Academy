@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function Perfil({user}) {
   const [activeView, setActiveView] = useState('publicProfile');
   const [name, setName] = useState('HELEN ARCO SENO');
-  const [description, setDescription] = useState('SOY EL FUTURO DEL PAÍS AÑÁ');
+  const [description, setDescription] = useState('SOY EL FUTURO DEL PAÍS');
   const [rank, setRank] = useState('RANGO PLATA');
   const [recentActivity, setRecentActivity] = useState([
     { title: 'Bread & Fred Demo', time: '6 h registradas', lastSession: 'última sesión: 29 DIC 2024' },
@@ -80,34 +80,34 @@ function Perfil({user}) {
         <div className="profile-header">
           <img src={user.imageUrl} alt="Avatar" className="avatar" />
           <div className="profile-info">
-            <div className="name">{name}</div>
+            <div className="name">{user.userName}</div>
           </div>
         </div>
         <div className="menu">
-          <button
+          {/**<a href='#perfilPublico'
             className={`menu-item ${activeView === 'publicProfile' ? 'active' : ''}`}
             onClick={() => handleViewChange('publicProfile')}
           >
             VER PERFIL PÚBLICO
-          </button>
-          <button
+          </a> */}
+          <a href='#miPerfil'
             className={`menu-item ${activeView === 'myProfile' ? 'active' : ''}`}
             onClick={() => handleViewChange('myProfile')}
           >
             MI PERFIL
-          </button>
-          <button
+          </a>
+          <a href='#suscripcion'
             className={`menu-item ${activeView === 'subscription' ? 'active' : ''}`}
             onClick={() => handleViewChange('subscription')}
           >
             SUSCRIPCIÓN
-          </button>
-          <button
+          </a>
+          <a href='#metodoPago'
             className={`menu-item ${activeView === 'paymentMethod' ? 'active' : ''}`}
             onClick={() => handleViewChange('paymentMethod')}
           >
             MÉTODO DE PAGO
-          </button>
+          </a>
           <button onClick={handleSignOut} className="menu-item">
             CERRAR CUENTA
           </button>
@@ -115,14 +115,16 @@ function Perfil({user}) {
       </div>
 
       {activeView === 'publicProfile' && (
-        <div className="public-profile-card">
+        <div id='perfilPublico' className="public-profile-card">
+
           <div className="profile-info">
-            <img src="URL_DE_TU_AVATAR" alt="Avatar" className="avatar-large" />
-            <div className="name">{name}</div>
+            <img src={user.imageUrl} alt="Avatar" className="avatar-large" />
+            <div className="name">{user.userName}</div>
             <div className="description">{description}</div>
             <div className="rank">{rank}</div>
           </div>
-          <div className="recent-activity">
+
+          {/**<div className="recent-activity">
             <h3>ACTIVIDAD RECIENTE</h3>
             {recentActivity.map((activity, index) => (
               <div key={index} className="activity-item">
@@ -132,6 +134,7 @@ function Perfil({user}) {
               </div>
             ))}
           </div>
+          */}
           <div className="badges">
             <h3>INSIGNIAS</h3>
             {badges.map((badge, index) => (
@@ -140,12 +143,12 @@ function Perfil({user}) {
                 <p>{badge.title}</p>
               </div>
             ))}
-          </div>
+          </div> 
         </div>
       )}
 
       {activeView === 'myProfile' && (
-        <div className="my-profile-card">
+        <div id='miPerfil' className="my-profile-card">
           <h2>Información Básica</h2>
           <button className="edit-profile-button">EDITAR FOTO DE PERFIL</button>
           <form>
@@ -170,7 +173,7 @@ function Perfil({user}) {
       )}
 
       {activeView === 'subscription' && (
-        <div className="subscription-card">
+        <div id='suscripcion' className="subscription-card">
           <h2>Suscripciones</h2>
           <div className="active-subscriptions">
             <p>No tienes suscripciones activas</p>
@@ -192,7 +195,7 @@ function Perfil({user}) {
       )}
 
       {activeView === 'paymentMethod' && (
-        <div className="payments-card">
+        <div id='metodoPago' className="payments-card">
           <h2>Método de Pago</h2>
           <div className="payments-form">
             <div className="form-group">

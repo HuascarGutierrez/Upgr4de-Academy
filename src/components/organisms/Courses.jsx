@@ -8,7 +8,7 @@ import EnrolledCourses from './EnrolledCourses'
 
 function Courses() {
   return (
-  <div style={{overflowX: 'hidden'}}>
+  <div className='SAPIcurses'>
     <BarMyCourses/>
     <ProgresoCurso />
     <AllStatus />

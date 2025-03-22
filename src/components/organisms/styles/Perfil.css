@@ -36,8 +36,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin-right: 20px;
-  height: 500px;
+  height: fit-content;
 }
 
 .profile-header {
@@ -95,12 +94,11 @@
 .my-profile-card,
 .subscription-card,
 .payments-card {
-  width: 1000px;
+  width: 100%;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-left: 5px;
 }
 
 /* Public Profile Card Specific Styles */
@@ -237,7 +235,6 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-left: 20px;
   font-size: 16px; /* Tamaño de fuente uniforme */
 }
 
@@ -285,7 +282,7 @@
 }
 
 .plan-item ul {
-  list-style-type: none;
+  margin-left: 2rem;
   padding: 0;
   margin-bottom: 15px;
 }

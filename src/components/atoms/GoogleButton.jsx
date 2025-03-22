@@ -10,7 +10,7 @@ function GoogleButton() {
 
     const handleBtnAuth = async() => {
         setWait(true)
-        await handleAuth({funcion: ()=>{navigate('/')}})
+        await handleAuth({funcion: ()=>{navigate('/main/courses');}, salida: ()=>{navigate('/');}})
         setWait(false)
     }
 

@@ -3,10 +3,21 @@ import './styles/Perfil.css';
 import { getAuth, signOut } from 'firebase/auth';
 import { alertSignOut, alertWarning } from '../../config/alerts';
 import { useNavigate } from 'react-router-dom';
+import { doc, getFirestore, query, setDoc, where } from 'firebase/firestore';
+import { useRef } from 'react';
+import { handleUpdateImage } from '../../config/auth_functions';
+import Swal from 'sweetalert2';
+import { ClipLoader } from 'react-spinners';
 
 function Perfil({user}) {
-  const [activeView, setActiveView] = useState('publicProfile');
-  const [name, setName] = useState('HELEN ARCO SENO');
+  const usuario = user;
+
+  
+  console.log(usuario);
+
+  const [wait, setWait] = useState(false);
+  
+  const [activeView, setActiveView] = useState('myProfile');
   const [description, setDescription] = useState('SOY EL FUTURO DEL PAÍS');
   const [rank, setRank] = useState('RANGO PLATA');
   const [recentActivity, setRecentActivity] = useState([
@@ -19,6 +30,16 @@ function Perfil({user}) {
   ]);
   const [subscriptionPlans, setSubscriptionPlans] = useState([
     {
+      name: 'Plan Gratuito',
+      description: 'Inscríbete en el plan Gratuito para obtener los siguientes beneficios:',
+      benefits: [
+        'Acceso a algunas las unidades',
+        'Acceso al 50% del contenido',
+        'Evaluaciones y ejercicios',
+      ],
+      plan: 'free',
+    },
+    {
       name: 'Plan Mensual',
       description: 'Te esperan nuevas oportunidades. Inscríbete en el plan Mensual para obtener muchos beneficios:',
       benefits: [
@@ -27,12 +48,16 @@ function Perfil({user}) {
         'Acceso al apartado de supervisión',
         'Evaluaciones y ejercicios',
       ],
+      plan: 'monthly',
     },
+    
   ]);
 
-  const [email, setEmail] = useState('yourname@gmail.com');
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [notification, setNotification] = useState('Allow');
+  const fullNameRef = useRef('');
+  const [imageUrl, setImageUrl] = useState('https://firebasestorage.googleapis.com/v0/b/sapi-5c389.firebasestorage.app/o/images_profiles%2Fdefault_img_profile.webp?alt=media&token=56d413c0-7595-4131-8a5d-2213d13c3cad');
+  //const [email, setEmail] = useState('yourname@gmail.com');
+  //const [mobileNumber, setMobileNumber] = useState('');
+  //const [notification, setNotification] = useState('Allow');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
@@ -42,16 +67,12 @@ function Perfil({user}) {
 
   const navigate = useNavigate();
 
-  const reloadPage = async () => {
-    navigate('/');
-    location.reload();
-  };
-
   const handleSignOut = async () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        alertSignOut({ funcion: reloadPage });
+        alertSignOut();
+        navigate('/');
       })
       .catch((error) => {
         alertWarning(`Error de logout: ${error}`);
@@ -62,25 +83,92 @@ function Perfil({user}) {
     setActiveView(view);
   };
 
-  const handleSave = () => {
-    alert('Cambios guardados');
-  };
-
+  
   const handleNotificationChange = (e) => {
     setNotification(e.target.value);
   };
-
+  
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
   };
+  
+  const handleImageChange = async(e) => {
+    setWait(true);
+    if (e.target.files[0]) {
+      setImageUrl(e.target.files[0]); // Guarda la imagen en el estado
+      const imagen = e.target.files[0];
+      const url = await handleUpdateImage({email: usuario?.email, image: imagen});
+      const db = getFirestore();
+      const userRef = doc(db, 'users', usuario?.uid);
+      setDoc(userRef, {
+        imageUrl: url,
+      }, { merge: true }).then(() => {location.reload();});
+    }
+    setWait(true);
+  };
+  
+  const handleSaveName = async (e) => {
+    e.preventDefault();
+    const fullName = fullNameRef.current.value;  
+    console.log(fullName.length); 
+    if(fullName.length < 8){
+      alertWarning('El nombre debe tener al menos 8 caracteres');
+      return;
+    } 
+    const db = getFirestore();
+    const userRef = doc(db, 'users', usuario?.uid);
+      setDoc(userRef, {
+        userName: fullName,
+      }, { merge: true }).then(() => {location.reload();});
+  };
+
+  const cambiarPlan = async (plan) => {
+    const db = getFirestore();
+    const userRef = doc(db, 'users', usuario?.uid);
+    setDoc(userRef, {
+      planType: plan,
+    }, { merge: true }).then(() => {location.reload();});
+  }
+
+  /**const deactiveUser = async () => {
+    const db = getFirestore();
+    const userRef = doc(db, 'users', usuario?.uid);
+    setDoc(userRef, {
+      activo: false,
+    }, { merge: true }).then(() => {location.reload();});
+    signOut(getAuth())
+      .then(() => {
+        alertSignOut();
+        navigate('/');
+      })
+      .catch((error) => {
+        alertWarning(`Error de logout: ${error}`);
+      });
+  }
+
+  const advice = async () => {
+    Swal.fire({
+      title: '¿Estás seguro de eliminar tu cuenta?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar cuenta',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#ff0000',
+      cancelButtonColor: '#ccccff',
+      preConfirm: () => {
+        deactiveUser();
+      }
+    })
+  } */
 
   return (
     <div className="profile-container">
       <div className="menu-card">
         <div className="profile-header">
-          <img src={user.imageUrl} alt="Avatar" className="avatar" />
+          <img src={usuario?.imageUrl} alt="Avatar" className="avatar" />
           <div className="profile-info">
-            <div className="name">{user.userName}</div>
+            <div className="name">{usuario?.userName}</div>
           </div>
         </div>
         <div className="menu">
@@ -108,8 +196,8 @@ function Perfil({user}) {
           >
             MÉTODO DE PAGO
           </a>
-          <button onClick={handleSignOut} className="menu-item">
-            CERRAR CUENTA
+          <button onClick={handleSignOut} className="menu-item" >
+            CERRAR SESIÓN
           </button>
         </div>
       </div>
@@ -118,8 +206,8 @@ function Perfil({user}) {
         <div id='perfilPublico' className="public-profile-card">
 
           <div className="profile-info">
-            <img src={user.imageUrl} alt="Avatar" className="avatar-large" />
-            <div className="name">{user.userName}</div>
+            <img src={usuario?.imageUrl} alt="" className="avatar-large" />
+            <div className="name">{usuario?.userName}</div>
             <div className="description">{description}</div>
             <div className="rank">{rank}</div>
           </div>
@@ -150,24 +238,30 @@ function Perfil({user}) {
       {activeView === 'myProfile' && (
         <div id='miPerfil' className="my-profile-card">
           <h2>Información Básica</h2>
-          <button className="edit-profile-button">EDITAR FOTO DE PERFIL</button>
           <form>
-            <label>Nombres y Apellidos</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-            <label>Descripción</label>
-            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+            {
+              wait?
+              <div style={{marginInline: 'auto', width: 'min-content'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div>: 
+              <label> Cambiar foto de perfil
+              <input type="file" accept="image/*" onChange={handleImageChange}/>
+              </label>
+            }
+            <label> Cambiar nombre completo
+              <input minLength={8} type="text" ref={fullNameRef} placeholder={user?.userName}/>
+              <button className="save-button" onClick={handleSaveName}>Guardar Nombre</button>
+            </label>
+            {/**<label>Descripción</label>
+            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} /> 
             <label>Teléfono</label>
-            <input type="text" value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />
-
-            <h3>Información del Tutor (opcional)</h3>
+            <input type="text" value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />*/}
+            
+            {/**<h3>Información del Tutor (opcional)</h3>
             <label>Nombres y Apellidos del Tutor</label>
             <input type="text" value={tutorName} onChange={(e) => setTutorName(e.target.value)} />
             <label>Correo Electrónico del Tutor</label>
             <input type="email" value={tutorEmail} onChange={(e) => setTutorEmail(e.target.value)} />
             <label>Teléfono del Tutor</label>
-            <input type="text" value={tutorPhone} onChange={(e) => setTutorPhone(e.target.value)} />
-
-            <button className="save-button" onClick={handleSave}>Guardar</button>
+            <input type="text" value={tutorPhone} onChange={(e) => setTutorPhone(e.target.value)} /> */}
           </form>
         </div>
       )}
@@ -176,7 +270,19 @@ function Perfil({user}) {
         <div id='suscripcion' className="subscription-card">
           <h2>Suscripciones</h2>
           <div className="active-subscriptions">
-            <p>No tienes suscripciones activas</p>
+            {subscriptionPlans.map((plan, index) => (
+              plan.plan == usuario.planType? 
+              <div key={index} className="plan-item">
+                <h4>{plan.name}</h4>
+                <p>{plan.description}</p>
+                <ul>
+                  {plan.benefits.map((benefit, i) => (
+                    <li key={i}>{benefit}</li>
+                  ))}
+                </ul>
+                <button>Plan actual</button>
+              </div> : <div style={{display: 'none'}}></div>
+            ))}
           </div>
           <h3>Planes de Suscripción disponibles</h3>
           {subscriptionPlans.map((plan, index) => (
@@ -188,7 +294,10 @@ function Perfil({user}) {
                   <li key={i}>{benefit}</li>
                 ))}
               </ul>
-              <button>Suscribirse</button>
+              {plan.plan == usuario.planType?
+              <p style={{textAlign: 'center'}}>Suscrito</p>:
+              <button onClick={() => {cambiarPlan(plan.plan)}}>Suscribirse</button>
+              }
             </div>
           ))}
         </div>
@@ -234,7 +343,7 @@ function Perfil({user}) {
                 </div>
               </div>
             )}
-            <button className="save-button" onClick={handleSave}>Guardar Cambios</button>
+            <button className="save-button">Guardar Cambios</button>
           </div>
         </div>
       )}

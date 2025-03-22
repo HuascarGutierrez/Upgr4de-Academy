@@ -10,6 +10,7 @@ import Perfil from '../components/organisms/Perfil'
 import Supervision from '../components/organisms/Supervision'
 
 function SAPIMain({user}) {
+
   return (
     <div className='SAPIMain'>
         <NavLateral/>
@@ -22,7 +23,7 @@ function SAPIMain({user}) {
                  <Route path='/courses' element={<Courses/>}/>
                 <Route path='/catalogo' element={<CoursesCatalog/>}/>
                 <Route path='/supervision' element={<Supervision/>}/> 
-                <Route path='/Perfil' element={<Perfil user={user}/>}/> 
+                <Route path='/perfil' element={<Perfil user={user}/>}/> 
             </Routes>
         </div>
     </div>

@@ -28,7 +28,7 @@ function App() {
         
           const userRef = doc(db, "users", uid); // Referencia al documento con el uid
             await getDoc(userRef).then((userSnap) => {
-                if (userSnap.exists()) {
+                if (userSnap.exists() && userSnap.data().activo) {
                     console.log("Usuario encontrado");
                     const userData =userSnap.data();
                     setUserdb(userData);

@@ -1,4 +1,11 @@
 .SAPIcurses{
     overflow-x: hidden;
     color: #1C1B1F;
+    padding: 20px;
+    height: 100vh;
+}
+
+.Enrolled {
+    max-width: 920px;
+    
 }

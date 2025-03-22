@@ -1,6 +1,7 @@
 import FooterItem from "../molecules/FooterItem"
 import './styles/Footer.css'
 
+
 function Footer() {
   return (
     <footer className='footer'>
@@ -13,11 +14,15 @@ function Footer() {
       </section>
       <section className='footer_section footer_section_materias'>
         <span className='footer_section_title'>Servicios</span>
-          <p>SAPI</p>
+          <li className="footer_item">
+            <p>SAPI</p>
+          </li>
       </section>
       <section className='footer_section footer_section_links'>
         <span className='footer_section_title'>Links</span>
+        <li className="footer_item">
           <p>Sobre Nosotros</p>
+        </li>
       </section>
     </footer>
   )

@@ -13,7 +13,7 @@ function AllStatus() {
                 </div>
                 <div>
                     <img src="/assets/app_registration.svg" alt="" />
-                    <h3>30/70 Ejercios</h3>
+                    <h3>30/70 Ejercicios</h3>
                 </div>
                 <div>
                     <img src="/assets/stadia_controller.svg" alt="" />
@@ -21,7 +21,7 @@ function AllStatus() {
                 </div>
                 <div>
                     <img src="/assets/timelapse.svg" alt="" />
-                    <h3>2 horas de apredizaje</h3>
+                    <h3>2 hrs de aprendizaje</h3>
                 </div>
             </div>
         </div>

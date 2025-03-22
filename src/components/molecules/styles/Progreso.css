@@ -1,5 +1,9 @@
 .ProgresoCurso{
-    display: flex;
+    display: grid;
     justify-content: space-around;
     align-items: center;
+}
+
+.ProgresoCurso div img{
+    max-width: 920px;
 }

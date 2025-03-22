@@ -7,11 +7,20 @@
     background-color: #2D9CDB;
     color: white;
     display: flex;
-    width: 200px;
-    height: 36px;
     font-size: 14px;
     align-items: center;
     justify-content: space-evenly;
+    padding-right: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.Boton_vercatalogo img{
+    width: 48px;
+    height: 48px;
 }
 
 .CursoProgreso{

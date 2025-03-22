@@ -7,8 +7,8 @@ function EnrolledHeader() {
     <div className='EnrolledHeader'>
         <h2>Cusos Inscritos</h2>
         <div className='Boton_vercatalogo'>
-            <img src="assets\zowl-white.svg" alt="" />
-            <h3>Catalogo de cursos</h3>
+            <img src="/Icons/zowl-white.svg" alt="" />
+            <p>Catalogo de cursos</p>
         </div>
     </div>
     </>

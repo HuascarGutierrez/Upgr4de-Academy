@@ -46,3 +46,7 @@
         gap: 1px;
     }
 }
+
+.footer_item{
+    list-style-type: none;
+}

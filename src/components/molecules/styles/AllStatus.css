@@ -1,11 +1,10 @@
 .AllStatus{
-    width: 920px;
-    margin: 30px;
-    
+    max-width: 920px;
 }
 
 .StatusP{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px,1fr) );
     margin: 20px;
     justify-content: space-around;
     align-items: center;
@@ -17,14 +16,13 @@
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
+
 .StatusP div{
     text-align: center;
-    width:25% ;
     border-right: 2px solid rgb(206, 201, 201);
 }
 
 .StatusP div:nth-child(4){
     text-align: center;
-    width:25% ;
     border-right: 0px;
 }

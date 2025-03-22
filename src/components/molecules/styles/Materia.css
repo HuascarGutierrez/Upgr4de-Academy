@@ -6,8 +6,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: baseline;
-    padding: 1em;
+    gap: 1rem;
+    padding: 2rem;
     color: var(--color-secondary);
+    text-wrap: pretty;
 }
 
 .card:nth-child(2n) {
@@ -15,7 +17,12 @@
     color: var(--color-text);
 }
 
+.card_title {
+    font-size: 2.2rem;
+}
+
 .card_text {
+    font-size: 1.4rem;
     padding-inline: 0.8em;
     letter-spacing: 0.05em;
     text-wrap: pretty;

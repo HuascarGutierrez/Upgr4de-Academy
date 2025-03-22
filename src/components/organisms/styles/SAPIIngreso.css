@@ -1,0 +1,75 @@
+.SAPIIngreso_title {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--brandy-punch-400);
+}
+
+.SAPIIngreso_container {
+    display: flex;
+    flex-direction: row;
+    width: clamp(200px, 80%, 820px);
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.SAPIIngreso_img {
+    width: 40%;
+    background-color: var(--swans-down-400);
+    overflow: hidden;
+    padding: 13px 0 13px 13px;
+}
+
+.SAPIIngreso_img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.SAPIIngreso_description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    width: 60%;
+    padding: 13px 37px;
+    background-color: var(--brandy-punch-400);
+}
+
+.SAPIIngreso_description > h3 {
+    font-size: 2.2rem;
+    line-height: 150%;
+}
+
+.SAPIIngreso_description > p {
+    font-size: 1.4rem;
+    line-height: 160%;
+}
+
+.SAPIIngreso_description > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
+    width: clamp(200px, 50%, 320px);
+    height: 58px;
+    border-radius: 56px;
+    font-size: 1.9rem;
+    line-height: 2.5rem;
+    background-color: var(--swans-down-400);
+    transition: background-color .5s ease-in-out;
+}
+
+.SAPIIngreso_description > a:hover {
+    background-color: var(--swans-down-700);
+}
+
+@media screen and (max-width: 500px) {
+    .SAPIIngreso_container {
+        flex-direction: column;
+    }
+    .SAPIIngreso_img, .SAPIIngreso_description{
+        width: 100%;
+    }
+}

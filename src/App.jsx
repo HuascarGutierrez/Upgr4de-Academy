@@ -71,7 +71,7 @@ function App() {
           <Route path='/SAPI' element={<SAPI user={userdb}/>}/>
           <Route path='/registro' element={<SignUp/>}/>
           <Route path='/iniciodesesion' element={<Login/>}/>
-          <Route path='/main/*' element={<SAPIMain/>}/>
+          <Route path='/main/*' element={<SAPIMain user={userdb}/>}/>
         </Routes>
       </Router>
     </>

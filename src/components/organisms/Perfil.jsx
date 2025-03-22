@@ -5,7 +5,7 @@ import {alertSignOut, alertWarning} from '../../config/alerts'
 import { useNavigate } from 'react-router-dom';
 
 
-function Perfil() {
+function Perfil({user}) {
   const [activeView, setActiveView] = useState('myProfile');
   const [name, setName] = useState('Your Name');
   const [email, setEmail] = useState('yourname@gmail.com');
@@ -60,7 +60,7 @@ function Perfil() {
     <div className="profile-container">
       <div className="menu-card">
         <div className="profile-header">
-          <img src="URL_DE_TU_AVATAR" alt="Avatar" className="avatar" />
+          <img src={user.imageUrl} alt="Avatar" className="avatar" />
           <div className="profile-info">
             <div className="name">{name}</div>
             <div className="email">{email}</div>

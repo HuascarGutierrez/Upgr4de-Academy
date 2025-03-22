@@ -49,6 +49,7 @@ function App() {
           <Route path='/registro' element={<SignUp/>}/>
           <Route path='/iniciodesesion' element={<Login/>}/>
           <Route path='/main/*' element={<SAPIMain/>}/>
+          
         </Routes>
       </Router>
     </>

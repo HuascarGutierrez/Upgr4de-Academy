@@ -5,9 +5,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SignUp from './SignUp'
 import Login from './Login'
 import Courses from '../components/organisms/Courses'
-import CoursesCatalog from '../components/organisms/CoursesCatalog'
+import CoursesCatalog from '../components/organisms/coursesCatalog'
 import Perfil from '../components/organisms/Perfil'
 import Supervision from '../components/organisms/Supervision'
+import CourseDetail from '../components/organisms/CourseDetail'
 
 function SAPIMain() {
   return (
@@ -15,14 +16,11 @@ function SAPIMain() {
         <NavLateral/>
         <div className='SAPIContent'>
             <Routes>
-                {/** EJEMPLOS
-                 * <Route path='hola' element={<SignUp/>}/>
-                  <Route path='adios' element={<Login/>}/>
-                 */}
                  <Route path='/courses' element={<Courses/>}/>
                 <Route path='/catalogo' element={<CoursesCatalog/>}/>
                 <Route path='/supervision' element={<Supervision/>}/> 
                 <Route path='/Perfil' element={<Perfil/>}/> 
+                <Route path='/course/:courseId' element={<CourseDetail />} />
             </Routes>
         </div>
     </div>

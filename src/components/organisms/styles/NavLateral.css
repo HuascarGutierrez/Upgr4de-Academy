@@ -8,6 +8,7 @@
     z-index: 200;
     padding: 1.5rem;
     gap: 2rem;
+    transition: width .1s ease;
 }
 
 .navLateral:hover {
@@ -55,10 +56,10 @@
     justify-content: left;
     gap: 10px;
     width: 90%;
+    border-radius: 10px;
     font-size: 1.5rem;
     color: var(--swans-down-900);
     transition: background-color 0.75s ease;
-    border-radius: 10px;
 }
 
 .navLateral_item > p {
@@ -79,4 +80,25 @@
     background-color: var(--swans-down-400);
     border-radius: 10px;
     transition: background-color 0.75s ease ;
+}
+
+.navLateral_exit {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 90%;
+    max-width: fit-content;
+    padding: 5px;
+    border: 1px solid var(--swans-down-900);
+    border-radius: 10px;
+    background-color: var(--swans-down-400);
+    transform: translate(-50%, -10px);
+}
+
+.navLateral_exit > p {
+    font-size: 1.5rem;;
+    color: var(--black-50);
 }

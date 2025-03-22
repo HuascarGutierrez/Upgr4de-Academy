@@ -1,4 +1,5 @@
 import React from 'react'
+import "./styles/CoursesCatalog.css"
 
 const courses = [
     { id: 1, title: "Introducción a cálculo", description: "Acompañame en este maravilloso mundo", lessons: 12, quiz: 3 },

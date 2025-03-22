@@ -15,7 +15,7 @@ function InicioAdmin() {
     <section className='InicioAdmin'>
     <h2>Lista de Estudiantes </h2>    
     <div className="Tabla-Contenedor">
-      <div className="table-header">
+      <div className="EncabezadoLista">
         <div>Nombres y Apellidos</div>
         <div>Fecha de Ingreso</div>
         <div>Plan de Suscripción</div>
@@ -35,7 +35,7 @@ function InicioAdmin() {
           <div>
 
 
-          <ul className="actions">
+          <ul className="acciones">
             <li className='items'>
                 <img src="/Icons/eye.svg" alt="" />
             </li>

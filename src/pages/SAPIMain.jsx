@@ -8,6 +8,8 @@ import Courses from '../components/organisms/Courses'
 import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import Perfil from '../components/organisms/Perfil'
 import Supervision from '../components/organisms/Supervision'
+import InicioAdmin from "../components/organisms/InicioAdmin"
+import CatalogoAdmin from "../components/organisms/CatalogoAdmin"
 
 function SAPIMain({user}) {
   return (

@@ -9,20 +9,20 @@ function Progreso() {
         <img src="/Icons/Materia1.svg" alt="book"/>
     </div>
 
-    <div className="content">
+    <div className="contenido">
         <div className="titulo">Calculo</div>
-        <div className="progress-text">Progreso</div>
-        <div className="progress-bar-container">
-            <div className="progress-bar"></div>
+        <div className="ProgresoText">Progreso</div>
+        <div className="ContenedorProgreso">
+            <div className="ProgresoBarra"></div>
         </div>
     </div>
 
-    <div className="progress-indicators">
-        <div className="indicator">
+    <div className="ProgresoIndicadores">
+        <div className="indicador">
             <img src="/Icons/menu_book.svg" alt="book"/>
             2/10
         </div>
-        <div className="indicator">
+        <div className="indicador">
             <img src="/Icons/contract_edit.svg" alt="note"/>
             3/5
         </div>

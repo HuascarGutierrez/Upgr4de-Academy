@@ -60,7 +60,8 @@
     height: 80%;
     flex-direction: column;
     color: var(--black-200);
-    justify-content: space-around;
+    gap: 20px;
+    justify-content: center;
 }
 
 .SAPIHeader_contenido > p {
@@ -69,6 +70,7 @@
     padding: 0.5rem 1rem;
     background-color: var(--black-300);
     color: var(--black-900);
+    font-size: 1.7rem;
     font-weight: 700;
     transform: rotate(-3deg);
     border-radius: 0.5rem;
@@ -85,11 +87,19 @@
 .SAPIHeader_contenido a {
     display: block;
     width: fit-content;
-    background-color: var(--swans-down-700);
+    background-color: var(--swans-down-200);
     padding: 1rem 2rem;
-    font-size: 1.5em;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--swans-down-900);
     border-radius: 1rem;
-    border: 1px solid var(--swans-down-400);
+    border: 1px solid var(--swans-down-700);
+    transition: all .5s ease-in-out;
+}
+
+.SAPIHeader_contenido a:hover {
+    background-color: var(--swans-down-900);
+    color: var(--black-50);
 }
 
 .SAPIHeader_overlay > img {
@@ -99,34 +109,7 @@
     bottom: 0;
 }
 
-@media screen and (max-width: 900px) {
-    .SAPIHeader_circle{
-        border-width: 0.2rem;
-        width: 15rem;
-    }
-
-    .SAPIHeader {
-        margin-bottom: 7.5rem;
-    }
-
-    .SAPIHeader_contenido {
-        height: 60%;
-    }
-
-    .SAPIHeader_contenido>h2 {
-        font-size: 3rem;
-    }
-}
-
 @media screen and (max-width: 500px) {
-    .SAPIHeader_contenido > h2 {
-        font-size: 2rem;
-    }
-
-    .SAPIHeader_contenido > a {
-        font-size: 1rem;
-    }
-
     .SAPIHeader_overlay > img {
         display: none;
     }

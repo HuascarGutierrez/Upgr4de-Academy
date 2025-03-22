@@ -9,14 +9,20 @@
     gap: 2rem;
 }
 
+.navLateral:hover {
+    width: 200px;
+}
+
 .navLateral_logo {
     position: absolute;
-    top: 1rem;
-    left: 0;
-    width: 100%;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 100px;
 }
 
 .navLateral_logo > img {

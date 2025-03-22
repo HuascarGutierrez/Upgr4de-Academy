@@ -33,7 +33,7 @@ function Nav({user}) {
       </div>
       <ul className={`nav_items ${menuOpen ? "open" : ""}`}>
         <li onClick={() => {navigate('/')}} className="nav_item">
-          <p>Home</p>
+          <p>Inicio</p>
         </li>
         <li onClick={() => {navigate('/SAPI')}} className="nav_item">
           <p>SAPI</p>

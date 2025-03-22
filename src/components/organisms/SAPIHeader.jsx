@@ -29,7 +29,7 @@ function SAPIHeader({user}) {
             <div className='SAPIHeader_contenido'>
                 <p>No pares de estudiar</p>
                 <h2>AYUDANOS A<br /> CUMPLIR TUS <span>METAS</span></h2>
-                <a onClick={handleIngresa}>INGRESA A SAPI</a>
+                <a onClick={handleIngresa}>INGRESAR  A  SAPI</a>
             </div>
             <img src="images/veloz_buho.webp" alt="veloz" />
         </div>

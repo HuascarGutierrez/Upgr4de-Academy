@@ -1,0 +1,139 @@
+.course-banner-container {
+  /* height: 100vh; */
+  padding: 20px;
+  color: black;
+  background-color: white;
+}
+
+.course-detail-card {
+  overflow: hidden;
+  font-family: sans-serif;
+  border-radius: 10px;
+}
+
+.course-banner-title {
+  background: linear-gradient(135deg, #667eea, #764ba2); /* Degradado de fondo */
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  
+}
+  
+.banner-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.banner-title {
+  font-size: 6rem;
+}
+
+.banner-subtitle {
+  font-size: 2rem;
+}
+  
+.course-info {
+  padding: 2rem 4rem 2rem 4rem;
+}
+  
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  
+.course-title {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+  
+.course-category {
+  font-size: 1rem;
+  color: #666;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+  
+.rating-label {
+  font-size: 1.4rem;
+  margin-right: 5px;
+}
+
+.rating-value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+.star {
+  font-size: 1.4rem;
+  color: gold;
+}
+
+.instructor {
+  font-size: 2rem;
+  font-style: italic;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.topics h3 {
+  margin-bottom: 10px;
+}
+
+.topic-item {
+  font-size: 1.3rem;
+  background-color: #f0f0f0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.topic-item:hover .arrow {
+  transform: rotate(180deg);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.enroll-button {
+  font-size: 1.5rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-link {
+  font-size: 1.5rem;
+  color: #667eea;
+  text-decoration: none;
+}

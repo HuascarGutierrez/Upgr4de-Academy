@@ -57,6 +57,7 @@
     border-radius: 56px;
     font-size: 1.9rem;
     line-height: 2.5rem;
+    color: var(--black-50);
     background-color: var(--swans-down-400);
     transition: background-color .5s ease-in-out;
 }

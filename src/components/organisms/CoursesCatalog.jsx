@@ -9,6 +9,7 @@ const courses = [
   new CourseModel({id: 4, title: 'Álgebra de cero a experto', description: 'Te volveras un experto en Álgebra conmigo', lessons: 7, quiz: 1, teacher: 'Ing. Samuel Veliz'}),
 ]
 
+
 function CoursesCatalog() {
   const navigate = useNavigate()
     return (

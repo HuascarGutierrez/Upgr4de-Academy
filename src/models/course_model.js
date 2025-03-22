@@ -9,5 +9,6 @@ class CourseModel {
     }
 }
 
+
 export default CourseModel
 

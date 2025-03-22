@@ -6,13 +6,13 @@
     width: 80%;
     min-width: 258px;
     max-width: 400px;
-    height: 10%;
+    height: 40px;
     gap: 10px;
     border-radius: 10px;
     margin-inline: auto;
     font-size: 1.2em;
     letter-spacing: 0.1em;
-    background-color: var(--black-50);
+    background-color: var(--black-100);
 }
 
 .googleButton img{

@@ -24,7 +24,6 @@ function Nav({user}) {
     })
   }
 
-
   return (
     <nav className="nav">
       <div className="nav_logo">
@@ -48,11 +47,11 @@ function Nav({user}) {
         {
           user?
           <>
-            <li className="nav_item ">
-              <p>Hola {user.displayName}</p>
-            </li>
             <li onClick={handleSignOut} className="nav_item item-signup">
               <p>Cerrar Sesión</p>
+            </li>
+            <li className="nav_item ">
+              <img className="nav_profile_photo" src={user.imageUrl} alt="profile" />
             </li>
           </> :
           <>

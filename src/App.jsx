@@ -10,18 +10,41 @@ import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './config/app'
 import SAPIMain from './pages/SAPIMain'
+import { getFirestore } from 'firebase/firestore'
+import { getDoc, doc } from 'firebase/firestore'
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [userdb, setUserdb] = useState(null);
+
+  
+
 
   useEffect(()=> {
+    const db = getFirestore();
+    
+        const getUserData = async (uid) => {
+          if (!auth.currentUser) return null; // Verificamos si hay un usuario autenticado
+        
+          const userRef = doc(db, "users", uid); // Referencia al documento con el uid
+            await getDoc(userRef).then((userSnap) => {
+                if (userSnap.exists()) {
+                    console.log("Usuario encontrado");
+                    const userData =userSnap.data();
+                    setUserdb(userData);
+                  } else {
+                    console.log("No se encontró el usuario");
+                    return null;
+                  }
+            }
+          )
+        };
+
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser?.emailVerified){
-        setUser(currentUser);
+        getUserData(currentUser.uid);
         console.log(currentUser);
-
-      } else {setUser(null);
+      } else {setUserdb(null);
         console.log('nada')
       }
     })
@@ -43,9 +66,9 @@ function App() {
       <Router>
         <ScrollToTop/> {/**por temas del scroll */}
         <Routes>
-          <Route path='/' element={<Home user={user}/>}/>
-          <Route path='/sobreNosotros' element={<SobreNosotros user={user}/>}/>
-          <Route path='/SAPI' element={<SAPI user={user}/>}/>
+          <Route path='/' element={<Home user={userdb}/>}/>
+          <Route path='/sobreNosotros' element={<SobreNosotros user={userdb}/>}/>
+          <Route path='/SAPI' element={<SAPI user={userdb}/>}/>
           <Route path='/registro' element={<SignUp/>}/>
           <Route path='/iniciodesesion' element={<Login/>}/>
           <Route path='/main/*' element={<SAPIMain/>}/>

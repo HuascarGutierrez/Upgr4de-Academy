@@ -2,20 +2,39 @@ import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailA
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "./app";
 import { handleAlert, handleErrorNoti, handleSuccess } from "./alerts";
+import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
 
-const handleSignup = async({email, password, passwordVer,funcion}) => {
+const handleSignup = async({fullName, imageUrl, email, password, passwordVer,funcion}) => {
     try{
         if (password != passwordVer){
             handleAlert('Su contraseña debe ser idéntica');
             return
         }
-        //const userCRedential = await createUserWithEmailAndPassword(auth, email, password);
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCRedential = await createUserWithEmailAndPassword(auth, email, password);
+        //await createUserWithEmailAndPassword(auth, email, password);
         await sendEmailVerification(auth.currentUser);
+        console.log(userCRedential.user.uid)
+        const db = getFirestore();
+            const userRef = doc(db, "users", userCRedential.user.uid);
+            getDoc(userRef).then((docSnap) => {
+                console.log(docSnap)
+                if (!docSnap.exists()){
+                    setDoc(doc(db, "users", userCRedential.user.uid), {
+                        userName: fullName,
+                        email: email,
+                        imageUrl: imageUrl,
+                        planType: 'free',
+                        activo: true,
+                        createdAt: new Date(), // Guarda la fecha de creación
+                      });
+                } else {
+                    console.log('usuario ya registrado')
+            }})
 
         //console.log('Usuario registrado: ',userCRedential.user);
         handleSuccess({title: 'Verifica tu correo',
             texto: 'Tu usuario ha sido creado, verifica el SPAM de tu correo para verificar.'});
+
         funcion();
     } catch(error){
         handleErrorNoti({texto: `error en el registro: ${error.message}`})
@@ -52,6 +71,23 @@ const handleAuth = async({funcion}) => {
             // The signed-in user info.
             const user = result.user;
             //console.log(user)
+            const db = getFirestore();
+            const userRef = doc(db, "users", user.uid);
+            getDoc(userRef).then((docSnap) => {
+                //console.log(docSnap)
+                if (!docSnap.exists()){
+                    setDoc(doc(db, "users", user.uid), {
+                        userName: user.displayName,
+                        email: user.email,
+                        imageUrl: user.photoURL,
+                        planType: 'free',
+                        activo: true,
+                        createdAt: new Date(), // Guarda la fecha de creación
+                      });
+                } else {
+                    console.log('usuario ya registrado')
+            }})
+
             if(user) {
                 funcion();
                 handleSuccess({texto: "Inicio de sesión exitoso."})
@@ -71,4 +107,24 @@ const handleAuth = async({funcion}) => {
         });
     }
 
-export {handleSignup, handleLogin, handleAuth}
+    const db = getFirestore();
+
+    const getUserData = async (uid) => {
+      if (!auth.currentUser) return null; // Verificamos si hay un usuario autenticado
+    
+      const userRef = doc(db, "users", uid); // Referencia al documento con el uid
+        await getDoc(userRef).then((userSnap) => {
+            if (userSnap.exists()) {
+                console.log("Usuario encontrado");
+                const userData =userSnap.data()
+                return JSON.stringify(userData); // Retorna los datos del usuario
+              } else {
+                console.log("No se encontró el usuario");
+                return null;
+              }
+        }
+      )
+    };
+    
+
+export {handleSignup, handleLogin, handleAuth, getUserData}

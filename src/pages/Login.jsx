@@ -45,7 +45,7 @@ function Login() {
                     </label>
                     {
                         waiting ? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
-                        <button className="formLogin_btn" type="submit">CREAR MI CUENTA</button>
+                        <button className="formLogin_btn" type="submit">INICIAR SESIÓN</button>
                     }
             </form>
         </div>

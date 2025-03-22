@@ -20,6 +20,7 @@ const handleSignup = async({fullName, imageUrl, email, password, passwordVer,fun
                 console.log(docSnap)
                 if (!docSnap.exists()){
                     setDoc(doc(db, "users", userCRedential.user.uid), {
+                        uid: userCRedential.user.uid,
                         userName: fullName,
                         email: email,
                         imageUrl: imageUrl,
@@ -60,7 +61,7 @@ const handleLogin = async({email, password, funcion}) => {
     }
 }
 
-const handleAuth = async({funcion}) => {
+const handleAuth = async({funcion, salida}) => {
         const provider = new GoogleAuthProvider();
     
         await signInWithPopup(auth, provider)
@@ -77,21 +78,29 @@ const handleAuth = async({funcion}) => {
                 //console.log(docSnap)
                 if (!docSnap.exists()){
                     setDoc(doc(db, "users", user.uid), {
+                        uid: user.uid,
                         userName: user.displayName,
                         email: user.email,
                         imageUrl: user.photoURL,
                         planType: 'free',
                         activo: true,
                         createdAt: new Date(), // Guarda la fecha de creación
-                      });
+                      }).then(()=>{
+                            handleSuccess({texto: "Inicio de sesión exitoso."});
+                            salida();
+                            location.reload();
+                        }
+                      )
                 } else {
                     console.log('usuario ya registrado')
+                    funcion();
+                    handleSuccess({texto: "Inicio de sesión exitoso."});
             }})
 
-            if(user) {
+            /**if(user ) {
                 funcion();
                 handleSuccess({texto: "Inicio de sesión exitoso."})
-            }
+            } */
             // IdP data available using getAdditionalUserInfo(result)
             // ...
         }).catch((error) => {
@@ -125,6 +134,24 @@ const handleAuth = async({funcion}) => {
         }
       )
     };
-    
 
-export {handleSignup, handleLogin, handleAuth, getUserData}
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+    
+    const handleUpdateImage = async ({email, image}) => {
+        
+            const storage = getStorage();
+            const storageRef = ref(storage, `images_profiles/${email}`); // Carpeta 'images/' en Storage
+    
+            try {
+              await uploadBytes(storageRef, image);
+              //alert("Imagen subida con éxito");
+            const url = await getDownloadURL(storageRef);
+            return url;
+              //console.log(url)
+            } catch (error) {
+              console.error("Error al subir la imagen:", error);
+              //alert("Error al subir la imagen");
+            }
+          };
+
+export {handleSignup, handleLogin, handleAuth, getUserData, handleUpdateImage}

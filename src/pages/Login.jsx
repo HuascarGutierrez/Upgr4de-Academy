@@ -46,7 +46,12 @@ function Login() {
                     {
                         waiting ? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
                         <button className="formLogin_btn" type="submit">INICIAR SESIÓN</button>
+                        
                     }
+
+                    <div className="googleButton_container">
+                        <GoogleButton/>
+                    </div>
             </form>
         </div>
     </section>

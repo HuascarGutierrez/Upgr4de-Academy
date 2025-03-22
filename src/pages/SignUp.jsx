@@ -91,6 +91,9 @@ function SignUp() {
                         waiting ? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
                         <button className="form_btn" type="submit">CREAR MI CUENTA</button>
                     }
+                    <div className="googleButton_container">
+                        <GoogleButton/>
+                    </div>
             </form>
         </div>
         <div className='signup_message'>

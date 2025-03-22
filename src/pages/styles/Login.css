@@ -84,6 +84,10 @@
     display: none;
 }
 
+.googleButton_container {
+    width: 100%;
+}
+
 @media screen and (min-width: 500px) {
     .login_title {
         text-align: center;
@@ -145,5 +149,9 @@
         background-size: contain;
         background-color: transparent;
         filter: opacity(0.2);
+    }
+
+    .googleButton_container {
+        display: none;
     }
 }

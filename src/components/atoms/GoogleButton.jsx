@@ -10,13 +10,13 @@ function GoogleButton() {
 
     const handleBtnAuth = async() => {
         setWait(true)
-        await handleAuth({funcion: ()=>{navigate('/')}})
+        await handleAuth({funcion: ()=>{navigate('/main/courses');}, salida: ()=>{navigate('/');}})
         setWait(false)
     }
 
     return (
         wait?
-        <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
+        <div style={{marginInline: 'auto', width: 'min-content'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
         
         <button onClick={handleBtnAuth} className="googleButton">
             <img src="assets/google-logo.svg" alt="google-icon"/>

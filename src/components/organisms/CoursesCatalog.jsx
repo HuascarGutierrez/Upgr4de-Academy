@@ -26,7 +26,7 @@ function CoursesCatalog() {
             </nav>
           </header>
           <div className="catalog-banner">
-            <p className="title">Course Catalog</p>
+            <p className="title">Catálogo de cursos</p>
             <p className="sub-title">Mis Coursos / catalogo</p>
             <div className="filters">
                 <button className="filter-button active">Todos</button>
@@ -44,7 +44,7 @@ function CoursesCatalog() {
               <div 
                 key={course.id} 
                 className="course-card" 
-                onClick={ () => navigate(`/main/course/${course.id}`) }
+                onClick={ () => navigate(`./${course.id}`) }
               >
                 <div className="course-banner">
                   <h3 className="course-title">{course.title}</h3>
@@ -54,8 +54,8 @@ function CoursesCatalog() {
                   <p className="course-description">{course.description}</p>
                   <div className="course-meta">
                     <span>👤 {course.teacher}</span>
-                    <span>📘 {course.lessons} lessons</span>
-                    <span>📝 {course.quiz} quiz</span>
+                    <span>📘 {course.lessons} lecciones</span>
+                    <span>📝 {course.quiz} ejercicios</span>
                   </div>
                 </div>
               </div>

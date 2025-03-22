@@ -9,7 +9,7 @@ function Footer() {
         <span className='footer_section_title'>Información</span>
         <FooterItem imageUrl={'Icons/Location.svg'} text={'Dirección: Ciudad Satelite, El Alto'}/>
         <FooterItem imageUrl={'assets/phone.svg'} text={'Celular: +591 12341234'}/>
-        <FooterItem imageUrl={'assets/clock.svg'} text={'Horas de respuestar: 8 to 20'}/>
+        <FooterItem imageUrl={'assets/clock.svg'} text={'Horas de respuestar: 8:00 - 20:00'}/>
         <FooterItem imageUrl={'assets/mail.svg'} text={'Email: info@SAPI.edu.com'}/>
       </section>
       <section className='footer_section footer_section_materias'>

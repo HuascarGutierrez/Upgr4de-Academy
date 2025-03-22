@@ -21,7 +21,7 @@ function SAPIMain({user}) {
                 <Route path='/catalogo' element={<CoursesCatalog/>}/>
                 <Route path='/supervision' element={<Supervision/>}/> 
                 <Route path='/perfil' element={<Perfil user={user}/>}/> 
-                <Route path='/course/:courseId' element={<CourseDetail />} />
+                <Route path='/catalogo/:courseId' element={<CourseDetail />} />
             </Routes>
         </div>
     </div>

@@ -1,7 +1,7 @@
 import CourseModel from '../../models/course_model';
 import './styles/CourseDetail.css'
 import ZowlWhite from '../../assets/images/zowl-white.svg';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const courses = [
   new CourseModel({id: 1, title: 'Introducción a cálculo', description: 'Acompañame en este maravilloso mundo', lessons: 12, quiz: 3, teacher: 'Ing. Huascar Guitierrez'}),
@@ -12,6 +12,7 @@ const courses = [
 
 function CourseDetail() {
 
+const navigate = useNavigate();
 const { courseId } = useParams();
 const course = courses.find((c) => c.id === parseInt(courseId));
 
@@ -63,7 +64,7 @@ const unidades = Array.from({ length: course.lessons }, (_, i) => `Unidad ${i + 
           </div>
           <div className="actions">
             <button className="enroll-button">Inscribirme por 150Bs.</button>
-            <a href="#" className="back-link">Regresar</a>
+            <a onClick={()=>{navigate('../catalogo')}} className="back-link">Regresar</a>
           </div>
         </div>
       </div>

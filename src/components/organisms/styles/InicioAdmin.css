@@ -1,0 +1,89 @@
+.InicioAdmin{
+    color: black;
+    background-color: white;
+    height: 100vh;
+}
+
+.InicioAdmin h2{
+    margin: 20px;
+    font-size: large;
+}
+.Tabla-Contenedor{
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(5, 1fr); 
+    margin: 10px;
+}
+
+.table-header, .table-row {
+    display: contents;
+}
+
+.table-header div, .table-row div {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-header div {
+    background-color: #f3f3f3;
+    color: #555;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table-row div {
+    color: #333;
+}
+
+.table-row:last-child div {
+    border-bottom: none
+}
+
+.status {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.status.active {
+    background-color: #e7f7e6;
+    color: #28a745;
+}
+
+.status.inactive {
+    background-color: #fdecea;
+    color: #dc3545;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #333;
+    font-size: 18px;
+}
+
+.actions button:hover {
+    color: #007bff;
+}
+
+.items{
+    list-style-type: none;
+    gap: clamp(1rem, 5vw, 2rem);
+    padding-right: 2rem;
+    margin: 0;
+}

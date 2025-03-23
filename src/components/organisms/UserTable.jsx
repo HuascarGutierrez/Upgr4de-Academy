@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, getDocs, doc, deleteDoc, updateDoc, addDoc } from 'firebase/firestore';
 import './styles/UserTable.css';
+import {db} from "../../config/app"
+import { toast } from 'react-toastify';
 
 function UserTable() {
-  const db = getFirestore();
   const [data, setData] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({
@@ -25,7 +26,11 @@ function UserTable() {
     const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "users"));
-        const list = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const list = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+          createdAt: doc.data().createdAt?.toDate().toLocaleDateString('en-GB') || 'N/A', // Formatear la fecha
+        }));
         setData(list);
       } catch (err) {
         console.log(err);
@@ -35,12 +40,16 @@ function UserTable() {
   }, []);
 
   const handleDelete = async (id) => {
-    try {
-      await deleteDoc(doc(db, "users", id));
-      setData(data.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(err);
+    if(window.confirm("Estas Seguro?")){
+      try {
+        await deleteDoc(doc(db, "users", id));
+        setData(data.filter((item) => item.id !== id));
+        toast.success("Estudiante Eliminado");
+      } catch (err) {
+        console.log(err);
+      }
     }
+
   };
 
   const handleEdit = (user) => {
@@ -96,78 +105,16 @@ function UserTable() {
 
   return (
     <div className="Tabla">
-      <h1>User Management</h1>
-      
-      {/* Formulario para crear un nuevo usuario */}
-      <div className="create-user">
-        <h2>Create New User</h2>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleCreate();
-          }}
-        >
-          <label>
-            Name:
-            <input
-              type="text"
-              name="userName"
-              value={newUser.userName}
-              onChange={(e) => handleChange(e, true)}
-              required
-            />
-          </label>
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={newUser.email}
-              onChange={(e) => handleChange(e, true)}
-              required
-            />
-          </label>
-          <label>
-            Plan Type:
-            <input
-              type="text"
-              name="planType"
-              value={newUser.planType}
-              onChange={(e) => handleChange(e, true)}
-              required
-            />
-          </label>
-          <label>
-            Active:
-            <input
-              type="checkbox"
-              name="activo"
-              checked={newUser.activo}
-              onChange={(e) => handleChange(e, true)}
-            />
-          </label>
-          <label>
-            Image URL:
-            <input
-              type="url"
-              name="imageUrl"
-              value={newUser.imageUrl}
-              onChange={(e) => handleChange(e, true)}
-            />
-          </label>
-          <button type="submit" className="btn-create">
-            Create User
-          </button>
-        </form>
-      </div>
-
+      <h1>Lista de Estudiantes</h1>
       {/* Tabla de usuarios */}
+      <div className='tablacontenedor'>
       <table className="styled-table">
         <thead>
           <tr>
             <th>No.</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Fecha de Creación</th>
             <th>Plan</th>
             <th>Active</th>
             <th>Action</th>
@@ -179,6 +126,7 @@ function UserTable() {
               <th>{index + 1}</th>
               <td>{user.userName}</td>
               <td>{user.email}</td>
+              <td>{user.createdAt }</td>
               <td>{user.planType}</td>
               <td>{user.activo ? 'Yes' : 'No'}</td>
               <td>
@@ -193,8 +141,9 @@ function UserTable() {
           ))}
         </tbody>
       </table>
+      </div>
 
-      {/* Modal de edición */}
+      {/* Cuadro de edición */}
       {editingUser && (
         <div className="modal-overlay">
           <div className="modal">
@@ -207,47 +156,26 @@ function UserTable() {
             >
               <label>
                 Name:
-                <input
-                  type="text"
-                  name="userName"
-                  value={formData.userName}
-                  onChange={handleChange}
-                />
+                <input type="text" name="userName" value={formData.userName} onChange={handleChange}/>
               </label>
               <label>
                 Email:
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} />
               </label>
               <label>
                 Plan Type:
-                <input
-                  type="text"
-                  name="planType"
-                  value={formData.planType}
-                  onChange={handleChange}
-                />
+                <input  type="text" name="planType" value={formData.planType} onChange={handleChange} />
               </label>
-              <label>
+              <label className='Active'>
                 Active:
-                <input
-                  type="checkbox"
-                  name="activo"
-                  checked={formData.activo}
-                  onChange={handleChange}
-                />
+                <div className='check'>
+                <input  type="checkbox"  name="activo" checked={formData.activo} onChange={handleChange} />
+                </div>
+                
               </label>
               <div className="modal-buttons">
                 <button type="submit" className="btn-save">Save</button>
-                <button
-                  type="button"
-                  className="btn-cancel"
-                  onClick={() => setEditingUser(null)}
-                >
+                <button type="button" className="btn-cancel" onClick={() => setEditingUser(null)}>
                   Cancel
                 </button>
               </div>

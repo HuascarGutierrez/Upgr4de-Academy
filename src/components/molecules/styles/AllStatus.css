@@ -1,6 +1,9 @@
 .AllStatus{
     max-width: 920px;
 }
+.AllStatus h2{
+    font-size: 2.5rem;
+}
 
 .StatusP{
     display: grid;

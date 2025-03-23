@@ -3,6 +3,10 @@
     justify-content: space-between;
 }
 
+.EnrolledHeader h2{
+    font-size: 2.5rem;
+}
+
 .Boton_vercatalogo{
     background-color: #2D9CDB;
     color: white;

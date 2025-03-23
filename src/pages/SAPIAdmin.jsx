@@ -10,25 +10,19 @@ import Supervision from '../components/organisms/Supervision'
 import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import CourseDetail from '../components/organisms/CourseDetail'
 import UserTable from '../components/organisms/UserTable'
+import NavAdmin from '../components/organisms/NavAdmin'
 
-
-function SAPIMain({user}) {
-
+function SAPIAdmin() {
   return (
     <div className='SAPIMain'>
-        <NavLateral/>
-        <div className='SAPIContent'>
-            <Routes>
-                <Route path='/courses' element={<Courses/>} />
-                <Route path='/catalogo' element={<CoursesCatalog/>}/>
-                <Route path='/supervision' element={<Supervision/>}/> 
-                <Route path='/perfil' element={<Perfil user={user}/>}/> 
-                <Route path='/catalogo/:courseId' element={<CourseDetail />} />
-
-            </Routes>
-        </div>
+    <NavAdmin />
+    <div className='SAPIContent'>
+        <Routes>
+            <Route path='/usertable' element={<UserTable />}/>
+        </Routes>
     </div>
+</div>
   )
 }
 
-export default SAPIMain
+export default SAPIAdmin

@@ -9,6 +9,8 @@ import Perfil from '../components/organisms/Perfil'
 import Supervision from '../components/organisms/Supervision'
 import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import CourseDetail from '../components/organisms/CourseDetail'
+import UserTable from '../components/organisms/UserTable'
+import AdminEdit from '../components/organisms/AdminEdit'
 
 function SAPIMain({user}) {
 
@@ -17,11 +19,15 @@ function SAPIMain({user}) {
         <NavLateral/>
         <div className='SAPIContent'>
             <Routes>
-                 <Route path='/courses' element={<Courses/>}/>
+                
+                <Route path='/cursos' element={<Courses/>} />
                 <Route path='/catalogo' element={<CoursesCatalog/>}/>
                 <Route path='/supervision' element={<Supervision/>}/> 
                 <Route path='/perfil' element={<Perfil user={user}/>}/> 
                 <Route path='/catalogo/:courseId' element={<CourseDetail />} />
+                <Route path='/usertable' element={<UserTable />}/>
+                <Route path='/adminedit/:id' element={<AdminEdit />}/>
+
             </Routes>
         </div>
     </div>

@@ -24,12 +24,8 @@ function Login() {
         }else{
             await handleLogin({email: email, password: password, funcion: ()=>{navigate('/main/courses')}})
         }
-
-
-        
         setWaiting(false);
     }
-
   return (
     <section className="login">
         <Nav/>

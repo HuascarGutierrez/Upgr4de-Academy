@@ -3,6 +3,7 @@ import "./styles/CrearCurso.css";
 import { db } from "../../config/app";
 import { collection, addDoc } from "firebase/firestore";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 function CrearCurso() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ function CrearCurso() {
     creation_date: new Date().toLocaleDateString("es-ES"), 
   });
 
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,6 +46,9 @@ function CrearCurso() {
   return (
     <div className="crear-curso-container">
       <h1 className="crear-curso-title">CREAR CURSO</h1>
+      <button type="submit" className="btn-crear-curso" onClick={() => {navigate("/admin/listacursos");}} >
+        Volver
+      </button>
       <form className="form-crear" onSubmit={handleSubmit}>
         <label>
           Nombre del Curso
@@ -99,9 +104,10 @@ function CrearCurso() {
             required
           />
         </label>
-        <button type="submit" className="btn-crear-curso">
+        <button type="submit" className="btn-crear-curso" onClick={() => {navigate("/admin/listacursos");}} >
           CREAR NUEVO CURSO
         </button>
+        
       </form>
     </div>
   );

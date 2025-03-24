@@ -28,7 +28,7 @@ function NavAdmin() {
             </li>
             <li
               onClick={() => {
-                navigate("/admin/crearcurso");
+                navigate("/admin/listacursos");
               }}
               className="navLateral_item"
             >

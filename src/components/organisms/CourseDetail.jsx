@@ -101,7 +101,11 @@ function CourseDetail() {
                 {openUnitIndex === index && (
                   <div className="lessons-list">
                     {lessons.map((lesson) => (
-                      <div key={lesson.id} className="lesson-item">
+                      <
+                        div key={lesson.id} 
+                        className="lesson-item"
+                        onClick={() => navigate('/main/courses/course/interactive-course', {state: {lesson}})}
+                      >
                         <span>{lesson.title}</span>
                       </div>
                     ))}

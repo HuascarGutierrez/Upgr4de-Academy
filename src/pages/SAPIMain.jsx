@@ -9,6 +9,7 @@ import Perfil from '../components/organisms/Perfil'
 import Supervision from '../components/organisms/Supervision'
 import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import CourseDetail from '../components/organisms/CourseDetail'
+import InteractiveCourse from '../components/organisms/InteractiveCourse'
 
 function SAPIMain({user}) {
 
@@ -22,6 +23,7 @@ function SAPIMain({user}) {
                 <Route path='/supervision' element={<Supervision/>}/> 
                 <Route path='/perfil' element={<Perfil user={user}/>}/> 
                 <Route path='/courses/course' element={<CourseDetail />} />
+                <Route path='/courses/course/interactive-course' element={<InteractiveCourse />} />
             </Routes>
         </div>
     </div>

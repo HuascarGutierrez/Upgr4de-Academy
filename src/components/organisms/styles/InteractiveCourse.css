@@ -1,0 +1,40 @@
+.clases-part-container {
+    color: black;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .clases-part-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .clases-part-container h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .clases-part-container p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .clases-part-container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .clases-part-container a:hover {
+    background-color: #0056b3;
+  }
+  
+  .video-container {
+    margin-top: 30px;
+  }

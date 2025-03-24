@@ -203,10 +203,10 @@ function Supervision({user}) {
             <section>
             <button onClick={() => {reloadData({condicion: false})}}>ver todos</button>
             {/**<button onClick={() => {setContenidoMostrado(dataContentAlgebra);setDataMostrada(dataAlgebra)}}>ver algebra</button> */}
-            <button onClick={() => {reloadData({condicion: true, materia: 'Álgebra'})}}>ver algebra</button>
-            <button onClick={() => {reloadData({condicion: true, materia: 'Física'})}}>ver fisica</button>
-            <button onClick={() => {reloadData({condicion: true, materia: 'Cálculo'})}}>ver calculo</button>
-            <button onClick={() => {reloadData({condicion: true, materia: 'Química'})}}>ver quimica</button>
+            <button onClick={() => {reloadData({condicion: true, materia: 'Álgebra'})}}>ver álgebra</button>
+            <button onClick={() => {reloadData({condicion: true, materia: 'Física'})}}>ver física</button>
+            <button onClick={() => {reloadData({condicion: true, materia: 'Cálculo'})}}>ver cálculo</button>
+            <button onClick={() => {reloadData({condicion: true, materia: 'Química'})}}>ver química</button>
             </section>
 
             <ResponsiveContainer width="100%" height="100%">

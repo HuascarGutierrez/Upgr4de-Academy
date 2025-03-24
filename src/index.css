@@ -1,70 +1,70 @@
 :root {
   /* Paleta de colores */
-    /*swans down - verde*/
-    --swans-down-50: #f3f8f7;
-    --swans-down-100: #d2e6e4;
-    --swans-down-200: #c4ddda;
-    --swans-down-300: #9ac6c3;
-    --swans-down-400: #6aa6a3;
-    --swans-down-500: #4e8c8a;
-    --swans-down-600: #447576;
-    --swans-down-700: #3c6162;
-    --swans-down-800: #375153;
-    --swans-down-900: #314648;
-    --swans-down-950: #1d2d2f;
-
-    /*black - grises*/
-    --black-50: #f6f6f6;
-    --black-100: #e7e7e7;
-    --black-200: #d1d1d1;
-    --black-300: #b0b0b0;
-    --black-400: #888888;
-    --black-500: #6d6d6d;
-    --black-600: #5d5d5d;
-    --black-700: #4f4f4f;
-    --black-800: #454545;
-    --black-900: #3d3d3d;
-    --black-950: #000000;
-
-    /*brandy-punch - naranja */
-    --brandy-punch-50: #faf6ec;
-    --brandy-punch-100: #f4e9cd;
-    --brandy-punch-200: #ead39e;
-    --brandy-punch-300: #ddb467;
-    --brandy-punch-400: #d2983d;
-    --brandy-punch-500: #c48430;
-    --brandy-punch-600: #a76627;
-    --brandy-punch-700: #864a22;
-    --brandy-punch-800: #703d23;
-    --brandy-punch-900: #603423;
-    --brandy-punch-950: #371a11;
-
+  /*swans down - verde*/
+  --swans-down-50: #f3f8f7;
+  --swans-down-100: #d2e6e4;
+  --swans-down-200: #c4ddda;
+  --swans-down-300: #9ac6c3;
+  --swans-down-400: #6aa6a3;
+  --swans-down-500: #4e8c8a;
+  --swans-down-600: #447576;
+  --swans-down-700: #3c6162;
+  --swans-down-800: #375153;
+  --swans-down-900: #314648;
+  --swans-down-950: #1d2d2f;
+  
+  /*black - grises*/
+  --black-50: #f6f6f6;
+  --black-100: #e7e7e7;
+  --black-200: #d1d1d1;
+  --black-300: #b0b0b0;
+  --black-400: #888888;
+  --black-500: #6d6d6d;
+  --black-600: #5d5d5d;
+  --black-700: #4f4f4f;
+  --black-800: #454545;
+  --black-900: #3d3d3d;
+  --black-950: #000000;
+  
+  /*brandy-punch - naranja */
+  --brandy-punch-50: #faf6ec;
+  --brandy-punch-100: #f4e9cd;
+  --brandy-punch-200: #ead39e;
+  --brandy-punch-300: #ddb467;
+  --brandy-punch-400: #d2983d;
+  --brandy-punch-500: #c48430;
+  --brandy-punch-600: #a76627;
+  --brandy-punch-700: #864a22;
+  --brandy-punch-800: #703d23;
+  --brandy-punch-900: #603423;
+  --brandy-punch-950: #371a11;
+  
   /*variantes*/
   --color-text: var(--black-950);
   --color-background: var(--black-50);
-
-}
-
-html {
+  
+  }
+  
+  html {
   scroll-behavior: smooth;
-  font-size: 62.5%;
+  font-size: 80.5%;
   overscroll-behavior: none;
-}
-
-@font-face {
+  }
+  
+  @font-face {
   font-family: 'Raleway';
   src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype');
-}
-
-@font-face {
+  }
+  
+  @font-face {
   font-family: 'Raleway';
   font-style: italic;
   src: url('fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: var(--black-50);
-    --color-background: var(--black-950);
   }
-}
+  
+  @media (prefers-color-scheme: dark) {
+  :root {
+  --color-text: var(--black-50);
+  --color-background: var(--black-950);
+  }
+  }

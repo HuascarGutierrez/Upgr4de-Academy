@@ -1,28 +1,83 @@
-.padresTutores {
-    width: 90%;
+/* styles/PadresYTutores.css */
+
+.padres-tutores-section {
+    background-color: #000000; /* Fondo negro */
+    color: #ffffff; /* Texto blanco */
+    padding: 40px 20px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-.padresTutores_img {
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+.padres-tutores-title {
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center; /* Centrado */
+    margin-bottom: 30px;
 }
 
-@media screen and (max-width: 500px) {
-    .padresTutores {
-        flex-direction: column;
-    }
-    .padresTutores_img{
-        width: 100%;
-    }
+.padres-tutores-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
 }
 
-@media screen and (max-width: 900px) {
-    .padresTutores {
-        flex-direction: column;
+.padres-tutores-text-container {
+    flex: 1; /* El texto ocupa más espacio */
+}
+
+.padres-tutores-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Una sola columna para los elementos */
+    gap: 15px;
+}
+
+.padres-tutores-grid-item {
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 1.5em;
+}
+
+/* Colores específicos para los textos */
+.padres-tutores-text-1 {
+    background-color: #4e8c8a; /* Color Swans Down */
+}
+
+.padres-tutores-text-2 {
+    background-color: #f0a830; /* Color Brandy Punch */
+}
+
+.padres-tutores-text-3 {
+    background-color: #333333; /* Color Black */
+}
+
+/* Imagen más pequeña y alineada a la derecha */
+.padres-tutores-image-container {
+    flex-shrink: 0; /* Evita que la imagen se reduzca demasiado */
+}
+
+.padres-tutores-image {
+    width: 40em; /* Tamaño reducido de la imagen */
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .padres-tutores-content {
+        flex-direction: column; /* En pantallas pequeñas, apilar contenido */
+        align-items: center;
+        text-align: center;
+    }
+
+    .padres-tutores-image-container {
+        margin-top: 20px; /* Espacio entre el texto y la imagen */
+    }
+
+    .padres-tutores-image {
+        width: 250px; /* Imagen más pequeña en dispositivos pequeños */
     }
 }

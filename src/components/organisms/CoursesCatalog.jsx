@@ -15,11 +15,11 @@ function CoursesCatalog() {
     return (
         <div className="catalog-container">
           <header className="catalog-header">
-            <div className="logo">SAPI</div>
+            <div className="logo"></div>
             <nav className="nav-bar">
               <input type="text" placeholder="Buscar cualquier cosa" className="search-input" />
               <div className="nav-links">
-                <span>My Courses</span>
+                <span>Mis Cursos</span>
                 <span>Progreso</span>
                 <span>🔔</span>
                 <span>⚙️</span>

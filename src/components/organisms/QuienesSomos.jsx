@@ -4,7 +4,7 @@ function QuienesSomos() {
     <section className='gridSomos'>
         <div className='gridSomos_element gridSomos_logo_name'>
             <img className='gridSomos_logo' src="/Icons/zowl-white.svg" alt="" />
-            <h1 className='gridSomos_name'>Upgr4de academy</h1>
+            <h1 className='gridSomos_name'>Upgr4de Academy</h1>
         </div>
         <div className='gridSomos_element gridSomos_img'>
             <img src="images/quienes_somos_image.webp" alt="quienes somos image" />

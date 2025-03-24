@@ -1,12 +1,12 @@
 
 .wrapper {
   color: black;
-  width: 250px;
+  width: 350px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   padding: 5px;
-  font-size: 5 rem;
+  font-size:  rem;
 }
 .wrapper img{
     height: 20px;
@@ -48,7 +48,7 @@ header .icons span {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
 }
 
@@ -59,7 +59,7 @@ header .icons span {
 
 .calendar .days li {
   width: 100%;
-  padding: 2px;
+  padding: 1px;
 }
 
 .calendar .days li{

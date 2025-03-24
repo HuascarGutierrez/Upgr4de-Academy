@@ -29,6 +29,7 @@
     background-color: var(--brandy-punch-400);
     min-height: 5em;
     border-radius: 1em;
+    font-size: 1.5em;
 }
 
 .benefits>.benefits_text:nth-child(2) {

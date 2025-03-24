@@ -3,8 +3,9 @@
     color: var(--black-900);
     display: grid;
     grid-template-columns: minmax(60%, 1000px) minmax(15%, 200px) minmax(15%, 200px);
+    grid-template-rows: auto 1fr 1fr;
     grid-template-areas:
-    'materia usuario usuario'
+    'dashboard usuario usuario'
     'dashboard card card'
     'dashboard card card';
     gap: 1rem;
@@ -16,13 +17,15 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: center;
+    /*justify-content: center;
+    */
     background-color: var(--black-50);
     border-radius: 2rem;
     padding: 1rem;
 }
 
 .supervision_temas_section {
+    display: none;
     grid-area: materia;
 }
 
@@ -66,6 +69,7 @@
 }
 
 .supervision_profile {
+    max-height: fit-content;
     grid-area: usuario;
     font-size: 2rem;
     line-height: 2.8rem;
@@ -186,6 +190,44 @@
 
 .supervision_card:nth-child(4) > svg {
     background-color: green;
+}
+
+/*cuidado aqui*/
+
+
+.supervision_profile > h3, .supervision_materias > h3, .supervision_dashboard > h3 {
+    font-size: 3rem;
+    line-height: 3.8rem;
+    font-weight: 700;
+    margin: 1rem;
+}
+
+.supervision_materias > p {
+    font-size: 1.5rem;
+    line-height: 2.8rem;
+    grid-area: 2 / span 2;
+    text-align: center;
+}
+
+.supervision_dashboard > section {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.supervision_dashboard > section > button {
+    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--swans-down-500);
+}
+
+.supervision_dashboard > section > button:nth-child(2n) {
+    background-color: var(--brandy-punch-400);
 }
 
 @media screen and (max-width: 900px) {

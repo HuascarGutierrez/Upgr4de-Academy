@@ -21,7 +21,7 @@ function CourseDetail({user}) {
   const [lessons, setLessons] = useState([]);
   const [openUnitIndex, setOpenUnitIndex] = useState(null);
 
-  const[enrolled, setEnrolled] = useState();
+  const[enrolled, setEnrolled] = useState(false);
 
   if (!course) {
     return <p>Curso no disponible</p>;
@@ -42,8 +42,9 @@ function CourseDetail({user}) {
         //aqui se revisa si esta enrolado
         const q2 = doc(db, 'users',user.uid,'enrolledCourses', course.id);
         const querySnapshot2 = await getDoc(q2);
+        const dato = querySnapshot2.data()
 
-        if(querySnapshot2.exists())
+        if(querySnapshot2.exists() && dato.activo)
         {
           setEnrolled(true);
         } else {
@@ -91,15 +92,26 @@ function CourseDetail({user}) {
       const unidades = units.map((unit)=>({id: unit.id, 
                                           nombreUnidad: unit.title, 
                                           completed: false,
+                                          cmopletedAt: new Date(),
                                           })) 
       try {
         const q = collection(doc(db, 'users',user.uid), 'enrolledCourses');
         const docCreated = await doc(q, course.id);
-        await setDoc(docCreated, {
-          units: unidades,
-          startedAt: new Date,
-          activo: true,
-        });
+        const verifica = await getDoc(docCreated);
+        if(verifica.exists()){
+          console.log('asdfasdfasdfasdfa')
+          await updateDoc(docCreated, {
+            activo: true,
+          });
+        } else {
+          await setDoc(docCreated, {
+            units: unidades,
+            startedAt: new Date,
+            activo: true,
+            title: course.title,
+            category: course.category,
+          });
+        }
         console.log(unidades)
         //await setDoc(docCreated, {unidades: units})
         setEnrolled(true);

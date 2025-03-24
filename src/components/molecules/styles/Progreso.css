@@ -13,8 +13,14 @@
 .ProgresoCurso-contenido > Calendario {
     flex: 1;
 }
-
+.ProgresoCurso-contenido{
+    display: flex;
+}
 .ProgresoCurso-contenido img {
     max-width: 100%;
     height: auto;
+}
+.ProgresoCurso-contenido div h2 {
+    font-size: 2.5rem;
+    color: black;
 }

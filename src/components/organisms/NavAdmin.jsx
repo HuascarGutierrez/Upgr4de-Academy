@@ -26,6 +26,15 @@ function NavAdmin() {
               <img src="/assets/navLateral_1.svg" alt="" />
               <p>Estudiantes</p>
             </li>
+            <li
+              onClick={() => {
+                navigate("/admin/crearcurso");
+              }}
+              className="navLateral_item"
+            >
+              <img src="/assets/navLateral_2.svg" alt="" />
+              <p>Cursos</p>
+            </li>
           </ul>
         </div>
         <div

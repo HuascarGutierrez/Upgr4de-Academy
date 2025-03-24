@@ -11,14 +11,16 @@ import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import CourseDetail from '../components/organisms/CourseDetail'
 import UserTable from '../components/organisms/UserTable'
 import NavAdmin from '../components/organisms/NavAdmin'
+import CrearCurso from '../components/organisms/CrearCurso'
 
 function SAPIAdmin() {
   return (
-    <div className='SAPIMain'>
+    <div className='SAPIAdmmin'>
     <NavAdmin />
-    <div className='SAPIContent'>
+    <div className='SAPIAdminContent'>
         <Routes>
             <Route path='/usertable' element={<UserTable />}/>
+            <Route path='/crearcurso' element={<CrearCurso />}/>
         </Routes>
     </div>
 </div>

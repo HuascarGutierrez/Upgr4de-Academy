@@ -29,7 +29,7 @@ function UserTable() {
         const list = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-          createdAt: doc.data().createdAt?.toDate().toLocaleDateString('en-GB') || 'N/A', // Formatear la fecha
+          createdAt: doc.data().createdAt?.toDate().toLocaleDateString('en-GB') || 'N/A', 
         }));
         setData(list);
       } catch (err) {
@@ -73,20 +73,6 @@ function UserTable() {
     }
   };
 
-  const handleCreate = async () => {
-    try {
-      const newUserWithDefaults = {
-        ...newUser,
-        createdAt: new Date().toISOString(),
-        uid: crypto.randomUUID(), // Generar UID único
-      };
-      const docRef = await addDoc(collection(db, "users"), newUserWithDefaults);
-      setData([...data, { id: docRef.id, ...newUserWithDefaults }]);
-      setNewUser({ userName: '', email: '', planType: '', activo: false, imageUrl: '' });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const handleChange = (e, isNewUser = false) => {
     const { name, value, type, checked } = e.target;
@@ -112,12 +98,12 @@ function UserTable() {
         <thead>
           <tr>
             <th>No.</th>
-            <th>Name</th>
+            <th>Nombre</th>
             <th>Email</th>
             <th>Fecha de Creación</th>
             <th>Plan</th>
-            <th>Active</th>
-            <th>Action</th>
+            <th>Activo</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody>
@@ -128,13 +114,13 @@ function UserTable() {
               <td>{user.email}</td>
               <td>{user.createdAt }</td>
               <td>{user.planType}</td>
-              <td>{user.activo ? 'Yes' : 'No'}</td>
+              <td>{user.activo ? 'Si' : 'No'}</td>
               <td>
                 <button className="btn btn-edit" onClick={() => handleEdit(user)}>
-                  Edit
+                  Editar
                 </button>
                 <button className="btn btn-delete" onClick={() => handleDelete(user.id)}>
-                  Delete
+                  Eliminar
                 </button>
               </td>
             </tr>

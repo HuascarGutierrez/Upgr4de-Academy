@@ -2,11 +2,17 @@ import React, { useState } from 'react'
 import Foldersvg from '../atoms/Foldersvg'
 import './styles/Supervision.css'
 import Elementsvg from '../atoms/Elementsvg'
-import { dataAlgebra } from '../../assets/dataAlgebra'
+import { dataAlgebra, dataContentAlgebra, dataCalculo, dataContentCalculo, dataFisica, dataContentFisica, dataQuimica, dataContentQuimica } from '../../assets/dataAlgebra'
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function Supervision({user}) {
+    const content = [
+        'álgebra',
+        'química',
+        'física',
+        'cálculo',
+    ]
     const data = [
         {
           name: '20/01',
@@ -59,7 +65,8 @@ function Supervision({user}) {
         },
       ];
     
-    const [dataMostrada, setDataMostrada] = useState(dataAlgebra);
+    const [dataMostrada, setDataMostrada] = useState(data);
+    const [contenidoMostrado, setContenidoMostrado] = useState(content);
     
   return (
     <section className='supervision'>
@@ -101,7 +108,13 @@ function Supervision({user}) {
 
         <div className='supervision_element supervision_dashboard'>
             <h3>Estadísticas</h3>
-            <button onClick={() => {console.log(data);setDataMostrada(dataAlgebra)}}>Cambiar a algebra</button>
+
+            <button onClick={() => {setContenidoMostrado(content);setDataMostrada(data)}}>ver todos</button>
+            <button onClick={() => {setContenidoMostrado(dataContentAlgebra);setDataMostrada(dataAlgebra)}}>ver algebra</button>
+            <button onClick={() => {setContenidoMostrado(dataContentFisica);setDataMostrada(dataFisica)}}>ver fisica</button>
+            <button onClick={() => {setContenidoMostrado(dataContentCalculo);setDataMostrada(dataCalculo)}}>ver calculo</button>
+            <button onClick={() => {setContenidoMostrado(dataContentQuimica);setDataMostrada(dataQuimica)}}>ver quimica</button>
+
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                 width={500}
@@ -118,11 +131,11 @@ function Supervision({user}) {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Legend iconSize={40} verticalAlign/>
-                <Bar dataKey="álgebra" stackId="a" fill="#158fa2" />
-                <Bar dataKey="física" stackId="a" fill="#453c5c" />
-                <Bar dataKey="química" stackId="a" fill="#076461" />
-                <Bar dataKey="cálculo" stackId="a" fill="#bd1b43" />
+                <Legend iconSize={20} layout='vertical'/>
+                <Bar dataKey={contenidoMostrado[0]} stackId="a" fill="#158fa2" />
+                <Bar dataKey={contenidoMostrado[1]} stackId="a" fill="#453c5c" />
+                <Bar dataKey={contenidoMostrado[2]} stackId="a" fill="#076461" />
+                <Bar dataKey={contenidoMostrado[3]} stackId="a" fill="#bd1b43" />
                 </BarChart>
             </ResponsiveContainer>
         </div>

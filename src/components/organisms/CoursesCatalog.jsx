@@ -67,4 +67,3 @@ function CoursesCatalog() {
 }
 
 export default CoursesCatalog
-

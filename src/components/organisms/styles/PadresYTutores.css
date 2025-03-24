@@ -1,30 +1,134 @@
-.padresTutores {
-    width: 90%;
+/* styles/PadresYTutores.css */
+
+.padres-tutores-section {
+    width: clamp(280px, 80%, 1045px);
+    display: grid;
+    grid-template-areas: 
+    'title title'
+    'text1 image'
+    'text2 image'
+    'text3 image';
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: dense;
+    gap: 2.8rem;
+    margin: 3em auto;
+    color: #ffffff;
+    padding: 5% 4%;
+}
+
+.padres-tutores-title {
+    grid-area: title;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
 }
 
-.padresTutores_img {
-    height: 352px;
-    aspect-ratio: 3/2;
-    object-fit: contain;
-    object-position: center;
+.padres-tutores-title > .title-text {
+    margin: auto;
+    font-size: clamp(2.5rem, 5vw, 4.8rem);
+    line-height: clamp(3rem, 6vw, 6.2rem);
+    text-align: center;
+    word-wrap: break-word;
 }
 
-@media screen and (max-width: 500px) {
-    .padresTutores {
-        flex-direction: column;
+.padres-tutores-text-container {
+    flex: 1;
+}
+
+.padres-tutores-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.padres-tutores-grid-item {
+    border-radius: 10px;
+    padding: 2rem;
+    font-size: clamp(1.8rem, 3vw, 2.7rem);
+    line-height: 180%;
+    letter-spacing: 2%;
+    background-color: var(--brandy-punch-400);
+    min-height: 5em;
+    text-align: center;
+}
+
+.padres-tutores-text-1 {
+    background-color: #4e8c8a;
+}
+
+.padres-tutores-text-2 {
+    background-color: #f0a830;
+}
+
+.padres-tutores-text-3 {
+    background-color: #333333;
+}
+
+.padres-tutores-image-container {
+    grid-area: image;
+    flex-shrink: 0;
+}
+
+.padres-tutores-image {
+    width: clamp(200px, 40%, 40em);
+    height: auto;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .padres-tutores-title > .title-text {
+        font-size: 3rem;
+        line-height: 4rem;
     }
-    .padresTutores_img{
-        width: 100%;
+
+    .padres-tutores-text-container {
+        font-size: 2rem;
+        padding-inline: 1rem;
+    }
+
+    .padres-tutores-image {
+        width: 70%;
+    }
+
+    .padres-tutores-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .padres-tutores-grid-item {
+        font-size: 2rem;
     }
 }
 
-@media screen and (max-width: 900px) {
-    .padresTutores {
-        flex-direction: column;
+@media (max-width: 500px) {
+    .padres-tutores-title > .title-text {
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+
+    .padres-tutores-text-container {
+        font-size: 1.8rem;
+    }
+
+    .padres-tutores-grid-item {
+        font-size: 1.8rem;
+        padding: 1rem;
+    }
+
+    .padres-tutores-image {
+        width: 80%;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .padres-tutores-text-1 {
+        background-color: var(--swans-down-200);
+    }
+
+    .padres-tutores-text-2 {
+        background-color: var(--brandy-punch-200);
+    }
+
+    .padres-tutores-text-3 {
+        background-color: var(--black-200);
     }
 }

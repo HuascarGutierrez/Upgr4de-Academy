@@ -6,7 +6,12 @@
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
+    border: 2px solid gray;
   }
+
+.crear-curso-container div{
+  display: flex;
+}
   
   .crear-curso-title {
     font-size: 2rem;
@@ -14,6 +19,8 @@
     text-align: center;
     margin-bottom: 1.5rem;
     color: #2d3748;
+    margin-left: 30%;
+    margin-bottom: 30px;
   }
   
 
@@ -47,6 +54,10 @@
   .file-input-label input {
     margin-top: 0.5rem;
   }
+
+.boton-crear{
+  display: flex;
+}
   
   .btn-crear-curso {
     margin-top: 1rem;
@@ -69,3 +80,9 @@
     background-color: #285e61;
   }
   
+  .btn-volver img {
+    width: 30px;
+    height: 30px;
+    appearance: none;
+    
+  }

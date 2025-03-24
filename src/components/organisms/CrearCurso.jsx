@@ -44,11 +44,15 @@ function CrearCurso() {
   };
 
   return (
+    <>
     <div className="crear-curso-container">
-      <h1 className="crear-curso-title">CREAR CURSO</h1>
-      <button type="submit" className="btn-crear-curso" onClick={() => {navigate("/admin/listacursos");}} >
-        Volver
+      <div>
+      <button type="submit" className="btn-volver" onClick={() => {navigate("/admin/listacursos");}} >
+        <img src="/assets/circle-arrow-left.svg" alt="" />
       </button>
+      <h1 className="crear-curso-title">CREAR CURSO</h1>
+      
+      </div>
       <form className="form-crear" onSubmit={handleSubmit}>
         <label>
           Nombre del Curso
@@ -104,12 +108,14 @@ function CrearCurso() {
             required
           />
         </label>
+        <div className='boton-crear'>
         <button type="submit" className="btn-crear-curso" onClick={() => {navigate("/admin/listacursos");}} >
           CREAR NUEVO CURSO
         </button>
-        
+        </div>
       </form>
     </div>
+    </>
   );
 }
 

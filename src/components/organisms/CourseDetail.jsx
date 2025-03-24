@@ -1,12 +1,12 @@
 import './styles/CourseDetail.css';
 import ZowlWhite from '../../assets/images/zowl-white.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where, setDoc, doc, deleteDoc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../../config/app';
 import UnitModel from '../../models/unit_model';
 
-function CourseDetail() {
+function CourseDetail({user}) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -15,6 +15,8 @@ function CourseDetail() {
   const [units, setUnits] = useState([]);
   const [lessons, setLessons] = useState([]);
   const [openUnitIndex, setOpenUnitIndex] = useState(null);
+
+  const[enrolled, setEnrolled] = useState(false);
 
   if (!course) {
     return <p>Curso no disponible</p>;
@@ -36,7 +38,25 @@ function CourseDetail() {
       }
     };
 
+    const checkEnrolledCourse = async () => {
+      try {
+        const q = doc(db, 'users',user.uid,'enrolledCourses', course.id);
+        const querySnapshot = await getDoc(q);
+
+        if(querySnapshot.exists())
+        {
+          setEnrolled(true);
+        } else {
+          setEnrolled(false);
+        }
+        
+      } catch (error) {
+        console.error('Error al checar si esta agregado: ', error);
+      }
+    };
+
     fetchUnits();
+    checkEnrolledCourse();
   }, [course.id]);
 
   const fetchLessons = async (unitId) => {
@@ -59,6 +79,31 @@ function CourseDetail() {
       await fetchLessons(unitId);
     }
   };
+
+    const enrollCourse = async (course) => {
+      try {
+        const q = collection(doc(db, 'users',user.uid), 'enrolledCourses');
+        const docCreated = await doc(q, course.id);
+        await setDoc(docCreated, course);
+        setEnrolled(true);
+      } catch (error) {
+        console.error('error al momento de ingresar al curso: ', error);
+      }
+    };
+
+    const deleteEnrolledCourse = async () => {
+      try {
+        // Referencia al documento del curso dentro de "enrolledCourses"
+        const courseRefDel = doc(db, "users", user.uid, "enrolledCourses", course.id);
+    
+        // Eliminar el documento
+        await deleteDoc(courseRefDel);
+        console.log(`Curso con ID ${course.id} eliminado.`);
+        setEnrolled(false);
+      } catch (error) {
+        console.error("Error eliminando el curso:", error);
+      }
+    };
 
   return (
     <div className="course-banner-container">
@@ -117,6 +162,11 @@ function CourseDetail() {
 
           <div className="actions">
             <a onClick={() => navigate(-1)} className="back-link">Regresar</a>
+            {
+              enrolled?
+              <button onClick={()=>{deleteEnrolledCourse();}} className='actions_enrollCourse-enrolled'>Quitar de las estadísticas</button>:
+              <button className='actions_enrollCourse' onClick={()=>{enrollCourse(course)}}>Agregar a las estadísticas</button>
+            }
           </div>
         </div>
       </div>

@@ -18,11 +18,11 @@ function SAPIMain({user}) {
         <NavLateral/>
         <div className='SAPIContent'>
             <Routes>
-                 <Route path='/courses' element={<Courses/>}/>
-                <Route path='/catalogo' element={<CoursesCatalog/>}/>
-                <Route path='/supervision' element={<Supervision user={user}/>}/> 
+                <Route path='/courses' element={<Courses/>}/>
+                <Route path='/catalogo' element={<CoursesCatalog user={user}/>}/>
+                <Route path='/supervision' element={<Supervision/>}/> 
                 <Route path='/perfil' element={<Perfil user={user}/>}/> 
-                <Route path='/courses/course' element={<CourseDetail />} />
+                <Route path='/courses/course' element={<CourseDetail user={user}/>} />
                 <Route path='/courses/course/interactive-course' element={<InteractiveCourse />} />
             </Routes>
         </div>

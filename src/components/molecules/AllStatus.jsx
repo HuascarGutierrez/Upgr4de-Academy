@@ -5,7 +5,7 @@ function AllStatus() {
   return (
     <>
         <div className='AllStatus'>
-            <h2>All Status</h2>
+            <h2>Estado Actual</h2>
             <div className='StatusP'>
                 <div>
                     <img src="/assets/Icons-drawer_2.svg" alt="" />

@@ -1,9 +1,18 @@
-.ProgresoCurso{
-    display: grid;
-    justify-content: space-around;
-    align-items: center;
+.ProgresoCurso-contenido {
+    display: flex;
+    align-items: flex-start;
 }
 
-.ProgresoCurso div img{
-    max-width: 920px;
+.ProgresoCurso-contenido > div:first-child {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.ProgresoCurso-contenido > Calendario {
+    flex: 1;
+}
+
+.ProgresoCurso-contenido img {
+    max-width: 100%;
+    height: auto;
 }

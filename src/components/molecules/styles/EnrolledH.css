@@ -2,12 +2,21 @@
     display: flex;
     justify-content: space-between;
 }
+   .EnrolledHeader h2 {
+    color: black; 
+    font-size: 1.5rem;
+  }
+  
+  .Boton_vercatalogo p {
+    color: black; 
+    font-size: 1.5rem;
+  }
 
 .Boton_vercatalogo{
-    background-color: #2D9CDB;
-    color: white;
+    background-color: #98cdec;
+    color: rgb(103, 33, 33);
     display: flex;
-    font-size: 14px;
+    font-size: 1.5rem;
     align-items: center;
     justify-content: space-evenly;
     padding-right: 10px;
@@ -21,6 +30,7 @@
 .Boton_vercatalogo img{
     width: 48px;
     height: 48px;
+
 }
 
 .CursoProgreso{
@@ -29,7 +39,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    border-bottom: 2px solid rgb(218, 210, 210);
+    border-bottom: 2px solid rgb(0, 0, 0);
 }
 
 .CursoProgreso .icono{
@@ -53,8 +63,8 @@ width: 60px;height: 60px;
 }
 
 .cursocomplet{
-    background-color: #2D9CDB;
-    color: white;
+    background-color: #c48430;
+    color: rgb(0, 0, 0);
     height: 30px;
     width: 100px;
     display: flex;

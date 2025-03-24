@@ -1,7 +1,7 @@
 import './styles/CourseDetail.css';
 import ZowlWhite from '../../assets/images/zowl-white.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { collection, getDocs, orderBy, query, where, setDoc, doc, deleteDoc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where, setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../../config/app';
 import UnitModel from '../../models/unit_model';
@@ -11,12 +11,17 @@ function CourseDetail({user}) {
   const navigate = useNavigate();
 
   const course = location.state?.course;
+  //usado para las queries de cada unidad
+  const [courseId, setCourseId] = useState();
+  const [unitId, setUnitId] = useState();
+
+  const [lastLessonByUnit, setLastLessonByUnit] = useState();
 
   const [units, setUnits] = useState([]);
   const [lessons, setLessons] = useState([]);
   const [openUnitIndex, setOpenUnitIndex] = useState(null);
 
-  const[enrolled, setEnrolled] = useState(false);
+  const[enrolled, setEnrolled] = useState();
 
   if (!course) {
     return <p>Curso no disponible</p>;
@@ -33,31 +38,24 @@ function CourseDetail({user}) {
         const querySnapshot = await getDocs(q);
         const unitsData = querySnapshot.docs.map((doc) => new UnitModel({ id: doc.id, ...doc.data() }));
         setUnits(unitsData);
-      } catch (error) {
-        console.error('Error al obtener las Unidades: ', error);
-      }
-    };
 
-    const checkEnrolledCourse = async () => {
-      try {
-        const q = doc(db, 'users',user.uid,'enrolledCourses', course.id);
-        const querySnapshot = await getDoc(q);
+        //aqui se revisa si esta enrolado
+        const q2 = doc(db, 'users',user.uid,'enrolledCourses', course.id);
+        const querySnapshot2 = await getDoc(q2);
 
-        if(querySnapshot.exists())
+        if(querySnapshot2.exists())
         {
           setEnrolled(true);
         } else {
           setEnrolled(false);
         }
-        
       } catch (error) {
-        console.error('Error al checar si esta agregado: ', error);
+        console.error('Error al obtener las Unidades: ', error);
       }
     };
 
     fetchUnits();
-    checkEnrolledCourse();
-  }, [course.id]);
+  }, []);
 
   const fetchLessons = async (unitId) => {
     try {
@@ -65,15 +63,23 @@ function CourseDetail({user}) {
       const querySnapshot = await getDocs(q);
       const lessonsData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setLessons(lessonsData);
+      if(lessonsData.length > 0 ){
+        setLastLessonByUnit(lessonsData[lessonsData.length - 1].number_lesson);
+        setCourseId(course.id);
+        setUnitId(lessonsData[lessonsData.length - 1].unit_id);
+
+      } else {
+        setLastLessonByUnit(undefined);
+      }
     } catch (error) {
       console.error('Error al obtener las lecciones: ', error);
     }
   };
 
   const handleTopicClick = async (index, unitId) => {
+    setLessons([]);
     if (openUnitIndex === index) {
       setOpenUnitIndex(null);
-      setLessons([]);
     } else {
       setOpenUnitIndex(index);
       await fetchLessons(unitId);
@@ -81,10 +87,21 @@ function CourseDetail({user}) {
   };
 
     const enrollCourse = async (course) => {
+  
+      const unidades = units.map((unit)=>({id: unit.id, 
+                                          nombreUnidad: unit.title, 
+                                          completed: false,
+                                          })) 
       try {
         const q = collection(doc(db, 'users',user.uid), 'enrolledCourses');
         const docCreated = await doc(q, course.id);
-        await setDoc(docCreated, course);
+        await setDoc(docCreated, {
+          units: unidades,
+          startedAt: new Date,
+          activo: true,
+        });
+        console.log(unidades)
+        //await setDoc(docCreated, {unidades: units})
         setEnrolled(true);
       } catch (error) {
         console.error('error al momento de ingresar al curso: ', error);
@@ -97,7 +114,10 @@ function CourseDetail({user}) {
         const courseRefDel = doc(db, "users", user.uid, "enrolledCourses", course.id);
     
         // Eliminar el documento
-        await deleteDoc(courseRefDel);
+        await updateDoc(courseRefDel, {
+          activo: false,
+        });
+
         console.log(`Curso con ID ${course.id} eliminado.`);
         setEnrolled(false);
       } catch (error) {
@@ -149,7 +169,7 @@ function CourseDetail({user}) {
                       <
                         div key={lesson.id} 
                         className="lesson-item"
-                        onClick={() => navigate('/main/courses/course/interactive-course', {state: {lesson}})}
+                        onClick={() => navigate('/main/courses/course/interactive-course', {state: {lesson, lastLessonByUnit, courseId, unitId}})}
                       >
                         <span>{lesson.title}</span>
                       </div>

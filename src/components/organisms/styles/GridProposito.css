@@ -7,7 +7,7 @@
     'image image image title title title'
     'image image image text1 text1 text1'
     'second_image second_image text2 text2 text3 text3';
-    gap: 1rem;
+    gap: 2rem;
     height: min-content;
 }
 
@@ -21,8 +21,9 @@
     align-items: center;
     border-radius: 1rem;
     background-color: var(--black-700);
-    padding-inline: 1rem;
-    font-size: 1.5rem;
+    padding: 1rem;
+    font-size: 2rem;
+    line-height: 160%;
     text-wrap: pretty;
     overflow-wrap: break-word;
 }
@@ -33,6 +34,7 @@
 
 .proposito_title {
     grid-area: title;
+    font-size: 3.5rem;
     background-color: var(--brandy-punch-400);
 }
 
@@ -78,7 +80,12 @@
     }
 
     .proposito_element {
+        font-size: 1.5rem;
         grid-area: span 1/ span 3;
+    }
+
+    .proposito_title {
+        font-size: 2rem;
     }
 
     .proposito_mainImage {
@@ -96,6 +103,7 @@
         'text2'
         'second_image'
         'text3';
+        gap: 1rem;
     }
 
     .proposito_element {
@@ -103,15 +111,15 @@
     }
 
     .proposito_element>p {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .proposito_title {
         grid-area: title;
+        font-size: 2.5rem;
     }
 
     .proposito_title>h2 {
-        font-size: 1.5rem;
         padding: 1rem;
     }
 }

@@ -7,7 +7,7 @@
     'title text3';
     grid-template-columns: repeat(2, 1fr);
     grid-auto-flow: dense;
-    gap: 2em;
+    gap: 2.8rem;
     margin: 3em auto;
 }
 
@@ -17,15 +17,19 @@
 }
 
 .benefits_title>.title-text {
-    width: fit-content;
-    text-wrap: balance;
     margin: auto;
-    font-size: 3em;
+    font-size: 4.8em;
+    line-height: 6.2rem;
+    text-align: center;
+    text-wrap: balance;
 }
 
 .benefits_text {
     place-content: center;
     padding-inline: 2em;
+    font-size: 2.7rem;
+    line-height: 180%;
+    letter-spacing: 2%;
     background-color: var(--brandy-punch-400);
     min-height: 5em;
     border-radius: 1em;
@@ -43,7 +47,7 @@
     background-color: var(--black-600);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 900px) {
     .benefits {
         grid-template-areas: 
         'title'

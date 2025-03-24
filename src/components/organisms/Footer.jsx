@@ -1,8 +1,10 @@
 import FooterItem from "../molecules/FooterItem"
 import './styles/Footer.css'
-
+import { useNavigate } from "react-router-dom"
 
 function Footer() {
+  const navigate = useNavigate()
+
   return (
     <footer className='footer'>
       <section className='footer_section'>
@@ -15,7 +17,7 @@ function Footer() {
       <section className='footer_section footer_section_materias'>
         <span className='footer_section_title'>Servicios</span>
           <li className="footer_item">
-            <p>SAPI</p>
+            <p onClick={()=> {navigate('/SAPI')}}>SAPI</p>
           </li>
       </section>
       <section className='footer_section footer_section_links'>

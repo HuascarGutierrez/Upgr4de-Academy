@@ -230,6 +230,8 @@
     background-color: var(--brandy-punch-400);
 }
 
+
+
 @media screen and (max-width: 900px) {
     .supervision_temas {
         gap: 1px;
@@ -258,6 +260,10 @@
 .recharts-legend-item-text {
     font-size: 1.7rem;
     font-weight: bold;
+}
+
+.recharts-surface tspan{
+    font-size: 2rem;
 }
 
 @media screen and (max-width: 900px) {

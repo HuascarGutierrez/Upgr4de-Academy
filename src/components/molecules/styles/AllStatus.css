@@ -2,6 +2,9 @@
     max-width: 920px;
     color: black; /* Color de texto negro para todo el contenedor */
 }
+.AllStatus h2{
+    font-size: 2.5rem;
+}
 
 .StatusP {
     display: grid;

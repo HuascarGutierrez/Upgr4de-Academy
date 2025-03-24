@@ -12,6 +12,10 @@
     font-size: 1.5rem;
   }
 
+.EnrolledHeader h2{
+    font-size: 2.5rem;
+}
+
 .Boton_vercatalogo{
     background-color: #98cdec;
     color: rgb(103, 33, 33);

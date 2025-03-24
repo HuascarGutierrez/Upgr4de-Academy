@@ -1,0 +1,168 @@
+.mostrar-cursos-container {
+    padding: 20px;
+    background-color: white;
+
+  }
+  
+  .mostrar-cursos-title {
+    text-align: center;
+    font-size: 3rem;
+
+    color: #333;
+  }
+  
+  .tabla-cursos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .curso-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .curso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .curso-imagen {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .curso-card h3 {
+    font-size: 2rem;
+    margin: 15px;
+    color: #002851;
+  }
+  
+  .curso-card p {
+    margin: 0 15px 10px;
+    font-size: 1.3rem;
+    color: #555;
+  }
+  
+  .curso-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+  }
+  
+  .btn-editar, .btn-borrar {
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-editar {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-editar:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-borrar {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .btn-borrar:hover {
+    background-color: #a71d2a;
+  }
+  
+  .editar-curso-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .editar-curso-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .editar-curso-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .editar-curso-form input,
+  .editar-curso-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .btn-editar-curso, .btn-cancelar-edicion {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .btn-editar-curso {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn-editar-curso:hover {
+    background-color: #218838;
+  }
+  
+  .btn-cancelar-edicion {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .btn-cancelar-edicion:hover {
+    background-color: #5a6268;
+  }
+
+  .boton-crear{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .btn-crear-curso {
+    text-align: center;
+    margin: 20px;
+    width: 50%;
+    padding: 0.8rem;
+    background-color: #319795;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-crear-curso:hover {
+    background-color: #2c7a7b;
+  }
+  
+  .btn-crear-curso:active {
+    background-color: #285e61;
+  }
+  

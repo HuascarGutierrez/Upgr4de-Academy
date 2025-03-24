@@ -1,6 +1,8 @@
-.ProgresoCurso-contenido {
+.ProgresoCurso{
     display: flex;
-    align-items: flex-start;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2rem;
 }
 
 .ProgresoCurso-contenido > div:first-child {

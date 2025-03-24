@@ -10,6 +10,8 @@ import Supervision from '../components/organisms/Supervision'
 import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import CourseDetail from '../components/organisms/CourseDetail'
 import InteractiveCourse from '../components/organisms/InteractiveCourse'
+import UserTable from '../components/organisms/UserTable'
+
 
 function SAPIMain({user}) {
 

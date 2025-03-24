@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap');
 .wrapper {
   color: black;
-  width: 400px;
+  width: 250px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   padding: 5px;
-  height: 250px;
-  font-family: 'Raleway', sans-serif; /* Aplica Raleway solo a .wrapper */
+  font-size: 5 rem;
 }
 
 .wrapper img{
@@ -16,12 +15,12 @@
 }
 
 .wrapper header {
-  font-size: 1.5rem;
+  font-size: 5 rem;
   text-align: center;
 }
 
 header .current-date {
-  font-size: 1rem;
+  font-size: 2.5rem;
 }
 
 header .icons span {
@@ -34,7 +33,7 @@ header .icons span {
   color: #878787;
   text-align: center;
   line-height: 10px;
-  font-size: 1.5rem;
+  font-size: 3rem;
   user-select: none;
   border-radius: 50%;
 }
@@ -54,8 +53,9 @@ header .icons span {
   text-align: center;
 }
 
-.calendar .weeks li {
+.weeks li {
   font-weight: bold;
+  margin: 0.3rem;
 }
 
 .calendar .days li {
@@ -68,7 +68,7 @@ header .icons span {
   cursor: pointer;
   position: relative;
   width: 100%;
-  padding: 2px;
+  padding: 4px;
 }
 
 .days li.inactive {

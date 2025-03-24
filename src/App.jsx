@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css'
 import ScrollToTop from './components/atoms/ScrollToTop'
 import Home from './pages/Home'
@@ -12,6 +13,9 @@ import { auth } from './config/app'
 import SAPIMain from './pages/SAPIMain'
 import { getFirestore } from 'firebase/firestore'
 import { getDoc, doc } from 'firebase/firestore'
+import SAPIAdmin from './pages/SAPIAdmin'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
 
@@ -65,6 +69,7 @@ function App() {
     <>
       <Router>
         <ScrollToTop/> {/**por temas del scroll */}
+        <ToastContainer position='top-center'/>
         <Routes>
           <Route path='/' element={<Home user={userdb}/>}/>
           <Route path='/sobreNosotros' element={<SobreNosotros user={userdb}/>}/>
@@ -72,6 +77,7 @@ function App() {
           <Route path='/registro' element={<SignUp/>}/>
           <Route path='/iniciodesesion' element={<Login/>}/>
           <Route path='/main/*' element={<SAPIMain user={userdb}/>}/>
+          <Route path='/admin/*' element={<SAPIAdmin />}/>
         </Routes>
       </Router>
     </>

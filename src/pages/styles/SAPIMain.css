@@ -6,3 +6,16 @@
     margin-left: 100px;
     background-color: white; /* Agrega un fondo blanco */
 }
+
+.SAPIAdmin {
+    min-height: 100dvh;
+    height: 100vh;
+    
+}
+
+.SAPIAdminContent {
+    margin-left: 100px;
+    background-color: white; /* Agrega un fondo blanco */
+    height: 100vh;
+
+}

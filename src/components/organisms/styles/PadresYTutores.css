@@ -1,30 +1,89 @@
-.padresTutores {
-    width: 90%;
+.padres-tutores-section {
+    color: #ffffff;
+    padding: clamp(30px, 30vw, 50px) clamp(10px, 2vw, 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.padres-tutores-title {
+    font-size: clamp(2.5rem, 5vw, 4.8rem); 
+    line-height: clamp(3rem, 6vw, 6.2rem); 
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.padres-tutores-content {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 4rem;
+    max-width: 1200px;
+    width: 100%;
+    gap: 2rem;
 }
 
-.padresTutores_img {
-    height: 352px;
-    aspect-ratio: 3/2;
-    object-fit: contain;
-    object-position: center;
+.padres-tutores-text-container {
+    flex: 1;
 }
 
-@media screen and (max-width: 500px) {
-    .padresTutores {
+.padres-tutores-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+}
+
+.padres-tutores-grid-item {
+    border-radius: 10px;
+    padding: 1.5rem;
+    font-size: clamp(2rem, 2.5vw, 2.5em);
+}
+
+.padres-tutores-text-1 {
+    background-color: #4e8c8a;
+}
+
+.padres-tutores-text-2 {
+    background-color: #a76627;
+}
+
+.padres-tutores-text-3 {
+    background-color: #6d6d6d;
+}
+
+.padres-tutores-image-container {
+    flex-shrink: 0;
+}
+
+.padres-tutores-image {
+    width: clamp(250px, 40vw, 40em);
+    height: auto;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .padres-tutores-content {
         flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
-    .padresTutores_img{
-        width: 100%;
+
+    .padres-tutores-image-container {
+        margin-top: 2rem;
+    }
+
+    .padres-tutores-image {
+        width: 80%;
     }
 }
 
-@media screen and (max-width: 900px) {
-    .padresTutores {
-        flex-direction: column;
+@media (max-width: 480px) {
+    .padres-tutores-title {
+        font-size: 2rem;
+    }
+
+    .padres-tutores-grid-item {
+        font-size: clamp(1rem, 2.5vw, 1.3em);
     }
 }

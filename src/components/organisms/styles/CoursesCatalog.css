@@ -1,7 +1,11 @@
 .catalog-container {
     height: 100vh;
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: #f7f7f7; /* Coincide con el color de fondo de SAPIcurses */
+    border-radius: 10px; /* Agregado para coincidir con el borde redondeado */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Similar a la sombra del primer contenedor */
+    max-width: 1400px; /* Tamaño consistente */
+    margin: 0 auto;
 }
 
 .catalog-header {
@@ -10,13 +14,15 @@
     align-items: center;
     padding: 10px 20px;
     background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Estilo de sombra similar */
+    border-radius: 8px; /* Bordes redondeados como en el primer código */
+    margin-bottom: 20px; /* Espaciado similar entre secciones */
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 2.5rem; /* Tamaño de fuente similar */
     font-weight: bold;
-    color: #0B7077;
+    color: #333333; /* Coincide con el color del encabezado en SAPIcurses */
 }
 
 .nav-bar {
@@ -51,7 +57,10 @@
 
 .title {
     color: black;
-    font-size: 2rem;
+    font-size: 2.5rem; /* Coincide con el tamaño de fuente en h1 */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px; /* Coincide con el espaciado del primer código */
 }
 
 .sub-title {
@@ -102,7 +111,7 @@
 .course-card {
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 250px;
     min-width: 250px;
@@ -145,4 +154,22 @@
     justify-content: space-between;
     font-size: 1.6rem;
     color: #555;
+}
+
+@media (max-width: 768px) {
+    .catalog-container {
+        padding: 15px;
+    }
+
+    .catalog-header {
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
 }

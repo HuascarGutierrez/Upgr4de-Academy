@@ -67,6 +67,17 @@
 
 .supervision_profile {
     grid-area: usuario;
+    font-size: 2rem;
+    line-height: 2.8rem;
+    font-weight: 700;
+}
+
+.supervision_description > img {
+    height: 100%;
+    max-height: 50px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 3px solid var(--brandy-punch-400);
 }
 
 .supervision_description {
@@ -82,13 +93,19 @@
     flex-wrap: wrap;
 }
 
+.supervision_info > p {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: bold;
+}
+
 .supervision_info>p:nth-child(2) {
     font-weight: lighter;
     color: var(--black-700);
 }
 
-.supervision_courses>p {
-    color: var(--black-700);
+.supervision_courses {
+    margin-inline: auto;
 }
 
 .courses-unit, .courses-course {
@@ -98,9 +115,15 @@
     gap: 4px;
 }
 
-.supervision_courses>p>span {
-    color: var(--black-950);
-    font-weight: bolder;
+.courses-course > p , .courses-unit > p {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: normal;
+}
+
+.supervision_courses span {
+    font-size: 2rem;
+    line-height: 2.8rem;
 }
 
 .supervision_dashboard {
@@ -188,6 +211,11 @@
         flex-direction: column;
         font-size: 0.75em;
     }
+}
+
+.recharts-legend-item-text {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 900px) {

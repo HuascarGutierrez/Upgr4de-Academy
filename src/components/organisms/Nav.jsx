@@ -34,15 +34,15 @@ function Nav({user}) {
         <li onClick={() => {navigate('/')}} className="nav_item">
           <p>Inicio</p>
         </li>
+        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item">
+          <p>Sobre Nosotros</p>
+        </li>
         <li onClick={() => {navigate('/SAPI')}} className="nav_item">
           <p>SAPI</p>
         </li>
         {/**<li className="nav_item">
           <p>Blog</p>
         </li> */}
-        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item">
-          <p>Sobre Nosotros</p>
-        </li>
 
         {
           user?
@@ -50,8 +50,8 @@ function Nav({user}) {
             <li onClick={handleSignOut} className="nav_item item-signup">
               <p>Cerrar Sesión</p>
             </li>
-            <li className="nav_item ">
-              <img className="nav_profile_photo" src={user.imageUrl} alt="profile" />
+            <li onClick={() => {navigate('/main/perfil')}} className="nav_item">
+              <img className="nav_profile_photo" src={user.imageUrl}/>
             </li>
           </> :
           <>

@@ -1,17 +1,8 @@
 import FooterItem from "../molecules/FooterItem"
 import './styles/Footer.css'
-import { useNavigate } from 'react-router-dom'
-import { useState } from "react";
 
 
 function Footer() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate()
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   return (
     <footer className='footer'>
       <section className='footer_section'>

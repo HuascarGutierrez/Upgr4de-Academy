@@ -1,5 +1,5 @@
 .card {
-    background-color: var(--brandy-punch-300);
+    background-color: var(--brandy-punch-500);
     border-radius: 20px;
     flex: 1 1 150px;
     display: flex;
@@ -13,7 +13,7 @@
 }
 
 .card:nth-child(2n) {
-    background-color: var(--swans-down-400);
+    background-color: var(--swans-down-500);
     color: var(--color-text);
 }
 

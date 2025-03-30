@@ -34,6 +34,18 @@
     width: 90%;
 }
 
+.navLateral_logo > p {
+    display: none;
+    transition: display 0.5s ease;
+}
+
+.navLateral:hover .navLateral_logo > p {
+    display: inline;
+    width: 18rem;
+    text-align: center;
+}
+
+
 .navLateral_content{
     height: 100%;
 }

@@ -2,7 +2,7 @@ import './styles/GridVision.css'
 
 function GridVision() {
   return (
-    <section className="vision">
+    <section className="vision" id='Vision'>
         <div className="vision_element vision_title">
             <h2 className="title-h2">VISIÓN</h2>
         </div>

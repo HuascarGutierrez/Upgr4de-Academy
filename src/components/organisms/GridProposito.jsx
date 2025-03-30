@@ -1,7 +1,7 @@
 import "./styles/GridProposito.css";
 function GridProposito() {
   return (
-    <section className="proposito">
+    <section className="proposito" id="Proposito">
       <div className="proposito_element proposito_mainImage">
         <img src="images/proposito_main.webp" alt="main image" />
       </div>

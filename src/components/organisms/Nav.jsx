@@ -33,6 +33,11 @@ function Nav({user}) {
       <ul className={`nav_items ${menuOpen ? "open" : ""}`}>
         <li onClick={() => {navigate('/')}} className="nav_item">
           <p>Inicio</p>
+          <ul className="menu-vertical">
+            <li><a href="#QuienesSomos"><p>Quienes Somos</p></a></li>
+            <li><a href="#Beneficios"><p>Beneficios</p></a></li>
+            <li><a href="#PadresyTutores"><p>Para PadresyTutores</p></a></li>
+          </ul>
         </li>
         <li onClick={() => {navigate('/SAPI')}} className="nav_item">
           <p>SAPI</p>
@@ -42,6 +47,11 @@ function Nav({user}) {
         </li> */}
         <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item">
           <p>Sobre Nosotros</p>
+          <ul className="menu-vertical">
+            <li><a href="#Mision"><p>Mision</p></a></li>
+            <li><a href="#Vision"><p>Vision</p></a></li>
+            <li><a href="#Proposito"><p>Proposito</p></a></li>
+          </ul>
         </li>
 
         {

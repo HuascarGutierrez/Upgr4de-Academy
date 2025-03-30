@@ -1,0 +1,93 @@
+.CreateUser{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+.btn-volver img {
+    width: 30px;
+    height: 30px;
+    appearance: none;
+    
+  }
+.CreateUser_container {
+    max-width: 70%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.CreateUser_title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.CreateUser_form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.CreateUser_input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form_btn {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form_btn:hover {
+    background: #0056b3;
+}
+
+
+
+input[type="file"] {
+    border: none;
+    padding: 5px;
+    font-size: 14px;
+    color: black;
+}
+
+.CreateUser_form_container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .CreateUser_form {
+    width: 100%;
+  }
+  
+  .image-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px; /* Espacio entre el formulario y la imagen */
+  }
+  
+  .image-preview {
+    text-align: center;
+  }
+  
+  .image-preview-img {
+    border-radius: 50%;
+    height: 200px !important;
+    width: 200px !important;
+  }
+  

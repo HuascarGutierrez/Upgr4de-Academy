@@ -7,7 +7,7 @@ function Benefits() {
         'Diseñado para estudiantes con dificultades en estas materias.'
     ] */
   return (
-      <section className="benefits">
+      <section className="benefits" id='Beneficios'>
         <div className='benefits_title'>
           <h2 className='title-text'>Beneficios de Upgr4de academy</h2>
         </div>

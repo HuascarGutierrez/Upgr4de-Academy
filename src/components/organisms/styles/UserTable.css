@@ -1,68 +1,85 @@
-.Tabla{
-  color: black ;
-  height: 100vh;
-  overflow-x: hidden;
-}
-
-.Tabla h1{
-  font-size: 2rem;
+/* Estilos generales */
+.Tabla {
+  width: 90%;
+  margin: auto;
   text-align: center;
-  margin: 20px;
-}
-
-.tablacontenedor{
-  display: flex;
-  justify-content: center;
-}
-
-.styled-table {
-  border-collapse: collapse;
-  font-size: 1.5rem;
-  text-align: left;
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  
-}
-
-.styled-table th, .styled-table td {
-  padding: 12px 15px;
   color: black;
 }
 
-.styled-table thead {
-  background-color: #c4ddda;
-  color: white;
-}
-
-.styled-table tr {
-  border-bottom: 1px solid #dddddd;
-}
-
-.styled-table tr:hover {
-  background-color: #f1f1f1;
+h1 {
+  color: #333;
 }
 
 .btn {
   padding: 8px 12px;
-  font-size: 14px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
 .btn-edit {
-  background-color: #007bff;
+  background-color: #4CAF50;
   color: white;
   margin-right: 5px;
 }
 
 .btn-delete {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: white;
 }
 
+.btn-delete-multiple {
+  background-color: #d9534f;
+  color: white;
+  margin-bottom: 10px;
+  display: none;
+}
+
+/* Tabla */
+.tablacontenedor {
+  overflow-x: auto;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.styled-table th, .styled-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para las imágenes de usuario */
+.user-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Modal de edición */
 /* Estilos para el modal */
 .modal-overlay {
   position: fixed;

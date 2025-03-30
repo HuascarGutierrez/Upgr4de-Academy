@@ -55,7 +55,7 @@
     display: flex;
     justify-content: end;
     flex: 1;
-    gap: clamp(1rem, 5vw, 2rem);
+    gap: clamp(7rem, 5vw, 2rem);
     padding-right: 2rem;
     margin: 0;
     color: inherit;
@@ -140,4 +140,28 @@
     .nav-links li {
         margin: 20px 0;
     }
+}
+
+.menu-vertical{
+    margin-top: 18rem;
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 18rem;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.nav_items li:hover .menu-vertical{
+    display: block;
+}
+
+.menu-vertical li:hover{
+    background-color: black;
+}
+
+.menu-vertical li a{
+    display: block;
+    color: white;
+    padding: 5px 5px 5px 10px;
+    text-decoration: none;
 }

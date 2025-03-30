@@ -63,17 +63,31 @@ function UserTable() {
   };;
 
   const handleMassDelete = async () => {
-    if (window.confirm("¿Estás seguro de eliminar los usuarios seleccionados?")) {
-      try {
-        await Promise.all(selectedUsers.map(id => deleteDoc(doc(db, "users", id))));
-        setData(data.filter(user => !selectedUsers.includes(user.id)));
-        setSelectedUsers([]);
-        setSelectAll(false);
-        toast.success("Usuarios eliminados");
-      } catch (err) {
-        console.error(err);
+    // Usamos SweetAlert en lugar de window.confirm
+    swal({
+      title: "¿Estás seguro de eliminar los usuarios seleccionados?",
+      text: "¡Esta acción no se puede deshacer!",
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        try {
+          // Eliminar los usuarios seleccionados
+          await Promise.all(selectedUsers.map(id => deleteDoc(doc(db, "users", id))));
+          setData(data.filter(user => !selectedUsers.includes(user.id)));
+          setSelectedUsers([]);
+          setSelectAll(false);
+          toast.success("Usuarios eliminados");
+        } catch (err) {
+          console.error(err);
+          toast.error("Ocurrió un error al eliminar los usuarios");
+        }
+      } else {
+        swal("Los usuarios seleccionados están a salvo.");
       }
-    }
+    });
   };
 
   const handleEdit = (user) => {

@@ -1,39 +1,45 @@
-import './styles/PadresYTutores.css';
+import "./styles/PadresYTutores.css";
 
 function PadresYTutores() {
-    const title = 'Para Padres y Tutores';
-    const list = [
-        'Recibe reportes detallados del avance de tu hijo y celebra sus logros junto a él.',
-        'Planes flexibles y precios ajustados para que la educación de calidad no sea una ilusión.',
-        'Que tu hijo desarrolle habilidades STEM críticas para carreras universitarias y profesionales en auge.'
-    ];
-
+    /**const title = 'Beneficios de Upgr4de Academy'
+      const list = [ 'Clases pregrabadas disponibles mediante la plataforma SAPI',
+          'Disponible desde cualquier lugar con conexión a internet.',
+          'Diseñado para estudiantes con dificultades en estas materias.'
+      ] */
     return (
-        <section className="padres-tutores-section">
-            <h2 className="padres-tutores-title">{title}</h2>
-            <div className="padres-tutores-content">
-                <div className="padres-tutores-text-container">
-                    <div className="padres-tutores-grid">
-                        {list.map((item, index) => (
-                            <div 
-                                key={index} 
-                                className={`padres-tutores-grid-item padres-tutores-text padres-tutores-text-${index + 1}`}
-                            >
-                                {item}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className="padres-tutores-image-container">
+        <section className="benefits">
+            <div className="benefits_title">
+                <h2 className="title-text">Para Padres y Tutores</h2>
+            </div>
+            <div className="benefits_text">
+                <p>
+                    Recibe reportes detallados del avance de tu hijo y celebra sus logros
+                    junto a él.
+                </p>
+            </div>
+            <div className="benefits_text">
+                <p>
+                    Planes flexibles y precios ajustados para que la educación de calidad
+                    no sea una ilusión.
+                </p>
+            </div>
+            <div className="benefits_text">
+                <p>
+                    Que tu hijo desarrolle habilidades STEM críticas para carreras
+                    universitarias y profesionales en auge.
+                </p>
+            </div>
+
+        </section>
+    );
+}
+
+export default PadresYTutores;
+/* <div className="padres-tutores-image-container">
                     <img 
                         src="images/PadresYTutores.webp" 
                         alt="Padres y Tutores" 
                         className="padres-tutores-image" 
                     />
                 </div>
-            </div>
-        </section>
-    );
-}
-
-export default PadresYTutores;
+*/

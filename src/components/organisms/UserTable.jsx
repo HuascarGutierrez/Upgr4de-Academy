@@ -37,7 +37,6 @@ function UserTable() {
   }, []);
 
   const handleDelete = async (id) => {
-    // Usamos SweetAlert en lugar de window.confirm
     swal({
       title: "¿Estás seguro de eliminar este usuario?",
       text: "¡Esta acción no se puede deshacer!",
@@ -48,7 +47,6 @@ function UserTable() {
     .then(async (willDelete) => {
       if (willDelete) {
         try {
-          // Eliminar el usuario seleccionado
           await deleteDoc(doc(db, "users", id));
           setData(data.filter((item) => item.id !== id));
           toast.success("Usuario eliminado");
@@ -63,7 +61,6 @@ function UserTable() {
   };;
 
   const handleMassDelete = async () => {
-    // Usamos SweetAlert en lugar de window.confirm
     swal({
       title: "¿Estás seguro de eliminar los usuarios seleccionados?",
       text: "¡Esta acción no se puede deshacer!",
@@ -74,7 +71,6 @@ function UserTable() {
     .then(async (willDelete) => {
       if (willDelete) {
         try {
-          // Eliminar los usuarios seleccionados
           await Promise.all(selectedUsers.map(id => deleteDoc(doc(db, "users", id))));
           setData(data.filter(user => !selectedUsers.includes(user.id)));
           setSelectedUsers([]);
@@ -188,7 +184,7 @@ function UserTable() {
               <label>Nombre: <input type="text" name="userName" value={formData.userName} onChange={(e) => setFormData({ ...formData, userName: e.target.value })} /></label>
               <label>Email: <input type="email" name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} /></label>
               <label>Tipo de Plan: <input type="text" name="planType" value={formData.planType} onChange={(e) => setFormData({ ...formData, planType: e.target.value })} /></label>
-              <label>Activo: <input type="checkbox" name="activo" checked={formData.activo} onChange={(e) => setFormData({ ...formData, activo: e.target.checked })} /></label>
+              <label>Activo: <input className="check" type="checkbox" name="activo" checked={formData.activo} onChange={(e) => setFormData({ ...formData, activo: e.target.checked })} /></label>
               <div className="modal-buttons">
                 <button type="submit" className="btn-save">Guardar</button>
                 <button type="button" className="btn-cancel" onClick={() => setEditingUser(null)}>Cancelar</button>

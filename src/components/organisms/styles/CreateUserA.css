@@ -4,13 +4,24 @@
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
+    background: linear-gradient(45deg, var(--brandy-punch-950), var(--brandy-punch-600), var(--brandy-punch-300));
+  }
+
+.Header_CreateUser{
+  display: flex;
 }
+
+.btn-volver{
+  background-color: transparent;
+}
+
 .btn-volver img {
     width: 30px;
     height: 30px;
     appearance: none;
-    
-  }
+    margin-right: 10rem;
+}
+
 .CreateUser_container {
     max-width: 70%;
     padding: 20px;

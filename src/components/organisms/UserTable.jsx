@@ -114,12 +114,15 @@ function UserTable() {
   };
 
   return (
+    <>
     <div className="Tabla">
+      <div className='Header_UserTable'>
       <h1>Lista de Estudiantes</h1>
       <button className="btn btn-edit" onClick={() => navigate("/admin/createuser")}>Crear Estudiante</button>
       {selectedUsers.length > 0 && (
         <button className="btn btn-delete" onClick={handleMassDelete}>Eliminar Seleccionados ({selectedUsers.length})</button>
       )}
+      </div>
       <div className='tablacontenedor'>
         <table className="styled-table">
           <thead>
@@ -181,6 +184,7 @@ function UserTable() {
         </div>
       )}
     </div>
+    </>
   );
 }
 

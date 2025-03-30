@@ -102,10 +102,12 @@ function CrearUserA() {
     <>
     <div className="CreateUser">
     <div className="CreateUser_container">
+      <div className="Header_CreateUser">
       <button type="button" className="btn-volver" onClick={() => navigate("/admin/usertable")}>
         <img src="/assets/circle-arrow-left.svg" alt="Volver" />
       </button>
       <h2 className="CreateUser_title">Crear una cuenta</h2>
+      </div>
       <div className="CreateUser_form_container">
         <form className="CreateUser_form" onSubmit={handleSubmit}>
           <label>

@@ -51,27 +51,28 @@ function CrearUserA() {
       alert("Las contraseñas no coinciden");
       return;
     }
-
+  
     setWaiting(true);
     try {
+      // 1. Crear usuario en Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const uid = userCredential.user.uid;
-
-      // Subir imagen y obtener URL
-      const uploadedImageUrl = await handleUploadImage(email);
+      const uid = userCredential.user.uid; // Obtener UID generado por Firebase
+  
+      // 2. Subir imagen a Firebase Storage usando el UID
+      const uploadedImageUrl = await handleUploadImage(uid);
       const finalImageUrl = uploadedImageUrl || imageUrl;
-
-      // Guardar usuario en Firestore
+  
+      // 3. Guardar usuario en Firestore
       const db = getFirestore();
       const userRef = doc(db, "users", uid);
       const docSnap = await getDoc(userRef);
-
+  
       if (!docSnap.exists()) {
         await setDoc(userRef, {
           uid,
           userName: fullName,
           email,
-          imageUrl: finalImageUrl,
+          imageUrl: finalImageUrl, // Guardamos la URL de la imagen
           planType: "free",
           activo: true,
           createdAt: new Date(),
@@ -79,7 +80,7 @@ function CrearUserA() {
       } else {
         console.log("Usuario ya registrado");
       }
-
+  
       alert("Usuario creado exitosamente");
       navigate("/admin/usertable");
     } catch (error) {
@@ -88,6 +89,7 @@ function CrearUserA() {
       setWaiting(false);
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

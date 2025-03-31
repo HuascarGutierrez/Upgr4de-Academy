@@ -16,10 +16,10 @@ function Footer() {
     <footer className='footer'>
       <section className='footer_section'>
         <span className='footer_section_title'>Información</span>
-        <FooterItem imageUrl={'Icons/Location.svg'} text={'Dirección: Ciudad Satelite, El Alto'}/>
-        <FooterItem imageUrl={'assets/phone.svg'} text={'Celular: +591 12341234'}/>
-        <FooterItem imageUrl={'assets/clock.svg'} text={'Horas de respuestar: 8 to 20'}/>
-        <FooterItem imageUrl={'assets/mail.svg'} text={'Email: info@SAPI.edu.com'}/>
+        <FooterItem imageUrl={'Icons/Location.svg'} text={'Dirección: Ciudad Satelite, El Alto'} refe={'https://maps.app.goo.gl/YUnRX9TF2idCKLwi6'}/>
+        <FooterItem imageUrl={'assets/phone.svg'} text={'Celular: +591 71832939'} refe={'https://wa.me/+59171832939'}/>
+        <FooterItem imageUrl={'assets/clock.svg'} text={'Horas de respuesta: 8:00 - 20:00'} refe={'https://wa.me/+59171832939'}/>
+        <FooterItem imageUrl={'assets/mail.svg'} text={'Email: info@SAPI.edu.com'} refe={'mailto:samuelantoni2002@gmail.com'}/>
       </section>
       <section className='footer_section footer_section_materias'>
         <span className='footer_section_title'>Servicios</span>

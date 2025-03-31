@@ -1,10 +1,11 @@
 import './styles/FooterItem.css'
 
-function FooterItem({imageUrl, text}) {
+function FooterItem({imageUrl, text, refe}) {
+
   return (
     <div className='footerItem'>
         <img src={imageUrl} alt={text} />
-        <p>{text}</p>
+        <a href={refe} target={'_blank'}>{text}</a>
     </div>
   )
 }

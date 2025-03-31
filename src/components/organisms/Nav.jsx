@@ -60,8 +60,8 @@ function Nav({user}) {
             <li onClick={handleSignOut} className="nav_item item-signup">
               <p>Cerrar Sesión</p>
             </li>
-            <li className="nav_item ">
-              <img className="nav_profile_photo" src={user.imageUrl} alt="profile" />
+            <li onClick={() => {navigate('/main/perfil')}} className="nav_item">
+              <img className="nav_profile_photo" src={user.imageUrl}/>
             </li>
           </> :
           <>

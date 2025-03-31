@@ -8,12 +8,6 @@
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
-    gap: inherit;
+    gap: 7.8rem;
     align-items: center;
-}
-
-@media screen and (max-width: 500px) {
-    .sobreNosotros {
-        gap: 2rem;
-    }
 }

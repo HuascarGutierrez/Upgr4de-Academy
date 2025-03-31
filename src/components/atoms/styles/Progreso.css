@@ -13,6 +13,7 @@
     -moz-border-radius: 12px;
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
+    color: black;
 }
 
 .icono {
@@ -49,7 +50,7 @@
 .progress-bar {
     width: 40%;
     height: 100%;
-    background: #2F80ED;
+    background: #c48430;
 }
 
 .progress-indicators {
@@ -61,7 +62,7 @@
 .indicator {
     display: flex;
     align-items: center;
-    background: #E0ECFF;
+    background: #9ac6c3;
     border-radius: 20px;
     padding: 5px 12px;
     font-size: 12px;
@@ -73,6 +74,7 @@
 .indicator img {
     width: 16px;
     height: 16px;
+
 }
 
 .menu {

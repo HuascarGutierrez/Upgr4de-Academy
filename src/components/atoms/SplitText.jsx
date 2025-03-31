@@ -2,7 +2,7 @@ import { useSprings, animated } from '@react-spring/web';
 import { useEffect, useRef, useState } from 'react';
 
 const SplitText = ({
-  fontcolor = 'var(--color-primary)',
+  fontcolor = 'var(--brandy-punch-400)',
   text = '',
   className = '',
   delay = 100,

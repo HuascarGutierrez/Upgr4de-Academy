@@ -9,7 +9,7 @@ function Benefits() {
   return (
       <section className="benefits" id='Beneficios'>
         <div className='benefits_title'>
-          <h2 className='title-text'>Beneficios de Upgr4de academy</h2>
+          <h2 className='title-text'>Beneficios de Upgr4de Academy</h2>
         </div>
         <div className='benefits_text'><p>Clases pregrabadas disponibles mediante la plataforma SAPI.</p></div>
         <div className='benefits_text'><p>Disponible desde cualquier lugar con conexión a internet.</p></div>

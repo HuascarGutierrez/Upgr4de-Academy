@@ -1,16 +1,21 @@
-.buscar{
-    width: 215px;
+.buscar {
+    width: 255px;
     height: 32px;
     display: flex;
-    border:  2px solid gray;
+    align-items: center; /* Centrar verticalmente */
+    border: 2px solid gray;
     border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
     margin: 5px;
+    padding: 2px 5px;
 }
-.buscar input{
-    border: 0px;
 
+.buscar input {
+    border: 0;
+    padding: 5px;
+    width: 100%;
+    outline: none; /*Remover el borde que aparece al seleccionar el input*/
+}
+
+.buscar input::placeholder{
+    color: grey;
 }

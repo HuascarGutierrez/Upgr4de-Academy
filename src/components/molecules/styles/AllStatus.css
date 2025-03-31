@@ -1,13 +1,14 @@
-.AllStatus{
+.AllStatus {
     max-width: 920px;
+    color: black; /* Color de texto negro para todo el contenedor */
 }
 .AllStatus h2{
     font-size: 2.5rem;
 }
 
-.StatusP{
+.StatusP {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px,1fr) );
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     margin: 20px;
     justify-content: space-around;
     align-items: center;
@@ -20,12 +21,14 @@
     -o-border-radius: 10px;
 }
 
-.StatusP div{
+.StatusP div {
     text-align: center;
     border-right: 2px solid rgb(206, 201, 201);
+    color: black; /* Color de texto negro para los elementos dentro de StatusP */
 }
 
-.StatusP div:nth-child(4){
+.StatusP div:nth-child(4) {
     text-align: center;
     border-right: 0px;
+    color: black; /* Color de texto negro para el cuarto div */
 }

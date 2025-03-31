@@ -1,42 +1,29 @@
-/* Base styles for the profile container */
 .profile-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  font-family: 'Arial', sans-serif;
+  flex-wrap: wrap;
   min-height: 100vh;
   padding: 20px;
   background-color: #f0f4f8;
-  color: #333; /* Color de texto uniforme */
-  font-size: 16px; /* Tamaño de fuente base */
+  color: #333;
+  font-size: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .profile-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .menu-card,
-  .public-profile-card,
-  .my-profile-card,
-  .subscription-card,
-  .payments-card {
-    width: 100%;
-    margin-left: 0;
-    margin-bottom: 20px;
-  }
-}
-
-/* Menu Card Styles */
 .menu-card {
-  width: 330px;
-  background-color: #f1f1f1;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  height: fit-content;
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .profile-header {
@@ -50,259 +37,199 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-bottom: 10px;
-  border: 2px solid #0B7077; /* Cambio de color azul a #0B7077 */
+  margin-bottom: 15px;
+  border: 4px solid #0b7077;
 }
 
 .profile-info .name {
-  font-size: 1.8em;
+  font-size: 2rem;
   font-weight: bold;
   color: #333;
+  text-align: center;
 }
 
+/* Menu Styles */
 .menu {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  margin-top: 20px;
 }
 
 .menu-item {
-  padding: 10px 15px;
-  border: 1px solid #b4b2b2;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
   background-color: transparent;
   color: #495057;
-  font-size: 1.5rem;
-  line-height: 1.8rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
   text-align: left;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 5px;
-  width: 100%;
+  margin-bottom: 12px;
+  transition: all 0.3s ease-in-out;
 }
 
 .menu-item:hover {
-  background-color: #e9ecef;
+  background-color: #f1f1f1;
 }
 
 .menu-item.active {
-  background-color: #0B7077; /* Cambio de color azul a #0B7077 */
-  color: white;
+  background-color: #0b7077;
+  color: #fff;
 }
 
-/* Content Cards General Styles */
+/* Content Cards */
 .public-profile-card,
 .my-profile-card,
 .subscription-card,
 .payments-card {
   width: 100%;
-  padding: 20px;
+  max-width: 700px;
+  margin: 15px;
+  padding: 30px;
   background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
-/* Public Profile Card Specific Styles */
+.my-profile-card > form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.my-profile-card > form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+/* Public Profile Card */
 .public-profile-card .profile-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
 }
 
 .public-profile-card .avatar-large {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  margin-bottom: 10px;
-  border: 3px solid #0B7077; /* Cambio de color azul a #0B7077 */
+  margin-bottom: 15px;
+  border: 3px solid #0b7077;
 }
 
 .public-profile-card .description {
   color: #6c757d;
-  margin-bottom: 10px;
   text-align: center;
 }
 
 .public-profile-card .rank {
   font-weight: bold;
-  color: #0B7077; /* Cambio de color azul a #0B7077 */
+  color: #0b7077;
   text-align: center;
 }
 
-/* Recent Activity Styles */
-.recent-activity {
-  margin-top: 10px;
-}
-
-.recent-activity h3 {
-  margin-bottom: 10px;
-  color: #333;
-  font-size: 1.5em; /* Tamaño de fuente para subtítulos */
-}
-
-.activity-item {
-  padding: 10px;
-  background-color: #fbfdc7;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
-.activity-item h4 {
-  margin-bottom: 5px;
-  color: #333;
-}
-
-/* Badges Styles */
-.badges {
-  margin-top: 20px;
-}
-
+/* Recent Activity */
+.recent-activity h3,
 .badges h3 {
-  margin-bottom: 10px;
   color: #333;
-  font-size: 1.5em; /* Tamaño de fuente para subtítulos */
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
+.activity-item,
 .badge-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
+  padding: 15px;
+  background-color: #fbfdc7;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
-.badge-item img {
-  width: 30px;
-  height: 30px;
-  margin-right: 5px;
-}
-
-/* My Profile Card Specific Styles */
-.my-profile-card h2 {
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 2em; /* Tamaño de fuente para títulos */
-}
-
-.my-profile-card label {
-  display: block;
-  margin-top: 10px;
-  color: #333;
-}
-
-.my-profile-card input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-}
-
-.my-profile-card h3 {
-  margin-top: 20px;
-  color: #333;
-  font-size: 1.5em; /* Tamaño de fuente para subtítulos */
-}
-
-/* Save Button Styles */
-.save-button {
-  background-color: #0B7077; /* Cambio de color azul a #0B7077 */
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 20px;
-}
-
-.save-button:hover {
-  background-color: #095c5f; /* Color hover más oscuro */
-}
-
-/* Edit Profile Button Styles */
+/* Buttons */
+.save-button,
 .edit-profile-button {
-  background-color: #0B7077; /* Cambio de color azul a #0B7077 */
+  background-color: #0b7077;
   color: white;
-  padding: 8px 12px;
+  padding: 12px 18px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 10px;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 1.6rem;
 }
 
-/* Subscription Card Specific Styles */
-.subscription-card {
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 16px; /* Tamaño de fuente uniforme */
+.save-button:hover,
+.edit-profile-button:hover {
+  background-color: #095c5f;
 }
 
-.subscription-card h2 {
-  color: #333;
-  margin-bottom: 20px;
-  font-size: 2em; /* Tamaño de fuente para títulos */
-}
-
+/* Subscription Card */
+.subscription-card h2,
 .subscription-card h3 {
-  color: #333;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  font-size: 1.5em; /* Tamaño de fuente para subtítulos */
-}
-
-.active-subscriptions {
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 5px;
+  font-size: 2rem;
   margin-bottom: 20px;
-}
-
-.active-subscriptions p {
-  color: #6c757d;
-  text-align: center;
-}
-
-.plan-item {
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  margin-bottom: 15px;
 }
 
 .plan-item h4 {
-  color: #0B7077; /* Cambio de color azul a #0B7077 */
+  color: #0b7077;
+  font-size: 1.6rem;
   margin-bottom: 10px;
-  font-size: 1.25em; /* Tamaño de fuente para subtítulos */
 }
 
 .plan-item p {
   color: #6c757d;
-  margin-bottom: 10px;
-}
-
-.plan-item ul {
-  margin-left: 2rem;
-  padding: 0;
-  margin-bottom: 15px;
-}
-
-.plan-item ul li {
-  padding: 5px 0;
-  color: #495057;
 }
 
 .plan-item button {
-  background-color: #0B7077; /* Cambio de color azul a #0B7077 */
+  background-color: #0b7077;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 16px; /* Tamaño de fuente uniforme */
+  transition: background-color 0.3s ease-in-out;
+  font-size: 1.6rem;
 }
 
 .plan-item button:hover {
-  background-color: #095c5f; /* Color hover más oscuro */
+  background-color: #095c5f;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu-card,
+  .public-profile-card,
+  .my-profile-card,
+  .subscription-card,
+  .payments-card {
+    width: 90%;
+  }
+
+  .menu-item {
+    font-size: 1.3rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    font-size: 1.3rem;
+  }
+
+  .menu-item {
+    font-size: 1.2rem;
+  }
+
+  .save-button,
+  .edit-profile-button,
+  .plan-item button {
+    font-size: 1.4rem;
+    padding: 10px 15px;
+  }
 }

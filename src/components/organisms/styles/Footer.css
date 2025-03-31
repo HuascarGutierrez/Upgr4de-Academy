@@ -22,7 +22,9 @@
 
 .footer_section_title{
     font-weight: 700;
-    font-size: 18px;
+    font-size: 2.1rem;
+    line-height: 2.4rem;
+    margin: 1rem 0;
     color: var(--color-dark);
 }
 
@@ -45,4 +47,9 @@
 
 .footer_item{
     list-style-type: none;
+}
+
+.footer_item p {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
 }

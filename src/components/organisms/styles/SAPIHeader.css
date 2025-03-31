@@ -1,13 +1,7 @@
-.SAPIHeader {
-    position: relative;
-    width: 100%;
-    height: 100dvh;
-}
-
 .SAPIHeader_bg {
     position: absolute;
     width: 100%;
-    height: 100dvh;
+    height: 100%;
     z-index: 1;
     background-image: url('../../../assets/images/SAPI_header.webp');
     background-repeat: no-repeat;
@@ -24,7 +18,7 @@
 .SAPIHeader_overlay {
     position: absolute;
     width: 100%;
-    height: 100dvh;
+    height: 100%;
     background-color: #3339;
     backdrop-filter: blur(1px);
     z-index: 10;
@@ -67,28 +61,37 @@
 .SAPIHeader_contenido > p {
     display: block;
     width: fit-content;
-    padding: 0.5rem 1rem;
-    background-color: var(--black-300);
-    color: var(--black-900);
-    font-size: 1.7rem;
+    padding: 0.5rem 18rem;
+    background-color: var(--swans-down-500);
+    color: var(--swans-down-50);
+    font-size: 6rem;
     font-weight: 700;
     transform: rotate(-3deg);
     border-radius: 0.5rem;
-    border: 5px solid var(--swans-down-900);
+    border: 4px solid var(--swans-down-900);
 }
-
-.SAPIHeader_contenido > h2 {
-    font-size: 5rem;
+.SAPIHeader_contenido > h3 {
     width: fit-content;
-    color: var(--brandy-punch-400);
-    -webkit-text-stroke: 1px var(--brandy-punch-800);
+    padding: 0.5rem 4rem;
+    background-color: var(--swans-down-700);
+    color: var(--swans-down-50);
+    font-size: 2rem;
+    font-weight: 400;
+    transform: rotate(-3deg);
+    border-radius: 0.5rem;
+    border: 4px solid var(--swans-down-900);
 }
-
+.SAPIHeader_contenido > h2 {
+    font-size: 2.5rem;
+    width: fit-content;
+    color: var(--brandy-punch-50);
+    -webkit-text-stroke: 0.5px var(--black-950);
+}
 .SAPIHeader_contenido a {
     display: block;
     width: fit-content;
-    background-color: var(--swans-down-200);
-    padding: 1rem 2rem;
+    background-color: var(--brandy-punch-400);
+    padding: 1rem 4rem;
     font-size: 2rem;
     font-weight: bold;
     color: var(--swans-down-900);
@@ -121,3 +124,4 @@
         background: radial-gradient(transparent, var(--swans-down-400));
     }
 }
+

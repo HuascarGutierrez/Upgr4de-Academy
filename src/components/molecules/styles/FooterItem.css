@@ -4,3 +4,14 @@
     align-items: center;
     color: var(--color-green-primary);
 }
+
+.footerItem > img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.footerItem > a {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    margin-left: .5rem;
+}

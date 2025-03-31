@@ -1,6 +1,36 @@
-.crear-curso-container {
-    max-width: 600px;
-    margin: auto;
+.container-crear-nuevo-curso {
+  height: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-title {
+  width: 80%;
+  background-color: var(--swans-down-200);
+  padding: 8px;
+  margin: 0px 8px 8px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.container-formularios {
+  width: 80%;
+}
+
+.crear-nuevo-curso-title {
+  color: var(--swans-down-600);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 4rem;
+}
+
+.crear-container {
+    width: 100%;
+    margin-bottom: 12px;
     padding: 2rem;
     background-color: #f9f9f9;
     border-radius: 12px;
@@ -9,51 +39,65 @@
     border: 2px solid gray;
   }
 
-.crear-curso-container div{
+.crear-container div{
   display: flex;
 }
   
-  .crear-curso-title {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #2d3748;
-    margin-left: 30%;
-    margin-bottom: 30px;
-  }
+.crear-curso-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+  margin-left: 30%;
+  margin-bottom: 30px;
+}
   
 
-  .form-crear {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .form-crear label {
-    display: flex;
-    flex-direction: column;
-    font-size: 1rem;
-    color: #4a5568;
-  }
-  
-  .form-crear input,
-  .form-crear textarea {
-    margin-top: 0.5rem;
-    padding: 0.8rem;
-    border: 1px solid #cbd5e0;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-  
-  .form-crear textarea {
-    resize: none;
-    height: 80px;
-  }
-  
-  .file-input-label input {
-    margin-top: 0.5rem;
-  }
+.form-crear {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-crear label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  color: #4a5568;
+}
+
+.form-crear input,
+.form-crear textarea {
+  margin-top: 0.5rem;
+  padding: 0.8rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-crear textarea {
+  resize: none;
+  height: 80px;
+}
+
+.numero-titulo-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.numero-label {
+  width: 10%;
+}
+
+.titulo-label {
+  width: 85%;
+}
+
+.file-input-label input {
+  margin-top: 0.5rem;
+}
 
 .boton-crear{
   display: flex;
@@ -84,5 +128,4 @@
     width: 30px;
     height: 30px;
     appearance: none;
-    
   }

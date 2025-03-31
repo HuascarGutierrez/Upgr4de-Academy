@@ -10,16 +10,8 @@ function GridProposito() {
       </div>
       <div className="proposito_element proposito_text">
         <p>
-          El propósito de Upgr4de Academy es nivelar el campo de juego educativo
-          para los estudiantes bolivianos,{" "}
-          <span>
-            proporcionando un camino claro y efectivo hacia el dominio de las
-            materias STEM.
-          </span>
+          El propósito de Upgr4de Academy es nivelar el campo de juego educativo para los estudiantes bolivianos,proporcionando un camino claro y efectivo hacia el dominio de las materias STEM.
         </p>
-      </div>
-      <div className="proposito_element proposito_secondImage">
-        <img src="images/proposito_second.webp" alt="second image" />
       </div>
       <div className="proposito_element proposito_text">
         <p>

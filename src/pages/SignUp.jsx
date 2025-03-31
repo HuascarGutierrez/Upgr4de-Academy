@@ -84,9 +84,16 @@ function SignUp() {
                     <label htmlFor="confirmPassword"> Confirmar contraseña
                         <input className="form_input" type="password" id="confirmPassword" placeholder="Repita su contraseña" ref={passwordVerREf} required/>
                     </label>
-                    <label htmlFor="fileInput">
-                        <input type="file" id="fileInput" accept="image/*" onChange={handleFileChange}/>
-                    </label>
+                    <label htmlFor="fileInput" className="custom-file-upload">
+    Escoge tu foto:
+    <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+    />
+</label>
                     {
                         waiting ? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :
                         <button className="form_btn" type="submit">CREAR MI CUENTA</button>
@@ -98,8 +105,9 @@ function SignUp() {
         </div>
         <div className='signup_message'>
                     <span className='message_overlay'></span>
-                    <h3>"En algún lugar, algo increíble está esperando a ser conocido."</h3>
-                    <p>- Carl Sagan</p>
+                    <h3>Registrate a SAPI</h3>
+                    <h3>para activar tu aprendizaje</h3>
+                    <p>¡Inicia sesión en SAPI para empezar!</p>
                     <GoogleButton/>
         </div>
     </section>

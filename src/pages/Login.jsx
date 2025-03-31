@@ -31,8 +31,10 @@ function Login() {
         <Nav/>
         <div className='login_message'>
                     <span className='message_overlay'></span>
-                    <h3>"La mente que se abre a una nueva idea jamás volverá a su tamaño original."</h3>
-                    <p>- Albert Einstein</p>
+                    {/*<img src="src\assets\images\zowl-white.svg" alt="buho" className="imglg" />*/}
+                    <h3>Únete a SAPI y</h3>
+                    <h3>aprende con nosotros</h3>
+                    <p>¡Inicia sesión en SAPI para empezar!</p>
                     <GoogleButton/>
         </div>
         <div className="login_container">

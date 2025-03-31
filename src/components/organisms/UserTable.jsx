@@ -108,6 +108,21 @@ function UserTable() {
     }
   };
 
+  const handleImageChange = async(e) => {
+    setWait(true);
+    if (e.target.files[0]) {
+      setImageUrl(e.target.files[0]); // Guarda la imagen en el estado
+      const imagen = e.target.files[0];
+      const url = await handleUpdateImage({email: usuario?.email, image: imagen});
+      const db = getFirestore();
+      const userRef = doc(db, 'users', usuario?.uid);
+      setDoc(userRef, {
+        imageUrl: url,
+      }, { merge: true }).then(() => {location.reload();});
+    }
+    setWait(true);
+  };
+
   const toggleSelectUser = (id) => {
     setSelectedUsers(prev =>
       prev.includes(id) ? prev.filter(uid => uid !== id) : [...prev, id]
@@ -180,11 +195,43 @@ function UserTable() {
         <div className="modal-overlay">
           <div className="modal">
             <h2>Editar Usuario</h2>
-            <form onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
-              <label>Nombre: <input type="text" name="userName" value={formData.userName} onChange={(e) => setFormData({ ...formData, userName: e.target.value })} /></label>
-              <label>Email: <input type="email" name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} /></label>
-              <label>Tipo de Plan: <input type="text" name="planType" value={formData.planType} onChange={(e) => setFormData({ ...formData, planType: e.target.value })} /></label>
-              <label>Activo: <input className="check" type="checkbox" name="activo" checked={formData.activo} onChange={(e) => setFormData({ ...formData, activo: e.target.checked })} /></label>
+            <form className='Form_edit' onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
+              
+              {/* Imagen de perfil */}
+              <div className="profile-section">
+                <img 
+                  src={formData.imageUrl || "https://firebasestorage.googleapis.com/v0/b/sapi-5c389.firebasestorage.app/o/images_profiles%2Fdefault_img_profile.webp?alt=media&token=56d413c0-7595-4131-8a5d-2213d13c3cad"} 
+                  alt="Perfil" 
+                  className="profile-image"
+                />
+                <input type="file" accept="image/*" onChange={handleImageChange} />
+              </div>
+
+              <label><p>Nombre:</p> 
+                <input type="text" name="userName" value={formData.userName} onChange={(e) => setFormData({ ...formData, userName: e.target.value })} />
+              </label>
+
+              <label><p>Email: </p>
+                <input type="email" name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+              </label>
+
+              <label className='TipoPlan'><p>Tipo de Plan: </p>
+                <select 
+                  name="planType" 
+                  value={formData.planType} 
+                  onChange={(e) => setFormData({ ...formData, planType: e.target.value })}
+                >
+                  <option value="Gratuito">Gratuito</option>
+                  <option value="Mensual">Mensual</option>
+                </select>
+              </label>
+
+              <label><p>Activo:</p>
+                <div className='check'>
+                  <input type="checkbox" name="activo" checked={formData.activo} onChange={(e) => setFormData({ ...formData, activo: e.target.checked })} />
+                </div> 
+              </label>
+
               <div className="modal-buttons">
                 <button type="submit" className="btn-save">Guardar</button>
                 <button type="button" className="btn-cancel" onClick={() => setEditingUser(null)}>Cancelar</button>
@@ -193,6 +240,7 @@ function UserTable() {
           </div>
         </div>
       )}
+
     </div>
     </>
   );

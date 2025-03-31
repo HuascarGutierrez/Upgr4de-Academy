@@ -3,6 +3,7 @@ import { getFirestore, collection, getDocs, doc, deleteDoc, updateDoc, addDoc } 
 import './styles/UserTable.css';
 import {db} from "../../config/app"
 import { toast } from 'react-toastify';
+import swal from 'sweetalert';
 
 function UserTable() {
   const [data, setData] = useState([]);
@@ -40,16 +41,29 @@ function UserTable() {
   }, []);
 
   const handleDelete = async (id) => {
-    if(window.confirm("Estas Seguro?")){
-      try {
-        await deleteDoc(doc(db, "users", id));
-        setData(data.filter((item) => item.id !== id));
-        toast.success("Estudiante Eliminado");
-      } catch (err) {
-        console.log(err);
-      }
-    }
 
+    swal({
+      title: "¿Estás seguro de eliminar este usuario?",
+      text: "¡Esta acción no se puede deshacer!",
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        try {
+          // Eliminar el usuario seleccionado
+          await deleteDoc(doc(db, "users", id));
+          setData(data.filter((item) => item.id !== id));
+          toast.success("Usuario eliminado");
+        } catch (err) {
+          console.error(err);
+          toast.error("Ocurrió un error al eliminar el usuario");
+        }
+      } else {
+        swal("El usuario está a salvo.");
+      }
+    });
   };
 
   const handleEdit = (user) => {

@@ -4,6 +4,8 @@ import { db } from "../../config/app";
 import { collection, addDoc } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 
 function CrearCurso() {
 
@@ -107,6 +109,29 @@ function CrearCurso() {
     }
   }
 
+  const handleCourseImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
+    try {
+      const storage = getStorage();
+      const storageRef = ref(storage, `courses_images/${file.name}`);
+      await uploadBytes(storageRef, file);
+  
+      const url = await getDownloadURL(storageRef);
+  
+      setFormData(prev => ({
+        ...prev,
+        link_image: url
+      }));
+  
+      toast.success("Imagen subida correctamente");
+    } catch (error) {
+      console.error("Error al subir la imagen:", error);
+      toast.error("Error al subir la imagen");
+    }
+  };
+
   return (
     <div className='container-crear-nuevo-curso'>
       <div className="container-title">
@@ -146,14 +171,18 @@ function CrearCurso() {
             </label>
             <label>
               Categoría
-              <input
-                type="text"
+              <select
                 name="category"
-                placeholder="Física, Química"
                 value={formData.category}
                 onChange={handleInputChange}
                 required
-              />
+              >
+                <option value="">Seleccione una materia</option>
+                <option value="Álgebra">Álgebra</option>
+                <option value="Cálculo">Cálculo</option>
+                <option value="Física">Física</option>
+                <option value="Química">Química</option>
+              </select>
             </label>
             <label>
               Profesor
@@ -166,17 +195,17 @@ function CrearCurso() {
                 required
               />
             </label>
-            <label>
-              Enlace de Imagen
-              <input
-                type="text"
-                name="link_image"
-                placeholder="URL de la Imagen"
-                value={formData.link_image}
-                onChange={handleInputChange}
-                required
-              />
-            </label>
+            {
+              <label>
+                Arrastra una imagen aquí
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleCourseImageChange}
+                  required
+                />
+              </label>
+            }
             <div className='boton-crear'>
             <button type="submit" className="btn-crear-curso" >
               CREAR NUEVO CURSO

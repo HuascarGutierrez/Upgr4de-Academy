@@ -243,7 +243,7 @@ function Perfil({user}) {
               wait?
               <div style={{marginInline: 'auto', width: 'min-content'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div>: 
               <label> Cambiar foto de perfil
-              <input type="file" accept="image/*" onChange={handleImageChange}/>
+              <input type="file" accept="image/*" onChange={handleImageChange}/> 
               </label>
             }
             <label> Cambiar nombre completo

@@ -15,15 +15,7 @@ function InfoBlockGrid3x6({title, text1, textetiqueta, text3, imageLarge, imageS
           <img className='grid-img' src={imageLarge} alt="" />
       </div>
       <div ref={containerRef} className="grid_element grid_title grid-yellow" style={{'position': 'relative'}}>
-          <VariableProximity
-              label={title}
-              className={'variable-proximity-demo'}
-              fromFontVariationSettings="'wght' 400, 'opsz' 9"
-              toFontVariationSettings="'wght' 1000, 'opsz' 40"
-              containerRef={containerRef}
-              radius={100}
-              falloff='linear'
-          />
+          {title}
       </div>
       <div className="grid_element grid_materias">
           {textetiqueta}

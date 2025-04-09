@@ -22,7 +22,7 @@
     border-radius: 1rem;
     background-color: var(--black-700);
     padding: 1rem;
-    font-size: 2rem;
+    font-size: var(--font-size-md);
     line-height: 160%;
     text-wrap: pretty;
     overflow-wrap: break-word;
@@ -34,7 +34,7 @@
 
 .proposito_title {
     grid-area: title;
-    font-size: 3.5rem;
+    font-size: var(--font-size-xl);
     background-color: var(--brandy-punch-400);
 }
 

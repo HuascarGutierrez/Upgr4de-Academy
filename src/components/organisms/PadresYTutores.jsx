@@ -2,7 +2,7 @@ import "./styles/PadresYTutores.css";
 
 function PadresYTutores() {
     return (
-        <section className="benefits">
+        <section className="benefits"id='PadresYTutores'>
             <div className="benefits_title">
                 <h2 className="title-text">Para Padres y Tutores</h2>
             </div>

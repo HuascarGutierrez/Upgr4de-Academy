@@ -5,8 +5,6 @@ import { getAuth, signOut } from 'firebase/auth'
 import Swal from 'sweetalert2'
 import {alertSignOut, alertWarning} from '../../config/alerts'
 
-
-
 function Nav({user}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
@@ -24,6 +22,17 @@ function Nav({user}) {
     })
   }
 
+    const handleNavigateAndScroll = (path, sectionId) => {
+        navigate(path);
+        setTimeout(() => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 100); // Delay to allow navigation to complete
+        toggleMenu(); // Close the menu after navigation
+    };
+
   return (
     <nav className="nav">
       <div className="nav_logo">
@@ -31,29 +40,26 @@ function Nav({user}) {
         <span className="logo_title">Upgr4de Academy</span>
       </div>
       <ul className={`nav_items ${menuOpen ? "open" : ""}`}>
-        <li onClick={() => {navigate('/')}} className="nav_item opcion">
-          <p>Inicio</p>
+        <li className="nav_item opcion">
+          <p onClick={() => handleNavigateAndScroll('/', 'QuienesSomos')}>Inicio</p>
           <ul className="menu-vertical">
-            <li><a href="#QuienesSomos"><p>Quienes Somos</p></a></li>
-            <li><a href="#Beneficios"><p>Beneficios</p></a></li>
-            <li><a href="#PadresYTutores"><p>Para Padres y Tutores</p></a></li>
+            <li><a href="#QuienesSomos" onClick={(e) => {e.preventDefault(); handleNavigateAndScroll('/', 'QuienesSomos')}}><p>Quienes Somos</p></a></li>
+            <li><a href="#Beneficios" onClick={(e) => {e.preventDefault(); handleNavigateAndScroll('/', 'Beneficios')}}><p>Beneficios</p></a></li>
+            <li><a href="#PadresYTutores" onClick={(e) => {e.preventDefault(); handleNavigateAndScroll('/', 'PadresYTutores')}}><p>Para Padres y Tutores</p></a></li>
           </ul>
         </li>
 
-        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item opcion">
-          <p>Sobre Nosotros</p>
+        <li className="nav_item opcion">
+          <p onClick={() => handleNavigateAndScroll('/sobreNosotros', 'Mision')}>Sobre Nosotros</p>
           <ul className="menu-vertical">
-            <li><a href="#Mision"><p>Mision</p></a></li>
-            <li><a href="#Vision"><p>Vision</p></a></li>
-            <li><a href="#Proposito"><p>Proposito</p></a></li>
+            <li><a href="#Mision" onClick={(e) => {e.preventDefault(); handleNavigateAndScroll('/sobreNosotros', 'Mision')}}><p>Mision</p></a></li>
+            <li><a href="#Vision" onClick={(e) => {e.preventDefault(); handleNavigateAndScroll('/sobreNosotros', 'Vision')}}><p>Vision</p></a></li>
+            <li><a href="#Proposito" onClick={(e) => {e.preventDefault(); handleNavigateAndScroll('/sobreNosotros', 'Proposito')}}><p>Proposito</p></a></li>
           </ul>
         </li>
         <li onClick={() => {navigate('/SAPI')}} className="nav_item opcion">
           <p>SAPI</p>
         </li>
-        {/**<li className="nav_item">
-          <p>Blog</p>
-        </li> */}
         {
           user?
           <>
@@ -107,4 +113,4 @@ function Nav({user}) {
   );
 }
 
-export default Nav;
+export default Nav

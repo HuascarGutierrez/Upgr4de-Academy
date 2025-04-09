@@ -38,11 +38,21 @@ function UserTable() {
 
   const handleDelete = async (id) => {
     Swal.fire({
-      title: "¿Estás seguro de eliminar este usuario?",
-      text: "¡Esta acción no se puede deshacer!",
+      title: "Estas seguro de borrar este usuario",
+      text: "Esto no ser reversible!",
       icon: "warning",
-      buttons: ["Cancelar", "Eliminar"],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
     })
     .then(async (willDelete) => {
       if (willDelete) {
@@ -63,11 +73,21 @@ function UserTable() {
 
   const handleMassDelete = async () => {
     Swal.fire({
-      title: "¿Estás seguro de eliminar los usuarios seleccionados?",
-      text: "¡Esta acción no se puede deshacer!",
+      title: "Estas seguro de borrar a estos usuarios",
+      text: "Esto no ser reversible!",
       icon: "warning",
-      buttons: ["Cancelar", "Eliminar"],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Borrado!",
+          text: "El usuario fue borrado.",
+          icon: "success"
+        });
+      }
     })
     .then(async (willDelete) => {
       if (willDelete) {

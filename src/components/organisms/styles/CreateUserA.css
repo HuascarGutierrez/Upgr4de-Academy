@@ -1,5 +1,5 @@
 .CreateUser{
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,6 +43,14 @@
     gap: 15px;
 }
 
+.CreateUser_form label p{
+  color: black;
+  text-align: left;
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
 .CreateUser_input {
     width: 100%;
     padding: 10px;
@@ -52,7 +60,7 @@
 }
 
 .form_btn {
-    background: #007bff;
+    background: var(--swans-down-700);
     color: #fff;
     padding: 10px;
     font-size: 16px;
@@ -63,7 +71,7 @@
 }
 
 .form_btn:hover {
-    background: #0056b3;
+    background: var(--swans-down-500);
 }
 
 
@@ -85,20 +93,27 @@ input[type="file"] {
   }
   
   .image-preview-container {
-    display: flex;
+    display: block;
     flex-direction: column;
+    height: 100%;
+    width: 300px;
     align-items: center;
     justify-content: center;
     margin-left: 20px; /* Espacio entre el formulario y la imagen */
+    border: 0px solid;
   }
   
   .image-preview {
     text-align: center;
+    height: 200px;
+    width: 200px;
+    margin-top: 10rem;
   }
   
   .image-preview-img {
     border-radius: 50%;
     height: 200px !important;
     width: 200px !important;
+    display: block !important;
   }
   

@@ -49,10 +49,20 @@ function UserTable() {
         try {
           await deleteDoc(doc(db, "users", id));
           setData(data.filter((item) => item.id !== id));
-          toast.success("Usuario eliminado");
+          Swal.fire({
+            title: "Usuario eliminado",
+            icon: "success",
+            draggable: true
+          });
+          //toast.success("Usuario eliminado");
         } catch (err) {
           console.error(err);
-          toast.error("Ocurrió un error al eliminar el usuario");
+          //toast.error("Ocurrió un error al eliminar el usuario");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ocurrió un error al eliminar el usuario"
+          });
         }
       } else {
         swal("El usuario está a salvo.");
@@ -75,10 +85,20 @@ function UserTable() {
           setData(data.filter(user => !selectedUsers.includes(user.id)));
           setSelectedUsers([]);
           setSelectAll(false);
-          toast.success("Usuarios eliminados");
+          //toast.success("Usuarios eliminados");
+          Swal.fire({
+            title: "Drag me!",
+            icon: "Usuarios eliminados",
+            draggable: true
+          });
         } catch (err) {
           console.error(err);
-          toast.error("Ocurrió un error al eliminar los usuarios");
+          //toast.error("Ocurrió un error al eliminar los usuarios");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ocurrió un error al eliminar los usuarios"
+          });
         }
       } else {
         swal("Los usuarios seleccionados están a salvo.");
@@ -102,7 +122,12 @@ function UserTable() {
       await updateDoc(userDoc, formData);
       setData(data.map((item) => (item.id === editingUser ? { ...item, ...formData } : item)));
       setEditingUser(null);
-      toast.success("Usuario actualizado");
+      //toast.success("Usuario actualizado");
+      Swal.fire({
+        title: "Usuario actualizado!",
+        icon: "success",
+        draggable: true
+      });
     } catch (err) {
       console.error(err);
     }
@@ -184,7 +209,7 @@ function UserTable() {
                 <td>{user.createdAt}</td>
                 <td>{user.planType}</td>
                 <td>{user.activo ? 'Sí' : 'No'}</td>
-                <td>
+                <td className='action'>
                   <button className="btn btn-edit" onClick={() => handleEdit(user)}>Editar</button>
                   <button className="btn btn-delete" onClick={() => handleDelete(user.id)}>Eliminar</button>
                 </td>

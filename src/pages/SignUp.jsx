@@ -190,9 +190,9 @@ function SignUp() {
       </div>
       <div className="signup_message">
         <span className="message_overlay"></span>
-        <h3>Registrate a SAPI</h3>
-        <h3>para activar tu aprendizaje</h3>
-        <p>¡Inicia sesión en SAPI para empezar!</p>
+        <h3>¡Bienvenido a la comunidad SAPI! <br /> ¡Hola, futuro crack de las ciencias! 😎</h3>
+        <p>Te estás uniendo como estudiante a SAPI, la plataforma diseñada para ayudarte a dominar lo que antes parecía difícil. <br />
+💡 ¡El primer paso para aprender más, comienza hoy!</p>
         <GoogleButton />
       </div>
     </section>

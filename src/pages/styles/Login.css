@@ -141,7 +141,7 @@
 
     .login_message > p {
         font-size: var(--font-size-md);
-        line-height: 2.4rem;
+        line-height: 3.5rem;
         text-shadow: 4px 4px 0 #ccc4;
         text-align: center;
         
@@ -159,6 +159,7 @@
         background-size: contain;
         background-color: transparent;
         filter: opacity(0.2);
+        text-align: center;
     }
 
     .googleButton_container {

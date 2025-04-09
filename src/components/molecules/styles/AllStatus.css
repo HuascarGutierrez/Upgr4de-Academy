@@ -3,7 +3,7 @@
     color: black; /* Color de texto negro para todo el contenedor */
 }
 .AllStatus h2{
-    font-size: 2.5rem;
+    font-size: var(--font-size-xl);
 }
 
 .StatusP {
@@ -31,4 +31,8 @@
     text-align: center;
     border-right: 0px;
     color: black; /* Color de texto negro para el cuarto div */
+}
+
+.StatusP div h3{
+    font-size: var(--font-size-md);
 }

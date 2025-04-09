@@ -114,6 +114,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        text-align: center;
         align-items: start;
         gap: 18px;
         width: 50%;
@@ -134,7 +135,7 @@
 
     .signup_message > p {
         font-size: var(--font-size-md);
-        line-height: 2.4rem;
+        line-height: 3.5rem;
         text-shadow: 4px 4px 0 #ccc4;
         font-size: 2em;
         

@@ -116,20 +116,25 @@
   line-height: 4rem;
   color: inherit;
   transition: color, text-shadow 0.5s ease;
-    font-size: var(--font-size-base);
-    line-height: 4rem;
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
-    font-weight: 400;
-    letter-spacing: 0.2rem;
-    line-height: 4rem;
-    color: inherit;
-    transition: color, text-shadow .5s ease;
+  font-size: var(--font-size-lg);
+  line-height: 4rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.2rem;
+  line-height: 4rem;
+  color: inherit;
+  transition: color, text-shadow .5s ease;
+  -webkit-transition: color, text-shadow 0.5s ease;
+  -moz-transition: color, text-shadow 0.5s ease;
+  -ms-transition: color, text-shadow 0.5s ease;
+  -o-transition: color, text-shadow 0.5s ease;
 }
 
 .nav_item > p {
   text-align: center;
+  font-size: var(--font-size-base);
 }
 
 .nav_btn {
@@ -169,16 +174,19 @@
   position: absolute;
   display: none;
   list-style: none;
-  width: 18rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 20rem;
+  background-color: var(--brandy-punch-700)/*rgba(0, 0, 0, 0.5)*/;
+  text-align: center;
 }
 
 .nav_items li:hover .menu-vertical {
   display: block;
 }
 
-.menu-vertical li:hover {
-  background-color: black;
+.menu-vertical li a:hover {
+  background-color: rgb(221, 198, 198);
+  color: var(--brandy-punch-700);
+  font-weight: bold;
 }
 
 .menu-vertical li a {
@@ -186,6 +194,7 @@
   color: white;
   padding: 5px 5px 5px 10px;
   text-decoration: none;
+  border: 1px solid white;
 }
 
 @media screen and (max-width: 768px) {

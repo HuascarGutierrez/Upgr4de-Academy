@@ -133,23 +133,23 @@ function CrearUserA() {
       <div className="CreateUser_form_container">
         <form className="CreateUser_form" onSubmit={handleSubmit}>
           <label>
-            Nombre completo
+            <p>Nombre completo</p>
             <input type="text" className="CreateUser_input" ref={fullNameRef} placeholder="Tu Nombre" required />
           </label>
           <label>
-            Correo Electrónico
+            <p>Correo Electrónico</p>
             <input type="email" className="CreateUser_input" ref={emailRef} placeholder="tucorreo@email.com" required />
           </label>
           <label>
-            Contraseña
+            <p>Contraseña</p>
             <input type="password" className="CreateUser_input" ref={passwordRef} placeholder="Contraseña" required />
           </label>
           <label>
-            Confirmar contraseña
+            <p>Confirmar contraseña</p>
             <input type="password" className="CreateUser_input" ref={passwordVerRef} placeholder="Repita su contraseña" required />
           </label>
           <label>
-            Foto de perfil
+            <p>Foto de perfil</p>
             <input type="file" accept="image/*" onChange={handleFileChange} />
           </label>
           {waiting ? <ClipLoader color="var(--swans-down-400)" size={40} /> : <button type="submit" className="form_btn">CREAR USUARIO</button>}

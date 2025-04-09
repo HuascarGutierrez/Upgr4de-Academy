@@ -32,9 +32,8 @@ function Login() {
         <div className='login_message'>
                     <span className='message_overlay'></span>
                     {/*<img src="src\assets\images\zowl-white.svg" alt="buho" className="imglg" />*/}
-                    <h3>Únete a SAPI y</h3>
-                    <h3>aprende con nosotros</h3>
-                    <p>¡Inicia sesión en SAPI para empezar!</p>
+                    <h3>¡Bienvenido de nuevo, estudiante SAPI!<br></br>¡Nos alegra verte otra vez!</h3>
+                    <p>Conéctate con tu cuenta y continúa reforzando tus conocimientos en Cálculo, Álgebra, Física y Química. <br></br>📚 ¡Tu camino al aprendizaje sigue aquí!</p>
                     <GoogleButton/>
         </div>
         <div className="login_container">

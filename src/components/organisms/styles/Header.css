@@ -61,7 +61,7 @@
 
 .header_title {
     color: var(--black-100);
-    font-size: 4em;
+    font-size: var(--font-size-2xl);
     line-height: 4.2rem;
     text-wrap: balance;
     padding-left: 10px;
@@ -90,7 +90,7 @@
     border-radius: 20px;
     color: var(--black-100);
     font-weight: 700;
-    font-size: 1.6em;
+    font-size: var(--font-size-base);
     line-height: auto;
     text-transform: uppercase;
     background-color: var(--brandy-punch-400);
@@ -102,7 +102,7 @@
 
 @media screen and (min-width: 900px) {
     .header_title {
-        font-size: 6rem;
+        font-size: var(--font-size-4xl);
         line-height: 6.2rem;
     }
 }

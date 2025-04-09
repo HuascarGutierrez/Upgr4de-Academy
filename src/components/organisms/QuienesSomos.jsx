@@ -10,7 +10,7 @@ function QuienesSomos() {
             <img src="/images/quienes_somos_image.webp" alt="quienes somos image" />
         </div>
         <div className='gridSomos_element gridSomos_title'>
-            <h2>QUIENES<br /> SOMOS</h2>
+            <h2>QUIENES SOMOS</h2>
         </div>
         <div className='gridSomos_element gridSomos_text'>
             <p>Estamos enfocados en ayudar a estudiantes <span className='text-span'>con dificultades en materias STEM</span></p>

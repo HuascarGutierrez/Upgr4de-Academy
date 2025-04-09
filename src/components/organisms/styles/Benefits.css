@@ -20,7 +20,7 @@
 
 .benefits_title > .title-text {
     margin: auto;
-    font-size: clamp(2.5rem, 5vw, 4.8rem); 
+    font-size: var(--font-size-3xl); 
     line-height: clamp(3rem, 6vw, 6.2rem); 
     text-align: center;
     word-wrap: break-word; 
@@ -31,13 +31,14 @@
     justify-content: center;
     align-items: center;
     padding-inline: 2em;
-    font-size: clamp(1.8rem, 3vw, 2.7rem); 
+    font-size: var(--font-size-2xl); 
     line-height: 180%;
     letter-spacing: 2%;
     background-color: var(--brandy-punch-400);
     min-height: 5em;
     border-radius: 1em;
     text-align: center;
+    font-weight: 600;
 }
 
 .benefits > .benefits_text:nth-child(2) {
@@ -63,12 +64,12 @@
     }
 
     .benefits_title > .title-text {
-        font-size: 3rem; 
+        font-size: var(--font-size-xl); 
         line-height: 4rem;
     }
 
     .benefits_text {
-        font-size: 2rem; 
+        font-size: var(--font-size-md); 
         padding-inline: 1rem;
     }
 }
@@ -79,27 +80,12 @@
     }
 
     .benefits_title > .title-text {
-        font-size: 2.5rem;
+        font-size: var(--font-size-xl);
         line-height: 3rem;
     }
 
     .benefits_text {
-        font-size: 1.8rem;
+        font-size: var(--font-size-base);
         padding-inline: 0.5rem;
     }
 }
-
-@media (prefers-color-scheme: light) {
-    .benefits > .benefits_text:nth-child(2) {
-        background-color: var(--swans-down-200);
-    }
-    
-    .benefits > .benefits_text:nth-child(3) {
-        background-color: var(--brandy-punch-200);
-    }
-    
-    .benefits > .benefits_text:nth-child(4) {
-        background-color: var(--black-200);
-    }
-}
-    

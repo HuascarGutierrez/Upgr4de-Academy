@@ -3,8 +3,9 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    height: 100dvh;
+    min-height: 100dvh;
     padding-top: 82px;
+    background-color: var(--black-50);
 }
 
 .signup_container {
@@ -18,10 +19,11 @@
 }
 
 .signup_title {
-    font-size: 1.8rem;
+    font-size: var(--font-size-xl);
     font-weight: bold;
     line-height: 3.6rem;
     margin-bottom: 40px;
+    font-size: 2em;
 }
 
 .signup_form {
@@ -29,14 +31,16 @@
     flex-direction: column;
     width: 100%;
     gap: 24px;
+    
 }
 
 .signup_form > label {
     display: flex;
     flex-direction: column;
     width: clamp(258px, 100%, 400px);
-    font-size: 1.4rem;
+    font-size: var(--font-size-base);
     line-height: 2.4rem;
+    
 }
 
 .signup_form .form_input {
@@ -46,7 +50,7 @@
     border: 1px;
     border-radius: 4px;
     margin-top: 4px;
-    font-size: 1.2rem;
+    font-size: var(--font-size-base);
     line-height: 1.6rem;
     box-shadow: 0 2px 2px 2px var(--black-100);
 }
@@ -120,7 +124,8 @@
     }
 
     .signup_message > h3 {
-        font-size: 4.4rem;
+        font-size: 5em;
+        font-size: var(--font-size-3xl);
         font-weight: bold;
         line-height: 5.4rem;
         text-wrap: pretty;
@@ -128,9 +133,11 @@
     }
 
     .signup_message > p {
-        font-size: 1.6rem;
+        font-size: var(--font-size-md);
         line-height: 2.4rem;
         text-shadow: 4px 4px 0 #ccc4;
+        font-size: 2em;
+        
     }
 
     .message_overlay {
@@ -146,4 +153,34 @@
         background-color: transparent;
         filter: opacity(0.2);
     }
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    color: #333;
+    border-radius: 5px;
+    font-size: 0.9em;
+    margin-top: 10px; /* Espacio con el campo anterior */
+}
+
+.custom-file-upload:hover {
+    background-color: #e0e0e0;
+}
+
+.image-preview-container {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+    width: 100px; /* Ajusta el tamaño deseado */
+    height: 100px;
+}
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta o escala la imagen para cubrir el contenedor */
 }

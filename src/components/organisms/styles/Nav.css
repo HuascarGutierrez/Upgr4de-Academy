@@ -1,38 +1,39 @@
 .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 100%;
-    height: 82px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    animation-name: nav-ch-bg;
-    animation-fill-mode: both;
-    animation-timeline: --main-view;
-    animation-range: cover 0% contain 0%;
-    color: var(--black-50);
-    padding-inline: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 82px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation-name: nav-ch-bg;
+  animation-fill-mode: both;
+  animation-timeline: --main-view;
+  animation-range: cover 0% contain 0%;
+  color: var(--black-50);
+  padding-inline: 1rem;
 }
 
 .nav_profile_photo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: var(--swans-down-400);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--swans-down-400);
 }
 
 @keyframes nav-ch-bg {
-    from {
-        background-color: #0000;
-    }
-    to {
-        background-color: #0009;
-        backdrop-filter: blur(20px);
-        color: var(--black-50);
-    }
+  from {
+    background-color: #0000;
+  }
+
+  to {
+    background-color: #0009;
+    backdrop-filter: blur(20px);
+    color: var(--black-50);
+  }
 }
 
 .nav_btn {
@@ -67,16 +68,19 @@
 */
 
 .nav_logo {
-    display: flex;
-    align-items: center;
-    height: max-content;
+  display: flex;
+  align-items: center;
+  height: max-content;
 }
 
 .logo_img {
-    height: 100%;
+  height: 100%;
 }
 
 .logo_title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--brandy-punch-400);
     font-size: var(--font-size-lg);
     line-height: 2rem;
     font-weight: 700;
@@ -84,6 +88,14 @@
 }
 
 .nav_items {
+  display: flex;
+  justify-content: end;
+  flex: 1;
+  gap: clamp(7rem, 5vw, 2rem);
+  padding-right: 2rem;
+  margin: 0;
+  color: inherit;
+  list-style-type: none;
     display: flex;
     justify-content: end;
     flex: 1;
@@ -96,6 +108,14 @@
 }
 
 .nav_item {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.2rem;
+  line-height: 4rem;
+  color: inherit;
+  transition: color, text-shadow 0.5s ease;
     font-size: var(--font-size-base);
     line-height: 4rem;
     display: flex;
@@ -108,124 +128,127 @@
     transition: color, text-shadow .5s ease;
 }
 
-.nav_item>p {
-    text-align: center;
+.nav_item > p {
+  text-align: center;
 }
 
 .nav_btn {
-    display: none;
-    font-size: 4rem;
-    cursor: pointer;
+  display: none;
+  font-size: 4rem;
+  cursor: pointer;
 }
 
 .nav_item:hover {
-    color: var(--brandy-punch-200);
+  color: var(--brandy-punch-200);
 }
 
 .item-login {
-    padding: 0 5px;
-    border: 2px solid var(--brandy-punch-400);
-    border-radius: 10px;
+  padding: 0 5px;
+  border: 2px solid var(--brandy-punch-400);
+  border-radius: 10px;
 }
 
 .item-login:hover {
-    background-color: var(--brandy-punch-300);
-    color: var(--black-50);
+  background-color: var(--brandy-punch-300);
+  color: var(--black-50);
 }
 
 .item-signup {
-    padding: 0 5px;
-    border: 2px solid var(--swans-down-400);
-    border-radius: 10px;
+  padding: 0 5px;
+  border: 2px solid var(--swans-down-400);
+  border-radius: 10px;
 }
 
 .item-signup:hover {
-    background-color: var(--swans-down-300);
-    color: var(--black-50);
+  background-color: var(--swans-down-300);
+  color: var(--black-50);
 }
 
+.menu-vertical {
+  margin-top: 18rem;
+  position: absolute;
+  display: none;
+  list-style: none;
+  width: 18rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-.menu-vertical{
-    margin-top: 18rem;
+.nav_items li:hover .menu-vertical {
+  display: block;
+}
+
+.menu-vertical li:hover {
+  background-color: black;
+}
+
+.menu-vertical li a {
+  display: block;
+  color: white;
+  padding: 5px 5px 5px 10px;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .nav_btn {
+    position: relative;
+    z-index: 100;
+    display: block;
+  }
+
+  .nav_items {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100dvh;
+    padding-top: 4rem;
+    background-color: #3b3b3b;
+    filter: opacity(0.95);
+    color: var(--black-50);
+    transition: right 0.3s;
+  }
+
+  .nav_items.open {
+    right: 0;
+  }
+
+  .nav-links li {
+    margin: 20px 0;
+  }
+
+  .menu-vertical {
+    margin-top: 19rem;
+    margin-left: 30rem;
     position: absolute;
     display: none;
     list-style: none;
     width: 18rem;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .opcion {
+    padding: 0 5px;
+    border: 2px solid var(--swans-down-400);
+    border-radius: 10px;
+    width: 15rem;
+    justify-content: center;
+  }
 }
 
-.nav_items li:hover .menu-vertical{
-    display: block;
+#QuienesSomos,
+#Beneficios,
+#PadresYTutores {
+  scroll-margin-top: 200px;
 }
 
-.menu-vertical li:hover{
-    background-color: black;
+#Mision,
+#Vision{
+  scroll-margin-top: 150px;
 }
-
-.menu-vertical li a{
-    display: block;
-    color: white;
-    padding: 5px 5px 5px 10px;
-    text-decoration: none;
-}
-
-@media screen and (max-width: 900px) {
-    .nav_btn {
-        position: relative;
-        z-index: 100;
-        display: block;
-    }
-    
-
-    .nav_items {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: start;
-        width: 100%;
-        height: 100dvh;
-        padding-top: 4rem;
-        background-color: #3b3b3b;
-        filter: opacity(0.95);
-        color: var(--black-50);
-        transition: right 0.3s;
-    }
-
-    .nav_items.open {
-        right: 0;
-    }
-
-    .nav-links li {
-        margin: 20px 0;
-    }
-    .menu-vertical{
-        margin-top:19rem;
-        margin-left: 30rem;
-        position: absolute;
-        display: none;
-        list-style: none;
-        width: 18rem;
-        background-color: rgba(0, 0, 0, .5);
-    }
-
-    .item-login, .item-signup{
-        width: 15rem;
-    }
-
-    .item-login > p, .item-signup>p{
-        width: 100%;
-        text-align: center;
-    }
-
-    .opcion{
-        padding: 0 5px;
-        border: 2px solid var(--swans-down-400);
-        border-radius: 10px;
-        width: 15rem;
-        justify-content: center;
-}
-   
+#Proposito {
+  scroll-margin-top: 120px;
 }

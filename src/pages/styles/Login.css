@@ -74,7 +74,8 @@
 .formLogin_text {
     text-align: center;
     font-weight: bold;
-    color: var(--black-300);    
+    color: var(--black-300); 
+       
 }
 
 .formLogin_text > span {
@@ -92,11 +93,14 @@
 @media screen and (min-width: 500px) {
     .login_title {
         text-align: center;
+        font-size: 2em;
     }
 
     .login_formLogin {
         align-items: center;
         justify-content: center;
+        font-size: 2em;
+        
     }
 }
 
@@ -122,6 +126,7 @@
         padding: 5%;
         color: #FFF;
         background: linear-gradient(45deg, var(--brandy-punch-950), var(--brandy-punch-600), var(--brandy-punch-300));
+    
     }
 
     .login_message > h3 {
@@ -130,12 +135,16 @@
         line-height: 5.4rem;
         text-wrap: pretty;
         text-shadow: 4px 4px 0 #ccc4;
+        text-align: center;
+        
     }
 
     .login_message > p {
         font-size: var(--font-size-md);
         line-height: 2.4rem;
         text-shadow: 4px 4px 0 #ccc4;
+        text-align: center;
+        
     }
 
     .message_overlay {
@@ -154,5 +163,13 @@
 
     .googleButton_container {
         display: none;
+    }
+    .imglg{
+        position: fixed;
+        top: -100px;
+        left: 0;
+        width: 50%;
+        height: calc(100dvh - 100px);
+        padding:5%;
     }
 }

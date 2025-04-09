@@ -163,8 +163,11 @@ function Perfil({user}) {
   } */
 
   return (
+    
     <div className="profile-container">
+      <h1 className="bento-title">Perfil</h1>
       <div className="menu-card">
+      
         <div className="profile-header">
           <img src={usuario?.imageUrl} alt="Avatar" className="avatar" />
           <div className="profile-info">

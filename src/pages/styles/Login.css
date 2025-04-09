@@ -92,11 +92,14 @@
 @media screen and (min-width: 500px) {
     .login_title {
         text-align: center;
+        font-size: 2em;
     }
 
     .login_formLogin {
         align-items: center;
         justify-content: center;
+        font-size: 2em;
+        
     }
 }
 
@@ -130,12 +133,14 @@
         line-height: 5.4rem;
         text-wrap: pretty;
         text-shadow: 4px 4px 0 #ccc4;
+        text-align: center;
     }
 
     .login_message > p {
         font-size: var(--font-size-md);
         line-height: 2.4rem;
         text-shadow: 4px 4px 0 #ccc4;
+        text-align: center;
     }
 
     .message_overlay {
@@ -154,5 +159,13 @@
 
     .googleButton_container {
         display: none;
+    }
+    .imglg{
+        position: fixed;
+        top: -100px;
+        left: 0;
+        width: 50%;
+        height: calc(100dvh - 100px);
+        padding:5%;
     }
 }

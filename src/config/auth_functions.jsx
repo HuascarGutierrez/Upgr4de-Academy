@@ -7,7 +7,12 @@ import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
 const handleSignup = async({fullName, imageUrl, email, password, passwordVer,funcion}) => {
     try{
         if (password != passwordVer){
-            handleAlert('Su contraseña debe ser idéntica');
+            //handleAlert('Su contraseña debe ser idéntica');
+            Swal.fire({
+                title: "Error",
+                text: "Su contraseña debe ser idéntica",
+                icon: "error"
+              });
             return
         }
         const userCRedential = await createUserWithEmailAndPassword(auth, email, password);
@@ -24,12 +29,17 @@ const handleSignup = async({fullName, imageUrl, email, password, passwordVer,fun
                         userName: fullName,
                         email: email,
                         imageUrl: imageUrl,
-                        planType: 'free',
+                        planType: 'Gratuito',
                         activo: true,
                         createdAt: new Date(), // Guarda la fecha de creación
                       });
                 } else {
-                    console.log('usuario ya registrado')
+                    //console.log('usuario ya registrado')
+                    Swal.fire({
+                        title: "Oopss...",
+                        text: "Usuario ya registrado",
+                        icon: "info"
+                    });
             }})
 
         //console.log('Usuario registrado: ',userCRedential.user);

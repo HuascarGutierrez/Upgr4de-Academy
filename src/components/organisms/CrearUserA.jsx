@@ -6,6 +6,7 @@ import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/app"
 import "./styles/CreateUserA.css"
+import Swal from "sweetalert2";
 
 function CrearUserA() {
   const [waiting, setWaiting] = useState(false);
@@ -48,7 +49,12 @@ function CrearUserA() {
 
   const handleCreateUser = async (fullName, email, password, passwordVer) => {
     if (password !== passwordVer) {
-      alert("Las contraseñas no coinciden");
+      //alert("Las contraseñas no coinciden");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Las contraseñas no coinciden"
+      });
       return;
     }
   
@@ -78,13 +84,27 @@ function CrearUserA() {
           createdAt: new Date(),
         });
       } else {
-        console.log("Usuario ya registrado");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuario ya registrado"
+        });
       }
   
-      alert("Usuario creado exitosamente");
+      //alert("Usuario creado exitosamente");
+      Swal.fire({
+        title: "Usuario creado exitosamente",
+        icon: "success",
+        draggable: true
+      });
       navigate("/admin/usertable");
     } catch (error) {
-      alert(`Error en el registro: ${error.message}`);
+      //alert(`Error en el registro: ${error.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error en el registro: ${error.message}"
+      });
     } finally {
       setWaiting(false);
     }
@@ -114,7 +134,7 @@ function CrearUserA() {
         <form className="CreateUser_form" onSubmit={handleSubmit}>
           <label>
             Nombre completo
-            <input type="text" className="CreateUser_input" ref={fullNameRef} placeholder="Veliz Benavidez" required />
+            <input type="text" className="CreateUser_input" ref={fullNameRef} placeholder="Tu Nombre" required />
           </label>
           <label>
             Correo Electrónico

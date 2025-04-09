@@ -31,7 +31,7 @@
 
 .gridSomos_name {
     width: max-content;
-    font-size: 3rem;
+    font-size: var(--font-size-xl);
     line-height: auto;
 }
 
@@ -63,7 +63,7 @@
 
 .gridSomos_title>h2 {
     width: fit-content;
-    font-size: 6.5em;
+    font-size: var(--font-size-3xl);
     letter-spacing: 0.39px;
     color: var(--black-950);
     font-weight: 800;
@@ -74,8 +74,8 @@
 }
 
 .gridSomos_text {
-    font-size: 3rem;
-    line-height: 120%;
+    font-size: var(--font-size-md);
+    line-height: calc(var(--font-size-md) + 10px);
     font-weight: 600;
 }
 
@@ -85,7 +85,7 @@
 
 @media screen and (max-width: 900px) {
     .gridSomos_name {
-        font-size: 2rem;
+        font-size: var(--font-size-lg);
         padding: 1rem;
     }
 
@@ -95,7 +95,7 @@
     }
 
     .gridSomos_element > h2 {
-        font-size: 3em;
+        font-size: var(--font-size-xl);
         margin: 2rem 1rem;
     }
 
@@ -104,7 +104,7 @@
     }
 
     .gridSomos_element > p {
-        font-size: 2rem;
+        font-size: var(--font-size-base);
         line-height: 2.4rem;
         font-weight: 500;
     }

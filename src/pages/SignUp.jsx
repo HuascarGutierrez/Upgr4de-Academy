@@ -70,7 +70,7 @@ function SignUp() {
     <section className="signup">
         <Nav/>
         <div className="signup_container">
-            <h2 className="signup_title">Crea Una Cuenta</h2>
+            <h2 className="signup_title">Crea Una Cuenta para SAPI</h2>
             <form className="signup_form" onSubmit={handleSubmit}>
                     <label htmlFor="fullName"> Nombre completo
                         <input className="form_input" type="text" id="fullName" placeholder='Veliz Benavidez' ref={fullNameRef} required/>
@@ -84,8 +84,8 @@ function SignUp() {
                     <label htmlFor="confirmPassword"> Confirmar contraseña
                         <input className="form_input" type="password" id="confirmPassword" placeholder="Repita su contraseña" ref={passwordVerREf} required/>
                     </label>
-                    <label htmlFor="fileInput">
-                        <input type="file" id="fileInput" accept="image/*" onChange={handleFileChange}/>
+                    <label htmlFor="fileInput"> Ingresa una foto de perfil
+                        <input className='form_input' type="file" id="fileInput" accept="image/*" onChange={handleFileChange}/>
                     </label>
                     {
                         waiting ? <div style={{marginInline: 'auto'}}><ClipLoader color="var(--swans-down-400)" size={40}/></div> :

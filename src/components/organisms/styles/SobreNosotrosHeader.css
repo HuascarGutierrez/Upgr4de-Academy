@@ -46,16 +46,15 @@
 }
 
 .sn_title {
-    font-size: 9.6rem;
+    font-size: var(--font-size-4xl);
     letter-spacing: 0;
 }
 .sn_title>span {
     color: var(--brandy-punch-400);
-    font-size: 3.5rem;
 }
 
 .sn_text {
-    font-size: 3rem;
+    font-size: var(--font-size-xl);
     line-height: 120%;
 }
 
@@ -66,7 +65,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 1.2em;
-    font-size: 2em;
+    font-size: var(--font-size-base);
     color: var(--black-200);
     font-weight: 700;
     border: 1px solid var(--black-100);
@@ -87,13 +86,5 @@
 @media screen and (max-width: 500px) {
     .sn_img_container {
         display: none;
-    }
-
-    .sn_title {
-        font-size: 6rem;
-    }
-
-    .sn_text {
-        font-size: 3rem;
     }
 }

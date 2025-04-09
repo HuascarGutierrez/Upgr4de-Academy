@@ -4,7 +4,7 @@ import './styles/UserTable.css';
 import { db } from "../../config/app";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 function UserTable() {
   const navigate = useNavigate();

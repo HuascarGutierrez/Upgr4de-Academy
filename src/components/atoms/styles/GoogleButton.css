@@ -10,7 +10,6 @@
     gap: 10px;
     border-radius: 10px;
     margin-inline: auto;
-    font-size: 1.2em;
     letter-spacing: 0.1em;
     background-color: var(--black-100);
 }
@@ -20,6 +19,7 @@
 }
 
 .googleButton p{
+    font-size: var(--font-size-sm);
     color: var(--black-950);
     text-transform: uppercase;
 }

@@ -26,7 +26,7 @@
 
 .grid_element p{
     width: 100%;
-    font-size: 2.5rem;
+    font-size: var(--font-size-md);
     line-height: 160%;
 }
 
@@ -42,7 +42,7 @@
     font-weight: 900;
     letter-spacing: 2px;
     align-items: center;
-    font-size: 5rem;
+    font-size: var(--font-size-3xl);
 }
 
 .grid_materias span {
@@ -70,7 +70,7 @@
 }
 
 .grid_materias p, .grid_description p{
-    font-size: 2rem;
+    font-size: var(--font-size-md);
     line-height: 160%;
 }
 

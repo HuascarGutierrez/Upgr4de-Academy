@@ -1,9 +1,10 @@
 .padres-tutores-section {
+    width: clamp(280px, 80%, 1045px);
     color: #ffffff;
-    padding: clamp(30px, 30vw, 50px) clamp(10px, 2vw, 20px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 3rem auto;
 }
 
 .padres-tutores-title {
@@ -21,7 +22,11 @@
     align-items: center;
     max-width: 1200px;
     width: 100%;
-    gap: 2rem;
+    gap: 2.8rem;
+}
+
+.padres-tutores-content>div {
+    flex: 1;
 }
 
 .padres-tutores-text-container {
@@ -35,9 +40,13 @@
 }
 
 .padres-tutores-grid-item {
+    margin-inline: auto;
     border-radius: 10px;
     padding: 1.5rem;
-    font-size: clamp(2rem, 2.5vw, 2.5em);
+    font-size: var(--font-size-md);
+    line-height: 180%;
+    min-height: 5em;
+    text-align: center;
 }
 
 .padres-tutores-text-1 {
@@ -57,12 +66,14 @@
 }
 
 .padres-tutores-image {
+    display: block;
     width: clamp(250px, 40vw, 40em);
     height: auto;
     border-radius: 10px;
+    margin-inline: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .padres-tutores-content {
         flex-direction: column;
         align-items: center;
@@ -78,12 +89,13 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
     .padres-tutores-title {
         font-size: 2rem;
     }
 
     .padres-tutores-grid-item {
-        font-size: clamp(1rem, 2.5vw, 1.3em);
+        width: 90%;
+        font-size: var(--font-size-md); 
     }
 }

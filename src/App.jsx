@@ -68,7 +68,6 @@ function App() {
   return (
     <>
       <Router>
-        <ScrollToTop/> {/**por temas del scroll */}
         <ToastContainer position='top-center'/>
         <Routes>
           <Route path='/' element={<Home user={userdb}/>}/>

@@ -36,7 +36,7 @@ function Login() {
                     <GoogleButton/>
         </div>
         <div className="login_container">
-            <h2 className="login_title">Iniciar Sesión</h2>
+            <h2 className="login_title">Iniciar Sesión en SAPI</h2>
             <form className="login_formLogin" onSubmit={handleSubmit}>   
                     <label htmlFor="email"> Correo Electrónico
                         <input className="formLogin_input"  type="email" id="email" placeholder="tucorreo@email.com" ref={emailRef} required/>

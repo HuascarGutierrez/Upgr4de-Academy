@@ -246,7 +246,9 @@
 }
 
 #Mision,
-#Vision,
-#Proposito {
+#Vision{
   scroll-margin-top: 150px;
+}
+#Proposito {
+  scroll-margin-top: 120px;
 }

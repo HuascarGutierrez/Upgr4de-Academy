@@ -74,7 +74,8 @@
 .formLogin_text {
     text-align: center;
     font-weight: bold;
-    color: var(--black-300);    
+    color: var(--black-300); 
+       
 }
 
 .formLogin_text > span {
@@ -125,6 +126,7 @@
         padding: 5%;
         color: #FFF;
         background: linear-gradient(45deg, var(--brandy-punch-950), var(--brandy-punch-600), var(--brandy-punch-300));
+    
     }
 
     .login_message > h3 {
@@ -134,6 +136,7 @@
         text-wrap: pretty;
         text-shadow: 4px 4px 0 #ccc4;
         text-align: center;
+        
     }
 
     .login_message > p {
@@ -141,6 +144,7 @@
         line-height: 2.4rem;
         text-shadow: 4px 4px 0 #ccc4;
         text-align: center;
+        
     }
 
     .message_overlay {

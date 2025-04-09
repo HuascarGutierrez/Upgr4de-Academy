@@ -25,15 +25,14 @@
     border-radius: 1rem;
     background-color: var(--black-700);
     padding: 1rem;
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-2xl);
     line-height: 160%;
-    font-size: 2rem;
     text-align: center; /* Center text within the boxes */
 }
 
 .proposito_title {
     grid-area: title;
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
     background-color: var(--brandy-punch-400);
     color: white; /* Added text color for better contrast */
     display: flex;

@@ -37,46 +37,57 @@ function UserTable() {
   }, []);
 
   const handleDelete = async (id) => {
-    swal({
-      title: "¿Estás seguro de eliminar este usuario?",
-      text: "¡Esta acción no se puede deshacer!",
+    Swal.fire({
+      title: "Estas seguro de borrar este usuario",
+      text: "Esto no ser reversible!",
       icon: "warning",
-      buttons: ["Cancelar", "Eliminar"],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
     })
     .then(async (willDelete) => {
       if (willDelete) {
         try {
           await deleteDoc(doc(db, "users", id));
           setData(data.filter((item) => item.id !== id));
-          Swal.fire({
-            title: "Usuario eliminado",
-            icon: "success",
-            draggable: true
-          });
-          //toast.success("Usuario eliminado");
+          toast.success("Usuario eliminado");
         } catch (err) {
           console.error(err);
-          //toast.error("Ocurrió un error al eliminar el usuario");
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Ocurrió un error al eliminar el usuario"
-          });
+          toast.error("Ocurrió un error al eliminar el usuario");
         }
       } else {
-        swal("El usuario está a salvo.");
+        Swal.fire("El usuario está a salvo.");
       }
     });
   };;
 
+
   const handleMassDelete = async () => {
-    swal({
-      title: "¿Estás seguro de eliminar los usuarios seleccionados?",
-      text: "¡Esta acción no se puede deshacer!",
+    Swal.fire({
+      title: "Estas seguro de borrar a estos usuarios",
+      text: "Esto no ser reversible!",
       icon: "warning",
-      buttons: ["Cancelar", "Eliminar"],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Borrado!",
+          text: "El usuario fue borrado.",
+          icon: "success"
+        });
+      }
     })
     .then(async (willDelete) => {
       if (willDelete) {
@@ -101,7 +112,7 @@ function UserTable() {
           });
         }
       } else {
-        swal("Los usuarios seleccionados están a salvo.");
+        Swal.fire("Los usuarios seleccionados están a salvo.");
       }
     });
   };

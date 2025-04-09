@@ -9,7 +9,7 @@ function PadresYTutores() {
     ];
 
     return (
-        <section className="padres-tutores-section">
+        <section className="padres-tutores-section" id='PadresyTutores'>
             <h2 className="padres-tutores-title">{title}</h2>
             <div className="padres-tutores-content">
                 <div className="padres-tutores-text-container">

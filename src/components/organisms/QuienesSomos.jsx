@@ -1,7 +1,7 @@
 import './styles/QuienesSomos.css'
 function QuienesSomos() {
   return (
-    <section className='gridSomos'>
+    <section className='gridSomos' id='QuienesSomos'>
         <div className='gridSomos_element gridSomos_logo_name'>
             <img className='gridSomos_logo' src="/assets/zowl-white.svg" alt="" />
             <h1 className='gridSomos_name'>Upgr4de Academy</h1>

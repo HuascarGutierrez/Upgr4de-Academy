@@ -31,18 +31,28 @@ function Nav({user}) {
         <span className="logo_title">Upgr4de Academy</span>
       </div>
       <ul className={`nav_items ${menuOpen ? "open" : ""}`}>
-        <li onClick={() => {navigate('/')}} className="nav_item">
+        <li onClick={() => {navigate('/')}} className="nav_item opcion">
           <p>Inicio</p>
+          <ul className="menu-vertical">
+            <li><a href="#QuienesSomos"><p>Quienes Somos</p></a></li>
+            <li><a href="#Beneficios"><p>Beneficios</p></a></li>
+            <li><a href="#PadresyTutores"><p>Para PadresyTutores</p></a></li>
+          </ul>
         </li>
-        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item">
-          <p>Sobre Nosotros</p>
-        </li>
-        <li onClick={() => {navigate('/SAPI')}} className="nav_item">
+        <li onClick={() => {navigate('/SAPI')}} className="nav_item opcion">
           <p>SAPI</p>
         </li>
         {/**<li className="nav_item">
           <p>Blog</p>
         </li> */}
+        <li onClick={() => {navigate('/sobreNosotros')}} className="nav_item opcion">
+          <p>Sobre Nosotros</p>
+          <ul className="menu-vertical">
+            <li><a href="#Mision"><p>Mision</p></a></li>
+            <li><a href="#Vision"><p>Vision</p></a></li>
+            <li><a href="#Proposito"><p>Proposito</p></a></li>
+          </ul>
+        </li>
 
         {
           user?

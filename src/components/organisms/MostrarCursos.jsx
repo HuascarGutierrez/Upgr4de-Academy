@@ -4,6 +4,7 @@ import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firesto
 import "./styles/MostrarCursos.css";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function MostrarCursos() {
   const [courses, setCourses] = useState([]);
@@ -25,7 +26,18 @@ function MostrarCursos() {
   };
 
   const handleDelete = async (id) => {
-    if(window.confirm("Quieres eliminar ese curso?")){
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará el curso permanentemente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    if (result.isConfirmed) {
       try {
         await deleteDoc(doc(db, "courses", id));
         toast.success("¡Curso eliminado con éxito!");

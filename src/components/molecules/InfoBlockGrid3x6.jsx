@@ -6,7 +6,7 @@ import './styles/InfoBlockGrid3x6.css'
 function InfoBlockGrid3x6({title, text1, textetiqueta, text3, imageLarge, imageSmall, displayBuho= 1}) {
   const containerRef = useRef(null);
   return (
-    <section className="grid">
+    <section className="grid" id='Mision'>
       <div className="grid_element grid_text">
           <img style={displayBuho? {display: 'block'}:{display: 'none'}} src="assets/zowl-white.svg" alt="" />
           <p>{text1}</p>

@@ -13,6 +13,7 @@ import UserTable from '../components/organisms/UserTable'
 import NavAdmin from '../components/organisms/NavAdmin'
 import CrearCurso from '../components/organisms/CrearCurso'
 import MostrarCursos from '../components/organisms/MostrarCursos'
+import CrearUserA from '../components/organisms/CrearUserA'
 
 function SAPIAdmin() {
   return (
@@ -23,6 +24,7 @@ function SAPIAdmin() {
             <Route path='/usertable' element={<UserTable />}/>
             <Route path='/listacursos' element={<MostrarCursos />}/>
             <Route path='/crearcurso' element={<CrearCurso />}/>
+            <Route path='/createuser' element={<CrearUserA/>} />
         </Routes>
     </div>
 </div>

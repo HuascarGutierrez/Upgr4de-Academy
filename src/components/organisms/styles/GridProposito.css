@@ -1,140 +1,147 @@
 .proposito {
     width: 70%;
     display: grid;
-
     grid-auto-flow: dense;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, minmax(5rem, min-content));
     grid-template-areas:
-    'image image image title title title'
-    'image image image text1 text1 text1'
-    'second_image second_image text2 text2 text3 text3';
+        'title text1'
+        'image text2'
+        'image text3';
     gap: 2rem;
-    height: min-content;
+    margin: 2rem auto; /* Center the section */
 }
 
 .proposito_element {
-    grid-area: span 1/ span 2;
+    height: min-content;
+    background-color: var(--black-700);
+    overflow: hidden;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 1rem;
-    background-color: var(--black-700);
-    padding: 1rem;
-    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.4rem;
     line-height: 160%;
-    text-wrap: pretty;
-    overflow-wrap: break-word;
-}
-
-.proposito_mainImage {
-    grid-area: image;
+    font-size: 2rem;
+    text-align: center; /* Center text within the boxes */
 }
 
 .proposito_title {
     grid-area: title;
-    font-size: 3.5rem;
+    text-wrap: balance;
+    font-size: 4rem;
     background-color: var(--brandy-punch-400);
+    color: white; /* Added text color for better contrast */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
-.proposito_secondImage {
-    grid-area: second_image;
-}
-
-.proposito_text:nth-child(3){
-    grid-area: text1;
-}
-
-.proposito_mainImage, .proposito_secondImage{
-    height: 100%;
-    width: 100%;
+.proposito_mainImage {
     padding: 0;
+    grid-area: image;
+    border-radius: 1rem;
+    overflow: hidden;
+    max-height: 400px; /* Adjust this value as needed */
 }
 
-.proposito_mainImage>img, .proposito_secondImage>img {
+.proposito_mainImage>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
 }
 
-.proposito_mainImage, .proposito_secondImage {
-    aspect-ratio: 16/13;
+.proposito_text:nth-child(3) {
+    grid-area: text1;
+    text-wrap: pretty;
+}
+
+.proposito_text:nth-child(4) {
+    grid-area: text2;
+    text-wrap: pretty;
+}
+
+.proposito_text:nth-child(5) {
+    grid-area: text3;
+    text-wrap: pretty;
 }
 
 .proposito_element > p > span {
     color: var(--brandy-punch-400);
 }
 
-.proposito_element:last-child {
+.proposito_title {
+    background-color: var(--swans-down-700);
+}
+
+.proposito_element:nth-child(3) {
+    background-color: var(--brandy-punch-400);
+    color: white; /* Added text color for better contrast */
+}
+
+.proposito_element:nth-child(5) {
     background-color: var(--swans-down-700);
 }
 
 @media screen and (max-width: 900px) {
-    .proposito {
-        grid-template-areas: 
-        'image image image title title title'
-        'text1 text1 text1 text2 text2 text2'
-        'second_image second_image second_image text3 text3 text3';
-    }
-
-    .proposito_element {
+    .proposito_element{
         font-size: 1.5rem;
-        grid-area: span 1/ span 3;
+        padding: 1rem;
     }
 
     .proposito_title {
-        font-size: 2rem;
-    }
-
-    .proposito_mainImage {
-        grid-area: image;
+        font-size: 3rem;
+        padding: 0.75rem;
     }
 }
 
 @media screen and (max-width: 500px) {
     .proposito {
-        width: 70%;
-        grid-template-areas: 
+        grid-template-areas:
         'title'
         'image'
         'text1'
         'text2'
-        'second_image'
         'text3';
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5,minmax(50px, min-content));
     }
 
     .proposito_element {
-        grid-area: span 1/ span 1;
-    }
-
-    .proposito_element>p {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        padding: 0.75rem;
+        text-align: left; /* Align text left on smaller screens for better readability */
     }
 
     .proposito_title {
-        grid-area: title;
         font-size: 2.5rem;
-    }
-
-    .proposito_title>h2 {
-        padding: 1rem;
+        padding: 0.5rem;
+        text-align: center;
     }
 }
 
 @media (prefers-color-scheme: light) {
     .proposito_element {
         background-color: var(--black-200);
+        color: var(--black-900); /* Added text color for light mode */
     }
 
     .proposito_title {
-        background-color: var(--brandy-punch-400);
+        background-color: var(--swans-down-200);
+        color: var(--black-900); /* Ensure title text is readable in light mode */
     }
 
-    .proposito_element:last-child {
-        background-color: var(--swans-down-200);
+    .proposito_element:nth-child(3) {
+        background-color: var(--brandy-punch-300);
+        color: var(--black-900); /* Ensure text is readable in light mode */
     }
-    
+
+    .proposito_element:nth-child(5) {
+        background-color: var(--swans-down-200);
+        color: var(--black-900); /* Ensure text is readable in light mode */
+    }
 }

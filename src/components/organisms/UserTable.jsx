@@ -85,10 +85,20 @@ function UserTable() {
           setData(data.filter(user => !selectedUsers.includes(user.id)));
           setSelectedUsers([]);
           setSelectAll(false);
-          toast.success("Usuarios eliminados");
+          //toast.success("Usuarios eliminados");
+          Swal.fire({
+            title: "Drag me!",
+            icon: "Usuarios eliminados",
+            draggable: true
+          });
         } catch (err) {
           console.error(err);
-          toast.error("Ocurrió un error al eliminar los usuarios");
+          //toast.error("Ocurrió un error al eliminar los usuarios");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ocurrió un error al eliminar los usuarios"
+          });
         }
       } else {
         swal("Los usuarios seleccionados están a salvo.");

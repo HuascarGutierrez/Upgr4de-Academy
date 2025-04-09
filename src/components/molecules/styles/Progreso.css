@@ -21,6 +21,6 @@
     height: auto;
 }
 .ProgresoCurso-contenido div h2 {
-    font-size: 2.5rem;
+    font-size: var(--font-size-xl);
     color: black;
-}
+} 

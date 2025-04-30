@@ -202,6 +202,7 @@ function TeacherTable() {
               </label>*/}
               <label>
                 Activo
+                <div className='check'>
                 <input
                   type="checkbox"
                   name="activo"
@@ -209,6 +210,7 @@ function TeacherTable() {
                   onChange={handleChange}
                   style={{ marginLeft: '10px' }}
                 />
+                </div> 
               </label>
 
           

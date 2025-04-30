@@ -200,7 +200,16 @@ function TeacherTable() {
                 <input type="file" name="imageFile" accept="image/*" onChange={handleChange} />
                 </div>
               </label>*/}
-              
+              <label>
+                Activo
+                <input
+                  type="checkbox"
+                  name="activo"
+                  checked={formData.activo}
+                  onChange={handleChange}
+                  style={{ marginLeft: '10px' }}
+                />
+              </label>
 
           
               <div className="modal-buttons">

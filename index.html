@@ -21,16 +21,7 @@
                 url: "https://runtime-api.voiceflow.com"
               }
             }).then(() => {
-        window.voiceflow.chat.proactive.clear(); // 
-        window.voiceflow.chat.proactive.push({ 
-          //mensaje 1
-          type: 'text', 
-          payload: { message: 'Hey, tienes alguna duda?' }
-        }, { 
-          //mensaje 2
-          type: 'text', 
-          payload: { message: 'preguntame lo que quieras y te responderé lo mejor que pueda. 🤗' }
-        });
+        window.voiceflow.chat.proactive.clear(); //
     })
           }
           v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);

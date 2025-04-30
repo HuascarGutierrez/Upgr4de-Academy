@@ -30,6 +30,8 @@ function Ejercicio({user, unitId, exerciseByUnitId, titulo, cambiarSeccion, actu
           const nuevoProgreso = Math.round((ejerciciosCompletados + 1) / ejercicios.length * 100);
           actualizarProgreso(nuevoProgreso);
         } else {
+          setEjerciciosCompletados(prev => prev + 1);
+
           setMensaje("¡Has completado todos los ejercicios de este nivel!");
           actualizarProgreso(100);
         }

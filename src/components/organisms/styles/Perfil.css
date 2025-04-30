@@ -148,6 +148,24 @@
   gap: 0.75rem;
   font-size: var(--font-size-md);
   color: var(--black-800);
+  background-color: var(--swans-down-100);
+
+  /* Estilos para que parezca un botón */
+  padding: 1rem 1.5rem; /* Añade espacio interno */
+  border: 1px solid var(--black-300); /* Borde sutil */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  cursor: pointer; /* Indica que es interactivo */
+  text-align: center; /* Centra el texto si es necesario */
+  transition: background-color 0.2s ease; /* Transición suave al pasar el ratón */
+}
+
+.my-profile-card .form-label-box:hover {
+  background-color: var(--swans-down-200); /* Ligeramente más oscuro al pasar el ratón */
+}
+
+.my-profile-card .form-label-box:active {
+  background-color: var(--swans-down-300); /* Más oscuro al hacer clic */
+  border-color: var(--black-500); /* Borde un poco más fuerte al hacer clic */
 }
 
 .my-profile-card .form-input-text,

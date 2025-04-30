@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import "./styles/CrearCurso.css";
 import { db } from "../../config/app";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs  } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
+import { useEffect} from "react";
 
 function CrearCurso() {
 
@@ -131,6 +132,22 @@ function CrearCurso() {
       toast.error("Error al subir la imagen");
     }
   };
+  //docentes
+  const [docentes, setDocentes] = useState([]);
+
+useEffect(() => {
+  const fetchDocentes = async () => {
+    const db = getFirestore();
+    const querySnapshot = await getDocs(collection(db, "teacher"));
+    const lista = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      nombre: doc.data().teacherName,
+    }));
+    setDocentes(lista);
+  };
+
+  fetchDocentes();
+}, []);
 
   return (
     <div className='container-crear-nuevo-curso'>
@@ -186,15 +203,21 @@ function CrearCurso() {
             </label>
             <label>
               Profesor
-              <input
-                type="text"
+              <select
                 name="teacher"
-                placeholder="Ing."
                 value={formData.teacher}
                 onChange={handleInputChange}
                 required
-              />
+              >
+                <option value="">Seleccione un docente</option>
+                {docentes.map(docente => (
+                  <option key={docente.id} value={docente.nombre}>
+                    {docente.nombre}
+                  </option>
+                ))}
+              </select>
             </label>
+
             {
               <label>
                 Arrastra una imagen aquí

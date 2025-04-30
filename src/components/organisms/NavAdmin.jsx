@@ -24,8 +24,17 @@ function NavAdmin() {
               }}
               className="navLateral_item"
             >
-              <img src="/assets/navLateral_1.svg" alt="" />
+              <img src="/Icons/student.svg" alt="" />
               <p>Estudiantes</p>
+            </li>
+            <li
+              onClick={() => {
+                navigate("/admin/docentes");
+              }}
+              className="navLateral_item"
+            >
+              <img src="/Icons/teacher.svg" alt="" />
+              <p>Docentes</p>
             </li>
             <li
               onClick={() => {
@@ -33,7 +42,7 @@ function NavAdmin() {
               }}
               className="navLateral_item"
             >
-              <img src="/assets/navLateral_2.svg" alt="" />
+              <img src="/Icons/curso-online.svg" alt="" />
               <p>Cursos</p>
             </li>
             <li
@@ -42,7 +51,7 @@ function NavAdmin() {
               }}
               className="navLateral_item"
             >
-              <img src="/assets/navLateral_2.svg" alt="" />
+              <img src="/Icons/informe.svg" alt="" />
               <p>Reportes</p>
             </li>
           </ul>

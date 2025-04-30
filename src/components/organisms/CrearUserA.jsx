@@ -15,6 +15,13 @@ function CrearUserA() {
   const [imageName, setImageName] = useState(null); // Estado para el nombre del archivo
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordVer, setShowPasswordVer] = useState(false);
+
+
+  const togglePasswordVisibility = () => setShowPassword(prev => !prev);
+  const togglePasswordVerVisibility = () => setShowPasswordVer(prev => !prev);
+
   const fullNameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -72,6 +79,11 @@ function CrearUserA() {
       const db = getFirestore();
       const userRef = doc(db, "users", uid);
       const docSnap = await getDoc(userRef);
+
+      //4. contraseñas
+
+
+
   
       if (!docSnap.exists()) {
         await setDoc(userRef, {
@@ -140,14 +152,44 @@ function CrearUserA() {
             <p>Correo Electrónico</p>
             <input type="email" className="CreateUser_input" ref={emailRef} placeholder="tucorreo@email.com" required />
           </label>
-          <label>
+          {/*contrase;as*/}
+          <label className="password-field">
             <p>Contraseña</p>
-            <input type="password" className="CreateUser_input" ref={passwordRef} placeholder="Contraseña" required />
+            <div className="input-with-icon">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="CreateUser_input"
+                ref={passwordRef}
+                placeholder="Contraseña"
+                required
+              />
+              <span onClick={togglePasswordVisibility} className="eye-icon">
+                <img
+                  src={showPassword ? "/Icons/eye-slash.svg" : "/Icons/eye.svg"}
+                  alt="Ver contraseña"
+                />
+              </span>
+            </div>
           </label>
-          <label>
+          <label className="password-field">
             <p>Confirmar contraseña</p>
-            <input type="password" className="CreateUser_input" ref={passwordVerRef} placeholder="Repita su contraseña" required />
+            <div className="input-with-icon">
+              <input
+                type={showPasswordVer ? "text" : "password"}
+                className="CreateUser_input"
+                ref={passwordVerRef}
+                placeholder="Repita su contraseña"
+                required
+              />
+              <span onClick={togglePasswordVerVisibility} className="eye-icon">
+                <img
+                  src={showPasswordVer ? "/Icons/eye-slash.svg" : "/Icons/eye.svg"}
+                  alt="Ver contraseña"
+                />
+              </span>
+            </div>
           </label>
+
           <label>
             <p>Foto de perfil</p>
             <input type="file" accept="image/*" onChange={handleFileChange} />

@@ -25,7 +25,7 @@ function NavLateral() {
             className="navLateral_item"
           >
             <img src="/assets/navLateral_1.svg" alt="" />
-            <p>Inicio</p>
+            <p>Mis Cursos</p>
           </li>
           <li
             onClick={() => {

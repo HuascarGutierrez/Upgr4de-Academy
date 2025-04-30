@@ -181,16 +181,16 @@ function UserTable() {
     <div className="Tabla">
       <div className='Header_UserTable'>
       <h1>Lista de Estudiantes</h1>
-      <button className="btn btn-edit" onClick={() => navigate("/admin/createuser")}>Crear Estudiante</button>
-      {selectedUsers.length > 0 && (
+      <button className="btn btn-create" onClick={() => navigate("/admin/createuser")}>Crear Estudiante</button>
+      {/*selectedUsers.length > 0 && (
         <button className="btn btn-delete" onClick={handleMassDelete}>Eliminar Seleccionados ({selectedUsers.length})</button>
-      )}
+      )*/}
       </div>
       <div className='tablacontenedor'>
         <table className="styled-table">
           <thead>
             <tr>
-              <th><input type="checkbox" checked={selectAll} onChange={handleSelectAll} /></th>
+              {/*<th><input type="checkbox" checked={selectAll} onChange={handleSelectAll} /></th> */}
               <th>No.</th>
               <th>Nombre</th>
               <th>Email</th>
@@ -203,13 +203,13 @@ function UserTable() {
           <tbody>
             {data.map((user, index) => (
               <tr key={user.id}>
-                <td>
+                {/*<td>
                   <input
                     type="checkbox"
                     checked={selectedUsers.includes(user.id)}
                     onChange={() => toggleSelectUser(user.id)}
                   />
-                </td>
+                </td>*/}
                 <td>{index + 1}</td>
                 <td>{user.imageUrl ? (
                     <img src={user.imageUrl} alt="User" className="user-image" />
@@ -222,7 +222,7 @@ function UserTable() {
                 <td>{user.activo ? 'Sí' : 'No'}</td>
                 <td className='action'>
                   <button className="btn btn-edit" onClick={() => handleEdit(user)}>Editar</button>
-                  <button className="btn btn-delete" onClick={() => handleDelete(user.id)}>Eliminar</button>
+                  {/*<button className="btn btn-delete" onClick={() => handleDelete(user.id)}>Eliminar</button>*/}
                 </td>
               </tr>
             ))}

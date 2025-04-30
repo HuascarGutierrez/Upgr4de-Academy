@@ -117,3 +117,20 @@ input[type="file"] {
     display: block !important;
   }
   
+  .input-with-icon {
+    position: relative;
+  }
+  
+  .input-with-icon input {
+    width: 100%;
+    padding-right: 35px;
+  }
+  
+  .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  

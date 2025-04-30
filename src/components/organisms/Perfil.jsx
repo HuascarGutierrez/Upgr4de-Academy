@@ -106,7 +106,9 @@ function Perfil({ user }) {
 
       <div className="menu-card bento-box">
         <div className="profile-header">
-          <img src={usuario?.imageUrl} alt="Avatar" className="avatar" />
+          {usuario?
+          <img src={usuario?.imageUrl} alt="Avatar" className="avatar" />:
+          <img src="/images/default_img_profile.webp" className='avatar'/>}
           <div className="profile-info">
             <div className="name">{usuario?.userName}</div>
           </div>

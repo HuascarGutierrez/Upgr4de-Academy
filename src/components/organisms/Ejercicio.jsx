@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from '../../config/app';
 
-function Ejercicio({exerciseByUnitId, titulo, nivel, cambiarSeccion, actualizarPuntuacion, actualizarProgreso }) {
+function Ejercicio({user, unitId, exerciseByUnitId, titulo, cambiarSeccion, actualizarPuntuacion, actualizarProgreso }) {
   const [ejercicioActual, setEjercicioActual] = useState(0);
   const [respuestaUsuario, setRespuestaUsuario] = useState('');
   const [mensaje, setMensaje] = useState('');
@@ -43,6 +43,26 @@ function Ejercicio({exerciseByUnitId, titulo, nivel, cambiarSeccion, actualizarP
   const mostrarAyuda = () => {
     setMostrarHint(true);
   };
+
+  const submitProgress = async (ejerciciosCompletados, totalEjercicios) => {
+    // enviar datos a la base de datos -coleccion: progress
+    // estructura: {userId, exerciseId, ejerciciosCompletados, totalEjercicios}
+    const progressData = {
+      userId: user.uid,
+      ejerciciosCompletados: ejerciciosCompletados,
+      totalEjercicios: totalEjercicios,
+      exerciseByUnitId: exerciseByUnitId,
+      unitId: unitId,
+    };
+    try {
+      await setDoc(doc(db, "progress", user.uid), progressData, { merge: true });
+      console.log("Progreso guardado correctamente:", progressData);
+      cambiarSeccion('menu'); // Cambiar a la sección de menú después de guardar el progreso
+    } catch (error) {
+      console.error("Error al guardar el progreso:", error);
+    }
+}
+
 
   const [ejercicios, setEjercicios] = useState([]);
   useEffect(() => {
@@ -129,6 +149,13 @@ function Ejercicio({exerciseByUnitId, titulo, nivel, cambiarSeccion, actualizarP
           className="volver-button"
         >
           Volver al menú
+        </button>
+
+        <button
+          onClick={() => submitProgress(ejerciciosCompletados, ejercicios.length)}
+          className="end-button"
+        >
+          Finalizar Ejercicio
         </button>
         
         <div className="progreso-container">

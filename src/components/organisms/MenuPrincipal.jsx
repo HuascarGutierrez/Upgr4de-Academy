@@ -1,7 +1,38 @@
+import { useState, useEffect } from "react";
+import { collection, getDocs, setDoc, doc, query, where, orderBy } from "firebase/firestore";
+import { db } from '../../config/app';
 import { useLocation } from "react-router-dom";
 
-function MenuPrincipal({exercises, cambiarSeccion, cambiarTituloEjercicio, cambiarExerciseByUnitId, progreso }) {
+function MenuPrincipal({user, unitId, exercises, cambiarSeccion, cambiarTituloEjercicio, cambiarExerciseByUnitId, progreso }) {
 
+    const [progressData, setProgressData] = useState([]);
+
+  useEffect(() => {
+    const fetchProgress = async () => {
+      try {
+        const q = query(
+          collection(db, "progress"),
+          where("userId", "==", user.uid),
+          where("unitId", "==", unitId),
+        );
+
+        const querySnapshot = await getDocs(q);
+        const results = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        setProgressData(results);
+        console.log("Progreso:", results);
+      } catch (error) {
+        console.error("Error fetching progress:", error);
+      }
+    };
+
+    if (user.uid && unitId) {
+      fetchProgress();
+    }
+  }, [user.uid, unitId]);
 
   return (
     <div className="menu-container">
@@ -10,7 +41,12 @@ function MenuPrincipal({exercises, cambiarSeccion, cambiarTituloEjercicio, cambi
       <div className="modulos-grid">
       {
       exercises.length > 0 ?
-      exercises.map((exercise) => (
+      exercises.map((exercise) => {
+        const progresoEjercicio = progressData.find(
+            (p) => p.exerciseByUnitId === exercise.id
+          );
+          const porcentaje = progresoEjercicio?.ejerciciosCompletados/progresoEjercicio?.totalEjercicios * 100 || 0;
+        return(
           <div 
             key={exercise.id}
             className="modulo-card"
@@ -26,15 +62,15 @@ function MenuPrincipal({exercises, cambiarSeccion, cambiarTituloEjercicio, cambi
               <div className="barra-progreso-container">
                 <div 
                   className="barra-progreso"
-                  style={{ width: `${0}%` }}
+                  style={{ width: `${porcentaje}%` }}
                 ></div>
               </div>
               <div className="progreso-texto">
-                {0}% Completado
+                {porcentaje}% Completado
               </div>
             </div>
           </div>
-        )) : <h2 className='noExercises'>Sin Ejercicios por el momento.</h2>}
+        )}) : <h2 className='noExercises'>Sin Ejercicios por el momento.</h2>}
       </div>
     </div>
   );

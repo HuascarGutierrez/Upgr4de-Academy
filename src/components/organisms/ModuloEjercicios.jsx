@@ -22,7 +22,7 @@ export default function ModuloEjercicios({user}) {
   const [exercisesByUnit, setExercisesByUnit] = useState([]);
   const [exerciseByUnitId, setExerciseByUnitId] = useState(''); //aqui cambiar por el id del ejercicio
 
-  const [nivelActual, setNivelActual] = useState(1); //aqui cambiar por el nivel
+  //const [nivelActual, setNivelActual] = useState(1); //aqui cambiar por el nivel
   const [puntuacion, setPuntuacion] = useState(0); //aqui cambiar por la puntuacion //importante
 
   const [progreso, setProgreso] = useState({
@@ -88,14 +88,15 @@ export default function ModuloEjercicios({user}) {
       {/* Contenido principal */}
       <main className="app-main">
         {seccionActual === 'menu' && (
-          <MenuPrincipal exercises={exercisesByUnit} cambiarSeccion={cambiarSeccion} cambiarTituloEjercicio = {cambiarTituloEjercicio} cambiarExerciseByUnitId={cambiarExerciseByUnitId} progreso={progreso} />
+          <MenuPrincipal user={user} unitId={unitId} exercises={exercisesByUnit} cambiarSeccion={cambiarSeccion} cambiarTituloEjercicio = {cambiarTituloEjercicio} cambiarExerciseByUnitId={cambiarExerciseByUnitId} progreso={progreso} />
         )}
         
         {seccionActual === 'ejercicio' && (
-          <Ejercicio 
+          <Ejercicio user={user}
+            unitId={unitId}
             exerciseByUnitId={exerciseByUnitId}
             titulo = {TituloEjercicioActual}
-            nivel={nivelActual} 
+            //nivel={nivelActual} 
             cambiarSeccion={cambiarSeccion}
             actualizarPuntuacion={(puntos) => setPuntuacion(prev => prev + puntos)}
             actualizarProgreso={(valor) => setProgreso(prev => ({...prev, ecuacionesLineales: valor}))}

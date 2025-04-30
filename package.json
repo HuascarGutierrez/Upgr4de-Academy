@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@react-spring/web": "^9.7.5",
-    "firebase": "^11.4.0",
+    "firebase": "^11.6.1",
     "framer-motion": "^12.4.10",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",

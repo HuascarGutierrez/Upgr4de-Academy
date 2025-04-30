@@ -1,0 +1,360 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
+  
+  body {
+    background-color: #f5f5f7;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Estilos del encabezado */
+  .app-header {
+    background-color: var(--swans-down-300);
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .app-title {
+    font-size: var(--font-size-2xl);
+    font-weight: bold;
+  }
+  
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .puntos-badge {
+    font-size: var(--font-size-base);
+    background-color: var(--swans-down-700);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+  }
+  
+  .menu-button {
+    font-size: var(--font-size-base);
+    background-color: white;
+    color: var(--swans-down-700);
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .menu-button:hover {
+    background-color: #e5e7eb;
+  }
+  
+  /* Estilos del contenido principal */
+  .app-main {
+    flex-grow: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+  }
+  
+  /* Estilos del pie de página */
+  .app-footer {
+    background-color: #e5e7eb;
+    padding: 1rem;
+    text-align: center;
+    color: #4b5563;
+  }
+  
+  /* Estilos del menú principal */
+  .menu-container {
+    padding: 1.5rem 0;
+  }
+  
+  .menu-title {
+    font-size: var(--font-size-2xl);
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .modulos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .modulos-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  .modulo-card {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+  }
+  
+  .modulo-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modulo-content {
+    height: 100%;
+    padding: 1.5rem;
+    background-color: var(--brandy-punch-50);
+  }
+  
+  .modulo-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .modulo-icono {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+  }
+  
+  .modulo-titulo {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+    color: #1f2937;
+  }
+  
+  .modulo-descripcion {
+    font-size: var(--font-size-md);
+    color: #4b5563;
+    margin-bottom: 1rem;
+  }
+  
+  .barra-progreso-container {
+    width: 100%;
+    height: 1rem;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  
+  .barra-progreso {
+    height: 100%;
+    background-color: #10b981;
+    border-radius: 9999px;
+  }
+  
+  .progreso-texto {
+    margin-top: 0.5rem;
+    text-align: right;
+    font-size: var(--font-size-base);
+    color: #4b5563;
+  }
+  
+  /* Estilos de los ejercicios */
+  .ejercicios-container {
+    margin: 0 auto;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 5rem 10rem;
+  }
+  
+  .ejercicios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .ejercicios-titulo {
+    font-size: var(--font-size-2xl);
+    font-weight: bold;
+    color: var(--swans-down-600);
+  }
+  
+  .inecuaciones .ejercicios-titulo {
+    color: #8b5cf6; /* Color diferente para inecuaciones */
+  }
+  
+  .ejercicios-contador {
+    color: #4b5563;
+    font-size: var(--font-size-sm);
+  }
+  
+  .enunciado-container {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: var(--brandy-punch-50);
+    border-radius: 0.5rem;
+  }
+  
+  .inecuaciones .enunciado-container {
+    background-color: #f5f3ff; /* Color diferente para inecuaciones */
+  }
+  
+  .enunciado-texto {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    color: #1f2937;
+  }
+  
+  .respuesta-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .respuesta-label {
+    display: block;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+    font-size: var(--font-size-lg);
+  }
+  
+  .respuesta-input-container {
+    display: flex;
+  }
+  
+  .respuesta-input {
+    font-size: var(--font-size-lg);
+    flex: 1;
+    border: 1px solid #d1d5db;
+    border-right: none;
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+    padding: 0.5rem;
+  }
+  
+  .verificar-button {
+    font-size: var(--font-size-lg);
+    background-color: var(--swans-down-500);
+    color: white;
+    border: none;
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .verificar-button:hover {
+    background-color: #2563eb;
+  }
+  
+  .verificar-inecuaciones {
+    background-color: #8b5cf6;
+  }
+  
+  .verificar-inecuaciones:hover {
+    background-color: #7c3aed;
+  }
+  
+  .mensaje-container {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 0.375rem;
+  }
+  
+  .mensaje-correcto {
+    background-color: #d1fae5;
+    color: #065f46;
+    font-size: var(--font-size-lg);
+  }
+  
+  .mensaje-incorrecto {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    font-size: var(--font-size-lg);
+  }
+  
+  .hint-container {
+    margin-bottom: 1rem;
+  }
+  
+  .hint-button {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: var(--font-size-lg);
+  }
+  
+  .inecuaciones .hint-button {
+    color: #8b5cf6;
+  }
+  
+  .hint-text {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--brandy-punch-50);
+    color: #854d0e;
+    border-radius: 0.375rem;
+    font-size: var(--font-size-lg);
+  }
+  
+  .ejercicios-footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .volver-button {
+    font-size: var(--font-size-md);
+    padding: 0.5rem 1rem;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .volver-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .progreso-container {
+    display: flex;
+    align-items: center;
+    color: #4b5563;
+  }
+  
+  .progreso-label {
+    margin-right: 0.5rem;
+    font-size: var(--font-size-md);
+  }
+  
+  .barra-progreso-pequeña-container {
+    width: 8rem;
+    height: 0.75rem;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  
+  .barra-progreso-pequeña {
+    height: 100%;
+    background-color: #10b981;
+    border-radius: 9999px;
+  }

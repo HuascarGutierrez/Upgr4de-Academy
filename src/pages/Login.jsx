@@ -5,6 +5,7 @@ import GoogleButton from "../components/atoms/GoogleButton";
 import Nav from "../components/organisms/Nav";
 import './styles/Login.css'
 import { handleLogin } from "../config/auth_functions";
+import Buho from '/images/OrangeBuho.webp';
 
 function Login() {
     const [waiting, setWaiting] = useState(false);
@@ -37,6 +38,7 @@ function Login() {
                     <GoogleButton/>
         </div>
         <div className="login_container">
+        <img src={Buho} alt="OrangeBuho" className="buho_logo" />
             <h2 className="login_title">Iniciar Sesión en SAPI</h2>
             <form className="login_formLogin" onSubmit={handleSubmit}>   
                     <label htmlFor="email"> Correo Electrónico

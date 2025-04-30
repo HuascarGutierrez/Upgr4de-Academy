@@ -1,0 +1,95 @@
+/* styles/PaymentSimulationModal.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Fondo oscuro semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Asegura que esté por encima de otros elementos */
+}
+
+.modal-content {
+    background-color: var(--background-color);
+    /* Usa tu variable de color de fondo */
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    /* Ajusta el ancho según necesites */
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: var(--text-color);
+    /* Usa tu variable de color de texto */
+}
+
+.qr-code-container {
+    margin: 20px 0;
+}
+
+.qr-code {
+    width: 400px;
+    /* Ajusta el tamaño del QR */
+    height: 400px;
+    /* Ajusta el tamaño del QR */
+    border: 1px solid #ccc;
+    /* Opcional: borde alrededor del QR */
+    padding: 10px;
+    background-color: white;
+    display: block;
+    /* Para centrar si es una imagen */
+    margin: 0 auto;
+}
+
+/* Si usas texto en lugar de imagen */
+/*
+    .qr-code-placeholder {
+      width: 150px;
+      height: 150px;
+      background-color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      border: 1px dashed #ccc;
+      color: #555;
+    }
+    */
+
+.modal-actions {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    /* Espacio entre botones */
+}
+
+.save-button,
+.cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.save-button {
+    background-color: var(--primary-color);
+    /* Usa tu variable de color primario */
+    color: white;
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: #333;
+}

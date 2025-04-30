@@ -84,7 +84,7 @@ const InteractiveCourse = ({user}) => {
       
 
       <div className="actions">
-        <a onClick={() => navigate(-1)} className="back-link">Regresar</a>
+        <a onClick={() => navigate(-1)} className="">Regresar</a>
         {
           lastLessonByUnit == lesson.number_lesson && (
             completed ?

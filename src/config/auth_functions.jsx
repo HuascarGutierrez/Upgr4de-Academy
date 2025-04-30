@@ -92,7 +92,7 @@ const handleAuth = async({funcion, salida}) => {
                         userName: user.displayName,
                         email: user.email,
                         imageUrl: user.photoURL,
-                        planType: 'free',
+                        planType: 'Gratuito',
                         activo: true,
                         createdAt: new Date(), // Guarda la fecha de creación
                       }).then(()=>{

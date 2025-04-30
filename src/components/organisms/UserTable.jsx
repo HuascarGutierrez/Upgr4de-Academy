@@ -5,6 +5,8 @@ import { db } from "../../config/app";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 function UserTable() {
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ function UserTable() {
   });
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,8 +128,10 @@ function UserTable() {
       email: user.email,
       planType: user.planType,
       activo: user.activo,
+      imageUrl: user.imageUrl || "", // aquí
     });
   };
+  
 
   const handleUpdate = async () => {
     try {
@@ -144,20 +150,27 @@ function UserTable() {
     }
   };
 
-  const handleImageChange = async(e) => {
-    setWait(true);
-    if (e.target.files[0]) {
-      setImageUrl(e.target.files[0]); // Guarda la imagen en el estado
-      const imagen = e.target.files[0];
-      const url = await handleUpdateImage({email: usuario?.email, image: imagen});
-      const db = getFirestore();
-      const userRef = doc(db, 'users', usuario?.uid);
-      setDoc(userRef, {
-        imageUrl: url,
-      }, { merge: true }).then(() => {location.reload();});
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
+    const storage = getStorage();
+    const storageRef = ref(storage, `images_profiles/${editingUser}_${file.name}`);
+  
+    try {
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      
+      // Guarda en formData y en estado para previsualización
+      setFormData(prev => ({ ...prev, imageUrl: url }));
+      setImageUrl(url);
+      toast.success("Imagen actualizada y previsualizada");
+    } catch (error) {
+      console.error("Error al subir imagen:", error);
+      toast.error("Error al subir la imagen");
     }
-    setWait(true);
   };
+  
 
 
 
@@ -242,8 +255,19 @@ function UserTable() {
                   alt="Perfil" 
                   className="profile-image"
                 />
-                <input type="file" accept="image/*" onChange={handleImageChange} />
               </div>
+              <label htmlFor="fileInput">
+                Cambiar Foto del Estudiante
+                <input 
+                  id="fileInput" 
+                  type="file" 
+                  name="imageFile" 
+                  accept="image/*" 
+                  onChange={handleImageChange} 
+                  style={{ display: "none" }} // opcional para ocultar el input
+                />
+              </label>
+
 
               <label><p>Nombre:</p> 
                 <input type="text" name="userName" value={formData.userName} onChange={(e) => setFormData({ ...formData, userName: e.target.value })} />

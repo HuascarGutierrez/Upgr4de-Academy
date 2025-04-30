@@ -219,7 +219,7 @@ useEffect(() => {
             </label>
 
             {
-              <label>
+              <label className='btn-img'>
                 Arrastra una imagen aquí
                 <input
                   type="file"

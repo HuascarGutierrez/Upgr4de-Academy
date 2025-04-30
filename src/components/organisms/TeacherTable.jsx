@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from '../../config/app';
 import './styles/UserTable.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function TeacherTable() {
   const navigate = useNavigate();
@@ -15,6 +17,10 @@ function TeacherTable() {
     imageUrl: '',
     activo: false,
   });
+  const [newImageFile, setNewImageFile] = useState(null);
+  const [previewImageUrl, setPreviewImageUrl] = useState('');
+
+
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -57,24 +63,65 @@ function TeacherTable() {
 
   const handleUpdate = async () => {
     try {
+      let imageUrl = formData.imageUrl;
+  
+      if (newImageFile) {
+        const storage = getStorage();
+        const storageRef = ref(storage, `images_profiles/${newImageFile.name}`);
+        await uploadBytes(storageRef, newImageFile);
+        imageUrl = await getDownloadURL(storageRef);
+      }
+  
       const docRef = doc(db, "teacher", editingTeacher);
-      await updateDoc(docRef, formData);
-      setTeachers(teachers.map(t => (t.id === editingTeacher ? { ...t, ...formData } : t)));
-      toast.success("Docente actualizado");
+      await updateDoc(docRef, {
+        ...formData,
+        imageUrl,
+      });
+  
+      setTeachers(teachers.map(t =>
+        t.id === editingTeacher ? { ...t, ...formData, imageUrl } : t
+      ));
+      Swal.fire({
+        title: "Drag me!",
+        icon: "success",
+        draggable: true
+      });
       setEditingTeacher(null);
+      setNewImageFile(null);
     } catch (error) {
-      toast.error("Error al actualizar docente");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+  };
+  
+
+  const handleChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+    if (name === "imageFile") {
+      const file = files[0];
+      setNewImageFile(file);
+      if (file) {
+        setPreviewImageUrl(URL.createObjectURL(file));
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: type === 'checkbox' ? checked : value,
+      });
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+  const handleCancel = () => {
+    setEditingTeacher(null);
+    setNewImageFile(null);
+    setPreviewImageUrl('');
   };
-
+  
+  
+  
   return (
     <div className="Tabla">
       <div className='Header_UserTable'>
@@ -122,7 +169,23 @@ function TeacherTable() {
         <div className="modal-overlay">
           <div className="modal">
             <h2>Editar Docente</h2>
-            <form onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
+            <form className='Form_edit' onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
+            <label>
+            Foto del docente:
+              <div className="profile-section">
+                
+                  <img
+                    src={previewImageUrl || formData.imageUrl}
+                    alt="Previsualización"
+                    className="profile-image"
+                  />
+                </div>
+              </label>
+              <label htmlFor="fileInput">
+                Cambiar Foto del Docente
+                <input id="fileInput" type="file" name="imageFile" accept="image/*" onChange={handleChange} />
+              </label>
+
               <label>
                 Nombre:
                 <input type="text" name="teacherName" value={formData.teacherName} onChange={handleChange} />
@@ -131,17 +194,18 @@ function TeacherTable() {
                 Email:
                 <input type="email" name="email" value={formData.email} onChange={handleChange} />
               </label>
-              <label>
-                URL de Imagen:
-                <input type="text" name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
-              </label>
-              <label>
-                Activo:
-                <input type="checkbox" name="activo" checked={formData.activo} onChange={handleChange} />
-              </label>
+              {/* <label>
+                <div>
+                  Cambiar Portada
+                <input type="file" name="imageFile" accept="image/*" onChange={handleChange} />
+                </div>
+              </label>*/}
+              
+
+          
               <div className="modal-buttons">
                 <button type="submit" className="btn-save">Guardar</button>
-                <button type="button" className="btn-cancel" onClick={() => setEditingTeacher(null)}>Cancelar</button>
+                <button type="button" className="btn-cancel" onClick={handleCancel}>Cancelar</button>
               </div>
             </form>
           </div>

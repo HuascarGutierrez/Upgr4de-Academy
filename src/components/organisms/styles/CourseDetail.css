@@ -144,6 +144,12 @@
   font-size: var(--font-size-base);
 }
 
+.exercises-item{
+  background-color: var(--brandy-punch-100);
+  font-style: italic;
+}
+
+
 .actions {
   display: flex;
   flex-wrap: wrap;

@@ -189,6 +189,7 @@ function CourseDetail({user}) {
                   <span className="arrow">{openUnitIndex === index ? '▲' : '▼'}</span>
                 </div>
                 {openUnitIndex === index && (
+                  <>
                   <div className="lessons-list">
                     {lessons.map((lesson) => (
                       <
@@ -199,7 +200,15 @@ function CourseDetail({user}) {
                         <span>{lesson.title}</span>
                       </div>
                     ))}
+                    <div
+                        className="lesson-item exercises-item"
+                        onClick={() => navigate('/main/courses/course/interactive-exercises', {state: {unitTitle: unit.title, unitId: unit.id}})}   
+                  >
+                        <span>Ejercicios de la Unidad</span>
+                      </div>
                   </div>
+                  
+                  </>
                 )}
               </div>
             ))}

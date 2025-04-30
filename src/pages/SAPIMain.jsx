@@ -11,6 +11,7 @@ import CoursesCatalog from '../components/organisms/CoursesCatalog'
 import CourseDetail from '../components/organisms/CourseDetail'
 import InteractiveCourse from '../components/organisms/InteractiveCourse'
 import UserTable from '../components/organisms/UserTable'
+import ModuloEjercicios from '../components/organisms/ModuloEjercicios'
 
 
 function SAPIMain({user}) {
@@ -26,6 +27,7 @@ function SAPIMain({user}) {
                 <Route path='/perfil' element={<Perfil user={user}/>}/> 
                 <Route path='/courses/course' element={<CourseDetail user={user}/>} />
                 <Route path='/courses/course/interactive-course' element={<InteractiveCourse user={user}/>} />
+                <Route path='/courses/course/interactive-exercises' element={<ModuloEjercicios user={user}/>} />
             </Routes>
         </div>
     </div>

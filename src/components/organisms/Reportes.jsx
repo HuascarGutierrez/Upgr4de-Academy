@@ -495,7 +495,7 @@ const Reportes = () => {
         <h1 className="report-unidad-title">Previsualización del reporte</h1>
         {coursesData.length > 0 && (
           <p className="data-status">
-            Datos cargados: {coursesData.length} cursos, {usersData.length} usuarios, {teachersData.length} profesores
+            {/* Datos cargados: {coursesData.length} cursos, {usersData.length} usuarios, {teachersData.length} profesores */}
           </p>
         )}
       </div>

@@ -86,6 +86,8 @@
 
 .signup_message {
     display: none;
+    text-align: center;
+    align-items: center;
 }
 
 input[type="file"] {
@@ -145,7 +147,7 @@ label[for="fileInput"]:hover {
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        align-items: start;
+        align-items: center;
         gap: 18px;
         width: 50%;
         height: calc(100dvh - 82px);
@@ -215,3 +217,27 @@ label[for="fileInput"]:hover {
     height: 100%;
     object-fit: cover; /* Recorta o escala la imagen para cubrir el contenedor */
 }
+
+.input-with-icon {
+    position: relative;
+  }
+  
+  .input-with-icon input {
+    width: 100%;
+  }
+  
+  .eye-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin-top: .6rem;
+  }
+
+  .eye-icon img{
+    width: 4rem;
+    height: 4rem; 
+    margin-top: 1rem;
+    margin-left: 2.5rem;
+  }
+  

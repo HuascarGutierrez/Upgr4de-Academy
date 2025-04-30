@@ -18,6 +18,18 @@ function SignUp() {
   const [hasPhoto, setHasPhoto] = useState(false);
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(prev => !prev);
+  };
+
   const fullNameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -99,12 +111,52 @@ function SignUp() {
                     <label htmlFor="email"> Correo Electrónico
                         <input className="form_input"  type="email" id="email" placeholder="tucorreo@email.com" ref={emailRef} required/>
                     </label>
-                    <label htmlFor="password"> Contraseña
+                    {/*<label htmlFor="password"> Contraseña
                         <input className="form_input" type="password" id="password" placeholder="Contraseña" ref={passwordRef} required/>
                     </label>
                     <label htmlFor="confirmPassword"> Confirmar contraseña
                         <input className="form_input" type="password" id="confirmPassword" placeholder="Repita su contraseña" ref={passwordVerREf} required/>
+                    </label>*/}
+                    <label htmlFor="password">
+                      Contraseña
+                      <div className="input-with-icon">
+                        <input
+                          className="form_input"
+                          type={showPassword ? "text" : "password"}
+                          id="password"
+                          placeholder="Contraseña"
+                          ref={passwordRef}
+                          required
+                        />
+                        <span onClick={togglePasswordVisibility} className="eye-icon">
+                          <img
+                            src={showPassword ? "/Icons/eye-slash.svg" : "/Icons/eye.svg"}
+                            alt="Ver contraseña"
+                          />
+                        </span>
+                      </div>
                     </label>
+
+                    <label htmlFor="confirmPassword">
+                      Confirmar contraseña
+                      <div className="input-with-icon">
+                        <input
+                          className="form_input"
+                          type={showConfirmPassword ? "text" : "password"}
+                          id="confirmPassword"
+                          placeholder="Repita su contraseña"
+                          ref={passwordVerREf}
+                          required
+                        />
+                        <span onClick={toggleConfirmPasswordVisibility} className="eye-icon">
+                          <img
+                            src={showConfirmPassword ? "/Icons/eye-slash.svg" : "/Icons/eye.svg"}
+                            alt="Ver contraseña"
+                          />
+                        </span>
+                      </div>
+                    </label>
+                  
                     <label htmlFor="fileInput"> Ingresa una foto de perfil
                         {hasPhoto &&
                         <div style={{display: 'inline-block'}}><FaCheckCircle className="check-icon" />
@@ -122,7 +174,8 @@ function SignUp() {
         </div>
       <div className="signup_message">
         <span className="message_overlay"></span>
-        <h3>¡Bienvenido a la comunidad SAPI! <br /> ¡Hola, futuro crack de las ciencias! 😎</h3>
+        <h3>¡Bienvenido a la comunidad SAPI! </h3>
+        <h3>¡Hola, futuro crack de las ciencias! 😎</h3>
         <p>Te estás uniendo como estudiante a SAPI, la plataforma diseñada para ayudarte a dominar lo que antes parecía difícil. <br />
 💡 ¡El primer paso para aprender más, comienza hoy!</p>
         <GoogleButton />

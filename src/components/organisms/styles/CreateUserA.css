@@ -128,9 +128,21 @@ input[type="file"] {
   
   .eye-icon {
     position: absolute;
-    right: 10px;
-    top: 50%;
+    right: 5rem;
+    top: 40%;
     transform: translateY(-50%);
     cursor: pointer;
-  }
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    width: 2rem;
+}
+
+.eye-icon img{
+  width: 4rem;
+  height: 4rem;
+  margin-right: 5rem;
+}
+
   

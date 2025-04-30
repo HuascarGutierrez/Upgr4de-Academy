@@ -142,7 +142,7 @@ body {
   border: 1px solid var(--black-300);
   border-radius: 8px;
   font-size: var(--font-size-base);
-  color: var(--color-text);
+  color: var(--black-950);
 }
 
 /* Public Profile Card */

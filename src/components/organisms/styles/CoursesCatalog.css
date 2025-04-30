@@ -92,12 +92,14 @@
     font-weight: bold;
     margin-top: 20px;
     color: black;
+    font-size: var(--font-size-xl);
 }
 
 .weekly-description {
     font-weight: normal;
     margin-top: 20px;
     color: black;
+    font-size: var(--font-size-lg);
 }
 
 .course-grid {
@@ -154,6 +156,14 @@
     justify-content: space-between;
     font-size: 1.6rem;
     color: #555;
+}
+
+.noItems {
+    width: 100%;
+    color: black;
+    text-align: center;
+    font-size: var(--font-size-xl);
+    margin: 5rem;
 }
 
 @media (max-width: 768px) {

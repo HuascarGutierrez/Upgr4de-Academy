@@ -5,7 +5,7 @@ import { db } from '../../config/app';
 import React, { useEffect, useState } from 'react';
 import CourseModel from '../../models/course_model';
 
-function CoursesCatalog() {
+function CoursesCatalog({user}) {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [myCategory, setMyCategory] = useState('Álgebra'); 
@@ -76,7 +76,7 @@ function CoursesCatalog() {
       <h2 className="weekly-streak">Inicia una racha semanal</h2>
       <p className="weekly-description">Visita 5 min de video o prueba al día para lograr tus objetivos</p>
       <div className="course-grid">
-        {courses.map((course) => (
+        {user?.planType != "Gratuito" ? (courses.map((course) => (
           <div
             key={course.id}
             className="course-card"
@@ -99,7 +99,9 @@ function CoursesCatalog() {
               </div>
             </div>
           </div>
-        ))}
+        ))):
+        (<h3 className='noItems'>Cursos disponibles en el plan Mensual</h3>)
+        }
       </div>
     </div>
   );

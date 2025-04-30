@@ -38,9 +38,9 @@
 }
 
 .qr-code {
-    width: 150px;
+    width: 400px;
     /* Ajusta el tamaño del QR */
-    height: 150px;
+    height: 400px;
     /* Ajusta el tamaño del QR */
     border: 1px solid #ccc;
     /* Opcional: borde alrededor del QR */

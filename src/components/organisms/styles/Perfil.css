@@ -1,34 +1,42 @@
-/* styles/Perfil.css - Versión Simplificada y Ajustada */
-body {
-  background-color: var(--black-50);
-  color: var(--color-text);
-  font-size: var(--font-size-base);
-}
-
 .profile-container {
+  font-size: var(--font-size-base);
   display: grid;
+  /* Tu definición de grilla para los hijos directos de profile-container */
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 30px;
   padding: 40px;
   background-color: white;
-  max-width: 1200px;
-  margin: 30px auto;
+  max-width: 1300px;
+  /* Ancho máximo */
+
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+  /* --- CENTRADO HORIZONTAL --- */
+  /* margin: 40px auto; */
+  /* Puedes usar 40px para margen superior/inferior */
+  margin-left: auto;
+  /* Centra automáticamente el margen izquierdo */
+  margin-right: auto;
+  /* Centra automáticamente el margen derecho */
+
 }
 
 .bento-grid {
   display: grid;
+  /* Tu definición de grilla para las cajas bento */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 25px;
+  /* No necesita centrado, ya está dentro del contenedor centrado */
 }
 
 .bento-box {
-  background-color: #ffffff;
+  background-color: var(--black-50);
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  padding: 50px;
   transition: all 0.3s ease-in-out;
+  /* No necesita centrado, es un ítem de grilla */
 }
 
 .bento-box:hover {
@@ -36,22 +44,26 @@ body {
 }
 
 .bento-title {
-  background-color:var(--black-50);
+  background-color: var(--black-50);
   grid-column: 1 / -1;
   font-size: var(--font-size-2xl);
   font-weight: bold;
   color: var(--swans-down-900);
-  padding: 15px;
+  padding: 20px;
   margin-bottom: 15px;
 
-  border-radius: 10px; /* Redondea los bordes */
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), /* Sombra inferior derecha */
-              -5px 5px 10px rgba(0, 0, 0, 0.1); /* Sombra inferior izquierda */
+  border-radius: 10px;
+  /* Redondea los bordes */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+    /* Sombra inferior derecha */
+    -5px 5px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra inferior izquierda */
 }
 
 .menu-card {
   width: 100%;
   max-width: 400px;
+
 }
 
 .profile-header {
@@ -117,12 +129,14 @@ body {
 .my-profile-card,
 .subscription-card,
 .payments-card {
+  color: var(--swans-down-700);
   width: 210%;
+  /* Considera ajustar esto si causa problemas de layout */
   padding: 40px;
 }
 
 /* My Profile Card */
-.my-profile-card > form {
+.my-profile-card>form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -217,28 +231,46 @@ body {
   justify-content: center;
   gap: 40px;
   margin-bottom: 40px;
+  flex-wrap: wrap;
+  /* Permite que los planes se envuelvan en pantallas pequeñas */
 }
 
 .subscription-card .plan-item {
-  flex: 1 1 600px; /* Ajustado para ocupar más espacio inicialmente */
+  flex: 1 1 300px;
+  /* Permite que los ítems crezcan y encojan, base 300px */
+  max-width: 400px;
+  /* Añade un ancho máximo para que no se hagan demasiado grandes en pantallas grandes */
   padding: 35px;
   background-color: var(--black-50);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--black-100);
   text-align: center;
+  display: flex;
+  /* Usa flexbox para mejor control del contenido interno */
+  flex-direction: column;
+  justify-content: space-between;
+  /* Distribuye el espacio entre los hijos */
 }
 
 .subscription-card h2,
 .subscription-card h3,
 .subscription-card .plan-item h4 {
-  color: var(--swans-down-700); /* Unificamos el color del título principal y de los planes */
+  font-size: var(--font-size-xl);
+  color: var(--swans-down-700);
+  /* Unificamos el color del título principal y de los planes */
 }
 
-.subscription-card h2,
+.subscription-card h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: 25px;
+  color: var(--swans-down-700);
+}
+
 .subscription-card h3 {
   font-size: var(--font-size-lg);
   margin-bottom: 25px;
+  color: var(--swans-down-700);
 }
 
 .subscription-card .plan-item h4 {
@@ -247,17 +279,49 @@ body {
   font-weight: 600;
 }
 
+/* --- ESTILOS PARA EL PRECIO --- */
+.subscription-card .plan-price {
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  /* Tamaño de fuente más grande para el precio */
+  font-weight: bold;
+  color: var(--primary-color);
+  /* Usa un color destacado para el precio */
+  text-align: center;
+  /* Asegura que el precio esté centrado */
+}
+
+.subscription-card .plan-price .price-free {
+  color: var(--success-color);
+  /* Color verde para "Gratis" */
+  font-size: 1.2em;
+  /* Puede ser ligeramente más pequeño que los precios de pago */
+}
+
+.subscription-card .plan-price .price-value {
+  /* Estilos específicos para el valor del precio si los necesitas */
+  color: var(--swans-down-800);
+  /* Un color para el precio de pago */
+}
+
+/* --- FIN ESTILOS PARA EL PRECIO --- */
+
+
 .subscription-card .plan-description {
   color: var(--black-800);
   margin-bottom: 25px;
   font-size: var(--font-size-base);
   line-height: 1.7;
+  flex-grow: 1;
+  /* Permite que la descripción ocupe el espacio disponible */
 }
 
 .subscription-card .plan-benefits {
   list-style: none;
   padding-left: 0;
   margin-bottom: 30px;
+  text-align: left;
+  /* Alinea los beneficios a la izquierda */
 }
 
 .subscription-card .plan-benefits li {
@@ -288,11 +352,13 @@ body {
   margin-top: 40px;
   padding-top: 40px;
   border-top: 1px solid var(--black-200);
+
 }
 
 .subscription-card .current-plan .plan-item {
   background-color: var(--swans-down-50);
   border: 1px solid var(--swans-down-200);
+  
 }
 
 .subscription-card .current-plan .plan-item h4 {
@@ -346,7 +412,8 @@ body {
   border: 1px solid var(--black-300);
   border-radius: 8px;
   font-size: var(--font-size-base);
-  color: var(--black-900); /* Unificamos el color del texto de los inputs */
+  color: var(--black-900);
+  /* Unificamos el color del texto de los inputs */
   background-color: white;
 }
 
@@ -373,7 +440,10 @@ body {
 
   .subscription-card .plan-item {
     width: 90%;
-    margin-bottom: 30px;
+    max-width: none;
+    /* Elimina el max-width en pantallas pequeñas */
+    margin-bottom: 0;
+    /* El gap ya maneja el espacio */
   }
 }
 
@@ -389,7 +459,32 @@ body {
     margin-bottom: 30px;
   }
 
-  .menu-card,
+  .menu-card {
+    max-width: none;
+    /* Permite que el menú ocupe el ancho completo */
+  }
+
+  .menu {
+    flex-direction: row;
+    /* Cambia el menú a horizontal */
+    flex-wrap: wrap;
+    /* Permite que los ítems se envuelvan */
+    justify-content: center;
+    /* Centra los ítems del menú */
+    gap: 10px;
+    /* Espacio entre los ítems horizontales */
+  }
+
+  .menu-item {
+    flex-grow: 1;
+    /* Permite que los botones crezcan */
+    text-align: center;
+    /* Centra el texto en los botones horizontales */
+    margin-bottom: 0;
+    /* Remueve el margen inferior */
+  }
+
+
   .public-profile-card,
   .my-profile-card,
   .subscription-card,
@@ -407,12 +502,6 @@ body {
 
   .profile-info .name {
     font-size: var(--font-size-lg);
-  }
-
-  .menu-item {
-    font-size: var(--font-size-sm);
-    padding: 12px 20px;
-    margin-bottom: 10px;
   }
 
   .subscription-card .plan-item h4 {

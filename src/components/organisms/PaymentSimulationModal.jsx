@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/PaymentSimulationModal.css'; // Necesitarás crear este archivo CSS
+import qrImage from '/images/qr.webp'; // Importa la imagen
 // Si utilizas PropTypes, importarlos aquí:
 // import PropTypes from 'prop-types';
 
@@ -14,7 +15,7 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose }) {
                 <h2>Pago del plan {plan}</h2>
                 <p>Escanea el código QR para realizar el pago.</p>
                 <div className="qr-code-container">
-                    <img src={qrCodePlaceholder} alt="Código QR de ejemplo" className="qr-code" />
+                    <img src={qrImage} alt="Código QR de ejemplo" className="qr-code" />
                     {/* O si no tienes la imagen, podrías usar un div con estilo */}
                     {/* <div className="qr-code-placeholder">QR Code Placeholder</div> */}
                 </div>

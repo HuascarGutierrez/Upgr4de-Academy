@@ -28,6 +28,7 @@ function Perfil({ user }) {
         'Evaluaciones y ejercicios',
       ],
       plan: 'Gratuito',
+      price: 0, // Precio en Bolivianos
     },
     {
       name: 'Plan Mensual',
@@ -39,6 +40,7 @@ function Perfil({ user }) {
         'Evaluaciones y ejercicios',
       ],
       plan: 'Mensual',
+      price: 120, // Precio en Bolivianos
     },
   ]);
 
@@ -115,7 +117,7 @@ function Perfil({ user }) {
         alertWarning(`Error al actualizar la imagen: ${error}`);
       }
     } else if (!user?.email || !user?.uid) {
-        alertWarning("No se pudo obtener la información del usuario para actualizar la imagen.");
+      alertWarning("No se pudo obtener la información del usuario para actualizar la imagen.");
     }
     setWait(false);
   };
@@ -127,21 +129,21 @@ function Perfil({ user }) {
       alertWarning('El nombre debe tener al menos 8 caracteres');
       return;
     }
-     if (!user?.uid) { // Verifica que el uid del usuario exista
-        alertWarning("No se pudo obtener la información del usuario para actualizar el nombre.");
-        return;
+    if (!user?.uid) { // Verifica que el uid del usuario exista
+      alertWarning("No se pudo obtener la información del usuario para actualizar el nombre.");
+      return;
     }
     const db = getFirestore();
     // Usa user.uid para la referencia al documento
     const userRef = doc(db, 'users', user.uid);
     try {
-        await setDoc(userRef, {
-            userName: fullName,
-        }, { merge: true });
-        // Considera actualizar el estado del usuario en lugar de recargar
-        location.reload(); // Mantengo tu lógica original, pero es mejor evitarlo
+      await setDoc(userRef, {
+        userName: fullName,
+      }, { merge: true });
+      // Considera actualizar el estado del usuario en lugar de recargar
+      location.reload(); // Mantengo tu lógica original, pero es mejor evitarlo
     } catch (error) {
-        alertWarning(`Error al guardar el nombre: ${error}`);
+      alertWarning(`Error al guardar el nombre: ${error}`);
     }
   };
 
@@ -154,13 +156,13 @@ function Perfil({ user }) {
     const db = getFirestore();
     const userRef = doc(db, 'users', user.uid); // Usa user.uid
     try {
-        await setDoc(userRef, {
-            planType: plan,
-        }, { merge: true });
-        // Considera actualizar el estado del usuario en lugar de recargar
-        location.reload(); // Mantengo tu lógica original, pero es mejor evitarlo
-    } catch(error) {
-        alertWarning(`Error al actualizar el plan: ${error}`);
+      await setDoc(userRef, {
+        planType: plan,
+      }, { merge: true });
+      // Considera actualizar el estado del usuario en lugar de recargar
+      location.reload(); // Mantengo tu lógica original, pero es mejor evitarlo
+    } catch (error) {
+      alertWarning(`Error al actualizar el plan: ${error}`);
     }
   }
 
@@ -223,13 +225,6 @@ function Perfil({ user }) {
           >
             SUSCRIPCIÓN
           </button>
-          <button
-            className={`menu-item ${activeView === 'paymentMethod' ? 'active' : ''}`}
-            onClick={() => handleViewChange('paymentMethod')}
-            type="button"
-          >
-            MÉTODO DE PAGO
-          </button>
           <button onClick={handleSignOut} className="menu-item" type="button">
             CERRAR SESIÓN
           </button>
@@ -239,7 +234,7 @@ function Perfil({ user }) {
       {activeView === 'publicProfile' && (
         <div id="perfilPublico" className="public-profile-card bento-box">
           <div className="profile-info">
-             {/* Simplifica la lógica para mostrar la imagen usando un operador ternario */}
+            {/* Simplifica la lógica para mostrar la imagen usando un operador ternario */}
             <img src={user?.imageUrl || "/images/default_img_profile.webp"} alt="" className="avatar-large" />
             {/* Usa user?.userName directamente */}
             <div className="name">{user?.userName || 'Cargando Nombre...'}</div>
@@ -292,7 +287,7 @@ function Perfil({ user }) {
               />
               {/* El botón submit dentro del form activará handleSaveName */}
               {/* Añade type="submit" explícitamente */}
-              <button type="submit" className="save-button">Guardar Nombre</button>
+              <button className="subscribe-button">Guardar Cambios</button>
             </label>
           </form>
         </div>
@@ -307,62 +302,14 @@ function Perfil({ user }) {
         />
       )}
 
-      {activeView === 'paymentMethod' && (
-        <div id="metodoPago" className="payments-card bento-box">
-          <h2>Método de Pago</h2>
-          <div className="payments-form">
-            <div className="form-group">
-              <label className="form-label">Método de Pago</label>
-              <select
-                className="form-select"
-                value={paymentMethod}
-                onChange={handlePaymentMethodChange}
-              >
-                <option value="">Seleccione un método</option>
-                <option value="tarjeta">Tarjeta de Crédito</option>
-                <option value="paypal">PayPal</option>
-              </select>
-            </div>
-            {paymentMethod === 'tarjeta' && (
-              // Puedes envolver estos inputs relacionados en un div
-              <div>
-                <div className="form-group">
-                  <label className="form-label">Número de Tarjeta</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    placeholder="XXXX-XXXX-XXXX-XXXX"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Fecha de Expiración</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    placeholder="MM/AA"
-                    value={expirationDate}
-                    onChange={(e) => setExpirationDate(e.target.value)}
-                  />
-                </div>
-                {/* Aquí iría un botón para guardar el método de pago si se implementara */}
-              </div>
-            )}
-            {/* Aquí iría un botón para guardar el método de pago si se implementara */}
-            {/* <button type="button" className="save-payment-button">Guardar Método de Pago</button> */}
-          </div>
-        </div>
-      )}
-
       {/* Renderiza el modal de pago condicionalmente */}
       {showPaymentModal && (
         <PaymentSimulationModal
           plan={planToSubscribe}
           onPaymentComplete={handlePaymentComplete}
           onClose={handleClosePaymentModal} // Pasa la función para cerrar
-          // Opcional: Puedes pasar el usuario si el modal lo necesita
-          // user={user}
+        // Opcional: Puedes pasar el usuario si el modal lo necesita
+        // user={user}
         />
       )}
 

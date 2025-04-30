@@ -104,7 +104,7 @@ function Perfil({user}) {
         imageUrl: url,
       }, { merge: true }).then(() => {location.reload();});
     }
-    setWait(true);
+    setWait(false);
   };
   
   const handleSaveName = async (e) => {
@@ -169,7 +169,9 @@ function Perfil({user}) {
       <div className="menu-card">
       
         <div className="profile-header">
-          <img src={usuario?.imageUrl} alt="Avatar" className="avatar" />
+          {usuario?
+          <img src={usuario?.imageUrl} alt="Avatar" className="avatar" />:
+          <img src="/images/default_img_profile.webp" className='avatar'/>}
           <div className="profile-info">
             <div className="name">{usuario?.userName}</div>
           </div>

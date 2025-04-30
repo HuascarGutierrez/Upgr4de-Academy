@@ -88,6 +88,36 @@
     display: none;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+label[for="fileInput"] {
+    width: fit-content;
+    display: inline-block;
+    background-color: var(--brandy-punch-400); 
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: sans-serif;
+    transition: background-color 0.3s ease;
+}
+label[for="fileInput"]:hover {
+    background-color: var(--brandy-punch-700); 
+}
+
+.check-icon {
+    margin-inline: 1rem;
+}
+.cancelImageButton {
+    border-radius: 10px;
+    background-color: var(--brandy-punch-200);
+    padding: 5px 10px;
+    color: black;
+}
+
 @media screen and (min-width: 500px) {
     .signup_title {
         text-align: center;

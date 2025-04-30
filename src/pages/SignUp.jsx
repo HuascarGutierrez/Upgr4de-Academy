@@ -14,7 +14,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 function SignUp() {
   const [waiting, setWaiting] = useState(false);
   const [image, setImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  //const [imageUrl, setImageUrl] = useState(null);
   const [hasPhoto, setHasPhoto] = useState(false);
   const navigate = useNavigate();
 

@@ -142,6 +142,8 @@ function CourseDetail({user}) {
       <div className="course-detail-card">
         <div className="course-banner-title">
           <div className="banner-content">
+          <a onClick={() => navigate(-1)} className="back-link">Regresar</a>
+
             <div>
               <h1 className="banner-title">{course.title}</h1>
               <h2 className="banner-subtitle">CURSO PRÁCTICO</h2>
@@ -154,15 +156,26 @@ function CourseDetail({user}) {
             <h3 className="course-title">{course.title}</h3>
             <span className="course-category">{course.category}</span>
           </div>
-          <div className="rating">
-            <span className="rating-label">Calificación:</span>
-            <span className="rating-value">{"N/A"}</span>
-            <span className="star">&#9733;</span>
-          </div>
+          
           <p className="instructor">{course.teacher}</p>
           <div className="description">
             <p>{course.description}</p>
           </div>
+
+          <div className="actions">
+            {
+              enrolled?
+              <button onClick={()=>{deleteEnrolledCourse();}} className='actions_enrollCourse-enrolled'>Quitar de las estadísticas</button>:
+              <button className='actions_enrollCourse' onClick={()=>{enrollCourse(course)}}>Agregar a las estadísticas</button>
+            }
+          </div>
+          {
+            enrolled && (<div className="rating">
+              <span className="rating-label">Calificación:</span>
+              <span className="rating-value">{"N/A"}</span>
+              <span className="star">&#9733;</span>
+            </div>)
+          }
 
           <div className="topics">
             <h3>Temario</h3>
@@ -192,14 +205,7 @@ function CourseDetail({user}) {
             ))}
           </div>
 
-          <div className="actions">
-            <a onClick={() => navigate(-1)} className="back-link">Regresar</a>
-            {
-              enrolled?
-              <button onClick={()=>{deleteEnrolledCourse();}} className='actions_enrollCourse-enrolled'>Quitar de las estadísticas</button>:
-              <button className='actions_enrollCourse' onClick={()=>{enrollCourse(course)}}>Agregar a las estadísticas</button>
-            }
-          </div>
+          
         </div>
       </div>
     </div>

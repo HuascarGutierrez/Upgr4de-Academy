@@ -165,11 +165,10 @@ function Perfil({user}) {
   return (
     
     <div className="profile-container">
-      <h1 className="bento-title">Perfil</h1>
       <div className="menu-card">
-      
+      <h2 className="bento-title">Mi perfil</h2>
         <div className="profile-header">
-          {usuario?
+          {usuario?.imageUrl != null ?
           <img src={usuario?.imageUrl} alt="Avatar" className="avatar" />:
           <img src="/images/default_img_profile.webp" className='avatar'/>}
           <div className="profile-info">

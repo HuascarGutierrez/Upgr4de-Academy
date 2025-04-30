@@ -242,6 +242,7 @@
   color: #333; /* Cambia este color según tu diseño */
 }
 .bento-title {
+  text-align: center;
   display: grid;
   font-size: var(--font-size-2xl);
   font-weight: bold;

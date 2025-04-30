@@ -38,8 +38,8 @@ function CoursesCatalog() {
         <nav className="nav-bar">
           <input type="text" placeholder="Busca el tema que necesitas" className="search-input" />
           <div className="nav-links">
-            <span>Mis Cursos</span>
-            <span>Progreso</span>
+            {/**<span>Mis Cursos</span>
+            <span>Progreso</span> */}
           </div>
         </nav>
       </header>
@@ -87,7 +87,9 @@ function CoursesCatalog() {
               style={{ backgroundImage: `url(${course.link_image})` }}
             >
               <div className="course-banner-faded-title">
-                <h3 className="course-title">{course.title}</h3>
+                <h3 className="course-title">{course.title.length > 32
+                                              ? course.title.slice(0, 29) + "..."
+                                              : course.title}</h3>
               </div>
             </div>
             <div className="course-content">

@@ -1,14 +1,10 @@
 import React from 'react';
-import './styles/PaymentSimulationModal.css'; // Necesitarás crear este archivo CSS
-import qrImage from '/images/qr.webp'; // Importa la imagen
-// Si utilizas PropTypes, importarlos aquí:
-// import PropTypes from 'prop-types';
+import './styles/PaymentSimulationModal.css'; 
+import qrImage from '/images/qr.webp'; 
+
 
 function PaymentSimulationModal({ plan, onPaymentComplete, onClose }) {
-    // Aquí podrías tener lógica para generar un QR real si lo tuvieras,
-    // pero para la simulación, usaremos una imagen o texto placeholder.
-    const qrCodePlaceholder = '/images/qr-placeholder.png'; // Asegúrate de tener una imagen de QR en esta ruta o ajusta la ruta
-
+    const qrCodePlaceholder = '/images/qr-placeholder.png'; 
     return (
         <div className="modal-overlay"> {/* Fondo oscuro semitransparente */}
             <div className="modal-content bento-box"> {/* Contenedor del contenido del modal */}
@@ -30,13 +26,5 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose }) {
     );
 }
 
-// Si usas PropTypes, descomenta y define las validaciones para tus props
-/*
-PaymentSimulationModal.propTypes = {
-  plan: PropTypes.string.isRequired, // plan debería ser un string y es requerido
-  onPaymentComplete: PropTypes.func.isRequired, // onPaymentComplete debería ser una función y es requerida
-  onClose: PropTypes.func.isRequired, // onClose debería ser una función y es requerida
-};
-*/
 
 export default PaymentSimulationModal;

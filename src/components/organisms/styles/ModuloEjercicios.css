@@ -358,3 +358,17 @@
     background-color: #10b981;
     border-radius: 9999px;
   }
+
+  .noExercises {
+    font-size: var(--font-size-2xl);
+    color: #000;
+    text-align: center;
+    margin: 5rem;
+  }
+
+.end-button {
+    background-color: #f55;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+}

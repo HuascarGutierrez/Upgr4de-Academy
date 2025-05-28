@@ -32,6 +32,12 @@ function Footer() {
         <li onClick={() => {navigate('/sobreNosotros')}} className="footer_item">
           <p>Sobre Nosotros</p>
         </li>
+        <li onClick={() => {navigate('/iniciodesesion')}} className="footer_item">
+          <p>Inicio de Sesion</p>
+        </li>
+        <li onClick={() => {navigate('/registro')}} className="footer_item">
+          <p>Registro</p>
+        </li>
       </section>
     </footer>
   )

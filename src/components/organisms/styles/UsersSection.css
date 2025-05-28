@@ -5,10 +5,17 @@
   font-size: var(--font-size-base);
 }
 
+.contenedor-title-users {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--swans-down-200);
+    margin-bottom: 1rem;
+}
+
+
 .users-unidad-title {
     text-align: center;
     font-size: var(--font-size-2xl);
-    margin-bottom: 2rem;
 
 }
 

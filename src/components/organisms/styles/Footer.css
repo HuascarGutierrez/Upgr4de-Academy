@@ -47,6 +47,7 @@
 
 .footer_item{
     list-style-type: none;
+    margin-bottom: 2rem;
 }
 
 .footer_item p {

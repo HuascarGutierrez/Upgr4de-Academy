@@ -71,7 +71,10 @@ const renderTable = (items, role) => (
 
   return (
     <div className="users-section">
-      <h1 className="users-unidad-title">Usuarios</h1>
+      <div className='contenedor-title-users'>
+        <h1 className="users-unidad-title">Usuarios</h1>
+      </div>
+      
       <div className="users-summary">
         <div className="summary-box">Estudiantes: {students.length}</div>
         <div className="summary-box">Docentes: {teachers.length}</div>

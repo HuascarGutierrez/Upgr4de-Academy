@@ -1,443 +1,214 @@
+/* src/components/styles/Perfil.css */
+
+/*
+  Ajustes para el contenedor principal del perfil
+  que afectarán el ancho de la caja de gamificación.
+*/
+
+.profile-page-wrapper {
+  display: flex;
+  flex-direction: column; /* Coloca elementos uno debajo del otro */
+  gap: 2.5rem; /* Espacio entre el título y el contenedor principal del perfil */
+  padding: 3rem 5rem; /* Padding general para la página */
+  max-width: 1600px; /* Ancho máximo para todo el contenido de la página de perfil */
+  margin: 0 auto; /* Centra el contenido en la página */
+  min-height: 100vh; /* Asegura que ocupe al menos el alto completo de la vista */
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+/* Nueva caja para el título de perfil */
+.profile-title-card {
+  /* Inherits bento-box styles for background, shadow, border-radius etc. */
+  padding: 2.5rem 3.5rem; /* Ajusta el padding para el título, más a los lados */
+  display: flex; /* Para controlar la alineación del h1 dentro */
+  align-items: center; /* Centra verticalmente el h1 */
+  justify-content: flex-start; /* Alinea el h1 a la izquierda */
+  min-height: 100px; /* Altura mínima para la caja del título */
+  /* Asegurémonos que el contenido se alinea a la izquierda dentro de esta caja */
+  text-align: left; /* Añadimos text-align: left aquí para su contenido */
+}
+
+.profile-main-title {
+  font-size: var(--font-size-3xl); /* Tamaño de fuente grande para el título principal */
+  color: var(--black-950);
+  font-weight: 700; /* Extra bold */
+  letter-spacing: -0.04em; /* Ligeramente más ajustado */
+  text-align: left; /* Asegura que el texto esté a la izquierda */
+  margin: 0; /* Asegurarse de que no tenga márgenes automáticos que lo centren */
+  padding: 0; /* Asegurarse de que no tenga padding que lo empuje */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible para que text-align funcione */
+  box-sizing: border-box; /* Para incluir padding/border si se añaden después */
+}
+
+/* Contenedor del menú y contenido principal del perfil (grid) */
 .profile-container {
-  font-size: var(--font-size-base);
   display: grid;
-  /* Tu definición de grilla para los hijos directos de profile-container */
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-  padding: 40px;
-  background-color: white;
-  max-width: 1300px;
-  /* Ancho máximo */
-
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-
-  /* --- CENTRADO HORIZONTAL --- */
-  /* margin: 40px auto; */
-  /* Puedes usar 40px para margen superior/inferior */
-  margin-left: auto;
-  /* Centra automáticamente el margen izquierdo */
-  margin-right: auto;
-  /* Centra automáticamente el margen derecho */
-
+  grid-template-columns: 280px 1fr; /* Menú lateral (fijo) y área de contenido (flexible) */
+  grid-template-areas: "menu content"; /* Definición de áreas para el grid */
+  gap: 2.5rem; /* Espacio entre el menú y el contenido */
+  /* NO poner padding ni max-width aquí, ya los controla profile-page-wrapper */
+  height: auto; /* Permite que el contenedor crezca con el contenido */
+  box-sizing: border-box;
 }
 
-.bento-grid {
-  display: grid;
-  /* Tu definición de grilla para las cajas bento */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-  /* No necesita centrado, ya está dentro del contenedor centrado */
-}
-
+/* Estilos de las "cajas bento" generales en el perfil */
 .bento-box {
   background-color: var(--black-50);
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 50px;
-  transition: all 0.3s ease-in-out;
-  /* No necesita centrado, es un ítem de grilla */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada para el efecto bento */
+  padding: 2.5rem; /* Padding general para las cajas bento internas */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid var(--black-100); /* Borde suave */
+  transition: all 0.3s ease-in-out; /* Transición para efectos de hover, etc. */
 }
 
 .bento-box:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
-.bento-title {
-  background-color: var(--black-50);
-  grid-column: 1 / -1;
-  font-size: var(--font-size-2xl);
-  font-weight: bold;
-  color: var(--swans-down-900);
-  padding: 20px;
-  margin-bottom: 15px;
-
-  border-radius: 10px;
-  /* Redondea los bordes */
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
-    /* Sombra inferior derecha */
-    -5px 5px 10px rgba(0, 0, 0, 0.1);
-  /* Sombra inferior izquierda */
-}
-
+/* Menú de navegación lateral */
 .menu-card {
-  width: 100%;
-  max-width: 400px;
-
+  grid-area: menu; /* Posiciona el menú en el área definida */
+  /* padding ya se aplica desde .bento-box */
 }
 
 .profile-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .avatar {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  margin-bottom: 20px;
-  border: 5px solid var(--swans-down-400);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  border: 4px solid var(--swans-down-400); /* Borde con tu color principal */
 }
 
 .profile-info .name {
   font-size: var(--font-size-xl);
   font-weight: 600;
-  color: var(--black-900);
-  text-align: center;
+  color: var(--black-950);
 }
 
-/* Menu Styles */
 .menu {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  margin-top: 30px;
+  gap: 1rem;
 }
 
 .menu-item {
-  padding: 15px 25px;
-  border: 1px solid var(--black-200);
-  background-color: #ffffff;
-  color: var(--black-800);
+  background: none;
+  border: none;
+  padding: 1rem 1.5rem;
   font-size: var(--font-size-base);
-  line-height: 1.6;
+  color: var(--black-700);
   text-align: left;
-  border-radius: 10px;
   cursor: pointer;
-  margin-bottom: 12px;
-  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 500;
 }
 
 .menu-item:hover {
-  background-color: var(--swans-down-50);
-  color: var(--swans-down-900);
-  border-color: var(--swans-down-300);
+  background-color: var(--black-100);
+  color: var(--black-950);
 }
 
 .menu-item.active {
-  background-color: var(--swans-down-500);
+  background-color: var(--swans-down-100); /* Un verde claro para el activo */
+  color: var(--swans-down-800); /* Un verde oscuro para el texto activo */
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Vistas de contenido principales - ahora todas envueltas por .content-wrapper */
+.content-wrapper {
+  grid-area: content; /* Posiciona el contenido principal en el área definida */
+  padding: 0;
+}
+
+/* Ajustes específicos para las tarjetas de perfil (si las necesitas) */
+.my-profile-card h2,
+.public-profile-card h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--black-950);
+  margin-bottom: 1.5rem;
+}
+
+.form-label-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--black-700);
+}
+
+/* ESTILOS UNIFICADOS PARA LOS TEXTOS DE LAS ETIQUETAS */
+.form-label-box .label-text {
+  font-size: var(--font-size-md); /* Unificado: Tamaño de texto para ambos labels */
+  font-weight: 600; /* Unificado: Peso de fuente para ambos labels */
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo para ocultar el input file original */
+.form-input-file-hidden {
+  display: none;
+}
+
+/* ESTILOS UNIFICADOS PARA LOS BOTONES */
+/* Aplica estos estilos a `subscribe-button` y `form-input-button` */
+.subscribe-button,
+.form-input-button {
+  background-color: var(--swans-down-500); /* Color principal para ambos botones */
   color: white;
-  border-color: var(--swans-down-500);
+  padding: 1rem 1.5rem; /* Padding unificado para ambos botones */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: var(--font-size-md); /* Tamaño de fuente unificado para ambos botones */
   font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  width: 100%; /* Asegura que ambos botones ocupen todo el ancho disponible */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  text-align: center; /* Centra el texto dentro del botón */
+  display: inline-flex; /* Permite centrar contenido si es necesario */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
 }
 
-/* Content Cards - General */
-.public-profile-card,
-.my-profile-card,
-.subscription-card,
-.payments-card {
-  color: var(--swans-down-700);
-  width: 210%;
-  /* Considera ajustar esto si causa problemas de layout */
-  padding: 40px;
+/* Efecto hover unificado para ambos botones */
+.subscribe-button:hover,
+.form-input-button:hover {
+  background-color: var(--swans-down-600);
+  transform: translateY(-1px);
 }
 
-/* My Profile Card */
-.my-profile-card>form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.my-profile-card .form-label-box {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  font-size: var(--font-size-md);
-  color: var(--black-800);
-  background-color: var(--swans-down-100);
-
-  /* Estilos para que parezca un botón */
-  padding: 1rem 1.5rem; /* Añade espacio interno */
-  border: 1px solid var(--black-300); /* Borde sutil */
-  border-radius: 0.5rem; /* Bordes redondeados */
-  cursor: pointer; /* Indica que es interactivo */
-  text-align: center; /* Centra el texto si es necesario */
-  transition: background-color 0.2s ease; /* Transición suave al pasar el ratón */
-}
-
-.my-profile-card .form-label-box:hover {
-  background-color: var(--swans-down-200); /* Ligeramente más oscuro al pasar el ratón */
-}
-
-.my-profile-card .form-label-box:active {
-  background-color: var(--swans-down-300); /* Más oscuro al hacer clic */
-  border-color: var(--black-500); /* Borde un poco más fuerte al hacer clic */
-}
-
-.my-profile-card .form-input-text,
-.my-profile-card .form-input-file {
-  padding: 12px;
+/* El input de texto se mantiene igual */
+.form-input-file,
+.form-input-text {
+  padding: 0.8rem 1rem;
   border: 1px solid var(--black-300);
   border-radius: 8px;
   font-size: var(--font-size-base);
   color: var(--black-950);
-}
-
-/* Public Profile Card */
-.public-profile-card .profile-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.public-profile-card .avatar-large {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  margin-bottom: 25px;
-  border: 4px solid var(--swans-down-400);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.public-profile-card .description {
-  color: var(--black-700);
-  text-align: center;
-  font-size: var(--font-size-base);
-  margin-bottom: 15px;
-}
-
-.public-profile-card .rank {
-  font-weight: 600;
-  color: var(--swans-down-700);
-  text-align: center;
-  font-size: var(--font-size-lg);
-}
-
-/* Badges */
-.badges h3 {
-  color: var(--black-900);
-  font-size: var(--font-size-lg);
-  margin-bottom: 20px;
-}
-
-.badge-item {
-  padding: 12px 18px;
-  background-color: var(--brandy-punch-100);
-  border-radius: 10px;
-  margin-bottom: 12px;
-  color: var(--brandy-punch-800);
-  font-size: var(--font-size-sm);
-  text-align: center;
-}
-
-/* Buttons */
-.save-button,
-.subscribe-button {
-  background-color: var(--swans-down-600);
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  font-size: var(--font-size-base);
-  font-weight: 500;
-}
-
-.save-button:hover,
-.subscribe-button:hover {
-  background-color: var(--swans-down-700);
-}
-
-/* Subscription Card */
-.subscription-card .available-plans {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-  /* Permite que los planes se envuelvan en pantallas pequeñas */
-}
-
-.subscription-card .plan-item {
-  flex: 1 1 300px;
-  /* Permite que los ítems crezcan y encojan, base 300px */
-  max-width: 400px;
-  /* Añade un ancho máximo para que no se hagan demasiado grandes en pantallas grandes */
-  padding: 35px;
   background-color: var(--black-50);
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--black-100);
-  text-align: center;
-  display: flex;
-  /* Usa flexbox para mejor control del contenido interno */
-  flex-direction: column;
-  justify-content: space-between;
-  /* Distribuye el espacio entre los hijos */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.subscription-card h2,
-.subscription-card h3,
-.subscription-card .plan-item h4 {
-  font-size: var(--font-size-xl);
-  color: var(--swans-down-700);
-  /* Unificamos el color del título principal y de los planes */
-}
-
-.subscription-card h2 {
-  font-size: var(--font-size-xl);
-  margin-bottom: 25px;
-  color: var(--swans-down-700);
-}
-
-.subscription-card h3 {
-  font-size: var(--font-size-lg);
-  margin-bottom: 25px;
-  color: var(--swans-down-700);
-}
-
-.subscription-card .plan-item h4 {
-  font-size: var(--font-size-xl);
-  margin-bottom: 25px;
-  font-weight: 600;
-}
-
-/* --- ESTILOS PARA EL PRECIO --- */
-.subscription-card .plan-price {
-  margin-bottom: 15px;
-  font-size: 1.8em;
-  /* Tamaño de fuente más grande para el precio */
-  font-weight: bold;
-  color: var(--primary-color);
-  /* Usa un color destacado para el precio */
-  text-align: center;
-  /* Asegura que el precio esté centrado */
-}
-
-.subscription-card .plan-price .price-free {
-  color: var(--success-color);
-  /* Color verde para "Gratis" */
-  font-size: 1.2em;
-  /* Puede ser ligeramente más pequeño que los precios de pago */
-}
-
-.subscription-card .plan-price .price-value {
-  /* Estilos específicos para el valor del precio si los necesitas */
-  color: var(--swans-down-800);
-  /* Un color para el precio de pago */
-}
-
-/* --- FIN ESTILOS PARA EL PRECIO --- */
-
-
-.subscription-card .plan-description {
-  color: var(--black-800);
-  margin-bottom: 25px;
-  font-size: var(--font-size-base);
-  line-height: 1.7;
-  flex-grow: 1;
-  /* Permite que la descripción ocupe el espacio disponible */
-}
-
-.subscription-card .plan-benefits {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 30px;
-  text-align: left;
-  /* Alinea los beneficios a la izquierda */
-}
-
-.subscription-card .plan-benefits li {
-  color: var(--black-800);
-  font-size: var(--font-size-sm);
-  line-height: 1.6;
-  padding-left: 1.4em;
-  position: relative;
-}
-
-.subscription-card .plan-benefits li::before {
-  content: "✓";
-  color: var(--swans-down-500);
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-
-.subscription-card .subscribed-text {
-  color: var(--swans-down-800);
-  font-weight: 600;
-  text-align: center;
-  margin-top: 25px;
-  font-size: var(--font-size-base);
-}
-
-.subscription-card .current-plan-container {
-  margin-top: 40px;
-  padding-top: 40px;
-  border-top: 1px solid var(--black-200);
-
-}
-
-.subscription-card .current-plan .plan-item {
-  background-color: var(--swans-down-50);
-  border: 1px solid var(--swans-down-200);
-  
-}
-
-.subscription-card .current-plan .plan-item h4 {
-  color: var(--swans-down-900);
-}
-
-.subscription-card .current-plan .plan-description {
-  color: var(--black-900);
-}
-
-.subscription-card .current-plan .plan-benefits li {
-  color: var(--black-900);
-}
-
-.subscription-card .current-text {
-  color: var(--swans-down-900);
-  font-weight: 600;
-  text-align: center;
-  margin-top: 25px;
-  font-size: var(--font-size-base);
-}
-
-/* Payments Card */
-.payments-card h2 {
-  font-size: var(--font-size-lg);
-  margin-bottom: 25px;
-  color: var(--black-900);
-}
-
-.payments-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-.payments-form .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.payments-form .form-label {
-  font-size: var(--font-size-md);
-  color: var(--black-900);
-  font-weight: 500;
-}
-
-.payments-card .form-select,
-.payments-card .form-input {
-  padding: 12px;
-  border: 1px solid var(--black-300);
-  border-radius: 8px;
-  font-size: var(--font-size-base);
-  color: var(--black-900);
-  /* Unificamos el color del texto de los inputs */
-  background-color: white;
-}
-
-.payments-card .form-select option {
-  color: var(--black-900);
-  background-color: white;
+.form-input-text:focus,
+.form-input-file:focus {
+  outline: none;
+  border-color: var(--swans-down-400);
+  box-shadow: 0 0 0 3px rgba(106, 166, 163, 0.2);
 }
 
 /* Loader */
@@ -445,139 +216,84 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60px;
+  min-height: 100px; /* Asegura un espacio para el loader */
 }
 
-/* Responsive Styles */
-@media (max-width: 900px) {
-  .subscription-card .available-plans {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+/* Responsive adjustments for Perfil.css */
+@media (max-width: 1400px) {
+  .profile-page-wrapper {
+    max-width: 1200px;
+    padding: 2.5rem 3.5rem;
+    gap: 2rem;
   }
+  .profile-title-card {
+    padding: 2rem 3rem;
+  }
+  .profile-main-title {
+    font-size: var(--font-size-4xl);
+  }
+}
 
-  .subscription-card .plan-item {
-    width: 90%;
-    max-width: none;
-    /* Elimina el max-width en pantallas pequeñas */
-    margin-bottom: 0;
-    /* El gap ya maneja el espacio */
+@media (max-width: 1024px) {
+  .profile-page-wrapper {
+    max-width: 960px;
+    padding: 2rem 2.5rem;
+    gap: 1.5rem;
+  }
+  .profile-title-card {
+    padding: 1.8rem 2.5rem;
+  }
+  .profile-main-title {
+    font-size: var(--font-size-3xl);
+  }
+  .profile-container {
+    grid-template-columns: 220px 1fr; /* Ajusta el menú lateral */
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .profile-container {
-    grid-template-columns: 1fr;
-    padding: 30px;
-    margin: 20px auto;
+  .profile-page-wrapper {
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
-
-  .bento-title {
+  .profile-title-card {
+    padding: 1.5rem 2rem;
+    min-height: 80px;
+  }
+  .profile-main-title {
     font-size: var(--font-size-2xl);
-    margin-bottom: 30px;
   }
-
+  .profile-container {
+    grid-template-columns: 1fr; /* Una sola columna para móviles: menú arriba, contenido abajo */
+    grid-template-areas:
+      "menu"
+      "content";
+    gap: 1.5rem;
+    height: auto; /* Permite que el contenedor crezca con el contenido */
+  }
   .menu-card {
-    max-width: none;
-    /* Permite que el menú ocupe el ancho completo */
-  }
-
-  .menu {
-    flex-direction: row;
-    /* Cambia el menú a horizontal */
-    flex-wrap: wrap;
-    /* Permite que los ítems se envuelvan */
-    justify-content: center;
-    /* Centra los ítems del menú */
-    gap: 10px;
-    /* Espacio entre los ítems horizontales */
-  }
-
-  .menu-item {
-    flex-grow: 1;
-    /* Permite que los botones crezcan */
-    text-align: center;
-    /* Centra el texto en los botones horizontales */
-    margin-bottom: 0;
-    /* Remueve el margen inferior */
-  }
-
-
-  .public-profile-card,
-  .my-profile-card,
-  .subscription-card,
-  .payments-card {
-    width: 95%;
-    margin: 15px auto;
-    padding: 30px;
-  }
-
-  .avatar {
-    width: 130px;
-    height: 130px;
-    margin-bottom: 15px;
-  }
-
-  .profile-info .name {
-    font-size: var(--font-size-lg);
-  }
-
-  .subscription-card .plan-item h4 {
-    font-size: var(--font-size-base);
-    margin-bottom: 20px;
-  }
-
-  .subscription-card .plan-description,
-  .subscription-card .plan-benefits li,
-  .subscription-card .subscribed-text,
-  .subscription-card .current-text {
-    font-size: var(--font-size-xs);
-  }
-
-  .payments-card h2 {
-    font-size: var(--font-size-lg);
-    margin-bottom: 20px;
+    width: 100%; /* El menú ocupa todo el ancho */
   }
 }
 
 @media (max-width: 480px) {
-  .profile-container {
-    padding: 20px;
-    margin: 15px auto;
+  .profile-page-wrapper {
+    padding: 1rem;
+    gap: 1rem;
   }
-
-  .bento-title {
+  .profile-title-card {
+    padding: 1rem 1.5rem;
+    min-height: 60px;
+  }
+  .profile-main-title {
     font-size: var(--font-size-xl);
-    margin-bottom: 25px;
   }
-
-  .avatar {
-    width: 110px;
-    height: 110px;
-    margin-bottom: 10px;
+  .bento-box {
+    padding: 1.5rem;
   }
-
-  .profile-info .name {
-    font-size: var(--font-size-md);
-  }
-
   .menu-item {
-    font-size: var(--font-size-xs);
-    padding: 10px 15px;
-    margin-bottom: 8px;
-  }
-
-  .subscription-card .plan-item {
-    padding: 25px;
-  }
-
-  .subscription-card .plan-item h4 {
     font-size: var(--font-size-sm);
-    margin-bottom: 15px;
-  }
-
-  .payments-card h2 {
-    font-size: var(--font-size-base);
-    margin-bottom: 15px;
+    padding: 0.8rem 1rem;
   }
 }

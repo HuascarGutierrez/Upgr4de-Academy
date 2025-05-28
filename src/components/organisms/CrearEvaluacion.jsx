@@ -270,7 +270,7 @@ const handleSubmitExercise = async (e) => {
             <label>
               Descripción de la unidad
               <p>
-                {units.find(unit => unit.id === formUnit.exerciseByUnitId)?.description || "Seleccione una unidad para ver la descripción."}
+                {units.find(unit => unit.id === formUnit.unitId)?.description || "Seleccione una unidad para ver la descripción."}
               </p>
             </label>
                 { formUnit.exerciseByUnitId !== "" && (
@@ -341,7 +341,7 @@ const handleSubmitExercise = async (e) => {
             <label>
               Descripción
               <p>
-                {listEvaluaciones.find(unit => unit.id === formExercise.unitId)?.description || "Seleccione una unidad para ver la descripción."}
+                {listEvaluaciones.find(unit => unit.id === formExercise.exerciseByUnitId)?.description || "Seleccione una unidad para ver la descripción."}
               </p>
             </label>
 

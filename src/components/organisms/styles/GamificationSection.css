@@ -1,0 +1,365 @@
+/* src/components/styles/GamificationSection.css */
+
+/*
+  Las variables de color y tipografía globales ya están declaradas en tu :root
+  (presumiblemente en tu archivo index.css o global.css).
+  Por lo tanto, este archivo CSS solo necesita HACER USO de ellas.
+*/
+
+.gamification-inner-content {
+    padding: 2rem;
+    /* Un padding interno para el contenido de gamificación */
+    background-color: var(--black-50);
+    /* Fondo blanco para las tarjetas bento internas */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: var(--black-950);
+    background: linear-gradient(135deg, var(--black-50) 0%, var(--swans-down-50) 100%);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Raleway', sans-serif;
+    height: 100%;
+    /* Asegura que ocupe todo el espacio disponible en su grid-area */
+}
+
+/* Pseudo-elementos para el fondo decorativo, ahora aplicados a .gamification-inner-content */
+.gamification-inner-content::before,
+.gamification-inner-content::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.gamification-inner-content::before {
+    width: 150px;
+    height: 150px;
+    background-color: var(--swans-down-400);
+    top: -50px;
+    left: -50px;
+    filter: blur(40px);
+}
+
+.gamification-inner-content::after {
+    width: 200px;
+    height: 200px;
+    background-color: var(--brandy-punch-400);
+    bottom: -80px;
+    right: -80px;
+    filter: blur(50px);
+}
+
+.gamification-title {
+    color: var(--black-950);
+    margin-bottom: 0.5rem;
+    font-size: var(--font-size-3xl);
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    z-index: 1;
+    /* Para que el título esté sobre los efectos de fondo */
+}
+
+.gamification-summary {
+    display: grid;
+    gap: 1.5rem;
+    z-index: 1;
+}
+
+/* Responsive adjustments for gamification-summary */
+@media (min-width: 600px) {
+    .gamification-summary {
+        grid-template-columns: 1fr 1fr;
+        /* Dos columnas de igual ancho */
+    }
+}
+
+@media (min-width: 992px) {
+    .gamification-summary {
+        grid-template-columns: 1fr 1fr;
+        /* Mantiene dos columnas en desktops */
+    }
+}
+
+.summary-item {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--black-100);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid var(--black-200);
+}
+
+.summary-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.summary-item h3 {
+    font-size: var(--font-size-md);
+    color: var(--black-700);
+    margin-bottom: 0;
+}
+
+.summary-item .summary-value {
+    font-size: var(--font-size-5xl);
+    font-weight: bold;
+    color: var(--swans-down-500);
+    line-height: 1;
+}
+
+.summary-icon {
+    font-size: var(--font-size-4xl);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.achievements-section,
+.badges-section {
+    margin-top: 1rem;
+    z-index: 1;
+}
+
+.achievements-section h3,
+.badges-section h3 {
+    color: var(--black-950);
+    margin-bottom: 1.5rem;
+    font-size: var(--font-size-xl);
+    text-align: center;
+    font-weight: 600;
+}
+
+.achievements-grid,
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.achievement-item,
+.badge-item {
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-item:hover,
+.badge-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.achievement-item.earned {
+    background-color: var(--swans-down-50);
+    border-color: var(--swans-down-400);
+}
+
+.achievement-item.locked {
+    background-color: var(--black-100);
+    border-color: var(--black-300);
+    opacity: 0.8;
+}
+
+.badge-item.earned {
+    background-color: var(--brandy-punch-50);
+    border-color: var(--brandy-punch-400);
+}
+
+.badge-item.locked {
+    background-color: var(--black-100);
+    border-color: var(--black-300);
+    opacity: 0.8;
+}
+
+.achievement-icon,
+.badge-icon {
+    font-size: var(--font-size-4xl);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-header h4,
+.badge-item h4 {
+    font-size: var(--font-size-lg);
+    color: var(--black-950);
+    margin: 0;
+    font-weight: 600;
+}
+
+.achievement-description {
+    font-size: var(--font-size-sm);
+    color: var(--black-700);
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.achievement-status,
+.badge-status {
+    font-weight: bold;
+    font-size: var(--font-size-xs);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-earned {
+    background-color: var(--swans-down-500);
+    color: white;
+}
+
+.status-locked {
+    background-color: var(--black-400);
+    color: var(--black-950);
+}
+
+.no-items-message {
+    text-align: center;
+    font-size: var(--font-size-base);
+    color: var(--black-700);
+    padding: 1.5rem;
+    border: 1px dashed var(--black-300);
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    background-color: var(--black-100);
+}
+
+.coming-soon-section {
+    padding: 2rem;
+    background-color: var(--swans-down-100);
+    border: 1px solid var(--swans-down-300);
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-top: 2rem;
+    z-index: 1;
+}
+
+.coming-soon-section h4 {
+    color: var(--black-950);
+    font-size: var(--font-size-xl);
+    margin-bottom: 1rem;
+}
+
+.coming-soon-section ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.coming-soon-section li {
+    font-size: var(--font-size-base);
+    color: var(--black-800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.coming-soon-section p {
+    font-style: italic;
+    color: var(--black-700);
+    font-size: var(--font-size-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .gamification-inner-content {
+        padding: 1.8rem;
+        gap: 1.5rem;
+    }
+
+    .gamification-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .achievements-grid,
+    .badges-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+
+    .summary-item .summary-value {
+        font-size: var(--font-size-4xl);
+    }
+
+    .achievement-icon,
+    .badge-icon {
+        font-size: var(--font-size-3xl);
+    }
+
+    .achievement-header h4,
+    .badge-item h4 {
+        font-size: var(--font-size-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .gamification-summary {
+        grid-template-columns: 1fr;
+        /* Asegura que en móviles se apilen */
+    }
+
+    .achievements-grid,
+    .badges-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gamification-inner-content {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .gamification-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .achievements-section h3,
+    .badges-section h3 {
+        font-size: var(--font-size-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .summary-item .summary-value {
+        font-size: var(--font-size-3xl);
+    }
+
+    .achievement-item,
+    .badge-item {
+        padding: 1rem;
+    }
+
+    .coming-soon-section {
+        padding: 1.5rem;
+    }
+}

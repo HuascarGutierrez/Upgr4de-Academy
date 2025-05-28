@@ -31,6 +31,12 @@
     border-radius: 6px;
 }
 
+.container-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .boton-filtro {
     padding: 0.5rem 1rem;
     font-size: var(--font-size-md);

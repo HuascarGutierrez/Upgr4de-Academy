@@ -62,34 +62,41 @@ const DateSelector = ({ mes, año, setMes, setAño, onPreview, onGenerate, previ
           min="2000"
           max="2100"
         />
-        <button
-          onClick={onPreview}
-          disabled={!mes || !año}
-          className="boton-filtro"
-        >
-          Previsualizar
-        </button>
-        <button
-          onClick={onGenerate}
-          disabled={!mes || !año || !previewActive}
-          className="boton-filtro"
-        >
-          Generar PDF
-        </button>
-        <button
-          onClick={onGenerateReportPlanPagos}
-          disabled={!mes || !año}
-          className="boton-filtro"
-        >
-          Previsualizar reporte de plan de pagos
-        </button>
-        <button
-          onClick={planPagosPdf}
-          disabled={!mes || !año || !onPreviewReportPlan}
-          className="boton-filtro"
-        >
-          Generar reporte de plan de pagos
-        </button>
+
+        <div className="container-buttons">
+          <button
+            onClick={onPreview}
+            disabled={!mes || !año}
+            className="boton-filtro"
+          >
+            Ver reporte general
+          </button>
+          <button
+            onClick={onGenerate}
+            disabled={!mes || !año || !previewActive}
+            className="boton-filtro"
+          >
+            Generar PDF
+          </button>
+        </div>
+
+        <div className="container-buttons">
+          <button
+            onClick={onGenerateReportPlanPagos}
+            disabled={!mes || !año}
+            className="boton-filtro"
+          >
+            Ver reporte de plan de pagos
+          </button>
+          <button
+            onClick={planPagosPdf}
+            disabled={!mes || !año || !onPreviewReportPlan}
+            className="boton-filtro"
+          >
+            Generar PDF
+          </button>
+        </div>
+
         <button
           onClick={onRefresh}
           className="boton-filtro"

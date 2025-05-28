@@ -184,6 +184,13 @@ function MostrarCursos() {
             <button type="submit" className="btn-editar-curso" disabled={uploading}>
               {uploading ? 'Subiendo imagen...' : 'Guardar Cambios'}
             </button>
+            <button onClick={() => {navigate('/admin/crearEvaluacion',{state: {
+              courseId: currentCourse.id, 
+              courseTitle: currentCourse.title, 
+              courseDescription: currentCourse.description, 
+              courseImage: currentCourse.link_image
+            }})}}
+             className='btn-editar-curso' style={{backgroundColor: 'orange'}}>Evaluaciones</button>
             <button
               type="button"
               className="btn-cancelar-edicion"

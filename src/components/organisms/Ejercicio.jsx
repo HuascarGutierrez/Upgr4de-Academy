@@ -76,8 +76,12 @@ function Ejercicio({user, unitId, exerciseByUnitId, titulo, cambiarSeccion, actu
           orderBy("number", "asc")
         );
         const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })).filter(doc => doc.activo === true);
+        if (data.length === 0) {
+          setEjercicios([]);
+        } else {
         setEjercicios(data);
+        }
       } catch (error) {
         console.error("Error fetching exercises:", error);
       }
@@ -89,7 +93,7 @@ function Ejercicio({user, unitId, exerciseByUnitId, titulo, cambiarSeccion, actu
   }, [exerciseByUnitId]);
 
   return (
-    <div className="ejercicios-container ecuaciones-lineales">
+      <div className="ejercicios-container ecuaciones-lineales">
       <div className="ejercicios-header">
         <h2 className="ejercicios-titulo">{titulo}</h2>
         <div className="ejercicios-contador">Ejercicio {ejercicioActual + 1} de {ejercicios.length}</div>
@@ -171,7 +175,7 @@ function Ejercicio({user, unitId, exerciseByUnitId, titulo, cambiarSeccion, actu
         </div>
       </div>
     </div>
-  );
+    )
 }
 
 export default Ejercicio;

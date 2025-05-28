@@ -47,7 +47,8 @@ function MenuPrincipal({user, unitId, exercises, cambiarSeccion, cambiarTituloEj
           );
           const porcentaje = progresoEjercicio?.ejerciciosCompletados/progresoEjercicio?.totalEjercicios * 100 || 0;
         return(
-          <div 
+          exercise.activo &&
+            (<div 
             key={exercise.id}
             className="modulo-card"
             onClick={() => {cambiarSeccion('ejercicio'); cambiarTituloEjercicio(exercise.title); cambiarExerciseByUnitId(exercise.id);}}
@@ -69,7 +70,8 @@ function MenuPrincipal({user, unitId, exercises, cambiarSeccion, cambiarTituloEj
                 {porcentaje}% Completado
               </div>
             </div>
-          </div>
+          </div>)
+          
         )}) : <h2 className='noExercises'>Sin Ejercicios por el momento.</h2>}
       </div>
     </div>

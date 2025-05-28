@@ -130,6 +130,12 @@ function MostrarCursos() {
             />
           </label>
           <button type="submit" className="btn-editar-curso">Guardar Cambios</button>
+          <button type="button" className="btn-crear-evaluacion" onClick={() => {navigate("/admin/crearEvaluacion", {state: {
+              courseId: currentCourse.id, 
+              courseTitle: currentCourse.title, 
+              courseDescription: currentCourse.description, 
+              courseImage: currentCourse.link_image
+          }});}}>Evaluaciones</button>
           <button
             type="button"
             className="btn-cancelar-edicion"
@@ -144,7 +150,8 @@ function MostrarCursos() {
       ) : (
         <>
         <div className='boton-crear'>
-        <button className='btn-crear-curso' onClick={() => {navigate("/admin/crearcurso");}}>Crear Curso</button></div>
+          <button className='btn-crear-curso' onClick={() => {navigate("/admin/crearcurso");}}>Crear Curso</button>
+        </div>
         <div className="tabla-cursos">
           {courses.map(course => (
             <div className="curso-card" key={course.id}>

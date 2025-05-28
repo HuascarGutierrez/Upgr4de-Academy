@@ -34,7 +34,7 @@ function NavAdmin() {
               className="navLateral_item"
             >
               <img src="/Icons/curso-online.svg" alt="" />
-              <p>Cursos</p>
+              <p>Cursos y ejercicios</p>
             </li>
             <li
               onClick={() => {
@@ -44,6 +44,15 @@ function NavAdmin() {
             >
               <img src="/Icons/informe.svg" alt="" />
               <p>Reportes</p>
+            </li>
+                        <li
+              onClick={() => {
+                navigate("/admin/solicitudes-pago");
+              }}
+              className="navLateral_item"
+            >
+              <img src="/Icons/curso-online.svg" alt="" />
+              <p>Solicitudes de Pago</p>
             </li>
           </ul>
         </div>

@@ -1,80 +1,75 @@
-import React, { useState, useRef, useEffect } from 'react'; // Importamos useEffect para sincronizar el ref
-import './styles/Perfil.css';
-import { getAuth, signOut } from 'firebase/auth';
-import { alertSignOut, alertWarning } from '../../config/alerts';
-import { useNavigate } from 'react-router-dom';
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
-import { handleUpdateImage } from '../../config/auth_functions'; // Asegúrate de que esta ruta es correcta
-import { ClipLoader } from 'react-spinners';
-import SubscriptionSection from './SubscriptionSection';
-// Importa o define tu componente/lógica para la vista de pago simulada
-import PaymentSimulationModal from './PaymentSimulationModal'; // Suponiendo que creas un nuevo componente
+// src/components/Perfil.jsx
+import React, { useState, useRef, useEffect } from "react";
+import "./styles/Perfil.css";
+import { getAuth, signOut } from "firebase/auth";
+import { alertSignOut, alertWarning } from "../../config/alerts";
+import { useNavigate } from "react-router-dom";
+import {
+  doc,
+  getFirestore,
+  setDoc,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { handleUpdateImage } from "../../config/auth_functions";
+import { ClipLoader } from "react-spinners";
 
-// Considera añadir PropTypes para la prop `user` si no usas TypeScript
+import SubscriptionSection from "./SubscriptionSection";
+import PaymentSimulationModal from "./PaymentSimulationModal";
+import GamificationSection from "./GamificationSection"; // Importa el componente
+
 function Perfil({ user }) {
-  // Elimina la variable `usuario` redundante. Usa `user` directamente.
-  // const usuario = user; // Eliminada
-
-  const [activeView, setActiveView] = useState('myProfile');
-  // Mantén los planes de suscripción aquí o cárgalos de otro lugar si son dinámicos
-  // No es necesario que sea un estado si no esperas que cambien durante la vida del componente
+  const [activeView, setActiveView] = useState("myProfile");
   const [subscriptionPlans] = useState([
     {
-      name: 'Plan Gratuito',
-      description: 'Inscríbete en el plan Gratuito para obtener los siguientes beneficios:',
+      name: "Plan Gratuito",
+      description:
+        "Inscríbete en el plan Gratuito para obtener los siguientes beneficios:",
       benefits: [
-        'Acceso a algunas las unidades',
-        'Acceso al 50% del contenido',
-        'Evaluaciones y ejercicios',
+        "Acceso a algunas las unidades",
+        "Acceso al 50% del contenido",
+        "Evaluaciones y ejercicios",
       ],
-      plan: 'Gratuito',
-      price: 0, // Precio en Bolivianos
+      plan: "Gratuito",
+      price: 0,
     },
     {
-      name: 'Plan Mensual',
-      description: 'Te esperan nuevas oportunidades. Inscríbete en el plan Mensual para obtener muchos beneficios:',
+      name: "Plan Mensual",
+      description:
+        "Te esperan nuevas oportunidades. Inscríbete en el plan Mensual para obtener muchos beneficios:",
       benefits: [
-        'Acceso a todas las unidades',
-        'Acceso al tutor artificial',
-        'Acceso al apartado de supervisión',
-        'Evaluaciones y ejercicios',
+        "Acceso a todas las unidades",
+        "Acceso al tutor artificial",
+        "Acceso al apartado de supervisión",
+        "Evaluaciones y ejercicios",
       ],
-      plan: 'Mensual',
-      price: 120, // Precio en Bolivianos
+      plan: "Mensual",
+      price: 120,
     },
   ]);
 
-  // Inicializa el valor del ref si quieres mostrar el nombre actual para editar
-  // Usa user?.userName como valor inicial
-  const fullNameRef = useRef(user?.userName || '');
-
-  // Puedes considerar agrupar estados relacionados como estos
-  // const [paymentDetails, setPaymentDetails] = useState({ method: '', cardNumber: '', expirationDate: '' });
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expirationDate, setExpirationDate] = useState('');
+  const fullNameRef = useRef(user?.userName || "");
+  const fileInputRef = useRef(null); // Ref para el input de archivo
   const [wait, setWait] = useState(false);
-
-  // Nuevo estado para el modal de pago
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [planToSubscribe, setPlanToSubscribe] = useState(null);
 
   const navigate = useNavigate();
 
-  // Efecto para sincronizar el ref con el nombre del usuario si la prop `user` cambia
-  // Esto asegura que si el nombre se actualiza externamente, el input refleje el cambio
   useEffect(() => {
     if (user?.userName) {
       fullNameRef.current.value = user.userName;
     }
-  }, [user?.userName]); // Dependencia del nombre del usuario
+  }, [user?.userName]);
 
   const handleSignOut = async () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
         alertSignOut();
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
         alertWarning(`Error de logout: ${error}`);
@@ -83,236 +78,314 @@ function Perfil({ user }) {
 
   const handleViewChange = (view) => {
     setActiveView(view);
-    // Opcional: puedes añadir scroll smooth a la sección correspondiente aquí si usas IDs en tus divs de contenido
-    // const section = document.getElementById(view);
-    // if (section) {
-    //   section.scrollIntoView({ behavior: 'smooth' });
-    // }
   };
 
-  const handlePaymentMethodChange = (e) => {
-    setPaymentMethod(e.target.value);
-    // Opcional: resetear otros campos de pago al cambiar de método
-    // setCardNumber('');
-    // setExpirationDate('');
+  // Función para abrir el selector de archivos al hacer clic en el botón
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
   };
+
 
   const handleImageChange = async (e) => {
     setWait(true);
-    // Verifica que hay un archivo y que la información del usuario es válida
     if (e.target.files && e.target.files[0] && user?.email && user?.uid) {
       const imagen = e.target.files[0];
       try {
-        // Asegúrate de que handleUpdateImage espera un objeto con email e image
-        const url = await handleUpdateImage({ email: user.email, image: imagen });
+        const url = await handleUpdateImage({
+          email: user.email,
+          image: imagen,
+        });
         const db = getFirestore();
-        // Usa user.uid para la referencia al documento
-        const userRef = doc(db, 'users', user.uid);
-        await setDoc(userRef, {
-          imageUrl: url,
-        }, { merge: true });
-        // Considera actualizar el estado del usuario en lugar de recargar para una experiencia más fluida
-        location.reload(); // Mantengo tu lógica original, pero es mejor evitarlo
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(
+          userRef,
+          {
+            imageUrl: url,
+          },
+          { merge: true }
+        );
+        location.reload();
       } catch (error) {
         alertWarning(`Error al actualizar la imagen: ${error}`);
       }
     } else if (!user?.email || !user?.uid) {
-      alertWarning("No se pudo obtener la información del usuario para actualizar la imagen.");
+      alertWarning(
+        "No se pudo obtener la información del usuario para actualizar la imagen."
+      );
     }
     setWait(false);
   };
 
   const handleSaveName = async (e) => {
     e.preventDefault();
-    const fullName = fullNameRef.current.value.trim(); // Usa trim() para eliminar espacios en blanco
+    const fullName = fullNameRef.current.value.trim();
     if (fullName.length < 8) {
-      alertWarning('El nombre debe tener al menos 8 caracteres');
+      alertWarning("El nombre debe tener al menos 8 caracteres");
       return;
     }
-    if (!user?.uid) { // Verifica que el uid del usuario exista
-      alertWarning("No se pudo obtener la información del usuario para actualizar el nombre.");
+    if (!user?.uid) {
+      alertWarning(
+        "No se pudo obtener la información del usuario para actualizar el nombre."
+      );
       return;
     }
     const db = getFirestore();
-    // Usa user.uid para la referencia al documento
-    const userRef = doc(db, 'users', user.uid);
+    const userRef = doc(db, "users", user.uid);
     try {
-      await setDoc(userRef, {
-        userName: fullName,
-      }, { merge: true });
-      // Considera actualizar el estado del usuario en lugar de recargar
-      location.reload(); // Mantengo tu lógica original, pero es mejor evitarlo
+      await setDoc(
+        userRef,
+        {
+          userName: fullName,
+        },
+        { merge: true }
+      );
+      location.reload();
     } catch (error) {
       alertWarning(`Error al guardar el nombre: ${error}`);
     }
   };
 
-  // Función original renombrada y ahora llamada por handlePaymentComplete
   const updatePlanInFirestore = async (plan) => {
-    if (!user?.uid) { // Usa user.uid
-      alertWarning("No se pudo obtener la información del usuario para actualizar el plan.");
+    if (!user?.uid) {
+      alertWarning(
+        "No se pudo obtener la información del usuario para actualizar el plan."
+      );
       return;
     }
     const db = getFirestore();
-    const userRef = doc(db, 'users', user.uid); // Usa user.uid
+    const userRef = doc(db, "users", user.uid);
     try {
-      await setDoc(userRef, {
-        planType: plan,
-      }, { merge: true });
-      // Considera actualizar el estado del usuario en lugar de recargar
-      location.reload(); // Mantengo tu lógica original, pero es mejor evitarlo
+      await setDoc(
+        userRef,
+        {
+          planType: plan,
+        },
+        { merge: true }
+      );
+      location.reload();
     } catch (error) {
       alertWarning(`Error al actualizar el plan: ${error}`);
     }
-  }
+  };
 
-  // Nueva función para iniciar el proceso de pago (mostrar el modal)
   const handleInitiatePayment = (plan) => {
     setPlanToSubscribe(plan);
     setShowPaymentModal(true);
   };
 
-  // Nueva función llamada cuando el usuario hace clic en "Listo" en el modal
-  const handlePaymentComplete = async () => {
-    // Aquí podrías añadir lógica para verificar el pago si no fuera una simulación
-    // Como es simulación, simplemente actualizamos el plan
-    if (planToSubscribe) {
-      await updatePlanInFirestore(planToSubscribe);
+  const handlePaymentComplete = async (fileComprobante) => {
+    if (!planToSubscribe) {
+      alertWarning("No hay un plan seleccionado para el pago.");
+      return;
     }
-    // Ocultar el modal
-    setShowPaymentModal(false);
-    setPlanToSubscribe(null); // Limpiar el plan a suscribir
+    if (!user?.uid) {
+      alertWarning(
+        "No se pudo obtener la información del usuario para registrar el pago."
+      );
+      return;
+    }
+    if (!fileComprobante) {
+      alertWarning("Por favor, sube una imagen de tu comprobante de pago.");
+      return;
+    }
+
+    setWait(true);
+
+    try {
+      const storage = getStorage();
+      const timestamp = Date.now();
+      const fileName = fileComprobante.name;
+      const storagePath = `comprobantes/${timestamp}-${fileName}`;
+
+      const storageRef = ref(storage, storagePath);
+      const uploadResult = await uploadBytes(storageRef, fileComprobante);
+      const urlComprobante = await getDownloadURL(uploadResult.ref);
+
+      const db = getFirestore();
+      const solicitudesRef = collection(db, "solicitudesPagos");
+
+      const selectedPlanDetails = subscriptionPlans.find(
+        (plan) => plan.name === planToSubscribe
+      );
+      const montoPago = selectedPlanDetails ? selectedPlanDetails.price : 0;
+
+      await addDoc(solicitudesRef, {
+        userId: user.uid,
+        userName: user.userName || "Usuario Desconocido",
+        userEmail: user.email,
+        planSolicitado: planToSubscribe,
+        monto: montoPago,
+        urlComprobante: urlComprobante,
+        estado: "pendiente",
+        fechaSolicitud: serverTimestamp(),
+      });
+
+      alert(
+        "Comprobante subido y solicitud registrada. Tu pago está pendiente de verificación."
+      );
+    } catch (error) {
+      console.error("Error al procesar el pago y subir comprobante:", error);
+      alertWarning(`Error al procesar el pago: ${error.message}`);
+    } finally {
+      setWait(false);
+      setShowPaymentModal(false);
+      setPlanToSubscribe(null);
+    }
   };
 
-  // Nueva función para cerrar el modal si el usuario cancela (opcional)
   const handleClosePaymentModal = () => {
     setShowPaymentModal(false);
     setPlanToSubscribe(null);
   };
 
-
   return (
-    <div className="profile-container bento-grid">
-      <h1 className="bento-title">Perfil</h1>
-
-      <div className="menu-card bento-box">
-        <div className="profile-header">
-          {/* Simplifica la lógica para mostrar la imagen usando un operador ternario */}
-          <img
-            src={user?.imageUrl || "/images/default_img_profile.webp"}
-            alt="Avatar"
-            className="avatar"
-          />
-          <div className="profile-info">
-            {/* Usa user?.userName directamente */}
-            <div className="name">{user?.userName || 'Cargando Nombre...'}</div> {/* Muestra un placeholder si el nombre no está cargado */}
-          </div>
-        </div>
-        <div className="menu">
-          {/* Usa botones (<button>) para acciones interactivas en lugar de enlaces (<a>) */}
-          <button
-            className={`menu-item ${activeView === 'myProfile' ? 'active' : ''}`}
-            onClick={() => handleViewChange('myProfile')}
-            // Añade type="button" para evitar comportamientos inesperados de formulario
-            type="button"
-          >
-            MI PERFIL
-          </button>
-          <button
-            className={`menu-item ${activeView === 'subscription' ? 'active' : ''}`}
-            onClick={() => handleViewChange('subscription')}
-            type="button"
-          >
-            SUSCRIPCIÓN
-          </button>
-          <button onClick={handleSignOut} className="menu-item" type="button">
-            CERRAR SESIÓN
-          </button>
-        </div>
+    // Contenedor principal para el título y el grid
+    <div className="profile-page-wrapper">
+      {/* Nueva caja para el título de perfil */}
+      <div className="profile-title-card bento-box">
+        <h1 className="profile-main-title">Perfil</h1>
       </div>
 
-      {activeView === 'publicProfile' && (
-        <div id="perfilPublico" className="public-profile-card bento-box">
-          <div className="profile-info">
-            {/* Simplifica la lógica para mostrar la imagen usando un operador ternario */}
-            <img src={user?.imageUrl || "/images/default_img_profile.webp"} alt="" className="avatar-large" />
-            {/* Usa user?.userName directamente */}
-            <div className="name">{user?.userName || 'Cargando Nombre...'}</div>
-            <div className="description">SOY EL FUTURO DEL PAÍS</div> {/* Considera que esta descripción sea configurable por el usuario */}
-            <div className="rank">RANGO PLATA</div> {/* Considera que el rango sea dinámico */}
+      <div className="profile-container bento-grid">
+        <div className="menu-card bento-box">
+          <div className="profile-header">
+            <img
+              src={user?.imageUrl || "/images/default_img_profile.webp"}
+              alt="Avatar"
+              className="avatar"
+            />
+            <div className="profile-info">
+              <div className="name">{user?.userName || "Cargando Nombre..."}</div>
+            </div>
           </div>
-          <div className="badges">
-            <h3>INSIGNIAS</h3>
-            {/* Asegúrate de renderizar las insignias de una lista o estado, no hardcodeado */}
-            <div>
-              <div className="badge-item">
-                <p>Catacora Patana Helen Jazmin</p> {/* Esto parece un nombre hardcodeado, debería ser dinámico */}
+          <div className="menu">
+            <button
+              className={`menu-item ${activeView === "myProfile" ? "active" : ""}`}
+              onClick={() => handleViewChange("myProfile")}
+              type="button"
+            >
+              MI PERFIL
+            </button>
+            <button
+              className={`menu-item ${activeView === "subscription" ? "active" : ""}`}
+              onClick={() => handleViewChange("subscription")}
+              type="button"
+            >
+              SUSCRIPCIÓN
+            </button>
+            <button
+              className={`menu-item ${activeView === "gamification" ? "active" : ""}`}
+              onClick={() => handleViewChange("gamification")}
+              type="button"
+            >
+              GAMIFICACIÓN
+            </button>
+            <button onClick={handleSignOut} className="menu-item" type="button">
+              CERRAR SESIÓN
+            </button>
+          </div>
+        </div>
+
+        {activeView === "publicProfile" && (
+          // Usamos la nueva clase de envoltorio general
+          <div className="content-wrapper bento-box">
+            <div id="perfilPublico" className="public-profile-card">
+              <div className="profile-info">
+                <img
+                  src={user?.imageUrl || "/images/default_img_profile.webp"}
+                  alt=""
+                  className="avatar-large"
+                />
+                <div className="name">{user?.userName || "Cargando Nombre..."}</div>
+                <div className="description">SOY EL FUTURO DEL PAÍS</div>
+                <div className="rank">RANGO PLATA</div>
               </div>
-              <div className="badge-item">
-                <p></p> {/* Este párrafo está vacío */}
+              <div className="badges">
+                <h3>INSIGNIAS</h3>
+                <div>
+                  <div className="badge-item">
+                    <p>Catacora Patana Helen Jazmin</p>
+                  </div>
+                  <div className="badge-item">
+                    <p></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {activeView === 'myProfile' && (
-        <div id="miPerfil" className="my-profile-card bento-box">
-          <h2>Información Básica</h2>
-          {/* Asegúrate de que el formulario esté bien estructurado para manejar submisiones */}
-          <form onSubmit={handleSaveName}> {/* Añadido onSubmit al form */}
-            {wait ? (
-              <div className="loader-container">
-                <ClipLoader color="var(--swans-down-400)" size={40} />
-              </div>
-            ) : (
-              // Etiqueta y input para cambiar foto de perfil
-              <label className="form-label-box">
-                Cambiar foto de perfil
-                {/* El input type="file" no necesita un value ni placeholder */}
-                {/* Usa accept para restringir tipos de archivo */}
-                <input type="file" accept="image/*" onChange={handleImageChange} className="form-input-file" />
-              </label>
-            )}
-            {/* Etiqueta y input para cambiar nombre completo */}
-            <label className="form-label-box">
-              Cambiar nombre completo
-              {/* Usa ref para acceder al valor del input en handleSaveName */}
-              <input
-                minLength={8}
-                type="text"
-                ref={fullNameRef}
-                placeholder={user?.userName || 'Nombre completo'} // Placeholder más descriptivo si user.userName no está
-                className="form-input-text"
-              />
-              {/* El botón submit dentro del form activará handleSaveName */}
-              {/* Añade type="submit" explícitamente */}
-              <button className="subscribe-button">Guardar Cambios</button>
-            </label>
-          </form>
-        </div>
-      )}
+        {activeView === "myProfile" && (
+          // Usamos la nueva clase de envoltorio general
+          <div className="content-wrapper bento-box">
+            <div id="miPerfil" className="my-profile-card">
+              <h2>Información Básica</h2>
+              <form onSubmit={handleSaveName}>
+                {wait ? (
+                  <div className="loader-container">
+                    <ClipLoader color="var(--swans-down-400)" size={40} />
+                  </div>
+                ) : (
+                  <>
+                    <label className="form-label-box custom-file-upload"> {/* Añadimos una clase para el botón */}
+                      <span className="label-text">Cambiar foto de perfil</span> {/* Envolvemos el texto */}
+                      <button type="button" onClick={handleButtonClick} className="form-input-button">
+                        Seleccionar Archivo
+                      </button>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="form-input-file-hidden" // Ocultamos el input de archivo
+                        ref={fileInputRef} // Asignamos la ref
+                      />
+                    </label>
+                  </>
+                )}
+                <label className="form-label-box">
+                  <span className="label-text">Cambiar nombre completo</span> {/* Envolvemos el texto */}
+                  <input
+                    minLength={8}
+                    type="text"
+                    ref={fullNameRef}
+                    placeholder={user?.userName || "Nombre completo"}
+                    className="form-input-text"
+                  />
+                  <button className="subscribe-button">Guardar Cambios</button>
+                </label>
+              </form>
+            </div>
+          </div>
+        )}
 
-      {activeView === 'subscription' && (
-        <SubscriptionSection
-          user={user} // Usa user directamente
-          subscriptionPlans={subscriptionPlans}
-          cambiarPlan={handleInitiatePayment} // Ahora pasamos la nueva función aquí
-          className="bento-box"
-        />
-      )}
+        {activeView === "subscription" && (
+          // Usamos la nueva clase de envoltorio general
+          <div className="content-wrapper bento-box">
+            <SubscriptionSection
+              user={user}
+              subscriptionPlans={subscriptionPlans}
+              cambiarPlan={handleInitiatePayment}
+            />
+          </div>
+        )}
 
-      {/* Renderiza el modal de pago condicionalmente */}
-      {showPaymentModal && (
-        <PaymentSimulationModal
-          plan={planToSubscribe}
-          onPaymentComplete={handlePaymentComplete}
-          onClose={handleClosePaymentModal} // Pasa la función para cerrar
-        // Opcional: Puedes pasar el usuario si el modal lo necesita
-        // user={user}
-        />
-      )}
+        {activeView === "gamification" && (
+          <div className="content-wrapper bento-box">
+            {" "}
+            {/* Usamos la nueva clase de envoltorio general */}
+            <GamificationSection user={user} />
+          </div>
+        )}
 
+        {showPaymentModal && (
+          <PaymentSimulationModal
+            plan={planToSubscribe}
+            onPaymentComplete={handlePaymentComplete}
+            onClose={handleClosePaymentModal}
+            isLoading={wait}
+          />
+        )}
+      </div>
     </div>
   );
 }

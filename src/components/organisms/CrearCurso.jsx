@@ -155,7 +155,7 @@ useEffect(() => {
         <button type="submit" className="btn-volver" onClick={() => {navigate("/admin/listacursos");}} >
           <img src="/assets/circle-arrow-left.svg" alt="" />
         </button>
-        <h1 className='crear-nuevo-curso-title'>Crear Nuevo Curso</h1>
+        <p className='crear-nuevo-curso-title'>Crear Nuevo Curso</p>
       </div>
 
       <div className="container-formularios">

@@ -151,11 +151,22 @@
     padding: 0.8rem;
     background-color: #319795;
     color: #fff;
-    font-size: 1rem;
+    font-size: var(--font-size-sm);
     font-weight: bold;
     border: none;
     border-radius: 8px;
     cursor: pointer;
+  }
+
+  .btn-crear-evaluacion {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: var(--brandy-punch-400);
+    color: #fff;
   }
   
   .btn-crear-curso:hover {

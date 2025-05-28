@@ -17,7 +17,7 @@ import CrearUserA from '../components/organisms/CrearUserA'
 import Reportes from '../components/organisms/Reportes'
 import TeacherTable from '../components/organisms/TeacherTable'
 import CrearDocente from '../components/organisms/CrearDocente'
-
+import AdminDashboard from '../components/organisms/AdminDashboard';
 function SAPIAdmin() {
   return (
     <div className='SAPIAdmmin'>
@@ -31,6 +31,7 @@ function SAPIAdmin() {
             <Route path='/createuser' element={<CrearUserA/>} />
             <Route path='/creardocente' element={<CrearDocente />}/>
             <Route path='/reportes' element={<Reportes/>} />
+            <Route path='/solicitudes-pago' element={<AdminDashboard />} />
         </Routes>
     </div>
 </div>

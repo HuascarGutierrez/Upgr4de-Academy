@@ -1,0 +1,155 @@
+/* src/styles/AdminDashboard.css */
+
+.admin-dashboard-container {
+    padding: 2rem;
+    background-color: var(--color-background); /* Usará --black-50 por defecto */
+    color: var(--color-text); /* Usará --black-950 por defecto */
+    min-height: 100vh;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-dashboard-container h1 {
+    font-size: var(--font-size-3xl);
+    color: var(--swans-down-500);
+    margin-bottom: 3rem;
+    text-align: center;
+    width: 100%;
+}
+.admin-dashboard-container p {
+    font-size: var(--font-size-md);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+.admin-loading,
+.admin-error {
+    font-size: var(--font-size-lg);
+    color: var(--brandy-punch-500);
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.solicitudes-list {
+    display: grid;
+    gap: 2rem; /* Espacio entre los elementos del grid */
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo para el grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+}
+
+.solicitud-item {
+    background-color: var(--black-50); /* Fondo claro para las cajas bento */
+    border-radius: 1.5rem; /* Bordes redondeados */
+    padding: 2rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out;
+    border: 1px solid var(--black-100); /* Borde sutil */
+}
+
+/* Ajustes para el modo oscuro: fondo claro y texto oscuro */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text: var(--black-950); /* Texto oscuro en fondo claro */
+        --color-background: var(--black-100); /* Fondo plomo claro para el modo oscuro */
+    }
+    .solicitud-item {
+        background-color: var(--black-50); /* Fondo muy claro para las cajas bento en modo oscuro */
+        border: 1px solid var(--black-100); /* Borde ajustado */
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    }
+}
+
+.solicitud-item:hover {
+    transform: translateY(-5px); /* Efecto hover */
+}
+
+.solicitud-item p {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.solicitud-item strong {
+    color: var(--swans-down-600);
+}
+
+.solicitud-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+    gap: 1rem; /* Espacio entre los botones */
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+}
+
+.solicitud-actions button,
+.solicitud-actions .view-comprobante-button {
+    padding: 1rem 1.5rem;
+    border-radius: 0.8rem;
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    text-decoration: none; /* Para el enlace */
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.approve-button {
+    background-color: var(--swans-down-500);
+    color: var(--black-50); /* Texto claro en botón verde */
+    border: none;
+}
+
+.approve-button:hover {
+    background-color: var(--swans-down-600);
+    transform: translateY(-2px);
+}
+
+.reject-button {
+    background-color: var(--brandy-punch-500);
+    color: var(--black-50); /* Texto claro en botón naranja */
+    border: none;
+}
+
+.reject-button:hover {
+    background-color: var(--brandy-punch-600);
+    transform: translateY(-2px);
+}
+
+.view-comprobante-button {
+    background-color: var(--black-300); /* Fondo plomo para el botón */
+    color: var(--black-950); /* Texto oscuro en botón plomo */
+    border: 1px solid var(--black-400);
+}
+
+.view-comprobante-button:hover {
+    background-color: var(--black-400);
+    color: var(--black-50); /* Texto claro al hacer hover */
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .admin-dashboard-container {
+        padding: 1.5rem;
+    }
+
+    .admin-dashboard-container h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .solicitudes-list {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+
+    .solicitud-actions {
+        flex-direction: column; /* Botones apilados en móvil */
+        gap: 0.8rem;
+    }
+}

@@ -32,6 +32,7 @@ const handleSignup = async({fullName, imageUrl, email, password, passwordVer,fun
                         planType: 'Gratuito',
                         activo: true,
                         createdAt: new Date(), // Guarda la fecha de creación
+                        Rol:'Estudiante',
                       });
                 } else {
                     //console.log('usuario ya registrado')
@@ -95,6 +96,7 @@ const handleAuth = async({funcion, salida}) => {
                         planType: 'Gratuito',
                         activo: true,
                         createdAt: new Date(), // Guarda la fecha de creación
+                        Rol:'Estudiante'
                       }).then(()=>{
                             handleSuccess({texto: "Inicio de sesión exitoso."});
                             salida();

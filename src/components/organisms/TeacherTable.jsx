@@ -16,6 +16,7 @@ function TeacherTable() {
     email: '',
     imageUrl: '',
     activo: false,
+    Rol: '',
   });
   const [newImageFile, setNewImageFile] = useState(null);
   const [previewImageUrl, setPreviewImageUrl] = useState('');
@@ -125,7 +126,7 @@ function TeacherTable() {
   return (
     <div className="Tabla">
       <div className='Header_UserTable'>
-        <h1>Lista de Docentes</h1>
+        <h2>Lista de Docentes</h2>
         <button className="btn btn-create" onClick={() => navigate("/admin/creardocente")}>Crear Docente</button>
       </div>
       <div className='tablacontenedor'>

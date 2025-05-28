@@ -62,6 +62,7 @@ function CrearDocente() {
         imageUrl,
         activo: true,
         createdAt: new Date(),
+        Rol:'Docente',
       });
   
       Swal.fire({
@@ -69,7 +70,7 @@ function CrearDocente() {
         icon: "success",
         confirmButtonText: "OK",
       });
-      navigate("/admin/docentes");
+      navigate("/admin/usersSection");
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -92,7 +93,7 @@ function CrearDocente() {
     <div className="CreateUser">
       <div className="CreateUser_container">
         <div className="Header_CreateUser">
-          <button type="button" className="btn-volver" onClick={() => navigate("/admin/docentes")}>
+          <button type="button" className="btn-volver" onClick={() => navigate("/admin/usersSection")}>
             <img src="/assets/circle-arrow-left.svg" alt="Volver" />
           </button>
           <h2 className="CreateUser_title">Registrar Docente</h2>

@@ -1,5 +1,5 @@
 .catalog-container {
-    height: 100vh;
+    min-height: 100vh;
     padding: 20px;
     background-color: #f7f7f7; /* Coincide con el color de fondo de SAPIcurses */
     border-radius: 10px; /* Agregado para coincidir con el borde redondeado */
@@ -161,9 +161,8 @@
 .noItems {
     width: 100%;
     color: black;
-    text-align: center;
     font-size: var(--font-size-xl);
-    margin: 5rem;
+    margin: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -182,4 +181,38 @@
     .title {
         font-size: 2rem;
     }
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fafafa;
+}
+
+.search-input:focus {
+  border-color: #4f46e5; /* Color primario */
+  box-shadow: 0 0 5px rgba(79, 70, 229, 0.3);
+  background-color: #fff;
+}
+
+.catalog-header .nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.noItems {
+  text-align: center;
+  color: #777;
+  margin-top: 20px;
+  font-size: 18px;
+  font-style: italic;
 }

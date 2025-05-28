@@ -17,6 +17,8 @@ import CrearUserA from '../components/organisms/CrearUserA'
 import Reportes from '../components/organisms/Reportes'
 import TeacherTable from '../components/organisms/TeacherTable'
 import CrearDocente from '../components/organisms/CrearDocente'
+import UsersSection from '../components/organisms/UsersSection'
+import CrearAdministrador from '../components/organisms/CrearAdministrador'
 
 function SAPIAdmin() {
   return (
@@ -24,6 +26,7 @@ function SAPIAdmin() {
     <NavAdmin />
     <div className='SAPIAdminContent'>
         <Routes>
+            <Route path='/usersSection' element={<UsersSection/>}/>
             <Route path='/usertable' element={<UserTable />}/>
             <Route path='/docentes' element={<TeacherTable />} />
             <Route path='/listacursos' element={<MostrarCursos />}/>
@@ -31,6 +34,7 @@ function SAPIAdmin() {
             <Route path='/createuser' element={<CrearUserA/>} />
             <Route path='/creardocente' element={<CrearDocente />}/>
             <Route path='/reportes' element={<Reportes/>} />
+            <Route path='/crearadmin' element={<CrearAdministrador />}/>
         </Routes>
     </div>
 </div>

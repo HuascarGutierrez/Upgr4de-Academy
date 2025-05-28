@@ -226,12 +226,6 @@ function MostrarCursos() {
                 >
                   Editar
                 </button>
-                <button
-                  className="btn-borrar"
-                  onClick={() => handleDelete(course.id)}
-                >
-                  Borrar
-                </button>
               </div>
             </div>
           ))}

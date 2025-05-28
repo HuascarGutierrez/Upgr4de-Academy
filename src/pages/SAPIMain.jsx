@@ -12,6 +12,7 @@ import CourseDetail from '../components/organisms/CourseDetail'
 import InteractiveCourse from '../components/organisms/InteractiveCourse'
 import UserTable from '../components/organisms/UserTable'
 import ModuloEjercicios from '../components/organisms/ModuloEjercicios'
+import Busqueda from '../components/organisms/Busqueda'
 
 
 function SAPIMain({user}) {
@@ -28,6 +29,7 @@ function SAPIMain({user}) {
                 <Route path='/courses/course' element={<CourseDetail user={user}/>} />
                 <Route path='/courses/course/interactive-course' element={<InteractiveCourse user={user}/>} />
                 <Route path='/courses/course/interactive-exercises' element={<ModuloEjercicios user={user}/>} />
+                <Route path='/catalogo/busqueda' element={<Busqueda user={user}/>}/>
             </Routes>
         </div>
     </div>

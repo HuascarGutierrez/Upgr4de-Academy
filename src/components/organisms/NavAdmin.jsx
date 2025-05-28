@@ -20,21 +20,12 @@ function NavAdmin() {
           <ul className="navLateral_list">
             <li
               onClick={() => {
-                navigate("/admin/usertable");
+                navigate("/admin/usersSection");
               }}
               className="navLateral_item"
             >
               <img src="/Icons/student.svg" alt="" />
-              <p>Estudiantes</p>
-            </li>
-            <li
-              onClick={() => {
-                navigate("/admin/docentes");
-              }}
-              className="navLateral_item"
-            >
-              <img src="/Icons/teacher.svg" alt="" />
-              <p>Docentes</p>
+              <p>Usuarios</p>
             </li>
             <li
               onClick={() => {

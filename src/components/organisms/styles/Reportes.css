@@ -196,3 +196,31 @@
     outline: none;
 }
   
+
+/* Estilos para el reporte de planes */
+.plan-stats-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.plan-stat-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 30%;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 10px 0;
+}
+
+.stat-percentage {
+  font-size: 16px;
+  color: #7f8c8d;
+}

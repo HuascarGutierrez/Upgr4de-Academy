@@ -91,9 +91,10 @@ function CrearUserA() {
           userName: fullName,
           email,
           imageUrl: finalImageUrl, // Guardamos la URL de la imagen
-          planType: "free",
+          planType: "Gratuito",
           activo: true,
           createdAt: new Date(),
+          Rol:"Estudiante",
         });
       } else {
         Swal.fire({
@@ -109,7 +110,7 @@ function CrearUserA() {
         icon: "success",
         draggable: true
       });
-      navigate("/admin/usertable");
+      navigate("/admin/usersSection");
     } catch (error) {
       //alert(`Error en el registro: ${error.message}`);
       Swal.fire({
@@ -137,7 +138,7 @@ function CrearUserA() {
     <div className="CreateUser">
     <div className="CreateUser_container">
       <div className="Header_CreateUser">
-      <button type="button" className="btn-volver" onClick={() => navigate("/admin/usertable")}>
+      <button type="button" className="btn-volver" onClick={() => navigate("/admin/usersSection")}>
         <img src="/assets/circle-arrow-left.svg" alt="Volver" />
       </button>
       <h2 className="CreateUser_title">Crear una cuenta</h2>

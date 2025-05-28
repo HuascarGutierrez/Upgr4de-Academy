@@ -5,12 +5,31 @@ import "./styles/MostrarCursos.css";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import EditUnitsForm from '../molecules/EditarUnitsForm';
 
 function MostrarCursos() {
   const [courses, setCourses] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [currentCourse, setCurrentCourse] = useState(null);
   const navigate = useNavigate();
+
+  const [uploading, setUploading] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      // Crear vista previa
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const fetchCourses = async () => {
     try {
@@ -52,14 +71,35 @@ function MostrarCursos() {
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
+      setUploading(true);
       const courseRef = doc(db, "courses", currentCourse.id);
-      await updateDoc(courseRef, currentCourse);
+      
+      let imageUrl = currentCourse.link_image;
+      
+      // Si hay un nuevo archivo de imagen, subirlo a Storage
+      if (imageFile) {
+        const storage = getStorage();
+        const storageRef = ref(storage, `course_images/${currentCourse.id}/${imageFile.name}`);
+        await uploadBytes(storageRef, imageFile);
+        imageUrl = await getDownloadURL(storageRef);
+      }
+      
+      // Actualizar el documento con la nueva URL (o la existente si no cambió)
+      await updateDoc(courseRef, {
+        ...currentCourse,
+        link_image: imageUrl
+      });
+      
       toast.success("¡Curso actualizado con éxito!");
       setEditMode(false);
       setCurrentCourse(null);
-      fetchCourses(); 
+      setImageFile(null);
+      setImagePreview(null);
+      fetchCourses();
     } catch (error) {
       toast.error("Error al actualizar el curso: " + error.message);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -78,75 +118,90 @@ function MostrarCursos() {
     <div className="mostrar-cursos-container">
       <h1 className="mostrar-cursos-title">Cursos</h1>
       {editMode ? (
-        <form className="editar-curso-form" onSubmit={handleEdit}>
-          <h2>Editar Curso</h2>
-          <label>
-            Nombre del Curso
-            <input
-              type="text"
-              name="title"
-              value={currentCourse.title}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Descripción
-            <textarea
-              name="description"
-              value={currentCourse.description}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </label>
-          <label>
-            Categoría
-            <input
-              type="text"
-              name="category"
-              value={currentCourse.category}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Profesor
-            <input
-              type="text"
-              name="teacher"
-              value={currentCourse.teacher}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Enlace de Imagen
-            <input
-              type="text"
-              name="link_image"
-              value={currentCourse.link_image}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <button type="submit" className="btn-editar-curso">Guardar Cambios</button>
-          <button type="button" className="btn-crear-evaluacion" onClick={() => {navigate("/admin/crearEvaluacion", {state: {
-              courseId: currentCourse.id, 
-              courseTitle: currentCourse.title, 
-              courseDescription: currentCourse.description, 
-              courseImage: currentCourse.link_image
-          }});}}>Evaluaciones</button>
-          <button
-            type="button"
-            className="btn-cancelar-edicion"
-            onClick={() => {
-              setEditMode(false);
-              setCurrentCourse(null);
-            }}
-          >
-            Cancelar
-          </button>
-        </form>
+        <div className="container">
+          <form className="editar-curso-form" onSubmit={handleEdit}>
+            <h2>Editar Curso</h2>
+            <label>
+              Nombre del Curso
+              <input
+                type="text"
+                name="title"
+                value={currentCourse.title}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Descripción
+              <textarea
+                name="description"
+                value={currentCourse.description}
+                onChange={handleChange}
+                required
+              ></textarea>
+            </label>
+            <label>
+              Categoría
+              <input
+                type="text"
+                name="category"
+                value={currentCourse.category}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Profesor
+              <input
+                type="text"
+                name="teacher"
+                value={currentCourse.teacher}
+                onChange={handleChange}
+                required
+              />
+            </label>
+
+            <label>
+              Imagen del Curso
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              {imagePreview && (
+                <div className="image-preview">
+                  <img src={imagePreview} alt="Vista previa" style={{maxWidth: '200px', marginTop: '10px'}} />
+                </div>
+              )}
+              {!imagePreview && currentCourse.link_image && (
+                <div className="current-image">
+                  <p>Imagen actual:</p>
+                  <img src={currentCourse.link_image} alt="Actual" style={{maxWidth: '200px'}} />
+                </div>
+              )}
+            </label>
+            
+            <button type="submit" className="btn-editar-curso" disabled={uploading}>
+              {uploading ? 'Subiendo imagen...' : 'Guardar Cambios'}
+            </button>
+            <button
+              type="button"
+              className="btn-cancelar-edicion"
+              onClick={() => {
+                setEditMode(false);
+                setCurrentCourse(null);
+              }}
+            >
+              Cancelar
+            </button>
+          </form>
+
+          <EditUnitsForm courseId={currentCourse.id} />
+
+        </div>
+        
+        
+
       ) : (
         <>
         <div className='boton-crear'>

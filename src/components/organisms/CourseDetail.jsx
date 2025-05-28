@@ -96,6 +96,7 @@ function CourseDetail({user}) {
                                           })) 
       try {
         const q = collection(doc(db, 'users',user.uid), 'enrolledCourses');
+        console.log('curso',course.id)
         const docCreated = await doc(q, course.id);
         const verifica = await getDoc(docCreated);
         if(verifica.exists()){
@@ -110,7 +111,7 @@ function CourseDetail({user}) {
             activo: true,
             title: course.title,
             category: course.category,
-          });
+          },{merge: true});
         }
         console.log(unidades)
         //await setDoc(docCreated, {unidades: units})

@@ -227,6 +227,7 @@ function Supervision({user}) {
     const reloadData = ({condicion=false, materia}) => {
 
         setCategoriaG(materia)
+        console.log('materia', materia)
         let content
         let contentTitle
 
@@ -309,12 +310,8 @@ function Supervision({user}) {
 
 const getUnidadesNoCompletadas = () => {
   let cursosFiltrados = cursos;
-  if (contenidoMostrado.length === 1 && contenidoMostrado[0].category !== 'materias') {
-    // Si está filtrado por materia
-    cursosFiltrados = cursos.filter(curso => curso.category === contenidoMostrado[0].category && curso.activo);
-    console.log('content ', contenidoMostrado)
-    console.log('filtrados', cursosFiltrados);
-  }
+  console.log('maybe: ',contenidoMostrado.length)
+ 
   // Si está en "ver todos", cursos ya es el array completo
 
   // Extrae unidades no completadas
@@ -436,26 +433,26 @@ const getUnidadesNoCompletadas = () => {
                     ))}
                 </BarChart>
             </ResponsiveContainer>
-            <div>
-  <h4>Unidades teóricas por cumplir</h4>
+            <div className='tablaSupervision'>
+  <h4 className='tabla_title'>Unidades teóricas por cumplir</h4>
   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
     <thead>
       <tr>
-        <th style={{ border: '1px solid #ccc', padding: '4px' }}>Nombre</th>
-        <th style={{ border: '1px solid #ccc', padding: '4px' }}>Categoría</th>
-        <th style={{ border: '1px solid #ccc', padding: '4px' }}>Curso</th>
+        <th className='encabezadoSupervision' style={{ border: '1px solid #ccc', padding: '4px' }}>Nombre</th>
+        <th className='encabezadoSupervision' style={{ border: '1px solid #ccc', padding: '4px' }}>Categoría</th>
+        <th className='encabezadoSupervision' style={{ border: '1px solid #ccc', padding: '4px' }}>Curso</th>
       </tr>
     </thead>
     <tbody>
       {categoriaG != null?getUnidadesNoCompletadas().map((unit, idx) =>  categoriaG == unit.category && (
-        <tr key={idx}>
+        <tr className='textSupervision' key={idx}>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.nombre}</td>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.category}</td>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.title}</td>
         </tr>
       )):
       getUnidadesNoCompletadas().map((unit, idx) =>  (
-        <tr key={idx}>
+        <tr className='textSupervision' key={idx}>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.nombre}</td>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.category}</td>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.title}</td>

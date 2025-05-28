@@ -13,6 +13,16 @@
     min-height: 100dvh;
 }
 
+.supervision_title {
+    font-size: var(--font-size-3xl);
+    text-align: center;
+    width: 100%;
+    color: var(--brandy-punch-500);
+    background-color: var(--swans-down-200);
+    margin: 0;
+    border-radius: 10px;
+}
+
 .supervision_element {
     display: flex;
     flex-direction: column;
@@ -133,6 +143,7 @@
 .supervision_dashboard {
     grid-area: dashboard;
     overflow: hidden;
+    background-color: var(--brandy-punch-100);
 }
 
 .supervision_dashboard>img {
@@ -231,6 +242,31 @@
 }
 
 
+.supervision_ejercicios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+}
+
+.supervision_ejercicios > h3 {
+    font-size: var(--font-size-2xl);
+}
+
+.ejercicios-info {
+    background-color: var(--swans-down-100);
+    width: 90%;
+    height: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+}
+
+.info-text {
+    font-size: var(--font-size-lg);
+    line-height: 2.4rem;
+    margin: 2px auto;
+}
 
 @media screen and (max-width: 900px) {
     .supervision_temas {

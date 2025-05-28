@@ -43,7 +43,7 @@ function NavLateral() {
             className="navLateral_item"
           >
             <img src="/assets/navLateral_3.svg" alt="" />
-            <p>Estadísticas</p>
+            <p>Supervisión</p>
           </li>
           <li
             onClick={() => {

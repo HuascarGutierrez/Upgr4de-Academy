@@ -100,11 +100,12 @@ function Supervision({user}) {
 
 
     useEffect(()=>{
+        let totalCompletados = 0;
+        let totalEjercicios = 0;
         const getEjerciciosCompletadosYTotales = async() => {
         const progresoQuery = query(collection(db, 'progress'), where('userId', '==', user.uid));
         getDocs(progresoQuery).then((querySnapshot) => {
-            let totalCompletados = 0;
-            let totalEjercicios = 0;
+            
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 totalCompletados += data.ejerciciosCompletados

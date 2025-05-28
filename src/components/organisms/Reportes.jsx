@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import './styles/Reportes.css';
 import { db } from "../../config/app";
 import { collection, getDocs } from "firebase/firestore";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import CourseModel from '../../models/course_model';
+
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import html2canvas from 'html2canvas';
+
+const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#8dd1e1'];
 
 // Constantes y helpers separados
 const MESES = [
@@ -43,7 +48,22 @@ const AlertCard = ({ materia, inscritos, minimo }) => {
 };
 
 // Componente para el selector de fecha
-const DateSelector = ({ mes, año, setMes, setAño, onPreview, onGenerate, previewActive, onGenerateReportPlanPagos, planPagosPdf, onPreviewReportPlan, onRefresh }) => {
+const DateSelector = ({ 
+  mes, 
+  año, 
+  setMes, 
+  setAño, 
+  onPreview, 
+  onGenerate, 
+  previewActive, 
+  onGenerateReportPlanPagos, 
+  planPagosPdf, 
+  onPreviewReportPlan, 
+  onPreviewReportUsers,
+  onGenerateReportUsers,
+  usersPdf,
+  onRefresh
+}) => {
   return (
     <div className="contenedor-titulo-filtros">
       <p className="filtro-title">Seleccione un mes y un año</p>
@@ -97,6 +117,23 @@ const DateSelector = ({ mes, año, setMes, setAño, onPreview, onGenerate, previ
           </button>
         </div>
 
+        <div className="container-buttons">
+          <button
+            onClick={onGenerateReportUsers}
+            disabled={!mes || !año}
+            className="boton-filtro"
+          >
+            Ver reporte de usuarios
+          </button>
+          <button
+            onClick={usersPdf}
+            disabled={!mes || !año || !onPreviewReportUsers}
+            className="boton-filtro"
+          >
+            Generar PDF
+          </button>
+        </div>
+
         <button
           onClick={onRefresh}
           className="boton-filtro"
@@ -122,6 +159,8 @@ const Reportes = () => {
   const [usersInSelectedMonth, setUsersInSelectedMonth] = useState(0);
 
   const [showPlansReport, setShowPlansReport] = useState(false);
+  
+  const [showUsersByRoleReport, setShowUsersByRoleReport] = useState(false);
   
   const [alumnosPorMateria, setAlumnosPorMateria] = useState({
     'Álgebra': 0,
@@ -512,6 +551,143 @@ const Reportes = () => {
     doc.save(`reporte_planes_usuarios_${currentDate.replace(/\//g, '-')}.pdf`);
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////
+  // Componente para el reporte de usuarios por rol
+  const UsersByRoleReport = ({ usersData, teachersData, mes, año }) => {
+    // Combinar usuarios y profesores
+    const allUsers = [
+      ...usersData.map(user => ({ ...user, collection: 'users' })),
+      ...teachersData.map(teacher => ({ ...teacher, collection: 'teachers' }))
+    ];
+
+    // Filtrar por mes y año
+    const filteredUsers = allUsers.filter(user => {
+      const fechaCreacion = parsearFechaUsuario(user.createdAt);
+      return (
+        fechaCreacion?.mes === MESES.findIndex(m => m === mes) &&
+        fechaCreacion?.año === parseInt(año)
+      );
+    });
+
+    // Contar por rol
+    const countByRole = filteredUsers.reduce((acc, user) => {
+      const rol = user.Rol || 'Estudiante';
+      acc[rol] = (acc[rol] || 0) + 1;
+      return acc;
+    }, {});
+
+    // Datos para el gráfico de torta
+    const pieData = Object.entries(countByRole).map(([rol, count]) => ({
+      name: rol,
+      value: count
+    }));
+
+    return (
+      <section className="report-section">
+        <h2>Distribución de Usuarios por Rol</h2>
+        <p className="report-period">Período: {mes} - {año}</p>
+
+        <div className="chart-container" style={{ width: '100%', height: 400 }}>
+          <h3>Total de usuarios: {filteredUsers.length}</h3>
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie
+                data={pieData}
+                cx="50%"
+                cy="50%"
+                label
+                outerRadius={130}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {pieData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => `${value} usuarios`} />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+         {/* Tabla */}
+         
+        
+
+      </section>
+    );
+  };
+
+
+//////////////////////
+  const generateUsersByRolePDF = (usersData, teachersData, mes, año) => {
+    const doc = new jsPDF();
+    const marginLeft = 14;
+    let currentY = 20;
+
+    // Logo
+    doc.addImage(LOGO_BASE64, 'PNG', marginLeft, 10, 30, 30);
+    currentY = 45;
+
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Reporte de Usuarios por Rol', 105, currentY, null, null, 'center');
+    currentY += 10;
+
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Período: ${mes} - ${año}`, 105, currentY, null, null, 'center');
+    currentY += 20;
+
+    const allUsers = [
+      ...usersData.map(user => ({ ...user, collection: 'users' })),
+      ...teachersData.map(teacher => ({ ...teacher, collection: 'teachers' }))
+    ];
+
+    const filteredUsers = allUsers.filter(user => {
+      const fechaCreacion = parsearFechaUsuario(user.createdAt);
+      return (
+        fechaCreacion?.mes === MESES.findIndex(m => m === mes) &&
+        fechaCreacion?.año === parseInt(año)
+      );
+    });
+
+    const countByRole = filteredUsers.reduce((acc, user) => {
+      const rol = user.Rol || 'Estudiante';
+      acc[rol] = (acc[rol] || 0) + 1;
+      return acc;
+    }, {});
+
+    const rolesTable = Object.entries(countByRole).map(([rol, count]) => [
+      rol,
+      count,
+      `${((count / filteredUsers.length) * 100).toFixed(1)}%`
+    ]);
+
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Distribución por Rol', marginLeft, currentY);
+    currentY += 10;
+
+    autoTable(doc, {
+      startY: currentY,
+      head: [['Rol', 'Cantidad', 'Porcentaje']],
+      body: rolesTable,
+      theme: 'striped',
+      headStyles: { fillColor: [75, 75, 75] },
+      margin: { left: marginLeft }
+    });
+
+    currentY = doc.lastAutoTable.finalY + 10;
+    doc.setFontSize(8);
+    doc.text(`Reporte generado el ${new Date().toLocaleDateString('es-ES')}`, 105, 285, null, null, 'center');
+
+    doc.save(`reporte_usuarios_por_rol_${mes}_${año}.pdf`);
+  };
+
+
+
+
   return (
     <div className="report-container">
       {loading && <div className="loading-overlay">Cargando datos...</div>}
@@ -532,6 +708,12 @@ const Reportes = () => {
         onGenerateReportPlanPagos={()=>{setShowPlansReport(true), setPreviewActive(false)}}
         onPreviewReportPlan={showPlansReport}
         planPagosPdf={()=>{generatePlansPDF(usersData)}}
+        onPreviewReportUsers={showUsersByRoleReport}
+        onGenerateReportUsers={()=> {
+            setShowUsersByRoleReport(true);
+            setPreviewActive(false);
+            setShowPlansReport(false);}}
+        usersPdf={() => generateUsersByRolePDF(usersData, teachersData, mes, año)}
       />
 
       {previewActive && (
@@ -608,6 +790,22 @@ const Reportes = () => {
           <p className="report-period">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
           <PlanesReport usersData={usersData} />
           </>
+        )
+      }
+
+      {
+        showUsersByRoleReport && (
+          <>
+          <h1 className="report-title">Reporte de Usuarios</h1>
+          <p className="report-period">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
+          <UsersByRoleReport 
+            usersData={usersData} 
+            teachersData={teachersData}
+            mes={mes}
+            año={año}
+          />
+          </>
+          
         )
       }
     </div>

@@ -230,3 +230,68 @@
   font-size: 16px;
   color: #7f8c8d;
 }
+
+/* Estilos para el reporte de usuarios por rol */
+.chart-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.pie-chart {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--segment-colors)
+  );
+  margin: 20px auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pie-segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+  transform: rotate(calc(var(--start) * 1deg)) 
+             skewY(calc((90 - var(--angle)) * 1deg));
+}
+
+.pie-segment span {
+  position: absolute;
+  transform: rotate(calc(var(--rotation) * 1deg)) 
+             translate(120px) 
+             rotate(calc(var(--inverse-rotation) * 1deg));
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.users-table-container {
+  margin-top: 40px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.users-table th, .users-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.users-table th {
+  background-color: #f2f2f2;
+}
+
+.users-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

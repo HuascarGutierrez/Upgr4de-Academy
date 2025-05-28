@@ -46,24 +46,27 @@ function Ejercicio({user, unitId, exerciseByUnitId, titulo, cambiarSeccion, actu
     setMostrarHint(true);
   };
 
-  const submitProgress = async (ejerciciosCompletados, totalEjercicios) => {
-    // enviar datos a la base de datos -coleccion: progress
-    // estructura: {userId, exerciseId, ejerciciosCompletados, totalEjercicios}
-    const progressData = {
-      userId: user.uid,
-      ejerciciosCompletados: ejerciciosCompletados,
-      totalEjercicios: totalEjercicios,
-      exerciseByUnitId: exerciseByUnitId,
-      unitId: unitId,
-    };
-    try {
-      await setDoc(doc(db, "progress", user.uid), progressData, { merge: true });
-      console.log("Progreso guardado correctamente:", progressData);
-      cambiarSeccion('menu'); // Cambiar a la sección de menú después de guardar el progreso
-    } catch (error) {
-      console.error("Error al guardar el progreso:", error);
-    }
-}
+const submitProgress = async (ejerciciosCompletados, totalEjercicios) => {
+  // Crear un ID único combinando el usuario con el ejercicio
+  const progressId = `${user.uid}_${exerciseByUnitId}`;
+
+  const progressData = {
+    userId: user.uid,
+    ejerciciosCompletados: ejerciciosCompletados,
+    totalEjercicios: totalEjercicios,
+    exerciseByUnitId: exerciseByUnitId,
+    unitId: unitId,
+  };
+
+  try {
+    await setDoc(doc(db, "progress", progressId), progressData, { merge: true });
+    console.log("Progreso guardado correctamente:", progressData);
+    cambiarSeccion('menu');
+  } catch (error) {
+    console.error("Error al guardar el progreso:", error);
+  }
+};
+
 
 
   const [ejercicios, setEjercicios] = useState([]);

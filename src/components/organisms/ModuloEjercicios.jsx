@@ -79,7 +79,7 @@ export default function ModuloEjercicios({user}) {
               onClick={() => navigate(-1)}
               className="menu-button"
             >
-              Salir del Curso
+              Salir al Curso
             </button>
           </div>
         </div>

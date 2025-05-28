@@ -43,7 +43,7 @@ function NavAdmin() {
               className="navLateral_item"
             >
               <img src="/Icons/curso-online.svg" alt="" />
-              <p>Cursos</p>
+              <p>Cursos y ejercicios</p>
             </li>
             <li
               onClick={() => {

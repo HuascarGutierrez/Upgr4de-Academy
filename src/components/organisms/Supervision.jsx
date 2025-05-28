@@ -74,6 +74,8 @@ function Supervision({user}) {
     const [dataEjercicios, setDataEjercicios] = useState([]);
     const [dataCursoPorMaterias, setDataCursoPorMaterias] = useState([]);
 
+    const [contentT, setContentT] = useState([])
+
 
 
     const COLORSPIE = ['#0088FE', '#00C49F'];
@@ -129,6 +131,7 @@ function Supervision({user}) {
                 let contUnidades = 0;
                 const cursosArray = querySnapshot2.docs.map((doc)=> doc.data());
                 await setCursos(cursosArray);
+                console.log("el array", cursosArray)
                 await setCursosActivos(cursosArray.filter(curso => curso.activo).length);
                 cursosArray.map((curso)=> {
                     if(curso.activo) contUnidades += curso.units.length
@@ -217,9 +220,13 @@ function Supervision({user}) {
     
     const [dataMostrada, setDataMostrada] = useState([]);
     const [contenidoMostrado, setContenidoMostrado] = useState([]);
+
+    const [categoriaG, setCategoriaG] = useState(null)
     
 
     const reloadData = ({condicion=false, materia}) => {
+
+        setCategoriaG(materia)
         let content
         let contentTitle
 
@@ -243,6 +250,10 @@ function Supervision({user}) {
             contentTitle = content.map((doc) => doc.title);
             setContenidoMostrado(contentTitle)
 
+            //aqui se puede hallar la categoria
+            setContentT(content)
+            console.log('contentTitle', content)
+
            // quantityByUnit = content.map((doc) => doc.units.length)
             //let mapeo = contentTitle.map()
             const resultado = content.reduce((acc, curso) => {
@@ -254,6 +265,7 @@ function Supervision({user}) {
             console.log(resuldatoArray)
 
         } else {
+            setCategoriaG(null)
             const content = [
                 'Álgebra',
                 'Química',
@@ -297,10 +309,11 @@ function Supervision({user}) {
 
 const getUnidadesNoCompletadas = () => {
   let cursosFiltrados = cursos;
-  if (contenidoMostrado.length === 1 && contenidoMostrado[0] !== 'materias') {
+  if (contenidoMostrado.length === 1 && contenidoMostrado[0].category !== 'materias') {
     // Si está filtrado por materia
-    cursosFiltrados = cursos.filter(curso => curso.category === contenidoMostrado[0] && curso.activo);
+    cursosFiltrados = cursos.filter(curso => curso.category === contenidoMostrado[0].category && curso.activo);
     console.log('content ', contenidoMostrado)
+    console.log('filtrados', cursosFiltrados);
   }
   // Si está en "ver todos", cursos ya es el array completo
 
@@ -434,7 +447,14 @@ const getUnidadesNoCompletadas = () => {
       </tr>
     </thead>
     <tbody>
-      {getUnidadesNoCompletadas().map((unit, idx) => (
+      {categoriaG != null?getUnidadesNoCompletadas().map((unit, idx) =>  categoriaG == unit.category && (
+        <tr key={idx}>
+          <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.nombre}</td>
+          <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.category}</td>
+          <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.title}</td>
+        </tr>
+      )):
+      getUnidadesNoCompletadas().map((unit, idx) =>  (
         <tr key={idx}>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.nombre}</td>
           <td style={{ border: '1px solid #ccc', padding: '4px' }}>{unit.category}</td>

@@ -354,12 +354,11 @@ const getUnidadesNoCompletadas = () => {
             </div>
         </div>
         <div className='supervision_element supervision_profile'>
-            <h3>Mi perfil de usuario</h3>
+            
             <div className='supervision_description'>
                 <img src={user?.imageUrl} alt="profile_photo" />
                 <div className='supervision_info'>
-                    <p>{user?.userName}</p>
-                    <p>{user?.email}</p>
+                    <h3>Rendimiento de los cursos</h3>
                 </div>
                 <div className='supervision_courses'>
                     <div className='courses-course'><p>Activo:</p> <span>{user?.activo?"SI":"NO"}</span></div> {/**agregar nombre de cursos  y de unidades */}

@@ -25,7 +25,7 @@ function NavAdmin() {
               className="navLateral_item"
             >
               <img src="/Icons/student.svg" alt="" />
-              <p>Usuarios</p>
+              <p>Gestion de Usuarios</p>
             </li>
             <li
               onClick={() => {

@@ -490,7 +490,7 @@ const getUnidadesNoCompletadas = () => {
                 <h4>Química</h4>
                 <p>Práctico 25 minutos.</p>
             </div> */}
-            <h3>Ejercicios</h3>
+            <h3>Vista de ejercicios</h3>
             <div className='ejercicios-info'>
                 <p className='info-text'>Ejercicios Completados: {dataEjercicios[0]?.value}</p>
                 <p className='info-text'>Ejercicios Faltantes: {dataEjercicios[1]?.value}</p>

@@ -5,11 +5,12 @@ import { db } from '../../config/app';
 import React, { useEffect, useState } from 'react';
 import CourseModel from '../../models/course_model';
 
-function CoursesCatalog({user}) {
+function CoursesCatalog({ user }) {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
-  const [myCategory, setMyCategory] = useState('Álgebra'); 
+  const [myCategory, setMyCategory] = useState('Álgebra');
   const [activeFilter, setActiveFilter] = useState('Álgebra');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchCourses = async (category) => {
     try {
@@ -29,79 +30,91 @@ function CoursesCatalog({user}) {
   const handleFilterClick = (category) => {
     setMyCategory(category);
     setActiveFilter(category);
+    setSearchTerm(''); // reset search when changing category
   };
+
+  // Filtrar cursos por término de búsqueda en título o descripción
+  const filteredCourses = courses.filter((course) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      course.title.toLowerCase().includes(term) ||
+      (course.description && course.description.toLowerCase().includes(term))
+    );
+  });
 
   return (
     <div className="catalog-container">
       <header className="catalog-header">
         <div className="logo">SAPI</div>
         <nav className="nav-bar">
-          <input type="text" placeholder="Busca el tema que necesitas" className="search-input" />
+          <input
+            type="text"
+            placeholder="Busca el tema que necesitas"
+            className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <div className="nav-links">
-            {/**<span>Mis Cursos</span>
-            <span>Progreso</span> */}
+            {/*<span>Mis Cursos</span>
+            <span>Progreso</span>*/}
           </div>
         </nav>
       </header>
+
       <div className="catalog-banner">
         <p className="title">Catálogo de cursos</p>
         <div className="filters">
-          <button
-            className={`filter-button ${activeFilter === 'Álgebra' ? 'active' : ''}`}
-            onClick={() => handleFilterClick('Álgebra')}
-          >
-            Álgebra
-          </button>
-          <button
-            className={`filter-button ${activeFilter === 'Cálculo' ? 'active' : ''}`}
-            onClick={() => handleFilterClick('Cálculo')}
-          >
-            Cálculo
-          </button>
-          <button
-            className={`filter-button ${activeFilter === 'Física' ? 'active' : ''}`}
-            onClick={() => handleFilterClick('Física')}
-          >
-            Física
-          </button>
-          <button
-            className={`filter-button ${activeFilter === 'Química' ? 'active' : ''}`}
-            onClick={() => handleFilterClick('Química')}
-          >
-            Química
-          </button>
+          {['Álgebra', 'Cálculo', 'Física', 'Química'].map((cat) => (
+            <button
+              key={cat}
+              className={`filter-button ${activeFilter === cat ? 'active' : ''}`}
+              onClick={() => handleFilterClick(cat)}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
       </div>
 
       <h2 className="weekly-streak">Inicia una racha semanal</h2>
       <p className="weekly-description">Visita 5 min de video o prueba al día para lograr tus objetivos</p>
+
       <div className="course-grid">
-        {user?.planType != "Gratuito" ? (courses.map((course) => (
-          <div
-            key={course.id}
-            className="course-card"
-            onClick={() => navigate('/main/courses/course', { state: { course } })}
-          >
+        {user?.planType !== 'Gratuito' ? (
+          (searchTerm ? filteredCourses : courses).map((course) => (
             <div
-              className="course-banner"
-              style={{ backgroundImage: `url(${course.link_image})` }}
+              key={course.id}
+              className="course-card"
+              onClick={() => navigate('/main/courses/course', { state: { course } })}
             >
-              <div className="course-banner-faded-title">
-                <h3 className="course-title">{course.title.length > 32
-                                              ? course.title.slice(0, 29) + "..."
-                                              : course.title}</h3>
+              <div
+                className="course-banner"
+                style={{ backgroundImage: `url(${course.link_image})` }}
+              >
+                <div className="course-banner-faded-title">
+                  <h3 className="course-title">
+                    {course.title.length > 32 ? `${course.title.slice(0, 29)}...` : course.title}
+                  </h3>
+                </div>
+              </div>
+              <div className="course-content">
+                <p className="course-description">{course.description}</p>
+                <div className="course-meta">
+                  <span>👤 {course.teacher}</span>
+                </div>
               </div>
             </div>
-            <div className="course-content">
-              <p className="course-description">{course.description}</p>
-              <div className="course-meta">
-                <span>👤 {course.teacher}</span>
-              </div>
-            </div>
+          ))
+        ) : (
+          <h3 className="noItems">Cursos disponibles en el plan Mensual</h3>
+        )}
+
+        {searchTerm && filteredCourses.length === 0 && (
+          <div>
+          <p className="noItems">No se encontraron cursos para "{searchTerm}"</p>
+          <p className="noItems" onClick={() => {navigate('/main/catalogo/busqueda')}}>Desea una busqueda profunda</p>
           </div>
-        ))):
-        (<h3 className='noItems'>Cursos disponibles en el plan Mensual</h3>)
-        }
+        )}
       </div>
     </div>
   );

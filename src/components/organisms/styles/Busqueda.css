@@ -1,0 +1,94 @@
+.busqueda-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+  color: var(--black-950);
+}
+
+.busqueda-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+.nav-bar .search-input {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.busqueda-banner .title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #333;
+}
+
+.loading, .noItems {
+  padding: 30px;
+  text-align: center;
+  font-style: italic;
+  color: #888;
+}
+
+.course-list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.course-item {
+  background-color: white;
+  border-left: 6px solid #3b82f6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.course-item h2 {
+  margin: 0;
+  color: #1f2937;
+}
+
+.course-item p {
+  margin: 5px 0;
+  color: #4b5563;
+}
+
+.units-list {
+  margin-top: 15px;
+  padding-left: 15px;
+  border-left: 2px solid #e5e7eb;
+}
+
+.unit-item {
+  margin-bottom: 15px;
+}
+
+.unit-item h4 {
+  margin-bottom: 8px;
+  color: #2563eb;
+}
+
+.unit-item ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.unit-item li {
+  color: #374151;
+  list-style-type: circle;
+  margin-bottom: 4px;
+}

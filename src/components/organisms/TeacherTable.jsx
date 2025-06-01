@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
+import { storage } from '../../config/app2';
+
 function TeacherTable() {
   const navigate = useNavigate();
   const [teachers, setTeachers] = useState([]);
@@ -67,7 +69,7 @@ function TeacherTable() {
       let imageUrl = formData.imageUrl;
   
       if (newImageFile) {
-        const storage = getStorage();
+        //const storage = getStorage();
         const storageRef = ref(storage, `images_profiles/${newImageFile.name}`);
         await uploadBytes(storageRef, newImageFile);
         imageUrl = await getDownloadURL(storageRef);

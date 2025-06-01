@@ -8,6 +8,7 @@ import GoogleButton from "../components/atoms/GoogleButton.jsx";
 import Nav from "../components/organisms/Nav.jsx";
 import { handleSignup } from "../config/auth_functions";
 import { FaCheckCircle } from "react-icons/fa";
+import { storage } from "../config/app2.js";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -83,7 +84,7 @@ function SignUp() {
       return "https://firebasestorage.googleapis.com/v0/b/sapi-5c389.firebasestorage.app/o/images_profiles%2Fdefault_img_profile.webp?alt=media&token=56d413c0-7595-4131-8a5d-2213d13c3cad";
     }
 
-    const storage = getStorage();
+    //const storage = getStorage();
     const storageRef = ref(storage, `images_profiles/${email}`); // Carpeta 'images/' en Storage
 
     try {

@@ -20,6 +20,8 @@ import SubscriptionSection from "./SubscriptionSection";
 import PaymentSimulationModal from "./PaymentSimulationModal";
 import GamificationSection from "./GamificationSection"; // Importa el componente
 
+import { storage } from "../../config/app2";
+
 function Perfil({ user }) {
   const [activeView, setActiveView] = useState("myProfile");
   const [subscriptionPlans] = useState([
@@ -192,7 +194,7 @@ function Perfil({ user }) {
     setWait(true);
 
     try {
-      const storage = getStorage();
+      //const storage = getStorage();
       const timestamp = Date.now();
       const fileName = fileComprobante.name;
       const storagePath = `comprobantes/${timestamp}-${fileName}`;

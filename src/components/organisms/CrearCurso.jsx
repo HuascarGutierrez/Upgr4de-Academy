@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 import { useEffect} from "react";
+import { storage } from '../../config/app2';
 
 function CrearCurso() {
 
@@ -115,7 +116,7 @@ function CrearCurso() {
     if (!file) return;
   
     try {
-      const storage = getStorage();
+      //const storage = getStorage();
       const storageRef = ref(storage, `courses_images/${file.name}`);
       await uploadBytes(storageRef, file);
   

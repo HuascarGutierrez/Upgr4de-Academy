@@ -6,7 +6,7 @@ import "./styles/CreateUserA.css";
 import Swal from "sweetalert2";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
-
+import { storage } from "../../config/app2";
 
 function CrearDocente() {
   const [waiting, setWaiting] = useState(false);
@@ -29,7 +29,7 @@ function CrearDocente() {
       return "https://firebasestorage.googleapis.com/v0/b/sapi-5c389.firebasestorage.app/o/images_profiles%2Fdefault_img_profile.webp?alt=media&token=56d413c0-7595-4131-8a5d-2213d13c3cad";
     }
 
-    const storage = getStorage();
+    //const storage = getStorage();
     const storageRef = ref(storage, `teacher_profiles/${docenteId}`);
 
     try {

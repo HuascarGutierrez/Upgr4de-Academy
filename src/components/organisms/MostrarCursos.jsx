@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import EditUnitsForm from '../molecules/EditarUnitsForm';
+import { storage } from '../../config/app2';
 
 function MostrarCursos() {
   const [courses, setCourses] = useState([]);
@@ -78,7 +79,7 @@ function MostrarCursos() {
       
       // Si hay un nuevo archivo de imagen, subirlo a Storage
       if (imageFile) {
-        const storage = getStorage();
+        //const storage = getStorage();
         const storageRef = ref(storage, `course_images/${currentCourse.id}/${imageFile.name}`);
         await uploadBytes(storageRef, imageFile);
         imageUrl = await getDownloadURL(storageRef);

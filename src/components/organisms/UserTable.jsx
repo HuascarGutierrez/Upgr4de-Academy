@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from '../../config/app2';
 
 
 function UserTable() {
@@ -154,7 +155,7 @@ function UserTable() {
     const file = e.target.files[0];
     if (!file) return;
   
-    const storage = getStorage();
+    //const storage = getStorage();
     const storageRef = ref(storage, `images_profiles/${editingUser}_${file.name}`);
   
     try {

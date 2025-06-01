@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/app"
 import "./styles/CreateUserA.css"
 import Swal from "sweetalert2";
+import { storage } from "../../config/app2";
 
 function CrearUserA() {
   const [waiting, setWaiting] = useState(false);
@@ -41,7 +42,7 @@ function CrearUserA() {
       return defaultUrl;
     }
 
-    const storage = getStorage();
+    //const storage = getStorage();
     const storageRef = ref(storage, `images_profiles/${email}`);
 
     try {

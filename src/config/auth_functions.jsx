@@ -3,6 +3,7 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "./app";
 import { handleAlert, handleErrorNoti, handleSuccess } from "./alerts";
 import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
+import { storage } from "./app2";
 
 const handleSignup = async({fullName, imageUrl, email, password, passwordVer,funcion}) => {
     try{
@@ -151,7 +152,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
     
     const handleUpdateImage = async ({email, image}) => {
         
-            const storage = getStorage();
+            //const storage = getStorage();
             const storageRef = ref(storage, `images_profiles/${email}`); // Carpeta 'images/' en Storage
     
             try {

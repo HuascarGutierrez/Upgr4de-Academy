@@ -4,7 +4,6 @@ body {
   background-color: var(--color-background) !important;
   color: var(--color-text) !important;
   /*si hay problemas con el color del texto, quitar lo de abajo*/
-  color: #000 !important;
   font-family: Raleway;
   min-height: 100dvh;
 }

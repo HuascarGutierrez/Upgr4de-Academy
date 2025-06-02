@@ -2,8 +2,9 @@
 
 .admin-dashboard-container {
     padding: 2rem;
-    background-color: var(--color-background); /* Usará --black-50 por defecto */
-    color: var(--color-text); /* Usará --black-950 por defecto */
+    /**background-color: var(--color-background); /* Usará --black-50 por defecto */
+    /**color: var(--color-text); /* Usará --black-950 por defecto */
+    color: #161616;
     min-height: 100vh;
     font-family: 'Raleway', sans-serif;
     display: flex;
@@ -53,10 +54,6 @@
 
 /* Ajustes para el modo oscuro: fondo claro y texto oscuro */
 @media (prefers-color-scheme: dark) {
-    :root {
-        --color-text: var(--black-950); /* Texto oscuro en fondo claro */
-        --color-background: var(--black-100); /* Fondo plomo claro para el modo oscuro */
-    }
     .solicitud-item {
         background-color: var(--black-50); /* Fondo muy claro para las cajas bento en modo oscuro */
         border: 1px solid var(--black-100); /* Borde ajustado */

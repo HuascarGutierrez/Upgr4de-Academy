@@ -40,8 +40,8 @@
     --brandy-punch-950: #371a11;
 
   /*variantes*/
-  --color-text: var(--black-950);
-  --color-background: var(--black-50);
+  --color-text: var(--black-50);
+  --color-background: #161716;
 
   --font-size-xs: 1.2rem;   /* 12px */
   --font-size-sm: 1.4rem;  /* 14px */

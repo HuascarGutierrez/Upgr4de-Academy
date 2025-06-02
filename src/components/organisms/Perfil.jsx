@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles/Perfil.css";
 import { getAuth, signOut } from "firebase/auth";
-import { alertSignOut, alertWarning } from "../../config/alerts";
+import { alertSignOut, alertWarning } from "../../config/alerts"; // Asegúrate de que estas usan Swal
 import { useNavigate } from "react-router-dom";
 import {
   doc,
@@ -15,12 +15,13 @@ import {
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { handleUpdateImage } from "../../config/auth_functions";
 import { ClipLoader } from "react-spinners";
+import Swal from 'sweetalert2'; // <-- Importar SweetAlert2
 
 import SubscriptionSection from "./SubscriptionSection";
 import PaymentSimulationModal from "./PaymentSimulationModal";
 import GamificationSection from "./GamificationSection"; // Importa el componente
 
-import { storage } from "../../config/app2";
+import { storage } from "../../config/app2"; // Asegúrate de que 'storage' de Firebase Storage esté correctamente exportado y sea accesible aquí.
 
 function Perfil({ user }) {
   const [activeView, setActiveView] = useState("myProfile");
@@ -67,15 +68,29 @@ function Perfil({ user }) {
   }, [user?.userName]);
 
   const handleSignOut = async () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        alertSignOut();
-        navigate("/");
-      })
-      .catch((error) => {
-        alertWarning(`Error de logout: ${error}`);
-      });
+    // Reemplazar window.confirm por Swal.fire
+    const result = await Swal.fire({
+      title: '¿Estás seguro de cerrar sesión?',
+      text: 'Se cerrará tu sesión actual.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          alertSignOut(); // Asumiendo que esto ya usa Swal internamente
+          navigate("/");
+        })
+        .catch((error) => {
+          alertWarning(`Error de logout: ${error.message}`); // Usar error.message para el mensaje de alerta
+        });
+    }
   };
 
   const handleViewChange = (view) => {
@@ -106,9 +121,18 @@ function Perfil({ user }) {
           },
           { merge: true }
         );
-        location.reload();
+        Swal.fire({ // Reemplazar alert por Swal.fire para éxito
+          icon: 'success',
+          title: '¡Imagen actualizada!',
+          text: 'Tu foto de perfil se ha actualizado correctamente. Se recargará la página.',
+          timer: 2000, // Opcional: cierra automáticamente después de 2 segundos
+          timerProgressBar: true,
+          didClose: () => {
+            location.reload(); // Recargar después de que el Swal se haya cerrado
+          }
+        });
       } catch (error) {
-        alertWarning(`Error al actualizar la imagen: ${error}`);
+        alertWarning(`Error al actualizar la imagen: ${error.message}`); // Usar error.message
       }
     } else if (!user?.email || !user?.uid) {
       alertWarning(
@@ -141,12 +165,25 @@ function Perfil({ user }) {
         },
         { merge: true }
       );
-      location.reload();
+      Swal.fire({ // Reemplazar alert por Swal.fire para éxito
+        icon: 'success',
+        title: '¡Nombre guardado!',
+        text: 'Tu nombre ha sido actualizado correctamente. Se recargará la página.',
+        timer: 2000,
+        timerProgressBar: true,
+        didClose: () => {
+          location.reload();
+        }
+      });
     } catch (error) {
-      alertWarning(`Error al guardar el nombre: ${error}`);
+      alertWarning(`Error al guardar el nombre: ${error.message}`); // Usar error.message
     }
   };
 
+  // NOTA: Esta función updatePlanInFirestore YA NO DEBERÍA SER LLAMADA DIRECTAMENTE POR SubscriptionSection
+  // si el plan es gratuito, ya que SubscriptionSection ahora maneja eso internamente con su propia lógica de Firebase.
+  // Solo se usaría si aún tuvieras una lógica para que Perfil actualice planes directamente,
+  // pero con la última actualización de SubscriptionSection, esto es menos probable.
   const updatePlanInFirestore = async (plan) => {
     if (!user?.uid) {
       alertWarning(
@@ -164,11 +201,19 @@ function Perfil({ user }) {
         },
         { merge: true }
       );
-      location.reload();
+      Swal.fire({ // Reemplazar alert por Swal.fire para éxito
+        icon: 'success',
+        title: '¡Plan actualizado!',
+        text: 'Tu plan se ha actualizado correctamente.',
+        timer: 1500,
+        timerProgressBar: true
+      });
+      // location.reload(); // Generalmente, no es necesario recargar aquí si el estado `user` se actualiza reactivamente
     } catch (error) {
-      alertWarning(`Error al actualizar el plan: ${error}`);
+      alertWarning(`Error al actualizar el plan: ${error.message}`);
     }
   };
+
 
   const handleInitiatePayment = (plan) => {
     setPlanToSubscribe(plan);
@@ -194,7 +239,7 @@ function Perfil({ user }) {
     setWait(true);
 
     try {
-      //const storage = getStorage();
+      //const storage = getStorage(); // Ya importamos 'storage' directamente
       const timestamp = Date.now();
       const fileName = fileComprobante.name;
       const storagePath = `comprobantes/${timestamp}-${fileName}`;
@@ -222,9 +267,13 @@ function Perfil({ user }) {
         fechaSolicitud: serverTimestamp(),
       });
 
-      alert(
-        "Comprobante subido y solicitud registrada. Tu pago está pendiente de verificación."
-      );
+      // Reemplazado window.alert por Swal.fire
+      Swal.fire({
+        icon: 'success',
+        title: '¡Solicitud enviada!',
+        text: 'Tu comprobante ha sido subido y tu solicitud de pago está pendiente de verificación por un administrador.',
+        confirmButtonText: 'Entendido'
+      });
     } catch (error) {
       console.error("Error al procesar el pago y subir comprobante:", error);
       alertWarning(`Error al procesar el pago: ${error.message}`);

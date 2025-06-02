@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './styles/PaymentSimulationModal.css';
 import qrImage from '/images/qr.webp';
 import { ClipLoader } from 'react-spinners';
+import Swal from 'sweetalert2'; // Importar SweetAlert2
 
 function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = false }) {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -17,13 +18,25 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
         if (file) {
             // Validar tipo de archivo
             if (!file.type.startsWith('image/')) {
-                alert("Por favor selecciona una imagen válida (JPG, PNG, etc.)");
+                Swal.fire({ // Reemplazado alert por Swal.fire
+                    icon: 'error',
+                    title: 'Tipo de archivo inválido',
+                    text: 'Por favor selecciona una imagen válida (JPG, PNG, etc.)',
+                });
+                setSelectedFile(null); // Asegurarse de resetear si el archivo es inválido
+                setFileName('');
                 return;
             }
 
             // Validar tamaño (máximo 10MB)
             if (file.size > 10 * 1024 * 1024) {
-                alert("El archivo debe ser menor a 10MB");
+                Swal.fire({ // Reemplazado alert por Swal.fire
+                    icon: 'error',
+                    title: 'Archivo demasiado grande',
+                    text: 'El archivo debe ser menor a 10MB',
+                });
+                setSelectedFile(null); // Asegurarse de resetear si el archivo es inválido
+                setFileName('');
                 return;
             }
 
@@ -56,7 +69,11 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
         if (selectedFile && !isLoading) {
             onPaymentComplete(selectedFile);
         } else if (!selectedFile) {
-            alert("Por favor, selecciona un archivo para subir tu comprobante.");
+            Swal.fire({ // Reemplazado alert por Swal.fire
+                icon: 'warning',
+                title: 'Comprobante requerido',
+                text: 'Por favor, selecciona un archivo para subir tu comprobante.',
+            });
         }
     };
 
@@ -74,8 +91,8 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                 <div className="modal-header">
                     <h2>Pago del {formatPlanName(plan)}</h2>
                     {!isLoading && (
-                        <button 
-                            className="close-button" 
+                        <button
+                            className="close-button"
                             onClick={onClose}
                             aria-label="Cerrar modal"
                         >
@@ -96,10 +113,10 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                     </div>
 
                     <div className="qr-code-container">
-                        <img 
-                            src={qrImage} 
-                            alt="Código QR de pago" 
-                            className="qr-code" 
+                        <img
+                            src={qrImage}
+                            alt="Código QR de pago"
+                            className="qr-code"
                         />
                         <p className="qr-instructions">
                             Escanea este código QR para realizar el pago
@@ -107,7 +124,7 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                     </div>
 
                     <div className="file-upload-section">
-                        <div 
+                        <div
                             className={`file-upload-area ${dragOver ? 'drag-over' : ''} ${selectedFile ? 'has-file' : ''}`}
                             onDragOver={handleDragOver}
                             onDragLeave={handleDragLeave}
@@ -121,7 +138,7 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                                 disabled={isLoading}
                                 style={{ display: 'none' }}
                             />
-                            
+
                             <label htmlFor="comprobante-upload" className="file-upload-label">
                                 {selectedFile ? (
                                     <div className="file-selected">
@@ -151,7 +168,7 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                         </div>
 
                         {selectedFile && (
-                            <button 
+                            <button
                                 type="button"
                                 className="remove-file-btn"
                                 onClick={() => {
@@ -167,8 +184,8 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                 </div>
 
                 <div className="modal-actions">
-                    <button 
-                        onClick={handleSubmit} 
+                    <button
+                        onClick={handleSubmit}
                         className={`confirm-button ${!selectedFile || isLoading ? 'disabled' : ''}`}
                         disabled={!selectedFile || isLoading}
                     >
@@ -181,8 +198,8 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                             'Confirmar Pago'
                         )}
                     </button>
-                    <button 
-                        onClick={onClose} 
+                    <button
+                        onClick={onClose}
                         className="cancel-button"
                         disabled={isLoading}
                     >

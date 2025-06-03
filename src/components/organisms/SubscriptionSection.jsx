@@ -33,7 +33,7 @@ function SubscriptionSection({ user, subscriptionPlans, cambiarPlan: handleIniti
     return plan.name || plan.plan || 'Plan desconocido';
   };
 
-  const handleSubscriptionClick = async (plan) => { // Cambiado a async
+  const handleSubscriptionClick = async (plan) => { // 'plan' aquí ya es el objeto completo del plan (ej: {name: "Plan Mensual", price: 120, ...})
     const currentUser = auth.currentUser;
     if (!currentUser) {
       Swal.fire({
@@ -44,8 +44,8 @@ function SubscriptionSection({ user, subscriptionPlans, cambiarPlan: handleIniti
       return;
     }
 
-    // Obtener el nombre "limpio" del plan para guardar en DB y pasar a funciones
-    const planNameToSave = getCleanPlanName(plan.name);
+    // Obtener el nombre "limpio" del plan para guardar en DB del usuario
+    const planNameToSave = getCleanPlanName(plan.name); // Esto es solo el nombre limpio, ej. "Mensual"
 
     if (plan.price === 0) { // Si el plan es el "Gratuito"
       // Confirmación para cambiar a plan gratuito
@@ -62,7 +62,7 @@ function SubscriptionSection({ user, subscriptionPlans, cambiarPlan: handleIniti
 
       if (result.isConfirmed) {
         try {
-          // **Aquí es donde actualizamos directamente el plan en Firebase**
+          // **Aquí es donde actualizamos directamente el plan en Firebase para el usuario**
           const userDocRef = doc(db, 'users', currentUser.uid);
           await updateDoc(userDocRef, {
             planType: planNameToSave, // <-- Usa el nombre limpio (ej. "Gratuito")
@@ -91,7 +91,8 @@ function SubscriptionSection({ user, subscriptionPlans, cambiarPlan: handleIniti
 
     // Para planes de pago (price > 0), sí llamamos a handleInitiatePayment
     // Esta función (pasada como prop) es la que debería abrir el PaymentSimulationModal
-    handleInitiatePayment(planNameToSave); // <-- Pasa el nombre limpio (ej. "Mensual")
+    // ¡CORRECCIÓN AQUÍ!: Pasa el objeto 'plan' completo, no solo el nombre.
+    handleInitiatePayment(plan); // <-- Pasa el objeto plan completo (ej: {name: "Plan Mensual", price: 120, ...})
   };
 
   return (
@@ -178,7 +179,7 @@ function SubscriptionSection({ user, subscriptionPlans, cambiarPlan: handleIniti
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleSubscriptionClick(plan)}
+                      onClick={() => handleSubscriptionClick(plan)} // Llama con el objeto plan completo
                       className={`action-button ${plan.price === 0 ? 'free-button' : 'premium-button'}`}
                     >
                       {plan.price === 0 ? 'Cambiar a Gratuito' : 'Suscribirse'}

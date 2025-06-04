@@ -32,7 +32,6 @@ function Perfil({ user }) {
         "Inscríbete en el plan Gratuito para obtener los siguientes beneficios:",
       benefits: [
         "Acceso a algunas las unidades",
-        "Acceso al 50% del contenido",
         "Evaluaciones y ejercicios",
       ],
       plan: "Gratuito",
@@ -44,7 +43,6 @@ function Perfil({ user }) {
         "Te esperan nuevas oportunidades. Inscríbete en el plan Mensual para obtener muchos beneficios:",
       benefits: [
         "Acceso a todas las unidades",
-        "Acceso al tutor artificial",
         "Acceso al apartado de supervisión",
         "Evaluaciones y ejercicios",
       ],

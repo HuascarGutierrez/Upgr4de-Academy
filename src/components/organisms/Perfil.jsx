@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles/Perfil.css";
 import { getAuth, signOut } from "firebase/auth";
-import { alertSignOut, alertWarning } from "../../config/alerts"; // Asegúrate de que estas usan Swal
+import { alertSignOut, alertWarning } from "../../config/alerts";
 import { useNavigate } from "react-router-dom";
 import {
   doc,
@@ -34,11 +34,11 @@ function Perfil({ user }) {
         "Acceso a algunas las unidades",
         "Evaluaciones y ejercicios",
       ],
-      plan: "Gratuito",
+      plan: "Gratuito", // Este campo 'plan' parece redundante si ya tienes 'name'. Podrías usar solo 'name'.
       price: 0,
     },
     {
-      name: "Plan Mensual",
+      name: "Plan Mensual", // Mantengo "Plan Mensual" aquí para la UI, pero se limpia para DB si es necesario.
       description:
         "Te esperan nuevas oportunidades. Inscríbete en el plan Mensual para obtener muchos beneficios:",
       benefits: [
@@ -46,7 +46,7 @@ function Perfil({ user }) {
         "Acceso al apartado de supervisión",
         "Evaluaciones y ejercicios",
       ],
-      plan: "Mensual",
+      plan: "Mensual", // Este campo 'plan' parece redundante si ya tienes 'name'.
       price: 120,
     },
   ]);
@@ -55,6 +55,7 @@ function Perfil({ user }) {
   const fileInputRef = useRef(null); // Ref para el input de archivo
   const [wait, setWait] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  // CAMBIO CLAVE: planToSubscribe ahora almacenará el OBJETO COMPLETO del plan
   const [planToSubscribe, setPlanToSubscribe] = useState(null);
 
   const navigate = useNavigate();
@@ -66,7 +67,6 @@ function Perfil({ user }) {
   }, [user?.userName]);
 
   const handleSignOut = async () => {
-    // Reemplazar window.confirm por Swal.fire
     const result = await Swal.fire({
       title: '¿Estás seguro de cerrar sesión?',
       text: 'Se cerrará tu sesión actual.',
@@ -82,11 +82,11 @@ function Perfil({ user }) {
       const auth = getAuth();
       signOut(auth)
         .then(() => {
-          alertSignOut(); // Asumiendo que esto ya usa Swal internamente
+          alertSignOut();
           navigate("/");
         })
         .catch((error) => {
-          alertWarning(`Error de logout: ${error.message}`); // Usar error.message para el mensaje de alerta
+          alertWarning(`Error de logout: ${error.message}`);
         });
     }
   };
@@ -95,11 +95,9 @@ function Perfil({ user }) {
     setActiveView(view);
   };
 
-  // Función para abrir el selector de archivos al hacer clic en el botón
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
-
 
   const handleImageChange = async (e) => {
     setWait(true);
@@ -119,18 +117,18 @@ function Perfil({ user }) {
           },
           { merge: true }
         );
-        Swal.fire({ // Reemplazar alert por Swal.fire para éxito
+        Swal.fire({
           icon: 'success',
           title: '¡Imagen actualizada!',
           text: 'Tu foto de perfil se ha actualizado correctamente. Se recargará la página.',
-          timer: 2000, // Opcional: cierra automáticamente después de 2 segundos
+          timer: 2000,
           timerProgressBar: true,
           didClose: () => {
-            location.reload(); // Recargar después de que el Swal se haya cerrado
+            location.reload();
           }
         });
       } catch (error) {
-        alertWarning(`Error al actualizar la imagen: ${error.message}`); // Usar error.message
+        alertWarning(`Error al actualizar la imagen: ${error.message}`);
       }
     } else if (!user?.email || !user?.uid) {
       alertWarning(
@@ -163,7 +161,7 @@ function Perfil({ user }) {
         },
         { merge: true }
       );
-      Swal.fire({ // Reemplazar alert por Swal.fire para éxito
+      Swal.fire({
         icon: 'success',
         title: '¡Nombre guardado!',
         text: 'Tu nombre ha sido actualizado correctamente. Se recargará la página.',
@@ -174,14 +172,15 @@ function Perfil({ user }) {
         }
       });
     } catch (error) {
-      alertWarning(`Error al guardar el nombre: ${error.message}`); // Usar error.message
+      alertWarning(`Error al guardar el nombre: ${error.message}`);
     }
   };
 
-  // NOTA: Esta función updatePlanInFirestore YA NO DEBERÍA SER LLAMADA DIRECTAMENTE POR SubscriptionSection
-  // si el plan es gratuito, ya que SubscriptionSection ahora maneja eso internamente con su propia lógica de Firebase.
-  // Solo se usaría si aún tuvieras una lógica para que Perfil actualice planes directamente,
-  // pero con la última actualización de SubscriptionSection, esto es menos probable.
+  // Esta función 'updatePlanInFirestore' ya no sería necesaria para planes de pago,
+  // ya que SubscriptionSection y handlePaymentComplete manejan la lógica de Firebase.
+  // La mantengo comentada o como referencia si alguna vez necesitas actualizar el plan
+  // directamente sin pasar por el flujo de pago/solicitud.
+  /*
   const updatePlanInFirestore = async (plan) => {
     if (!user?.uid) {
       alertWarning(
@@ -199,48 +198,59 @@ function Perfil({ user }) {
         },
         { merge: true }
       );
-      Swal.fire({ // Reemplazar alert por Swal.fire para éxito
+      Swal.fire({
         icon: 'success',
         title: '¡Plan actualizado!',
         text: 'Tu plan se ha actualizado correctamente.',
         timer: 1500,
         timerProgressBar: true
       });
-      // location.reload(); // Generalmente, no es necesario recargar aquí si el estado `user` se actualiza reactivamente
     } catch (error) {
       alertWarning(`Error al actualizar el plan: ${error.message}`);
     }
   };
+  */
 
-
+  // CAMBIO CLAVE: Ahora recibe el OBJETO COMPLETO del plan
   const handleInitiatePayment = (plan) => {
-    setPlanToSubscribe(plan);
+    setPlanToSubscribe(plan); // Guardamos el objeto plan completo
     setShowPaymentModal(true);
   };
 
   const handlePaymentComplete = async (fileComprobante) => {
-    if (!planToSubscribe) {
-      alertWarning("No hay un plan seleccionado para el pago.");
+    // Verificamos que planToSubscribe sea un objeto y tenga las propiedades necesarias
+    if (!planToSubscribe || typeof planToSubscribe !== 'object' || !planToSubscribe.name || typeof planToSubscribe.price === 'undefined') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Error',
+        text: "Información del plan no válida para el pago.",
+      });
       return;
     }
     if (!user?.uid) {
-      alertWarning(
-        "No se pudo obtener la información del usuario para registrar el pago."
-      );
+      Swal.fire({
+        icon: 'warning',
+        title: 'Error',
+        text: "No se pudo obtener la información del usuario para registrar el pago.",
+      });
       return;
     }
     if (!fileComprobante) {
-      alertWarning("Por favor, sube una imagen de tu comprobante de pago.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atención',
+        text: "Por favor, sube una imagen de tu comprobante de pago.",
+      });
       return;
     }
 
     setWait(true);
 
     try {
-      //const storage = getStorage(); // Ya importamos 'storage' directamente
       const timestamp = Date.now();
       const fileName = fileComprobante.name;
-      const storagePath = `comprobantes/${timestamp}-${fileName}`;
+      // Define una ruta de almacenamiento más específica si lo deseas, por ejemplo, incluyendo el ID de usuario
+      const storagePath = `comprobantes/${user.uid}/${timestamp}-${fileName}`;
 
       const storageRef = ref(storage, storagePath);
       const uploadResult = await uploadBytes(storageRef, fileComprobante);
@@ -249,36 +259,38 @@ function Perfil({ user }) {
       const db = getFirestore();
       const solicitudesRef = collection(db, "solicitudesPagos");
 
-      const selectedPlanDetails = subscriptionPlans.find(
-        (plan) => plan.name === planToSubscribe
-      );
-      const montoPago = selectedPlanDetails ? selectedPlanDetails.price : 0;
+      // CAMBIO CLAVE: Acceder directamente a las propiedades 'name' y 'price' del objeto planToSubscribe
+      const planNameForDB = planToSubscribe.name;
+      const montoPago = planToSubscribe.price;
 
       await addDoc(solicitudesRef, {
         userId: user.uid,
         userName: user.userName || "Usuario Desconocido",
         userEmail: user.email,
-        planSolicitado: planToSubscribe,
-        monto: montoPago,
+        planSolicitado: planNameForDB, // Utiliza el nombre del plan del objeto
+        monto: montoPago, // ¡Aquí está el monto correcto!
         urlComprobante: urlComprobante,
         estado: "pendiente",
         fechaSolicitud: serverTimestamp(),
       });
 
-      // Reemplazado window.alert por Swal.fire
       Swal.fire({
         icon: 'success',
         title: '¡Solicitud enviada!',
-        text: 'Tu comprobante ha sido subido y tu solicitud de pago está pendiente de verificación por un administrador.',
+        text: 'Tu comprobante ha sido subido y tu solicitud de pago está pendiente de verificación por un administrador. Te notificaremos cuando tu plan sea activado.',
         confirmButtonText: 'Entendido'
       });
     } catch (error) {
       console.error("Error al procesar el pago y subir comprobante:", error);
-      alertWarning(`Error al procesar el pago: ${error.message}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: `Hubo un error al procesar tu pago: ${error.message}`,
+      });
     } finally {
       setWait(false);
       setShowPaymentModal(false);
-      setPlanToSubscribe(null);
+      setPlanToSubscribe(null); // Resetea el plan seleccionado
     }
   };
 
@@ -288,9 +300,7 @@ function Perfil({ user }) {
   };
 
   return (
-    // Contenedor principal para el título y el grid
     <div className="profile-page-wrapper">
-      {/* Nueva caja para el título de perfil */}
       <div className="profile-title-card bento-box">
         <h1 className="profile-main-title">Perfil</h1>
       </div>
@@ -336,7 +346,6 @@ function Perfil({ user }) {
         </div>
 
         {activeView === "publicProfile" && (
-          // Usamos la nueva clase de envoltorio general
           <div className="content-wrapper bento-box">
             <div id="perfilPublico" className="public-profile-card">
               <div className="profile-info">
@@ -365,7 +374,6 @@ function Perfil({ user }) {
         )}
 
         {activeView === "myProfile" && (
-          // Usamos la nueva clase de envoltorio general
           <div className="content-wrapper bento-box">
             <div id="miPerfil" className="my-profile-card">
               <h2>Información Básica</h2>
@@ -376,8 +384,8 @@ function Perfil({ user }) {
                   </div>
                 ) : (
                   <>
-                    <label className="form-label-box custom-file-upload"> {/* Añadimos una clase para el botón */}
-                      <span className="label-text">Cambiar foto de perfil</span> {/* Envolvemos el texto */}
+                    <label className="form-label-box custom-file-upload">
+                      <span className="label-text">Cambiar foto de perfil</span>
                       <button type="button" onClick={handleButtonClick} className="form-input-button">
                         Seleccionar Archivo
                       </button>
@@ -385,14 +393,14 @@ function Perfil({ user }) {
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
-                        className="form-input-file-hidden" // Ocultamos el input de archivo
-                        ref={fileInputRef} // Asignamos la ref
+                        className="form-input-file-hidden"
+                        ref={fileInputRef}
                       />
                     </label>
                   </>
                 )}
                 <label className="form-label-box">
-                  <span className="label-text">Cambiar nombre completo</span> {/* Envolvemos el texto */}
+                  <span className="label-text">Cambiar nombre completo</span>
                   <input
                     minLength={8}
                     type="text"
@@ -408,27 +416,24 @@ function Perfil({ user }) {
         )}
 
         {activeView === "subscription" && (
-          // Usamos la nueva clase de envoltorio general
           <div className="content-wrapper bento-box">
             <SubscriptionSection
               user={user}
               subscriptionPlans={subscriptionPlans}
-              cambiarPlan={handleInitiatePayment}
+              cambiarPlan={handleInitiatePayment} // Ahora pasa el OBJETO COMPLETO del plan
             />
           </div>
         )}
 
         {activeView === "gamification" && (
           <div className="content-wrapper bento-box">
-            {" "}
-            {/* Usamos la nueva clase de envoltorio general */}
             <GamificationSection user={user} />
           </div>
         )}
 
         {showPaymentModal && (
           <PaymentSimulationModal
-            plan={planToSubscribe}
+            plan={planToSubscribe} // Pasa el OBJETO COMPLETO del plan al modal
             onPaymentComplete={handlePaymentComplete}
             onClose={handleClosePaymentModal}
             isLoading={wait}

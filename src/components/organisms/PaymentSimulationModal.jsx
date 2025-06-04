@@ -1,3 +1,4 @@
+// src/components/PaymentSimulationModal.jsx
 import React, { useState } from 'react';
 import './styles/PaymentSimulationModal.css';
 import qrImage from '/images/qr.webp';
@@ -18,24 +19,24 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
         if (file) {
             // Validar tipo de archivo
             if (!file.type.startsWith('image/')) {
-                Swal.fire({ // Reemplazado alert por Swal.fire
+                Swal.fire({
                     icon: 'error',
                     title: 'Tipo de archivo inválido',
                     text: 'Por favor selecciona una imagen válida (JPG, PNG, etc.)',
                 });
-                setSelectedFile(null); // Asegurarse de resetear si el archivo es inválido
+                setSelectedFile(null);
                 setFileName('');
                 return;
             }
 
             // Validar tamaño (máximo 10MB)
             if (file.size > 10 * 1024 * 1024) {
-                Swal.fire({ // Reemplazado alert por Swal.fire
+                Swal.fire({
                     icon: 'error',
                     title: 'Archivo demasiado grande',
                     text: 'El archivo debe ser menor a 10MB',
                 });
-                setSelectedFile(null); // Asegurarse de resetear si el archivo es inválido
+                setSelectedFile(null);
                 setFileName('');
                 return;
             }
@@ -69,7 +70,7 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
         if (selectedFile && !isLoading) {
             onPaymentComplete(selectedFile);
         } else if (!selectedFile) {
-            Swal.fire({ // Reemplazado alert por Swal.fire
+            Swal.fire({
                 icon: 'warning',
                 title: 'Comprobante requerido',
                 text: 'Por favor, selecciona un archivo para subir tu comprobante.',
@@ -77,19 +78,21 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
         }
     };
 
-    const formatPlanName = (planName) => {
-        // Si el plan es un objeto, extraer el nombre
-        if (typeof planName === 'object' && planName?.name) {
-            return planName.name;
+    const formatPlanName = (planData) => {
+        // 'planData' ahora es el objeto completo del plan (e.g., { name: "Plan Mensual", price: 120, ... })
+        if (typeof planData === 'object' && planData?.name) {
+            return planData.name;
         }
-        return planName || 'Plan desconocido';
+        // Fallback en caso de que planData no sea un objeto o no tenga 'name'
+        return planData || 'Plan desconocido';
     };
 
     return (
         <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && !isLoading && onClose()}>
             <div className="modal-content bento-box">
                 <div className="modal-header">
-                    <h2>Pago del {formatPlanName(plan)}</h2>
+                    {/* CAMBIO: Muestra el nombre del plan y el monto aquí */}
+                    <h2>Pago del {formatPlanName(plan)} - Monto: {plan?.price || 0} Bs.</h2>
                     {!isLoading && (
                         <button
                             className="close-button"
@@ -106,7 +109,8 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                         <p>Sigue estos pasos para completar tu pago:</p>
                         <ol>
                             <li>Escanea el código QR con tu aplicación de banca móvil</li>
-                            <li>Realiza el pago correspondiente</li>
+                            {/* CAMBIO: Aquí podrías incluir dinámicamente el monto, si lo deseas más prominente */}
+                            <li>Realiza el pago correspondiente (Monto: {plan?.price || 0} Bs.)</li>
                             <li>Sube una foto del comprobante de pago</li>
                             <li>Haz clic en "Confirmar Pago"</li>
                         </ol>

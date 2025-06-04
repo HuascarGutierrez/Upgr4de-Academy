@@ -19,7 +19,7 @@ function SAPIMain({user}) {
 
   return (
     <div className='SAPIMain'>
-        <NavLateral/>
+        <NavLateral user={user}/>
         <div className='SAPIContent'>
             <Routes>
                 <Route path='/courses' element={<Courses/>}/>

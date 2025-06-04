@@ -9,7 +9,7 @@ import { getFirestore } from "firebase/firestore";
 import { useEffect} from "react";
 import { storage } from '../../config/app2';
 
-function CrearCurso() {
+function CrearCurso({user}) {
 
   const navigate = useNavigate();
 
@@ -195,7 +195,7 @@ useEffect(() => {
                 onChange={handleInputChange}
                 required
               >
-                <option value="">Seleccione una materia</option>
+                <option value="">Seleccione una Categoria</option>
                 <option value="Álgebra">Álgebra</option>
                 <option value="Cálculo">Cálculo</option>
                 <option value="Física">Física</option>

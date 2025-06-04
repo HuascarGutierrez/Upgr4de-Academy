@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import './styles/AdminDashboard.css'; // Crea este archivo CSS
 
-function AdminDashboard() {
+function AdminDashboard({user}) {
     const [solicitudes, setSolicitudes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

@@ -23,24 +23,24 @@ import CrearAdministrador from '../components/organisms/CrearAdministrador'
 import CrearEvaluacion from '../components/organisms/CrearEvaluacion'
 import EditarEvaluacion from '../components/organisms/EditarEvaluacion'
 import AdminDashboard from '../components/organisms/AdminDashboard';
-function SAPIAdmin() {
+function SAPIAdmin({user}) {
   return (
     <div className='SAPIAdmmin'>
-    <NavAdmin />
+    <NavAdmin user={user}/>
     <div className='SAPIAdminContent'>
         <Routes>
-            <Route path='/usersSection' element={<UsersSection/>}/>
-            <Route path='/usertable' element={<UserTable />}/>
-            <Route path='/docentes' element={<TeacherTable />} />
-            <Route path='/listacursos' element={<MostrarCursos />}/>
-            <Route path='/crearcurso' element={<CrearCurso />}/>
-            <Route path='/crearEvaluacion' element={<CrearEvaluacion />}/>
-            <Route path='/editEvaluacion' element={<EditarEvaluacion />}/>
-            <Route path='/createuser' element={<CrearUserA/>} />
-            <Route path='/creardocente' element={<CrearDocente />}/>
-            <Route path='/reportes' element={<Reportes/>} />
-            <Route path='/crearadmin' element={<CrearAdministrador />}/>
-            <Route path='/solicitudes-pago' element={<AdminDashboard />} />
+            <Route path='/usersSection' element={<UsersSection user={user}/>}/>
+            <Route path='/usertable' element={<UserTable user={user} />}/>
+            <Route path='/docentes' element={<TeacherTable user={user}/>} />
+            <Route path='/listacursos' element={<MostrarCursos user={user}/>}/>
+            <Route path='/crearcurso' element={<CrearCurso user={user}/>}/>
+            <Route path='/crearEvaluacion' element={<CrearEvaluacion user={user}/>}/>
+            <Route path='/editEvaluacion' element={<EditarEvaluacion user={user}/>}/>
+            <Route path='/createuser' element={<CrearUserA user={user}/>} />
+            <Route path='/creardocente' element={<CrearDocente user={user} />}/>
+            <Route path='/reportes' element={<Reportes user={user}/>} />
+            <Route path='/crearadmin' element={<CrearAdministrador user={user}/>}/>
+            <Route path='/solicitudes-pago' element={<AdminDashboard user={user}/>} />
         </Routes>
     </div>
 </div>

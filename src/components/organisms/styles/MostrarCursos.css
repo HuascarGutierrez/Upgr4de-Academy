@@ -3,6 +3,20 @@
     background-color: white;
 
   }
+
+  .contenedor-title-users {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--swans-down-200);
+    margin-bottom: 1rem;
+}
+
+
+.users-unidad-title {
+    text-align: center;
+    font-size: var(--font-size-2xl);
+
+}
   
   .mostrar-cursos-title {
     text-align: center;
@@ -187,4 +201,16 @@
   .btn-crear-curso:active {
     background-color: #285e61;
   }
+
+.filtro-categoria {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.filtro-categoria select {
+  padding: 5px;
+  font-size: 16px;
+}
+
   

@@ -149,7 +149,7 @@ function AdminDashboard() {
 
     return (
         <div className="admin-dashboard-container">
-            <h1>Panel de Administración - Solicitudes de Pago</h1>
+            <h1>Solicitudes de Pago</h1>
             {solicitudes.length === 0 ? (
                 <p>No hay solicitudes de pago pendientes.</p>
             ) : (

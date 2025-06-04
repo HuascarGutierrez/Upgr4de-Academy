@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/NavLateral.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Sigue usando useNavigate, es correcto para los clicks
 
 function NavLateral() {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ function NavLateral() {
     <div className="navLateral">
       <div
         onClick={() => {
-          navigate("/");
+          navigate("/main"); // Cambiado a /main para ir a la ruta base de SAPIMain
         }}
         className="navLateral_logo"
       >
@@ -54,11 +54,22 @@ function NavLateral() {
             <img src="/assets/navLateral_4.svg" alt="" />
             <p>Perfil</p>
           </li>
+          {/* ¡AQUÍ ESTÁ EL CAMBIO PARA GAMIFICACIÓN! */}
+          <li
+            onClick={() => {
+              navigate("/main/gamification"); // Ahora apunta a la ruta completa: /main/gamification
+            }}
+            className="navLateral_item"
+          >
+            {/* Puedes usar un icono relevante aquí, por ejemplo: */}
+            <img src="/assets/navLateral_1.svg" alt="Gamificación" /> {/* Asegúrate de tener este SVG */}
+            <p>Gamificación</p>
+          </li>
         </ul>
       </div>
       <div
         onClick={() => {
-          navigate("/");
+          navigate("/"); // Si esto es para salir de la sesión, puede ser la ruta de logout o la raíz
         }}
         className="navLateral_exit"
       >

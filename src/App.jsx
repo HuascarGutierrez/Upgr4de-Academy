@@ -21,9 +21,6 @@ function App() {
 
   const [userdb, setUserdb] = useState(null);
 
-  
-
-
   useEffect(()=> {
     const db = getFirestore();
     

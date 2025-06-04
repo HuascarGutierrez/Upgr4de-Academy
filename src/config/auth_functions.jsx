@@ -1,94 +1,98 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "./app";
-import { handleAlert, handleErrorNoti, handleSuccess } from "./alerts";
+import { handleAlert, handleErrorNoti, handleSuccess } from "./alerts"; // Asumo que estas son tus funciones de notificación personalizadas
 import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
 import { storage } from "./app2";
+import Swal from 'sweetalert2'; // Asegúrate de que SweetAlert2 esté importado si usas Swal.fire directamente
 
-const handleSignup = async({fullName, imageUrl, email, password, passwordVer,funcion}) => {
-    try{
-        if (password != passwordVer){
-            //handleAlert('Su contraseña debe ser idéntica');
-            Swal.fire({
+const handleSignup = async ({ fullName, imageUrl, email, password, passwordVer, funcion }) => {
+    try {
+        if (password != passwordVer) {
+            Swal.fire({ // Usando Swal.fire directamente como en tu código original
                 title: "Error",
                 text: "Su contraseña debe ser idéntica",
                 icon: "error"
-              });
+            });
             return
         }
         const userCRedential = await createUserWithEmailAndPassword(auth, email, password);
-        //await createUserWithEmailAndPassword(auth, email, password);
         await sendEmailVerification(auth.currentUser);
         console.log(userCRedential.user.uid)
-        const db = getFirestore();
-            const userRef = doc(db, "users", userCRedential.user.uid);
-            getDoc(userRef).then((docSnap) => {
-                console.log(docSnap)
-                if (!docSnap.exists()){
-                    setDoc(doc(db, "users", userCRedential.user.uid), {
-                        uid: userCRedential.user.uid,
-                        userName: fullName,
-                        email: email,
-                        imageUrl: imageUrl,
-                        planType: 'Gratuito',
-                        activo: true,
-                        createdAt: new Date(), // Guarda la fecha de creación
-                        Rol:'Estudiante',
-                      });
-                } else {
-                    //console.log('usuario ya registrado')
-                    Swal.fire({
-                        title: "Oopss...",
-                        text: "Usuario ya registrado",
-                        icon: "info"
-                    });
-            }})
+        const db = getFirestore(); // Obtener la instancia de Firestore
 
-        //console.log('Usuario registrado: ',userCRedential.user);
-        handleSuccess({title: 'Verifica tu correo',
-            texto: 'Tu usuario ha sido creado, verifica el SPAM de tu correo para verificar.'});
-
-        funcion();
-    } catch(error){
-        handleErrorNoti({texto: `error en el registro: ${error.message}`})
-    }
-}
-
-const handleLogin = async({email, password, funcion}) => {
-    console.log(email)
-    try{
-        await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            if(userCredential.user.emailVerified){
-                handleSuccess({texto: "Inicio de sesión exitoso."})
-                funcion();
+        const userRef = doc(db, "users", userCRedential.user.uid);
+        getDoc(userRef).then((docSnap) => {
+            console.log(docSnap)
+            if (!docSnap.exists()) {
+                setDoc(doc(db, "users", userCRedential.user.uid), {
+                    uid: userCRedential.user.uid,
+                    userName: fullName,
+                    email: email,
+                    imageUrl: imageUrl,
+                    planType: 'Gratuito',
+                    activo: true,
+                    createdAt: new Date(), // Guarda la fecha de creación
+                    Rol: 'Estudiante',
+                    // ¡CAMPOS DE GAMIFICACIÓN AÑADIDOS AQUÍ!
+                    points: 0,
+                    achievements: {},
+                    badges: [],
+                    avatarParts: {
+                        // ¡IMPORTANTE! Reemplaza estos con los IDs reales de tus items de avatar por defecto
+                        body: 'default_body_id',
+                        head: 'default_head_id'
+                    }
+                });
             } else {
-                signOut(auth)
-                handleErrorNoti({texto: 'Error al iniciar sesión', title: 'Error', color: '#ccccff'})
+                Swal.fire({
+                    title: "Oopss...",
+                    text: "Usuario ya registrado",
+                    icon: "info"
+                });
             }
         })
-        
-    } catch(error){
-        handleErrorNoti({texto: `error en el registro: ${error.message}`})
+
+        handleSuccess({
+            title: 'Verifica tu correo',
+            texto: 'Tu usuario ha sido creado, verifica el SPAM de tu correo para verificar.'
+        });
+
+        funcion();
+    } catch (error) {
+        handleErrorNoti({ texto: `error en el registro: ${error.message}` })
     }
 }
 
-const handleAuth = async({funcion, salida}) => {
-        const provider = new GoogleAuthProvider();
-    
-        await signInWithPopup(auth, provider)
+const handleLogin = async ({ email, password, funcion }) => {
+    console.log(email)
+    try {
+        await signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                if (userCredential.user.emailVerified) {
+                    handleSuccess({ texto: "Inicio de sesión exitoso." })
+                    funcion();
+                } else {
+                    signOut(auth)
+                    handleErrorNoti({ texto: 'Error al iniciar sesión', title: 'Error', color: '#ccccff' })
+                }
+            })
+
+    } catch (error) {
+        handleErrorNoti({ texto: `error en el registro: ${error.message}` })
+    }
+}
+
+const handleAuth = async ({ funcion, salida }) => {
+    const provider = new GoogleAuthProvider();
+
+    await signInWithPopup(auth, provider)
         .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            //const credential = GoogleAuthProvider.credentialFromResult(result);
-            //const token = credential.accessToken;
-            // The signed-in user info.
             const user = result.user;
-            //console.log(user)
-            const db = getFirestore();
+            const db = getFirestore(); // Obtener la instancia de Firestore
             const userRef = doc(db, "users", user.uid);
             getDoc(userRef).then((docSnap) => {
-                //console.log(docSnap)
-                if (!docSnap.exists()){
+                if (!docSnap.exists()) {
                     setDoc(doc(db, "users", user.uid), {
                         uid: user.uid,
                         userName: user.displayName,
@@ -97,74 +101,60 @@ const handleAuth = async({funcion, salida}) => {
                         planType: 'Gratuito',
                         activo: true,
                         createdAt: new Date(), // Guarda la fecha de creación
-                        Rol:'Estudiante'
-                      }).then(()=>{
-                            handleSuccess({texto: "Inicio de sesión exitoso."});
-                            salida();
-                            location.reload();
+                        Rol: 'Estudiante',
+                        // ¡CAMPOS DE GAMIFICACIÓN AÑADIDOS AQUÍ!
+                        points: 0,
+                        achievements: {},
+                        badges: [],
+                        avatarParts: {
+                            // ¡IMPORTANTE! Reemplaza estos con los IDs reales de tus items de avatar por defecto
+                            body: 'default_body_id',
+                            head: 'default_head_id'
                         }
-                      )
+                    }).then(() => {
+                        handleSuccess({ texto: "Inicio de sesión exitoso." });
+                        salida();
+                        location.reload();
+                    })
                 } else {
                     console.log('usuario ya registrado')
                     funcion();
-                    handleSuccess({texto: "Inicio de sesión exitoso."});
-            }})
+                    handleSuccess({ texto: "Inicio de sesión exitoso." });
+                }
+            })
 
-            /**if(user ) {
-                funcion();
-                handleSuccess({texto: "Inicio de sesión exitoso."})
-            } */
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
         }).catch((error) => {
-            handleErrorNoti({texto: `error en el registro: ${error.message}`})
-            // Handle Errors here.
-        //    const errorCode = error.code;
-        //    const errorMessage = error.message;
-            // The email of the user's account used.
-        //    const email = error.customData.email;
-            // The AuthCredential type that was used.
-        //    const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
+            handleErrorNoti({ texto: `error en el registro: ${error.message}` })
         });
-    }
+}
 
-    const db = getFirestore();
+const db = getFirestore(); // Obtener la instancia de Firestore
 
-    const getUserData = async (uid) => {
-      if (!auth.currentUser) return null; // Verificamos si hay un usuario autenticado
-    
-      const userRef = doc(db, "users", uid); // Referencia al documento con el uid
-        await getDoc(userRef).then((userSnap) => {
-            if (userSnap.exists()) {
-                console.log("Usuario encontrado");
-                const userData =userSnap.data()
-                return JSON.stringify(userData); // Retorna los datos del usuario
-              } else {
-                console.log("No se encontró el usuario");
-                return null;
-              }
+const getUserData = async (uid) => {
+    if (!auth.currentUser) return null; // Verificamos si hay un usuario autenticado
+
+    const userRef = doc(db, "users", uid); // Referencia al documento con el uid
+    await getDoc(userRef).then((userSnap) => {
+        if (userSnap.exists()) {
+            console.log("Usuario encontrado");
+            const userData = userSnap.data()
+            return JSON.stringify(userData); // Retorna los datos del usuario
+        } else {
+            console.log("No se encontró el usuario");
+            return null;
         }
-      )
-    };
+    })
+};
 
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-    
-    const handleUpdateImage = async ({email, image}) => {
-        
-            //const storage = getStorage();
-            const storageRef = ref(storage, `images_profiles/${email}`); // Carpeta 'images/' en Storage
-    
-            try {
-              await uploadBytes(storageRef, image);
-              //alert("Imagen subida con éxito");
-            const url = await getDownloadURL(storageRef);
-            return url;
-              //console.log(url)
-            } catch (error) {
-              console.error("Error al subir la imagen:", error);
-              //alert("Error al subir la imagen");
-            }
-          };
+const handleUpdateImage = async ({ email, image }) => {
+    const storageRef = ref(storage, `images_profiles/${email}`); // Carpeta 'images/' en Storage
+    try {
+        await uploadBytes(storageRef, image);
+        const url = await getDownloadURL(storageRef);
+        return url;
+    } catch (error) {
+        console.error("Error al subir la imagen:", error);
+    }
+};
 
-export {handleSignup, handleLogin, handleAuth, getUserData, handleUpdateImage}
+export { handleSignup, handleLogin, handleAuth, getUserData, handleUpdateImage }

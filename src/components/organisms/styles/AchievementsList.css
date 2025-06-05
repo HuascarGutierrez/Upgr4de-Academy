@@ -1,10 +1,213 @@
-.achievements-list h3 {
-    text-align: center;
-    margin-bottom: 20px;
+/* src/components/organisms/styles/AchievementsList.css */
+
+/* Contenedor principal de la lista de logros */
+.achievements-list {
+    padding: var(--font-size-2xl); /* Espaciado interno generoso */
+    background-color: var(--black-900); /* **Fondo oscuro similar al AvatarCustomizer** */
+    border-radius: 16px; /* Bordes redondeados */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* Sombra profunda */
+    color: var(--black-50); /* Texto claro */
+    font-family: 'Raleway', sans-serif; /* Consistente con el dashboard */
+    border: 1px solid var(--black-700); /* Borde sutil */
+    display: flex;
+    flex-direction: column;
+    gap: var(--font-size-xl); /* Espacio entre el título y la cuadrícula */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible del tab-content */
 }
 
+/* Título de la sección de logros */
+.achievements-list h3.achievements-title {
+    text-align: center;
+    color: var(--swans-down-300); /* Color de acento para el título */
+    font-size: var(--font-size-3xl); /* Tamaño de título más grande */
+    margin-bottom: var(--font-size-lg); /* Espacio debajo del título */
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(78, 140, 138, 0.4); /* Sombra de texto suave */
+    font-weight: 700;
+}
+
+/* Cuadrícula de logros */
 .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    /* Ajuste el tamaño de los elementos de la cuadrícula para que se parezcan a las opciones del avatar */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Tamaños de tarjeta más grandes */
+    gap: var(--font-size-xl); /* Espacio entre las tarjetas de logros */
+    justify-content: center; /* Centrar elementos en la cuadrícula */
+    padding: 10px; /* Pequeño padding alrededor de la cuadrícula */
 }
+
+/* Estilos para el estado de carga */
+.achievements-list-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; /* Asegurar una altura mínima */
+    color: var(--black-200);
+    font-size: var(--font-size-lg);
+    width: 100%; /* Asegurar que ocupe el ancho */
+}
+
+.achievements-list-loading .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid var(--swans-down-500);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite, glow 1.5s ease-in-out infinite alternate;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px var(--swans-down-500), 0 0 10px var(--swans-down-400); }
+    100% { box-shadow: 0 0 10px var(--swans-down-500), 0 0 20px var(--swans-down-400); }
+}
+
+/* Mensaje de no logros */
+.achievements-list.no-achievements {
+    text-align: center;
+    padding: var(--font-size-3xl);
+    background-color: var(--black-800);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: var(--black-100);
+    font-style: italic;
+}
+
+
+/* --- Estilos para AchievementItem (Asegúrate de que este componente también use estilos similares) --- */
+/* Los siguientes estilos deberían ir en AchievementItem.css, pero los incluyo aquí para referencia */
+/* para que veas la similitud con .part-option de AvatarCustomizer */
+
+/* .achievement-item {
+    border: 2px solid var(--black-600);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: var(--black-800);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    min-height: 180px;
+}
+
+.achievement-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border-color: var(--swans-down-400);
+    background-color: var(--black-700);
+}
+
+.achievement-item.unlocked {
+    border-color: var(--swans-down-500);
+    box-shadow: 0 0 18px rgba(78, 140, 138, 0.8), inset 0 0 10px rgba(78, 140, 138, 0.4);
+    background-color: var(--swans-down-950);
+}
+
+.achievement-item-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    background-color: var(--black-600);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-2xl);
+    color: var(--swans-down-300);
+    border: 2px solid var(--black-500);
+}
+
+.achievement-item.unlocked .achievement-item-icon {
+    background-color: var(--swans-down-600);
+    color: var(--black-900);
+    border-color: var(--swans-down-400);
+}
+
+.achievement-item-title {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+    color: var(--swans-down-100);
+    margin-bottom: 5px;
+}
+
+.achievement-item-description {
+    font-size: var(--font-size-sm);
+    color: var(--black-200);
+    flex-grow: 1;
+}
+
+.achievement-item.unlocked .achievement-item-description {
+    color: var(--black-700);
+}
+
+.achievement-progress-bar-container {
+    width: 100%;
+    background-color: var(--black-700);
+    border-radius: 5px;
+    height: 8px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.achievement-progress-bar {
+    height: 100%;
+    background-color: var(--brandy-punch-500);
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+.achievement-progress-text {
+    font-size: var(--font-size-xs);
+    color: var(--black-300);
+    margin-top: 5px;
+}
+
+.achievement-item.unlocked .achievement-progress-text {
+    color: var(--black-600);
+}
+
+.achievement-item.unlocked .unlocked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(78, 140, 138, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.achievement-item.unlocked .unlocked-overlay .checkmark {
+    font-size: var(--font-size-4xl);
+    color: var(--swans-down-100);
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+*/

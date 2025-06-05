@@ -20,6 +20,8 @@ function MostrarCursos({user}) {
   const [uploading, setUploading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [teachers, setTeachers] = useState([]);
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -113,9 +115,24 @@ function MostrarCursos({user}) {
   };
 
 
+  const fetchTeachers = async () => {
+  try {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const teacherUsers = querySnapshot.docs
+        .map(doc => ({ id: doc.id, ...doc.data() }))
+        .filter(user => user.Rol === "Docente");
+      setTeachers(teacherUsers);
+    } catch (error) {
+      toast.error("Error al obtener los docentes: " + error.message);
+    }
+  };
+
   useEffect(() => {
     fetchCourses();
+    fetchTeachers();
   }, []);
+
+
 
   return (
     <div className="mostrar-cursos-container">
@@ -157,14 +174,21 @@ function MostrarCursos({user}) {
             </label>
             <label>
               Profesor
-              <input
-                type="text"
+              <select
                 name="teacher"
                 value={currentCourse.teacher}
                 onChange={handleChange}
                 required
-              />
+              >
+                <option value="">Seleccionar docente</option>
+                {teachers.map(teacher => (
+                  <option key={teacher.id} value={teacher.userName}>
+                    {teacher.userName}
+                  </option>
+                ))}
+              </select>
             </label>
+
 
             <label>
               Imagen del Curso
@@ -218,17 +242,23 @@ function MostrarCursos({user}) {
         <>
         <div className='boton-crear'>
           <button className='btn-crear-curso' onClick={() => {navigate("/admin/crearcurso");}}>Crear Curso</button>
-        </div>
-        <div className="tabla-cursos">
           <div className="filtro-categoria">
-          <label>Filtrar por categoría:</label>
-          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+          <label htmlFor="categoria-select" className="filtro-label">Filtrar por categoría:</label>
+          <select
+            id="categoria-select"
+            className="filtro-select"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
             {categories.map((cat, idx) => (
               <option key={idx} value={cat}>{cat}</option>
             ))}
           </select>
         </div>
-            
+
+        </div>
+
+        <div className="tabla-cursos">           
         {courses
         .filter(course => selectedCategory === "Todas" || course.category === selectedCategory)
         .map(course => (

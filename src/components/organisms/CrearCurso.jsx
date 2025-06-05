@@ -139,16 +139,27 @@ function CrearCurso({user}) {
 useEffect(() => {
   const fetchDocentes = async () => {
     const db = getFirestore();
-    const querySnapshot = await getDocs(collection(db, "teacher"));
-    const lista = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      nombre: doc.data().teacherName,
-    }));
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const lista = querySnapshot.docs
+      .map(doc => {
+        const data = doc.data();
+        if (data.Rol === "Docente") {
+          return {
+            id: doc.id,
+            nombre: data.userName|| data.email || "Nombre no disponible",
+          };
+        } else {
+          return null;
+        }
+      })
+      .filter(docente => docente !== null);
+    
     setDocentes(lista);
   };
 
   fetchDocentes();
 }, []);
+
 
   return (
     <div className='container-crear-nuevo-curso'>
@@ -217,6 +228,7 @@ useEffect(() => {
                   </option>
                 ))}
               </select>
+
             </label>
 
             {

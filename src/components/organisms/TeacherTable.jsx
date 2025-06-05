@@ -195,7 +195,7 @@ function TeacherTable({user}) {
     <>
     <div className="Tabla">
       <div className='Header_UserTable'>
-      <h2>Lista de Docentes</h2>
+      <h2>Lista de Profesores</h2>
       {/*<button className="btn btn-create" onClick={() => navigate("/admin/createuser")}>Crear Estudiante</button>
       selectedUsers.length > 0 && (
         <button className="btn btn-delete" onClick={handleMassDelete}>Eliminar Seleccionados ({selectedUsers.length})</button>

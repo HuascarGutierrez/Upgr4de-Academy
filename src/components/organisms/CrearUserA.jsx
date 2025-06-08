@@ -21,6 +21,9 @@ function CrearUserA({user}) {
 
   const fullNameRef = useRef(null);
   const emailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const ubiRef = useRef(null);
+  const birthRef = useRef(null);
   const passwordRef = useRef(null);
   const passwordVerRef = useRef(null);
 
@@ -50,7 +53,7 @@ function CrearUserA({user}) {
     }
   };
 
-  const handleCreateUser = async (fullName, email, password, passwordVer, role) => {
+  const handleCreateUser = async (fullName, email, password, passwordVer, role, phone, birth, direction) => {
     if (role !== "Docente" && password !== passwordVer) {
       Swal.fire({
         icon: "error",
@@ -63,93 +66,83 @@ function CrearUserA({user}) {
     setWaiting(true);
     try {
       const db = getFirestore();
-      let uid = email; // para docentes, se usará el email como identificador
+      let uid = email;
       let finalImageUrl = "";
-
-      if (role === "Docente") {
-      const userRef = doc(db, "users", uid);
-      const docSnap = await getDoc(userRef);
-      if (docSnap.exists()) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "El docente ya está registrado"
-        });
-        setWaiting(false);
-        return;
-      }
-
-      finalImageUrl = await handleUploadImage(uid);
-
-      await setDoc(userRef, {
-        uid,
-        userName: fullName,
-        email,
-        imageUrl: finalImageUrl,
-        activo: true,
-        createdAt: new Date(),
-        Rol: role,
-      });
-    } else {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      uid = userCredential.user.uid;
-      finalImageUrl = await handleUploadImage(uid);
-
-      const userRef = doc(db, "users", uid);
-      const docSnap = await getDoc(userRef);
-
-      if (docSnap.exists()) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Usuario ya registrado"
-        });
-        setWaiting(false);
-        return;
-      }
 
       const userData = {
         uid,
         userName: fullName,
         email,
-        imageUrl: finalImageUrl,
+        phone,
+        birthDate: birth,
+        city: direction,
+        imageUrl: "",
         activo: true,
         createdAt: new Date(),
         Rol: role,
       };
 
-      if (role === "Estudiante") {
-        userData.planType = "Gratuito";
+      if (role === "Docente") {
+        const userRef = doc(db, "users", uid);
+        const docSnap = await getDoc(userRef);
+        if (docSnap.exists()) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "El docente ya está registrado"
+          });
+          setWaiting(false);
+          return;
+        }
+
+        finalImageUrl = await handleUploadImage(uid);
+        userData.imageUrl = finalImageUrl;
+
+        await setDoc(userRef, userData);
+      } else {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        uid = userCredential.user.uid;
+        finalImageUrl = await handleUploadImage(uid);
+        userData.uid = uid;
+        userData.imageUrl = finalImageUrl;
+
+        if (role === "Estudiante") {
+          userData.planType = "Gratuito";
+        }
+
+        const userRef = doc(db, "users", uid);
+        await setDoc(userRef, userData);
       }
 
-      await setDoc(userRef, userData);
-    }
-
-
-      Swal.fire({
-        title: "Usuario creado exitosamente",
-        icon: "success",
-      });
-      navigate("/admin/usersSection");
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: `Error en el registro: ${error.message}`
-      });
-    } finally {
-      setWaiting(false);
-    }
-  };
+    Swal.fire({
+      title: "Usuario creado exitosamente",
+      icon: "success",
+    });
+    navigate("/admin/usersSection");
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: `Error en el registro: ${error.message}`
+    });
+  } finally {
+    setWaiting(false);
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const fullName = fullNameRef.current.value;
     const email = emailRef.current.value;
+    const number = phoneRef.current.value;
+    const birth = birthRef.current.value;
+    const direction = ubiRef.current.value;
     const password = passwordRef.current?.value || "";
     const passwordVer = passwordVerRef.current?.value || "";
-    await handleCreateUser(fullName, email, password, passwordVer, selectedRole);
+
+    await handleCreateUser(fullName, email, password, passwordVer, selectedRole, number, birth, direction);
   };
+
 
   return (
     <div className="CreateUser">
@@ -178,7 +171,18 @@ function CrearUserA({user}) {
               <p>Correo Electrónico</p>
               <input type="email" className="CreateUser_input" ref={emailRef} placeholder="tucorreo@email.com" required />
             </label>
-
+            <label>
+              <p>Numero de Celular</p>
+              <input type="number" className="CreateUser_input" ref={phoneRef} placeholder="tunumero" required />
+            </label>
+            <label>
+              <p>Fecha de Nacimiento</p>
+              <input type="date" className="CreateUser_input" ref={birthRef} placeholder="tufechadenacimiento" required />
+            </label>
+            <label>
+              <p>Cuidad De Recidencia</p>
+              <input type="text" className="CreateUser_input" ref={ubiRef} placeholder="tuciudad" required />
+            </label>
             {selectedRole !== "Docente" && (
               <>
                 <label className="password-field">
@@ -213,11 +217,27 @@ function CrearUserA({user}) {
                 </label>
               </>
             )}
-
+            {/*
             <label>
               <p>Foto de perfil</p>
               <input type="file" accept="image/*" onChange={handleFileChange} />
+            </label>*/}
+            <label className="custom-file-upload">
+              <p>Foto de perfil</p>
+              <div className="file-upload-wrapper">
+                <button type="button" className="upload-button" onClick={() => document.getElementById('imageInput').click()}>
+                  Seleccionar imagen
+                </button>
+                <input
+                  id="imageInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="file-input-hidden"
+                />
+              </div>
             </label>
+
 
             {waiting ? (
               <ClipLoader color="var(--swans-down-400)" size={40} />

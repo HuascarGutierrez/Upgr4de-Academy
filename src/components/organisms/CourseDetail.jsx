@@ -147,7 +147,7 @@ function CourseDetail({user}) {
 
             <div>
               <h1 className="banner-title">{course.title}</h1>
-              <h2 className="banner-subtitle">CURSO PRÁCTICO</h2>
+              <h2 className="banner-subtitle">CURSO TEORICO Y PRÁCTICO</h2>
             </div>
             <img src={ZowlWhite} alt="React Logo" className="react-logo" />
           </div>
@@ -160,7 +160,7 @@ function CourseDetail({user}) {
           
           <p className="instructor">Docente: {course.teacher}</p>
           <div className="description">
-            <p>{course.description}</p>
+            <p>Objetivo: {course.description}</p>
           </div>
 
           <div className="actions">

@@ -18,15 +18,7 @@ function NavLateral({user}) {
       </div>
       <div className="navLateral_content">
         <ul className="navLateral_list">
-          <li
-            onClick={() => {
-              navigate("/main/courses");
-            }}
-            className="navLateral_item"
-          >
-            <img src="/assets/navLateral_1.svg" alt="" />
-            <p>Mis Cursos</p>
-          </li>
+          
           <li
             onClick={() => {
               navigate("/main/catalogo");
@@ -52,7 +44,7 @@ function NavLateral({user}) {
             className="navLateral_item"
           >
             <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
-            <p>Perfil</p>
+            <p>{user?.userName ? user.userName.slice(0, 8) + "..." : "Usuario"}</p>
           </li>
         </ul>
       </div>

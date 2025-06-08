@@ -20,9 +20,14 @@
 }
 
 .logo {
-    font-size: 2.5rem; /* Tamaño de fuente similar */
+    font-size: var(--font-size-xl); /* Tamaño de fuente similar */
     font-weight: bold;
     color: #333333; /* Coincide con el color del encabezado en SAPIcurses */
+}
+
+.title-edit{
+    font-size: var(--font-size-base);
+    padding-bottom: 2rem;
 }
 
 .nav-bar {
@@ -57,7 +62,7 @@
 
 .title {
     color: black;
-    font-size: 2.5rem; /* Coincide con el tamaño de fuente en h1 */
+    font-size: var(--font-size-xl); /* Coincide con el tamaño de fuente en h1 */
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px; /* Coincide con el espaciado del primer código */
@@ -65,7 +70,7 @@
 
 .sub-title {
     color: gray;
-    font-size: 1rem;
+    font-size: var(--font-size-xs);
 }
 
 .filters {
@@ -132,12 +137,12 @@
 }
 
 .course-title {
-    font-size: 16px;
+    font-size: var(--font-size-base);
     font-weight: bold;
 }
 
 .course-subtitle {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
 }
 
 .course-content {
@@ -146,7 +151,7 @@
 
 .course-description {
     color: black;
-    font-size: 1.5rem;
+    font-size: var(--font-size-base);
 }
 
 .course-meta {
@@ -154,7 +159,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 1.6rem;
+    font-size:var(--font-size-base);
     color: #555;
 }
 
@@ -175,11 +180,11 @@
     }
 
     .logo {
-        font-size: 2rem;
+        font-size: var(--font-size-lg);
     }
 
     .title {
-        font-size: 2rem;
+        font-size: var(--font-size-lg);
     }
 }
 
@@ -189,7 +194,7 @@
   padding: 10px 15px;
   border: 2px solid #ddd;
   border-radius: 25px;
-  font-size: 16px;
+  font-size: var(--font-size-base);
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   background-color: #fafafa;
@@ -213,6 +218,11 @@
   text-align: center;
   color: #777;
   margin-top: 20px;
-  font-size: 18px;
+  font-size: var(--font-size-md);
   font-style: italic;
+}
+
+.Catalogo-user{
+    color: var(--swans-down-800);
+    font-size: var(--font-size-xl);
 }

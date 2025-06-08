@@ -20,8 +20,7 @@
   
   .mostrar-cursos-title {
     text-align: center;
-    font-size: 3rem;
-
+    font-size: var(--font-size-2xl);
     color: #333;
   }
   
@@ -51,14 +50,14 @@
   }
   
   .curso-card h3 {
-    font-size: 2rem;
+    font-size: var(--font-size-lg);
     margin: 15px;
     color: #002851;
   }
   
   .curso-card p {
     margin: 0 15px 10px;
-    font-size: 1.3rem;
+    font-size: var(--font-size-sm);
     color: #555;
   }
   
@@ -73,7 +72,7 @@
     border: none;
     border-radius: 5px;
     padding: 8px 12px;
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
     cursor: pointer;
     transition: background-color 0.2s;
   }
@@ -141,7 +140,7 @@
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: var(--font-size-sm);
     cursor: pointer;
     margin-right: 10px;
   }
@@ -187,7 +186,7 @@
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: var(--font-size-sm);
     cursor: pointer;
     margin-right: 10px;
     background-color: var(--brandy-punch-400);
@@ -210,7 +209,7 @@
 }
 .filtro-categoria select {
   padding: 5px;
-  font-size: 16px;
+  font-size: var(--font-size-base);
 }
 
 .filtro-categoria {
@@ -226,14 +225,14 @@
 }
 
 .filtro-label {
-  font-size: 16px;
+  font-size: var(--font-size-base);
   font-weight: 500;
   color: #333;
 }
 
 .filtro-select {
   padding: 8px 12px;
-  font-size: 16px;
+  font-size: var(--font-size-base);
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: white;

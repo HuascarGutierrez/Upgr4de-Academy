@@ -46,7 +46,7 @@ function CoursesCatalog({ user }) {
     <div className="catalog-container">
       <header className="catalog-header">
         
-        <div className="name">Hola: {user?.userName || "Cargando Nombre..."}</div>
+        <div className="Catalogo-user">Hola {user?.userName || "Cargando Nombre..."}</div>
         
         
         <nav className="nav-bar">

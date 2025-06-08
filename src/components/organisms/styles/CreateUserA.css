@@ -145,4 +145,28 @@ input[type="file"] {
   margin-right: 5rem;
 }
 
-  
+.file-upload-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-button {
+  background-color: #2c7a7b;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #285e61;
+}
+
+.file-input-hidden {
+  display: none;
+}

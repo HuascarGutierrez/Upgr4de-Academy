@@ -9,15 +9,19 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import EditUnitsForm from '../molecules/EditarUnitsForm';
 import { storage } from '../../config/app2';
 
-function MostrarCursos() {
+function MostrarCursos({user}) {
   const [courses, setCourses] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [currentCourse, setCurrentCourse] = useState(null);
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState("Todas");
+  const categories = ["Todas", ...new Set(courses.map(course => course.category))];
 
   const [uploading, setUploading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [teachers, setTeachers] = useState([]);
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -111,13 +115,30 @@ function MostrarCursos() {
   };
 
 
+  const fetchTeachers = async () => {
+  try {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const teacherUsers = querySnapshot.docs
+        .map(doc => ({ id: doc.id, ...doc.data() }))
+        .filter(user => user.Rol === "Docente");
+      setTeachers(teacherUsers);
+    } catch (error) {
+      toast.error("Error al obtener los docentes: " + error.message);
+    }
+  };
+
   useEffect(() => {
     fetchCourses();
+    fetchTeachers();
   }, []);
+
+
 
   return (
     <div className="mostrar-cursos-container">
-      <h1 className="mostrar-cursos-title">Cursos</h1>
+      <div className='contenedor-title-users'>
+        <h1 className="users-unidad-title">Cursos</h1>
+      </div>
       {editMode ? (
         <div className="container">
           <form className="editar-curso-form" onSubmit={handleEdit}>
@@ -153,14 +174,21 @@ function MostrarCursos() {
             </label>
             <label>
               Profesor
-              <input
-                type="text"
+              <select
                 name="teacher"
                 value={currentCourse.teacher}
                 onChange={handleChange}
                 required
-              />
+              >
+                <option value="">Seleccionar docente</option>
+                {teachers.map(teacher => (
+                  <option key={teacher.id} value={teacher.userName}>
+                    {teacher.userName}
+                  </option>
+                ))}
+              </select>
             </label>
+
 
             <label>
               Imagen del Curso
@@ -214,30 +242,46 @@ function MostrarCursos() {
         <>
         <div className='boton-crear'>
           <button className='btn-crear-curso' onClick={() => {navigate("/admin/crearcurso");}}>Crear Curso</button>
+          <div className="filtro-categoria">
+          <label htmlFor="categoria-select" className="filtro-label">Filtrar por categoría:</label>
+          <select
+            id="categoria-select"
+            className="filtro-select"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map((cat, idx) => (
+              <option key={idx} value={cat}>{cat}</option>
+            ))}
+          </select>
         </div>
-        <div className="tabla-cursos">
-          {courses.map(course => (
-            <div className="curso-card" key={course.id}>
+
+        </div>
+
+        <div className="tabla-cursos">           
+        {courses
+        .filter(course => selectedCategory === "Todas" || course.category === selectedCategory)
+        .map(course => (
+          <div className="curso-card" key={course.id}>
             <img src={course.link_image} alt={course.title} className="curso-imagen" />
-              <h3>{course.title}</h3>
-              <p>{course.description}</p>
-              <p><strong>Categoría:</strong> {course.category}</p>
-              <p><strong>Profesor:</strong> {course.teacher}</p>
-              <p><strong>Fecha de Creación:</strong> {course.creation_date}</p>
-              
-              <div className="curso-actions">
-                <button
-                  className="btn-editar"
-                  onClick={() => {
-                    setEditMode(true);
-                    setCurrentCourse(course);
-                  }}
-                >
-                  Editar
-                </button>
-              </div>
+            <h3>{course.title}</h3>
+            <p>{course.description}</p>
+            <p><strong>Categoría:</strong> {course.category}</p>
+            <p><strong>Profesor:</strong> {course.teacher}</p>
+            <p><strong>Fecha de Creación:</strong> {course.creation_date}</p>
+            <div className="curso-actions">
+              <button
+                className="btn-editar"
+                onClick={() => {
+                  setEditMode(true);
+                  setCurrentCourse(course);
+                }}
+              >
+                Editar
+              </button>
             </div>
-          ))}
+          </div>
+      ))}
         </div>
         </>
       )}

@@ -114,3 +114,13 @@
     font-size: 1.5rem;;
     color: var(--black-50);
 }
+
+.profile_photo{
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}

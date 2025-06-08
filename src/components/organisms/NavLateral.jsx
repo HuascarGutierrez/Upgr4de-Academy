@@ -2,7 +2,7 @@ import React from "react";
 import "./styles/NavLateral.css";
 import { useNavigate } from "react-router-dom"; // Sigue usando useNavigate, es correcto para los clicks
 
-function NavLateral() {
+function NavLateral({user}) {
   const navigate = useNavigate();
   return (
     <div className="navLateral">
@@ -51,7 +51,7 @@ function NavLateral() {
             }}
             className="navLateral_item"
           >
-            <img src="/assets/navLateral_4.svg" alt="" />
+            <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
             <p>Perfil</p>
           </li>
           {/* ¡AQUÍ ESTÁ EL CAMBIO PARA GAMIFICACIÓN! */}

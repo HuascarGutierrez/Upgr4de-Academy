@@ -45,7 +45,10 @@ function CoursesCatalog({ user }) {
   return (
     <div className="catalog-container">
       <header className="catalog-header">
-        <div className="logo">SAPI</div>
+        
+        <div className="name">Hola: {user?.userName || "Cargando Nombre..."}</div>
+        
+        
         <nav className="nav-bar">
           <input
             type="text"

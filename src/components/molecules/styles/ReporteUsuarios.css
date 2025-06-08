@@ -1,0 +1,163 @@
+/* Main container for the detailed report */
+.reporte-detalle-container {
+  background-color: #ffffff;
+  color: var(--black-950);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px; /* Spacing from the Reportes component */
+}
+
+/* Main headings within the report */
+.reporte-detalle-container h2 {
+  color: #333;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 1.8em;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Sub-headings for table sections */
+.reporte-detalle-container h3 {
+  color: #555;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+  border-left: 5px solid #28a745; /* A decorative green line */
+  padding-left: 10px;
+}
+
+/* Styles for loading and error messages */
+.reporte-detalle-loading,
+.reporte-detalle-error {
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.reporte-detalle-loading {
+  background-color: #e0f7fa; /* Light blue */
+  color: #007bff; /* Blue */
+}
+
+.reporte-detalle-error {
+  background-color: #ffe0e0; /* Light red */
+  color: #dc3545; /* Red */
+}
+
+/* Styles for table sections */
+.reporte-table-section {
+  margin-bottom: 30px;
+}
+
+/* General table styles */
+.reporte-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden; /* Ensures rounded corners are applied correctly */
+}
+
+/* Table header */
+.reporte-table thead {
+  background-color: #f2f2f2;
+}
+
+/* Header and body cells */
+.reporte-table th,
+.reporte-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Specific styles for header cells */
+.reporte-table th {
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+/* Styles for even rows (for a zebra effect) */
+.reporte-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect on table rows */
+.reporte-table tbody tr:hover {
+  background-color: #e9e9e9;
+  cursor: pointer;
+}
+
+/* Style for "No data" message */
+.reporte-table + p { /* Selects the paragraph directly following the table */
+  color: #666;
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Responsiveness for tables on small screens */
+@media (max-width: 768px) {
+  .reporte-table,
+  .reporte-table thead,
+  .reporte-table tbody,
+  .reporte-table th,
+  .reporte-table td,
+  .reporte-table tr {
+    display: block; /* Makes cells behave like blocks */
+  }
+
+  .reporte-table thead tr {
+    position: absolute; /* Hides original table headers */
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .reporte-table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+
+  .reporte-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%; /* Space for the pseudo-element */
+    text-align: right;
+  }
+
+  .reporte-table td:before {
+    /* Creates a label for each cell on mobile */
+    position: absolute;
+    top: 0;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Data labels for each cell (adjust according to your columns) */
+  /* For the role summary table */
+  .reporte-table .reporte-table-section:nth-of-type(1) td:nth-of-type(1):before { content: "Role:"; }
+  .reporte-table .reporte-table-section:nth-of-type(1) td:nth-of-type(2):before { content: "Count:"; }
+  .reporte-table .reporte-table-section:nth-of-type(1) td:nth-of-type(3):before { content: "Percentage:"; }
+
+  /* For the user detail tables (Administrators, Students, Teachers) */
+  .reporte-table .reporte-table-section:nth-of-type(n+2) td:nth-of-type(1):before { content: "Username:"; }
+  .reporte-table .reporte-table-section:nth-of-type(n+2) td:nth-of-type(2):before { content: "Email:"; }
+  .reporte-table .reporte-table-section:nth-of-type(n+2) td:nth-of-type(3):before { content: "Active:"; }
+  .reporte-table .reporte-table-section:nth-of-type(n+2) td:nth-of-type(4):before { content: "Registration Date:"; }
+}

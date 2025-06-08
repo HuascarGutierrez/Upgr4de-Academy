@@ -196,7 +196,7 @@ function PaymentSimulationModal({ plan, onPaymentComplete, onClose, isLoading = 
                         {isLoading ? (
                             <>
                                 <ClipLoader size={16} color="#ffffff" />
-                                Procesando...
+                                Procesandod...
                             </>
                         ) : (
                             'Confirmar Pago'

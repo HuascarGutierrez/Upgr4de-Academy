@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import "./styles/CreateUserA.css";
 
-function CrearAdministrador() {
+function CrearAdministrador({user}) {
   const [waiting, setWaiting] = useState(false);
   const navigate = useNavigate();
 

@@ -2,7 +2,7 @@ import React from 'react'
 import "./styles/NavLateral.css";
 import { useNavigate } from "react-router-dom";
 
-function NavAdmin() {
+function NavAdmin({user}) {
     const navigate = useNavigate();
     return (
       <div className="navLateral">
@@ -45,6 +45,7 @@ function NavAdmin() {
               <img src="/Icons/informe.svg" alt="" />
               <p>Reportes</p>
             </li>
+            
                         <li
               onClick={() => {
                 navigate("/admin/solicitudes-pago");
@@ -53,6 +54,15 @@ function NavAdmin() {
             >
               <img src="/Icons/curso-online.svg" alt="" />
               <p>Solicitudes de Pago</p>
+            </li>
+            <li
+              onClick={() => {
+                navigate("");
+              }}
+              className="navLateral_item"
+            >
+              <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
+              <p>Perfil</p>
             </li>
           </ul>
         </div>

@@ -3,6 +3,8 @@
 /*
   Ajustes para el contenedor principal del perfil
   que afectarán el ancho de la caja de gamificación.
+  Se asume que las variables de color y tipografía globales
+  están declaradas en tu :root global (ej. en index.css) y disponibles aquí.
 */
 
 .profile-page-wrapper {
@@ -14,6 +16,8 @@
   margin: 0 auto; /* Centra el contenido en la página */
   min-height: 100vh; /* Asegura que ocupe al menos el alto completo de la vista */
   box-sizing: border-box; /* Incluye padding en el tamaño total */
+  font-family: 'Raleway', sans-serif; /* Usar la misma fuente global */
+  color: var(--black-950); /* Color de texto base */
 }
 
 /* Nueva caja para el título de perfil */
@@ -24,20 +28,19 @@
   align-items: center; /* Centra verticalmente el h1 */
   justify-content: flex-start; /* Alinea el h1 a la izquierda */
   min-height: 100px; /* Altura mínima para la caja del título */
-  /* Asegurémonos que el contenido se alinea a la izquierda dentro de esta caja */
   text-align: left; /* Añadimos text-align: left aquí para su contenido */
 }
 
 .profile-main-title {
-  font-size: var(--font-size-3xl); /* Tamaño de fuente grande para el título principal */
+  font-size: var(--font-size-3xl); /* Usando tu variable para el título principal */
   color: var(--black-950);
   font-weight: 700; /* Extra bold */
   letter-spacing: -0.04em; /* Ligeramente más ajustado */
-  text-align: left; /* Asegura que el texto esté a la izquierda */
-  margin: 0; /* Asegurarse de que no tenga márgenes automáticos que lo centren */
-  padding: 0; /* Asegurarse de que no tenga padding que lo empuje */
-  width: 100%; /* Asegura que ocupe todo el ancho disponible para que text-align funcione */
-  box-sizing: border-box; /* Para incluir padding/border si se añaden después */
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Contenedor del menú y contenido principal del perfil (grid) */
@@ -47,7 +50,6 @@
   grid-template-columns: 280px 1fr; /* Menú lateral (fijo) y área de contenido (flexible) */
   grid-template-areas: "menu content"; /* Definición de áreas para el grid */
   gap: 2.5rem; /* Espacio entre el menú y el contenido */
-  /* NO poner padding ni max-width aquí, ya los controla profile-page-wrapper */
   height: auto; /* Permite que el contenedor crezca con el contenido */
   box-sizing: border-box;
 }
@@ -89,13 +91,13 @@
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--swans-down-400); /* Borde con tu color principal */
+  border: 4px solid var(--swans-down-400); /* Usando variable global */
 }
 
 .profile-info .name {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-xl); /* Usando variable global */
   font-weight: 600;
-  color: var(--black-950);
+  color: var(--black-950); /* Usando variable global */
 }
 
 .menu {
@@ -108,8 +110,8 @@
   background: none;
   border: none;
   padding: 1rem 1.5rem;
-  font-size: var(--font-size-base);
-  color: var(--black-700);
+  font-size: var(--font-size-base); /* Usando variable global */
+  color: var(--black-700); /* Usando variable global */
   text-align: left;
   cursor: pointer;
   border-radius: 8px;
@@ -118,13 +120,13 @@
 }
 
 .menu-item:hover {
-  background-color: var(--black-100);
-  color: var(--black-950);
+  background-color: var(--black-100); /* Usando variable global */
+  color: var(--black-950); /* Usando variable global */
 }
 
 .menu-item.active {
-  background-color: var(--swans-down-100); /* Un verde claro para el activo */
-  color: var(--swans-down-800); /* Un verde oscuro para el texto activo */
+  background-color: var(--swans-down-100); /* Usando variable global */
+  color: var(--swans-down-800); /* Usando variable global */
   font-weight: 700;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
@@ -138,23 +140,24 @@
 /* Ajustes específicos para las tarjetas de perfil (si las necesitas) */
 .my-profile-card h2,
 .public-profile-card h2 {
-  font-size: var(--font-size-2xl);
-  color: var(--black-950);
+  font-size: var(--font-size-2xl); /* Usando variable global */
+  color: var(--black-950); /* Usando variable global */
   margin-bottom: 1.5rem;
 }
 
-.form-label-box {
+/* NUEVA CLASE: para agrupar secciones de formulario de forma modular */
+.form-section-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  color: var(--black-700);
+  gap: 0.5rem; /* Espacio entre el texto del label, el input y el botón */
+  margin-bottom: 1.5rem; /* Espacio debajo de cada grupo de formulario */
+  color: var(--black-700); /* Usando variable global */
 }
 
 /* ESTILOS UNIFICADOS PARA LOS TEXTOS DE LAS ETIQUETAS */
-.form-label-box .label-text {
-  font-size: var(--font-size-md); /* Unificado: Tamaño de texto para ambos labels */
-  font-weight: 600; /* Unificado: Peso de fuente para ambos labels */
+.label-text {
+  font-size: var(--font-size-md); /* Usando variable global */
+  font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
@@ -164,52 +167,60 @@
 }
 
 /* ESTILOS UNIFICADOS PARA LOS BOTONES */
-/* Aplica estos estilos a `subscribe-button` y `form-input-button` */
 .subscribe-button,
 .form-input-button {
-  background-color: var(--swans-down-500); /* Color principal para ambos botones */
+  background-color: var(--swans-down-500); /* Usando variable global */
   color: white;
-  padding: 1rem 1.5rem; /* Padding unificado para ambos botones */
+  padding: 1rem 1.5rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: var(--font-size-md); /* Tamaño de fuente unificado para ambos botones */
+  font-size: var(--font-size-md); /* Usando variable global */
   font-weight: 600;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  width: 100%; /* Asegura que ambos botones ocupen todo el ancho disponible */
-  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-  text-align: center; /* Centra el texto dentro del botón */
-  display: inline-flex; /* Permite centrar contenido si es necesario */
-  align-items: center; /* Centra verticalmente el contenido */
-  justify-content: center; /* Centra horizontalmente el contenido */
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Efecto hover unificado para ambos botones */
 .subscribe-button:hover,
 .form-input-button:hover {
-  background-color: var(--swans-down-600);
+  background-color: var(--swans-down-600); /* Usando variable global */
   transform: translateY(-1px);
 }
 
-/* El input de texto se mantiene igual */
+/* El input de texto general se mantiene igual */
 .form-input-file,
 .form-input-text {
   padding: 0.8rem 1rem;
-  border: 1px solid var(--black-300);
+  border: 1px solid var(--black-300); /* Usando variable global */
   border-radius: 8px;
-  font-size: var(--font-size-base);
-  color: var(--black-950);
-  background-color: var(--black-50);
+  /* La siguiente línea define el tamaño base, pero será sobrescrita por .profile-name-input */
+  font-size: var(--font-size-base); /* Este será el tamaño predeterminado si no hay una clase más específica */
+  color: var(--black-950); /* Usando variable global */
+  background-color: var(--black-50); /* Usando variable global */
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
   box-sizing: border-box;
 }
 
+/* ¡CAMBIO CLAVE AQUÍ! Estilo específico para el input del nombre completo */
+/* Asegura que este selector esté DESPUÉS de .form-input-text para tener prioridad */
+.profile-name-input {
+    font-size: var(--font-size-md); /* Aumenta el tamaño de fuente para este input específico */
+    /* Si aún lo ves pequeño, prueba con var(--font-size-lg) */
+}
+
+
 .form-input-text:focus,
 .form-input-file:focus {
   outline: none;
-  border-color: var(--swans-down-400);
-  box-shadow: 0 0 0 3px rgba(106, 166, 163, 0.2);
+  border-color: var(--swans-down-400); /* Usando variable global */
+  box-shadow: 0 0 0 3px rgba(106, 166, 163, 0.2); /* Mantener rgba para transparencia */
 }
 
 /* Loader */
@@ -217,7 +228,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100px; /* Asegura un espacio para el loader */
+  min-height: 100px;
 }
 
 /* Responsive adjustments for Perfil.css */
@@ -231,7 +242,7 @@
     padding: 2rem 3rem;
   }
   .profile-main-title {
-    font-size: var(--font-size-4xl);
+    font-size: var(--font-size-4xl); /* Usando variable global */
   }
 }
 
@@ -245,10 +256,10 @@
     padding: 1.8rem 2.5rem;
   }
   .profile-main-title {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-3xl); /* Usando variable global */
   }
   .profile-container {
-    grid-template-columns: 220px 1fr; /* Ajusta el menú lateral */
+    grid-template-columns: 220px 1fr;
     gap: 1.5rem;
   }
 }
@@ -263,18 +274,18 @@
     min-height: 80px;
   }
   .profile-main-title {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-2xl); /* Usando variable global */
   }
   .profile-container {
-    grid-template-columns: 1fr; /* Una sola columna para móviles: menú arriba, contenido abajo */
+    grid-template-columns: 1fr;
     grid-template-areas:
       "menu"
       "content";
     gap: 1.5rem;
-    height: auto; /* Permite que el contenedor crezca con el contenido */
+    height: auto;
   }
   .menu-card {
-    width: 100%; /* El menú ocupa todo el ancho */
+    width: 100%;
   }
 }
 
@@ -288,13 +299,13 @@
     min-height: 60px;
   }
   .profile-main-title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-xl); /* Usando variable global */
   }
   .bento-box {
     padding: 1.5rem;
   }
   .menu-item {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-sm); /* Usando variable global */
     padding: 0.8rem 1rem;
   }
 }

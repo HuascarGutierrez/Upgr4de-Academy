@@ -12,7 +12,7 @@ const getCleanPlanName = (planName) => {
     return planName;
 };
 
-function AdminDashboard() {
+function AdminDashboard({user}) {
     const [solicitudes, setSolicitudes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

@@ -9,7 +9,7 @@ import { getFirestore } from "firebase/firestore";
 import { useEffect} from "react";
 import { storage } from '../../config/app2';
 
-function CrearCurso() {
+function CrearCurso({user}) {
 
   const navigate = useNavigate();
 
@@ -139,16 +139,27 @@ function CrearCurso() {
 useEffect(() => {
   const fetchDocentes = async () => {
     const db = getFirestore();
-    const querySnapshot = await getDocs(collection(db, "teacher"));
-    const lista = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      nombre: doc.data().teacherName,
-    }));
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const lista = querySnapshot.docs
+      .map(doc => {
+        const data = doc.data();
+        if (data.Rol === "Docente") {
+          return {
+            id: doc.id,
+            nombre: data.userName|| data.email || "Nombre no disponible",
+          };
+        } else {
+          return null;
+        }
+      })
+      .filter(docente => docente !== null);
+    
     setDocentes(lista);
   };
 
   fetchDocentes();
 }, []);
+
 
   return (
     <div className='container-crear-nuevo-curso'>
@@ -195,7 +206,7 @@ useEffect(() => {
                 onChange={handleInputChange}
                 required
               >
-                <option value="">Seleccione una materia</option>
+                <option value="">Seleccione una Categoria</option>
                 <option value="Álgebra">Álgebra</option>
                 <option value="Cálculo">Cálculo</option>
                 <option value="Física">Física</option>
@@ -217,6 +228,7 @@ useEffect(() => {
                   </option>
                 ))}
               </select>
+
             </label>
 
             {

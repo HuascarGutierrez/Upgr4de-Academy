@@ -20,15 +20,6 @@ function NavLateral({user}) {
         <ul className="navLateral_list">
           <li
             onClick={() => {
-              navigate("/main/courses");
-            }}
-            className="navLateral_item"
-          >
-            <img src="/assets/navLateral_1.svg" alt="" />
-            <p>Mis Cursos</p>
-          </li>
-          <li
-            onClick={() => {
               navigate("/main/catalogo");
             }}
             className="navLateral_item"
@@ -47,16 +38,6 @@ function NavLateral({user}) {
           </li>
           <li
             onClick={() => {
-              navigate("/main/perfil");
-            }}
-            className="navLateral_item"
-          >
-            <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
-            <p>Perfil</p>
-          </li>
-          {/* ¡AQUÍ ESTÁ EL CAMBIO PARA GAMIFICACIÓN! */}
-          <li
-            onClick={() => {
               navigate("/main/gamification"); // Ahora apunta a la ruta completa: /main/gamification
             }}
             className="navLateral_item"
@@ -65,6 +46,17 @@ function NavLateral({user}) {
             <img src="/assets/navLateral_1.svg" alt="Gamificación" /> {/* Asegúrate de tener este SVG */}
             <p>Gamificación</p>
           </li>
+          <li
+            onClick={() => {
+              navigate("/main/perfil");
+            }}
+            className="navLateral_item"
+          >
+            <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
+            <p>Perfil</p>
+          </li>
+          {/* ¡AQUÍ ESTÁ EL CAMBIO PARA GAMIFICACIÓN! */}
+
         </ul>
       </div>
       <div

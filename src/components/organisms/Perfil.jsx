@@ -1,5 +1,6 @@
 // src/components/Perfil.jsx
 
+
 import React, { useState, useRef, useEffect } from "react";
 import "./styles/Perfil.css";
 import { getAuth, signOut } from "firebase/auth";
@@ -18,11 +19,14 @@ import { handleUpdateImage } from "../../config/auth_functions";
 import { ClipLoader } from "react-spinners";
 import Swal from 'sweetalert2';
 
+
 import SubscriptionSection from "./SubscriptionSection";
 import PaymentSimulationModal from "./PaymentSimulationModal";
 import GamificationSection from "./GamificationSection";
 
+
 import { storage } from "../../config/app2";
+
 
 function Perfil({ user }) {
   const [activeView, setActiveView] = useState("myProfile");
@@ -52,19 +56,23 @@ function Perfil({ user }) {
     },
   ]);
 
+
   const fullNameRef = useRef(user?.userName || "");
   const fileInputRef = useRef(null);
   const [wait, setWait] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [planToSubscribe, setPlanToSubscribe] = useState(null);
 
+
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (user?.userName) {
       fullNameRef.current.value = user.userName;
     }
   }, [user?.userName]);
+
 
   const handleSignOut = async () => {
     const result = await Swal.fire({
@@ -77,6 +85,7 @@ function Perfil({ user }) {
       confirmButtonText: 'Sí, cerrar sesión',
       cancelButtonText: 'Cancelar'
     });
+
 
     if (result.isConfirmed) {
       const auth = getAuth();
@@ -91,13 +100,16 @@ function Perfil({ user }) {
     }
   };
 
+
   const handleViewChange = (view) => {
     setActiveView(view);
   };
 
+
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+
 
   const handleImageChange = async (e) => {
     setWait(true);
@@ -138,6 +150,7 @@ function Perfil({ user }) {
     setWait(false);
   };
 
+
   const handleSaveName = async (e) => {
     e.preventDefault();
     const fullName = fullNameRef.current.value.trim();
@@ -176,10 +189,12 @@ function Perfil({ user }) {
     }
   };
 
+
   const handleInitiatePayment = (plan) => {
     setPlanToSubscribe(plan);
     setShowPaymentModal(true);
   };
+
 
   const handlePaymentComplete = async (fileComprobante) => {
     if (!planToSubscribe || typeof planToSubscribe !== 'object' || !planToSubscribe.name || typeof planToSubscribe.price === 'undefined') {
@@ -207,22 +222,28 @@ function Perfil({ user }) {
       return;
     }
 
+
     setWait(true);
+
 
     try {
       const timestamp = Date.now();
       const fileName = fileComprobante.name;
       const storagePath = `comprobantes/${user.uid}/${timestamp}-${fileName}`;
 
+
       const storageRef = ref(storage, storagePath);
       const uploadResult = await uploadBytes(storageRef, fileComprobante);
       const urlComprobante = await getDownloadURL(uploadResult.ref);
 
+
       const db = getFirestore();
       const solicitudesRef = collection(db, "solicitudesPagos");
 
+
       const planNameForDB = planToSubscribe.name;
       const montoPago = planToSubscribe.price;
+
 
       await addDoc(solicitudesRef, {
         userId: user.uid,
@@ -234,6 +255,7 @@ function Perfil({ user }) {
         estado: "pendiente",
         fechaSolicitud: serverTimestamp(),
       });
+
 
       Swal.fire({
         icon: 'success',
@@ -255,16 +277,19 @@ function Perfil({ user }) {
     }
   };
 
+
   const handleClosePaymentModal = () => {
     setShowPaymentModal(false);
     setPlanToSubscribe(null);
   };
+
 
   return (
     <div className="profile-page-wrapper">
       <div className="profile-title-card bento-box">
         <h1 className="profile-main-title">Perfil</h1>
       </div>
+
 
       <div className="profile-container bento-grid">
         <div className="menu-card bento-box">
@@ -293,18 +318,12 @@ function Perfil({ user }) {
             >
               SUSCRIPCIÓN
             </button>
-            <button
-              className={`menu-item ${activeView === "gamification" ? "active" : ""}`}
-              onClick={() => handleViewChange("gamification")}
-              type="button"
-            >
-              GAMIFICACIÓN
-            </button>
             <button onClick={handleSignOut} className="menu-item" type="button">
               CERRAR SESIÓN
             </button>
           </div>
         </div>
+
 
         {activeView === "publicProfile" && (
           <div className="content-wrapper bento-box">
@@ -334,10 +353,12 @@ function Perfil({ user }) {
           </div>
         )}
 
+
         {activeView === "myProfile" && (
           <div className="content-wrapper bento-box">
             <div id="miPerfil" className="my-profile-card">
               <h2>Información Básica</h2>
+
 
               {/* SECCIÓN CAMBIAR FOTO DE PERFIL */}
               <div className="form-section-group">
@@ -362,6 +383,7 @@ function Perfil({ user }) {
                 )}
               </div>
 
+
               {/* SECCIÓN CAMBIAR NOMBRE COMPLETO */}
               <form onSubmit={handleSaveName} className="form-section-group">
                 <span className="label-text">Cambiar nombre completo</span>
@@ -378,6 +400,7 @@ function Perfil({ user }) {
           </div>
         )}
 
+
         {activeView === "subscription" && (
           <div className="content-wrapper bento-box">
             <SubscriptionSection
@@ -388,11 +411,6 @@ function Perfil({ user }) {
           </div>
         )}
 
-        {activeView === "gamification" && (
-          <div className="content-wrapper bento-box">
-            <GamificationSection user={user} />
-          </div>
-        )}
 
         {showPaymentModal && (
           <PaymentSimulationModal
@@ -406,5 +424,6 @@ function Perfil({ user }) {
     </div>
   );
 }
+
 
 export default Perfil;

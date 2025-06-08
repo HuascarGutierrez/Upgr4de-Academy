@@ -4,6 +4,7 @@ import { auth } from "./app";
 import { handleAlert, handleErrorNoti, handleSuccess } from "./alerts"; // Asumo que estas son tus funciones de notificación personalizadas
 import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
 import { storage } from "./app2";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // <--- ¡LÍNEA AÑADIDA/CORREGIDA AQUÍ!
 import Swal from 'sweetalert2'; // Asegúrate de que SweetAlert2 esté importado si usas Swal.fire directamente
 
 const handleSignup = async ({ fullName, imageUrl, email, password, passwordVer, funcion }) => {
@@ -107,7 +108,7 @@ const handleAuth = async ({ funcion, salida }) => {
                         achievements: {},
                         badges: [],
                         avatarParts: {
-                            // ¡IMPORTANTE! Reemplaza estos con los IDs reales de tus items de avatar por defecto
+                            // ¡IMPORTANT! Reemplaza estos con los IDs reales de tus items de avatar por defecto
                             body: 'default_body_id',
                             head: 'default_head_id'
                         }
@@ -154,6 +155,7 @@ const handleUpdateImage = async ({ email, image }) => {
         return url;
     } catch (error) {
         console.error("Error al subir la imagen:", error);
+        throw error; // Propagar el error para que Perfil.jsx pueda manejarlo con alertWarning
     }
 };
 

@@ -19,23 +19,20 @@ function SAPIMain({ user }) {
 
   return (
     <div className='SAPIMain'>
-      <NavLateral />
-      <div className='SAPIContent'>
-        <Routes>
-          <Route path='/courses' element={<Courses />} />
-          <Route path='/catalogo' element={<CoursesCatalog user={user} />} />
-          <Route path='/supervision' element={<Supervision user={user} />} />
-          <Route path='/perfil' element={<Perfil user={user} />} />
-          <Route path='/courses/course' element={<CourseDetail user={user} />} />
-          <Route path='/courses/course/interactive-course' element={<InteractiveCourse user={user} />} />
-          <Route path='/courses/course/interactive-exercises' element={<ModuloEjercicios user={user} />} />
-          <Route path='/catalogo/busqueda' element={<Busqueda user={user} />} />
-          {/* ¡EL CAMBIO ESTÁ AQUÍ! */}
-          {/* La ruta ahora debe ser relativa a /main/, por lo tanto, es '/gamification' */}
-          {/* Cuando se accede a /main/gamification, este Routes interno busca '/gamification' */}
-          <Route path='/gamification' element={<GamificationDashboard user={user} />} />
-        </Routes>
-      </div>
+        <NavLateral user={user}/>
+        <div className='SAPIContent'>
+            <Routes>
+                <Route path='/courses' element={<Courses/>}/>
+                <Route path='/catalogo' element={<CoursesCatalog user={user}/>}/>
+                <Route path='/supervision' element={<Supervision user={user}/>}/> 
+                <Route path='/perfil' element={<Perfil user={user}/>}/> 
+                <Route path='/courses/course' element={<CourseDetail user={user}/>} />
+                <Route path='/courses/course/interactive-course' element={<InteractiveCourse user={user}/>} />
+                <Route path='/courses/course/interactive-exercises' element={<ModuloEjercicios user={user}/>} />
+                <Route path='/catalogo/busqueda' element={<Busqueda user={user}/>}/>
+                <Route path='/gamification' element={<GamificationDashboard user={user} />} />
+            </Routes>
+        </div>
     </div>
   )
 }

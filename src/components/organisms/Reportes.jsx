@@ -1,813 +1,251 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/Reportes.css';
-import { db } from "../../config/app";
-import { collection, getDocs } from "firebase/firestore";
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import CourseModel from '../../models/course_model';
+import ReporteUsuarios from '../molecules/ReporteUsuarios';
 
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#8dd1e1'];
+const Reportes = () => {
+  const [selectedReport, setSelectedReport] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [showReportPreview, setShowReportPreview] = useState(false);
+  const [shouldShowReport, setShouldShowReport] = useState(false);
+  const reportRef = useRef(null);
 
-// Constantes y helpers separados
-const MESES = [
-  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-];
+  const LOGO_BASE64 = 'data:image/png;base64,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';
 
-const LOGO_BASE64 = 'data:image/png;base64,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';
+  // Resetear la previsualización cuando cambia el tipo de reporte
+  useEffect(() => {
+    setShowReportPreview(false);
+    setShouldShowReport(false);
+  }, [selectedReport]);
 
-// Componente para mostrar alertas por materia
-const AlertCard = ({ materia, inscritos, minimo }) => {
-  let estado = 'verde';
-  let mensaje = 'Demanda estable';
+  // Resetear la previsualización cuando cambian las fechas
+  useEffect(() => {
+    if (showReportPreview) {
+      setShowReportPreview(false);
+      setShouldShowReport(false);
+    }
+  }, [startDate, endDate]);
 
-  if (inscritos < minimo) {
-    estado = 'rojo';
-    mensaje = 'Inscritos por debajo del mínimo esperado';
-  } else if (inscritos === minimo) {
-    estado = 'amarillo';
-    mensaje = 'Justo en el mínimo, observar comportamiento';
-  }
+  const handleGenerateReport = () => {
+    if (!selectedReport || !startDate || !endDate) return;
+    
+    console.log('Reporte seleccionado:', selectedReport);
+    console.log('Fecha de inicio:', startDate);
+    console.log('Fecha de fin:', endDate);
+    alert(`Generando reporte: ${selectedReport} desde ${startDate} hasta ${endDate}`);
+    setShowReportPreview(false);
+    setShouldShowReport(false);
+    handleGeneratePDF()
+    
+  };
+
+  const handlePreviewReport = () => {
+    if (!selectedReport || !startDate || !endDate) {
+      alert('Por favor, selecciona un reporte e ingresa las fechas de inicio y fin para previsualizar.');
+      return;
+    }
+    setShowReportPreview(true);
+    setShouldShowReport(true);
+  };
+
+  const handleGeneratePDF = async () => {
+    if (!reportRef.current || !selectedReport) return;
+
+    try {
+        // Se ha reemplazado alert() por console.log()
+        console.log(`Generando PDF del reporte ${selectedReport}...`);
+
+        const canvas = await html2canvas(reportRef.current, {
+            scale: 2,
+            useCORS: true,
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'letter');
+
+        // Tamaños
+        const pageWidth = 210;
+        const pageHeight = 295;
+        const margin = 15; // margen más grande
+
+        // Insertar logo (ajustar tamaño y posición)
+        const logoWidth = 40; // ancho del logo en mm
+        const logoHeight = 20; // alto del logo en mm
+        pdf.addImage(LOGO_BASE64, 'PNG', margin, 10, logoWidth, logoHeight);
+
+        // Añadir espacio debajo del logo (para que el contenido no se encime)
+        const contentYStart = 10 + logoHeight + 5;
+
+        // Escalar imagen del reporte
+        const imgWidth = pageWidth - margin * 2;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        let currentY = contentYStart; // Posición Y actual para el contenido
+
+        // Añadir imagen del reporte, gestionando múltiples páginas si es necesario
+        let remainingHeight = imgHeight;
+        let imgX = margin;
+        let imgY = contentYStart;
+
+        while (remainingHeight > 0) {
+            const pageRemainingSpace = pageHeight - imgY - margin;
+            if (imgY === contentYStart && imgHeight <= pageRemainingSpace) {
+                // Si la imagen completa cabe en la primera página
+                pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth, imgHeight);
+                currentY = imgY + imgHeight + 10; // Actualizar currentY después de la imagen
+                remainingHeight = 0;
+            } else {
+                // Dividir la imagen en varias páginas
+                const sHeight = pageRemainingSpace; // Altura del "slice" de la imagen para la página actual
+                const sY = imgHeight - remainingHeight; // Posición de inicio del "slice" en la imagen original
+
+                // Crear un canvas temporal para el "slice"
+                const sliceCanvas = document.createElement('canvas');
+                sliceCanvas.width = canvas.width;
+                sliceCanvas.height = (sHeight / imgHeight) * canvas.height;
+                const sliceCtx = sliceCanvas.getContext('2d');
+                sliceCtx.drawImage(canvas, 0, sY / (imgHeight / canvas.height), canvas.width, sliceCanvas.height, 0, 0, sliceCanvas.width, sliceCanvas.height);
+                const sliceImgData = sliceCanvas.toDataURL('image/png');
+
+                pdf.addImage(sliceImgData, 'PNG', imgX, imgY, imgWidth, sHeight);
+                remainingHeight -= sHeight;
+
+                if (remainingHeight > 0) {
+                    pdf.addPage();
+                    imgY = margin; // Reiniciar Y para la nueva página
+                } else {
+                    currentY = imgY + sHeight + 10; // Actualizar currentY después del último "slice"
+                }
+            }
+        }
+
+        // --- Sección del pie de firma ---
+        // Calcular la posición Y para el pie de firma, asegurándose de que esté en la parte inferior de la última página.
+        const signatureTextHeight = 7; // Altura estimada para las dos líneas de texto de la firma
+        let signatureY = pageHeight - margin - signatureTextHeight;
+
+        // Asegurarse de que la firma no se superponga con el contenido existente
+        if (currentY > signatureY - 20) { // Si el contenido está muy abajo, añadir una nueva página
+            pdf.addPage();
+            signatureY = pageHeight - margin - signatureTextHeight;
+            currentY = margin; // Reiniciar currentY para la nueva página
+        }
+
+        pdf.setFontSize(10);
+        pdf.text("Travis Catacora", pageWidth / 2, signatureY, { align: 'center' });
+        pdf.setFontSize(9);
+        pdf.text("Administrador", pageWidth / 2, signatureY + 5, { align: 'center' });
+        // --- Fin de la sección del pie de firma ---
+
+
+        pdf.save(`reporte_${selectedReport}_${new Date().toISOString().slice(0,10)}.pdf`);
+    } catch (error) {
+        console.error('Error al generar PDF:', error);
+        // Utilizar un mensaje en la consola en lugar de alert()
+        console.log('Error al generar el PDF. Por favor intente nuevamente.');
+    }
+  };
+
+
+
+  const renderReportComponent = () => {
+    switch(selectedReport) {
+      case 'usuarios':
+        return (
+          <ReporteUsuarios
+            reportType={selectedReport}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        );
+      case 'general':
+        return (
+          <ReporteGeneral
+            reportType={selectedReport}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        );
+      case 'historial-pagos':
+        return (
+          <ReportePagos
+            reportType={selectedReport}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div className="alert-card">
-      <div className="alert-header">
-        <span className={`estado-circulo ${estado}`}></span>
-        <h3>{materia}</h3>
+    <div className="reportes-container">
+      <div className="reportes-title-container">
+        <h1 className="reportes-title">Reportes</h1>
       </div>
-      <div className="alert-body">
-        <p><strong>Inscritos:</strong> {inscritos}</p>
-        <p><strong>Mínimo esperado:</strong> {minimo}</p>
-        <p className="alert-message">{mensaje}</p>
-      </div>
-    </div>
-  );
-};
 
-// Componente para el selector de fecha
-const DateSelector = ({ 
-  mes, 
-  año, 
-  setMes, 
-  setAño, 
-  onPreview, 
-  onGenerate, 
-  previewActive, 
-  onGenerateReportPlanPagos, 
-  planPagosPdf, 
-  onPreviewReportPlan, 
-  onPreviewReportUsers,
-  onGenerateReportUsers,
-  usersPdf,
-  onRefresh
-}) => {
-  return (
-    <div className="contenedor-titulo-filtros">
-      <p className="filtro-title">Seleccione un mes y un año</p>
-      <div className="filtros-contenedor">
-        <select value={mes} onChange={(e) => setMes(e.target.value)}>
-          <option value="">Selecciona un mes</option>
-          {MESES.map((m, i) => (
-            <option key={i} value={m}>{m}</option>
-          ))}
-        </select>
-        <input
-          type="number"
-          placeholder="Año"
-          value={año}
-          onChange={(e) => setAño(e.target.value)}
-          min="2000"
-          max="2100"
-        />
-
-        <div className="container-buttons">
-          <button
-            onClick={onPreview}
-            disabled={!mes || !año}
-            className="boton-filtro"
+      <div className="reportes-toolbar">
+        <div className="reportes-form-group">
+          <label htmlFor="report-select" className="reportes-label">Seleccione un reporte:</label>
+          <select
+            id="report-select"
+            className="reportes-dropdown"
+            value={selectedReport}
+            onChange={(e) => setSelectedReport(e.target.value)}
           >
-            Ver reporte general
-          </button>
-          <button
-            onClick={onGenerate}
-            disabled={!mes || !año || !previewActive}
-            className="boton-filtro"
-          >
-            Generar PDF
-          </button>
+            <option value="">-- Seleccionar --</option>
+            <option value="general">Reporte general</option>
+            <option value="historial-pagos">Historial de pagos</option>
+            <option value="usuarios">Usuarios</option>
+          </select>
         </div>
 
-        <div className="container-buttons">
-          <button
-            onClick={onGenerateReportPlanPagos}
-            disabled={!mes || !año}
-            className="boton-filtro"
-          >
-            Ver reporte de plan de pagos
-          </button>
-          <button
-            onClick={planPagosPdf}
-            disabled={!mes || !año || !onPreviewReportPlan}
-            className="boton-filtro"
-          >
-            Generar PDF
-          </button>
+        <div className="reportes-form-group">
+          <label htmlFor="start-date" className="reportes-label">Fecha de inicio:</label>
+          <input
+            type="date"
+            id="start-date"
+            className="reportes-date-input"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
         </div>
 
-        <div className="container-buttons">
-          <button
-            onClick={onGenerateReportUsers}
-            disabled={!mes || !año}
-            className="boton-filtro"
-          >
-            Ver reporte de usuarios
-          </button>
-          <button
-            onClick={usersPdf}
-            disabled={!mes || !año || !onPreviewReportUsers}
-            className="boton-filtro"
-          >
-            Generar PDF
-          </button>
+        <div className="reportes-form-group">
+          <label htmlFor="end-date" className="reportes-label">Fecha de fin:</label>
+          <input
+            type="date"
+            id="end-date"
+            className="reportes-date-input"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
         </div>
 
         <button
-          onClick={onRefresh}
-          className="boton-filtro"
+          className="reportes-generate-button"
+          onClick={handlePreviewReport}
+          disabled={!selectedReport || !startDate || !endDate}
         >
-          Actualizar Datos
+          Previsualizar
+        </button>
+
+        <button
+          className="reportes-generate-button"
+          onClick={handleGenerateReport}
+          disabled={!selectedReport || !startDate || !endDate}
+        >
+          Generar Pdf
         </button>
       </div>
-    </div>
-  );
-};
 
-const Reportes = () => {
-  // Estados
-  const [recomendaciones, setRecomendaciones] = useState('Sin recomendaciones');
-  const [mes, setMes] = useState('');
-  const [año, setAño] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [previewActive, setPreviewActive] = useState(false);
-  
-  const [coursesData, setCoursesData] = useState([]);
-  const [usersData, setUsersData] = useState([]);
-  const [teachersData, setTeachersData] = useState([]);
-  const [usersInSelectedMonth, setUsersInSelectedMonth] = useState(0);
-
-  const [showPlansReport, setShowPlansReport] = useState(false);
-  
-  const [showUsersByRoleReport, setShowUsersByRoleReport] = useState(false);
-  
-  const [alumnosPorMateria, setAlumnosPorMateria] = useState({
-    'Álgebra': 0,
-    'Cálculo': 0,
-    'Física': 0,
-    'Química': 0
-  });
-
-  // Datos para el reporte
-  const materias = [
-    { 
-      nombre: 'Álgebra', 
-      porcentajeInscritos: `${(alumnosPorMateria['Álgebra'] / Math.max(1, usersData.length) * 100).toFixed(1)}%`, 
-      inscritos: alumnosPorMateria['Álgebra'], 
-      cursos: coursesData.filter(c => c.subject === 'Álgebra' || c.category === 'Álgebra').length || 8, 
-      minimoEsperado: 100
-    },
-    { 
-      nombre: 'Cálculo', 
-      porcentajeInscritos: `${(alumnosPorMateria['Cálculo'] / Math.max(1, usersData.length) * 100).toFixed(1)}%`, 
-      inscritos: alumnosPorMateria['Cálculo'], 
-      cursos: coursesData.filter(c => c.subject === 'Cálculo' || c.category === 'Cálculo').length || 8, 
-      minimoEsperado: 100
-    },
-    { 
-      nombre: 'Física', 
-      porcentajeInscritos: `${(alumnosPorMateria['Física'] / Math.max(1, usersData.length) * 100).toFixed(1)}%`, 
-      inscritos: alumnosPorMateria['Física'], 
-      cursos: coursesData.filter(c => c.subject === 'Física' || c.category === 'Física').length || 8, 
-      minimoEsperado: 100
-    },
-    { 
-      nombre: 'Química', 
-      porcentajeInscritos: `${(alumnosPorMateria['Química'] / Math.max(1, usersData.length) * 100).toFixed(1)}%`, 
-      inscritos: alumnosPorMateria['Química'], 
-      cursos: coursesData.filter(c => c.subject === 'Química' || c.category === 'Química').length || 8, 
-      minimoEsperado: 100
-    }
-  ];
-
-  // Función para obtener datos de Firebase
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      // 1. Obtener datos de cursos
-      const coursesSnap = await getDocs(collection(db, 'courses'));
-      const cursos = coursesSnap.docs.map(doc => {
-        return typeof CourseModel !== 'undefined' 
-          ? CourseModel.fromJson({ id: doc.id, ...doc.data() }) 
-          : { id: doc.id, ...doc.data() };
-      });
-      setCoursesData(cursos);
-      
-      // 2. Obtener datos de usuarios
-      const usersSnap = await getDocs(collection(db, 'users'));
-      const usuarios = await Promise.all(usersSnap.docs.map(async (userDoc) => {
-        const userData = { id: userDoc.id, ...userDoc.data() };
-        
-        try {
-          const enrolledCoursesSnap = await getDocs(collection(db, 'users', userDoc.id, 'enrolledCourses'));
-          userData.enrolledCoursesDocuments = enrolledCoursesSnap.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          }));
-        } catch (error) {
-          console.error(`Error al obtener cursos inscritos para usuario ${userDoc.id}:`, error);
-          userData.enrolledCoursesDocuments = [];
-        }
-        
-        return userData;
-      }));
-      setUsersData(usuarios);
-      
-      // 3. Obtener datos de profesores
-      const teachersSnap = await getDocs(collection(db, 'teacher'));
-      const profesores = teachersSnap.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setTeachersData(profesores);
-      
-      // 4. Calcular alumnos por materia
-      calcularAlumnosPorMateria(usuarios);
-      
-    } catch (error) {
-      console.error('Error al obtener datos:', error);
-      alert('Ocurrió un error al cargar los datos de la base de datos.');
-    }
-    setLoading(false);
-  };
-  
-  // Función para calcular alumnos por materia
-  const calcularAlumnosPorMateria = (usuarios) => {
-    const contadorMaterias = {
-      'Álgebra': 0,
-      'Cálculo': 0,
-      'Física': 0,
-      'Química': 0,
-      'Sin categorizar': 0
-    };
-    
-    const usuariosPorMateria = {
-      'Álgebra': new Set(),
-      'Cálculo': new Set(),
-      'Física': new Set(),
-      'Química': new Set(),
-      'Sin categorizar': new Set()
-    };
-    
-    usuarios.forEach(usuario => {
-      if (usuario.enrolledCoursesDocuments?.length > 0) {
-        usuario.enrolledCoursesDocuments.forEach(enrolledCourse => {
-          if (enrolledCourse.category) {
-            const categoria = enrolledCourse.category;
-            
-            if (contadorMaterias[categoria] !== undefined && !usuariosPorMateria[categoria].has(usuario.id)) {
-              contadorMaterias[categoria]++;
-              usuariosPorMateria[categoria].add(usuario.id);
-            } else if (!usuariosPorMateria['Sin categorizar'].has(usuario.id)) {
-              contadorMaterias['Sin categorizar']++;
-              usuariosPorMateria['Sin categorizar'].add(usuario.id);
-            }
-          }
-        });
-      }
-    });
-    
-    setAlumnosPorMateria(contadorMaterias);
-  };
-  
-  // Efecto para cargar datos al montar el componente
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // Manejadores de eventos
-  const handleRecomendacionesChange = (e) => {
-    const valor = e.target.value;
-    setRecomendaciones(valor.trim() === '' ? 'Sin recomendaciones' : valor);
-  };
-
-  // Función para parsear fechas
-  const parsearFechaUsuario = (fechaStr) => {
-    if (!fechaStr) return null;
-    
-    try {
-      // Intenta analizar primero como objeto Timestamp de Firebase
-      if (typeof fechaStr === 'object' && fechaStr.toDate) {
-        const fecha = fechaStr.toDate();
-        return {
-          dia: fecha.getDate(),
-          mes: fecha.getMonth(),
-          mesNombre: MESES[fecha.getMonth()].toLowerCase(),
-          año: fecha.getFullYear()
-        };
-      }
-      
-      // Si es una cadena, intenta varios formatos posibles
-      if (typeof fechaStr === 'string') {
-        // Formato "29 de marzo de 2025, 9:23:33 p.m. UTC-4"
-        const patronFechaEspañol = /(\d+) de ([a-zñáéíóú]+) de (\d+)/i;
-        const matchEspañol = fechaStr.toLowerCase().match(patronFechaEspañol);
-        
-        if (matchEspañol) {
-          const dia = parseInt(matchEspañol[1]);
-          const mesNombre = matchEspañol[2].toLowerCase();
-          const año = parseInt(matchEspañol[3]);
-          
-          // Normalizar acentos
-          const mesNormalizado = mesNombre
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-          
-          const mesNumero = MESES.findIndex(m => 
-            m.toLowerCase()
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "") === mesNormalizado
-          );
-          
-          if (mesNumero !== -1) {
-            return { dia, mes: mesNumero, mesNombre, año };
-          }
-        }
-        
-        // Formato ISO (2025-03-29)
-        const fecha = new Date(fechaStr);
-        if (!isNaN(fecha.getTime())) {
-          return {
-            dia: fecha.getDate(),
-            mes: fecha.getMonth(),
-            mesNombre: MESES[fecha.getMonth()].toLowerCase(),
-            año: fecha.getFullYear()
-          };
-        }
-      }
-      
-      return null;
-    } catch (error) {
-      console.error("Error al parsear fecha:", error, "para la cadena:", fechaStr);
-      return null;
-    }
-  };
-
-  // Función para previsualizar reporte
-  const handlePreview = () => {
-    if (!mes || !año) return;
-    
-    const mesSeleccionadoNum = MESES.findIndex(m => m === mes);
-    const añoSeleccionado = parseInt(año);
-    
-    const usuariosEnMesSeleccionado = usersData.filter(user => {
-      const fechaCreacion = parsearFechaUsuario(user.createdAt);
-      return fechaCreacion?.mes === mesSeleccionadoNum && fechaCreacion?.año === añoSeleccionado;
-    });
-    
-    setUsersInSelectedMonth(usuariosEnMesSeleccionado.length);
-    setPreviewActive(true);
-  };
-
-  // Función para generar PDF
-  const handleGeneratePDF = () => {
-    if (!mes || !año) return;
-    
-    const doc = new jsPDF();
-    let currentY = 20;
-    const marginLeft = 14;
-    
-    doc.addImage(LOGO_BASE64, 'PNG', marginLeft, 10, 30, 30); 
-    currentY = 45;
-
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const textWidth = pageWidth - 2 * marginLeft;
-
-    // Función auxiliar para añadir espacio vertical
-    const addSpace = (space = 10) => {
-      currentY += space;
-      return currentY;
-    };
-    
-    // Verificamos si hay que crear una nueva página
-    const checkPage = (requiredSpace) => {
-      if (currentY + requiredSpace > 280) {
-        doc.addPage();
-        currentY = 20;
-        return true;
-      }
-      return false;
-    };
-    
-    // === Título y período ===
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Reporte Ejecutivo de la Plataforma Educativa SAPI', pageWidth / 2, currentY, null, null, 'center');
-    addSpace();
-    
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Período: ${mes} - ${año}`, pageWidth / 2, addSpace(), null, null, 'center');
-    addSpace(15);
-    
-    // === 1. Resumen General ===
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text('1. Resumen General', marginLeft, currentY);
-    addSpace(10);
-    
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`• Usuarios registrados: ${usersData.length}`, marginLeft + 5, currentY);
-    doc.text(`• Usuarios registrados en este mes: ${usersInSelectedMonth}`, marginLeft + 5, addSpace(6));
-    doc.text(`• Total de maestros: ${teachersData.length}`, marginLeft + 5, addSpace(6));
-    doc.text(`• Total de cursos: ${coursesData.length}`, marginLeft + 5, addSpace(6));
-    doc.text(`• Evaluación promedio de satisfacción: Pendiente`, marginLeft + 5, addSpace(6));
-    addSpace(15);
-    
-    // === 2. Desglose Por Materia ===
-    checkPage(60);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text('2. Desglose Por Materia', marginLeft, currentY);
-    addSpace(5);
-    
-    // Tabla de materias
-    const materiasTabla = materias.map(m => [
-      m.nombre, 
-      m.porcentajeInscritos, 
-      m.inscritos, 
-      m.cursos
-    ]);
-    
-    autoTable(doc, {
-      startY: currentY,
-      head: [['Materia', 'Porcentaje de inscritos', 'Inscritos', 'Cursos']],
-      body: materiasTabla,
-      theme: 'striped',
-      headStyles: { fillColor: [75, 75, 75] },
-      margin: { left: marginLeft }
-    });
-    
-    currentY = doc.lastAutoTable.finalY + 15;
-    
-    // Pie de página con fecha de generación
-    doc.setFontSize(8);
-    doc.text(`Reporte generado el ${new Date().toLocaleDateString('es-ES')}`, pageWidth / 2, 285, null, null, 'center');
-    
-    // Guardar PDF
-    doc.save(`reporte_sapi_${mes}_${año}.pdf`);
-  };
-
-  ///////////////////////////////////////////////////////////////////////////////////////////
-  // Componente para el reporte de planes
-  const PlanesReport = ({ usersData }) => {
-    // Calcular estadísticas de planes
-    const totalUsers = usersData.length;
-    const freePlanUsers = usersData.filter(user => user.planType === 'Gratuito').length;
-    const monthlyPlanUsers = usersData.filter(user => user.planType === 'Mensual').length;
-    
-    const freePercentage = totalUsers > 0 ? ((freePlanUsers / totalUsers) * 100).toFixed(1) : 0;
-    const monthlyPercentage = totalUsers > 0 ? ((monthlyPlanUsers / totalUsers) * 100).toFixed(1) : 0;
-
-    return (
-      <section className="report-section">
-        <h2>Distribución de Planes de Usuarios</h2>
-        <div className="plan-stats-container">
-          <div className="plan-stat-card">
-            <h3>Total de Usuarios</h3>
-            <p className="stat-number">{totalUsers}</p>
-          </div>
-          <div className="plan-stat-card">
-            <h3>Plan Gratuito</h3>
-            <p className="stat-number">{freePlanUsers}</p>
-            <p className="stat-percentage">{freePercentage}%</p>
-          </div>
-          <div className="plan-stat-card">
-            <h3>Plan Mensual</h3>
-            <p className="stat-number">{monthlyPlanUsers}</p>
-            <p className="stat-percentage">{monthlyPercentage}%</p>
-          </div>
-        </div>
-      </section>
-    );
-  };
-
-  const generatePlansPDF = (usersData) => {
-    const doc = new jsPDF();
-    const currentDate = new Date().toLocaleDateString('es-ES');
-    const marginLeft = 14;
-    let currentY = 20;
-    
-    // Añadir logo
-    doc.addImage(LOGO_BASE64, 'PNG', marginLeft, 10, 30, 30);
-    currentY = 45;
-    
-    // Título y fecha
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Reporte de Planes de Usuarios', 105, currentY, null, null, 'center');
-    currentY += 10;
-    
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Fecha: ${currentDate}`, 105, currentY, null, null, 'center');
-    currentY += 20;
-    
-    // Calcular estadísticas
-    const totalUsers = usersData.length;
-    const freePlanUsers = usersData.filter(user => user.planType == 'Gratuito').length;
-    const monthlyPlanUsers = usersData.filter(user => user.planType == 'Mensual').length;
-
-    const freePercentage = totalUsers > 0 ? ((freePlanUsers / totalUsers) * 100).toFixed(1) : 51651;
-    const monthlyPercentage = totalUsers > 0 ? ((monthlyPlanUsers / totalUsers) * 100).toFixed(1) : 65465;
-    
-    // Tabla de datos
-    autoTable(doc, {
-      startY: currentY,
-      head: [['Tipo de Plan', 'Cantidad', 'Porcentaje']],
-      body: [
-        ['Total Usuarios', totalUsers, '100%'],
-        ['Plan Gratuito', freePlanUsers, `${freePercentage}%`],
-        ['Plan Mensual', monthlyPlanUsers, `${monthlyPercentage}%`]
-      ],
-      theme: 'striped',
-      headStyles: { fillColor: [75, 75, 75] },
-      margin: { left: marginLeft }
-    });
-    
-    // Guardar PDF
-    doc.save(`reporte_planes_usuarios_${currentDate.replace(/\//g, '-')}.pdf`);
-  };
-
-  //////////////////////////////////////////////////////////////////////////////////////
-  // Componente para el reporte de usuarios por rol
-  const UsersByRoleReport = ({ usersData, teachersData, mes, año }) => {
-    // Combinar usuarios y profesores
-    const allUsers = [
-      ...usersData.map(user => ({ ...user, collection: 'users' })),
-      ...teachersData.map(teacher => ({ ...teacher, collection: 'teachers' }))
-    ];
-
-    // Filtrar por mes y año
-    const filteredUsers = allUsers.filter(user => {
-      const fechaCreacion = parsearFechaUsuario(user.createdAt);
-      return (
-        fechaCreacion?.mes === MESES.findIndex(m => m === mes) &&
-        fechaCreacion?.año === parseInt(año)
-      );
-    });
-
-    // Contar por rol
-    const countByRole = filteredUsers.reduce((acc, user) => {
-      const rol = user.Rol || 'Estudiante';
-      acc[rol] = (acc[rol] || 0) + 1;
-      return acc;
-    }, {});
-
-    // Datos para el gráfico de torta
-    const pieData = Object.entries(countByRole).map(([rol, count]) => ({
-      name: rol,
-      value: count
-    }));
-
-    return (
-      <section className="report-section">
-        <h2>Distribución de Usuarios por Rol</h2>
-        <p className="report-period">Período: {mes} - {año}</p>
-
-        <div className="chart-container" style={{ width: '100%', height: 400 }}>
-          <h3>Total de usuarios: {filteredUsers.length}</h3>
-          <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                data={pieData}
-                cx="50%"
-                cy="50%"
-                label
-                outerRadius={130}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(value) => `${value} usuarios`} />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-         {/* Tabla */}
-         
-        
-
-      </section>
-    );
-  };
-
-
-//////////////////////
-  const generateUsersByRolePDF = (usersData, teachersData, mes, año) => {
-    const doc = new jsPDF();
-    const marginLeft = 14;
-    let currentY = 20;
-
-    // Logo
-    doc.addImage(LOGO_BASE64, 'PNG', marginLeft, 10, 30, 30);
-    currentY = 45;
-
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Reporte de Usuarios por Rol', 105, currentY, null, null, 'center');
-    currentY += 10;
-
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Período: ${mes} - ${año}`, 105, currentY, null, null, 'center');
-    currentY += 20;
-
-    const allUsers = [
-      ...usersData.map(user => ({ ...user, collection: 'users' })),
-      ...teachersData.map(teacher => ({ ...teacher, collection: 'teachers' }))
-    ];
-
-    const filteredUsers = allUsers.filter(user => {
-      const fechaCreacion = parsearFechaUsuario(user.createdAt);
-      return (
-        fechaCreacion?.mes === MESES.findIndex(m => m === mes) &&
-        fechaCreacion?.año === parseInt(año)
-      );
-    });
-
-    const countByRole = filteredUsers.reduce((acc, user) => {
-      const rol = user.Rol || 'Estudiante';
-      acc[rol] = (acc[rol] || 0) + 1;
-      return acc;
-    }, {});
-
-    const rolesTable = Object.entries(countByRole).map(([rol, count]) => [
-      rol,
-      count,
-      `${((count / filteredUsers.length) * 100).toFixed(1)}%`
-    ]);
-
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Distribución por Rol', marginLeft, currentY);
-    currentY += 10;
-
-    autoTable(doc, {
-      startY: currentY,
-      head: [['Rol', 'Cantidad', 'Porcentaje']],
-      body: rolesTable,
-      theme: 'striped',
-      headStyles: { fillColor: [75, 75, 75] },
-      margin: { left: marginLeft }
-    });
-
-    currentY = doc.lastAutoTable.finalY + 10;
-    doc.setFontSize(8);
-    doc.text(`Reporte generado el ${new Date().toLocaleDateString('es-ES')}`, 105, 285, null, null, 'center');
-
-    doc.save(`reporte_usuarios_por_rol_${mes}_${año}.pdf`);
-  };
-
-
-
-
-  return (
-    <div className="report-container">
-      {loading && <div className="loading-overlay">Cargando datos...</div>}
-      
-      <div className="contenedor-title-reporte">
-        <h1 className="report-unidad-title">Previsualización del reporte</h1>
+      <div ref={reportRef}>
+        {shouldShowReport && showReportPreview && renderReportComponent()}
       </div>
-
-      <DateSelector 
-        mes={mes}
-        año={año}
-        setMes={setMes}
-        setAño={setAño}
-        onPreview={handlePreview}
-        onGenerate={handleGeneratePDF}
-        previewActive={previewActive}
-        onRefresh={fetchData}
-        onGenerateReportPlanPagos={()=>{setShowPlansReport(true), setPreviewActive(false)}}
-        onPreviewReportPlan={showPlansReport}
-        planPagosPdf={()=>{generatePlansPDF(usersData)}}
-        onPreviewReportUsers={showUsersByRoleReport}
-        onGenerateReportUsers={()=> {
-            setShowUsersByRoleReport(true);
-            setPreviewActive(false);
-            setShowPlansReport(false);}}
-        usersPdf={() => generateUsersByRolePDF(usersData, teachersData, mes, año)}
-      />
-
-      {previewActive && (
-        <>
-          <h1 className="report-title">Reporte Ejecutivo de la Plataforma Educativa SAPI</h1>
-          <p className="report-period">Período: {mes} - {año}</p>
-
-          <section className="report-section report-summary">
-            <h2>1. Resumen General</h2>
-            <ul>
-              <li>Usuarios registrados: <strong>{usersData.length}</strong></li>
-              <li>Usuarios registrados en este mes: <strong>{usersInSelectedMonth}</strong></li>
-              <li>Total de maestros <strong>{teachersData.length}</strong></li>
-              <li>Total de cursos: <strong>{coursesData.length}</strong></li>
-              <li>Evaluación promedio de satisfacción: <strong>Pendiente</strong></li>
-            </ul>
-          </section>
-
-          <section className="report-section">
-            <h2>2. Desglose Por Materia</h2>
-            <table className="report-table">
-              <thead>
-                <tr>
-                  <th>Materia</th>
-                  <th>Porcentaje de inscritos</th>
-                  <th>Inscritos</th>
-                  <th>Cursos</th>
-                </tr>
-              </thead>
-              <tbody>
-                {materias.map((m, index) => (
-                  <tr key={index}>
-                    <td>{m.nombre}</td>
-                    <td>{m.porcentajeInscritos}</td>
-                    <td>{m.inscritos}</td>
-                    <td>{m.cursos}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-
-          <section className="report-section report-alerts">
-            <h2>3. Alertas: Mínimo De Estudiantes Esperado Por Materia</h2>
-            <div className="alert-cards">
-              {materias.map((materia, i) => (
-                <AlertCard 
-                  key={i}
-                  materia={materia.nombre}
-                  inscritos={materia.inscritos}
-                  minimo={materia.minimoEsperado}
-                />
-              ))}
-            </div>
-          </section>
-
-          <section className="report-section report-recommendations">
-            <h2>4. Recomendaciones</h2>
-            <textarea
-              className="recomendaciones-textarea"
-              placeholder="Escribe tus recomendaciones aquí..."
-              rows="5"
-              onBlur={handleRecomendacionesChange}
-              defaultValue={recomendaciones === 'Sin recomendaciones' ? '' : recomendaciones}
-            />
-          </section>
-        </>
-      )}
-
-      {
-        showPlansReport && (
-          <>
-          <h1 className="report-title">Reporte de Planes de Usuarios</h1>
-          <p className="report-period">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
-          <PlanesReport usersData={usersData} />
-          </>
-        )
-      }
-
-      {
-        showUsersByRoleReport && (
-          <>
-          <h1 className="report-title">Reporte de Usuarios</h1>
-          <p className="report-period">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
-          <UsersByRoleReport 
-            usersData={usersData} 
-            teachersData={teachersData}
-            mes={mes}
-            año={año}
-          />
-          </>
-          
-        )
-      }
     </div>
   );
 };

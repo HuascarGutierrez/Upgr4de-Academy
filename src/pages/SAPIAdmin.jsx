@@ -33,7 +33,7 @@ function SAPIAdmin() {
             <Route path='/crearcurso' element={<CrearCurso />}/>
             <Route path='/createuser' element={<CrearUserA/>} />
             <Route path='/creardocente' element={<CrearDocente />}/>
-            <Route path='/reportes' element={<Reportes/>} />
+            <Route path='/reportes' element={< Reportes />} />
             <Route path='/crearadmin' element={<CrearAdministrador />}/>
         </Routes>
     </div>

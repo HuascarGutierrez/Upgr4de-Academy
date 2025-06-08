@@ -55,15 +55,6 @@ function NavAdmin({user}) {
               <img src="/Icons/curso-online.svg" alt="" />
               <p>Solicitudes de Pago</p>
             </li>
-            <li
-              onClick={() => {
-                navigate("");
-              }}
-              className="navLateral_item"
-            >
-              <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
-              <p>Perfil</p>
-            </li>
           </ul>
         </div>
         <div

@@ -213,7 +213,7 @@ const handleSubmitExercise = async (e) => {
           <img src="/assets/circle-arrow-left.svg" alt="" />
         </button>
         <p className='crear-nuevo-curso-title'>Crear Evaluacion</p>
-        <button className='btn-crear-evaluacion' style={{position: 'absolute', top: '10px', right: '10px', fontSize: '18px', padding: '2px'}}
+        <button className='btn-crear-evaluacion' style={{position: 'absolute', top: '10px', right: '10px', fontSize: '18px', padding: '2px', width: 'auto'}}
         onClick={() => {navigate('/admin/editEvaluacion', {state: {
               courseId: datos.courseId, 
               courseTitle: datos.courseTitle, 

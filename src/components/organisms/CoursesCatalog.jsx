@@ -1,8 +1,9 @@
+// CoursesCatalog.jsx
 import './styles/CoursesCatalog.css';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/app';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; // Eliminado el ' => {' extra aquí
 import CourseModel from '../../models/course_model';
 
 function CoursesCatalog({ user }) {
@@ -30,7 +31,7 @@ function CoursesCatalog({ user }) {
   const handleFilterClick = (category) => {
     setMyCategory(category);
     setActiveFilter(category);
-    setSearchTerm(''); // reset search when changing category
+    setSearchTerm(''); // Restablecer la búsqueda al cambiar de categoría
   };
 
   // Filtrar cursos por término de búsqueda en título o descripción
@@ -45,10 +46,7 @@ function CoursesCatalog({ user }) {
   return (
     <div className="catalog-container">
       <header className="catalog-header">
-        
         <div className="name">Hola: {user?.userName || "Cargando Nombre..."}</div>
-        
-        
         <nav className="nav-bar">
           <input
             type="text"
@@ -57,15 +55,13 @@ function CoursesCatalog({ user }) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <div className="nav-links">
-            {/*<span>Mis Cursos</span>
-            <span>Progreso</span>*/}
-          </div>
         </nav>
       </header>
 
       <div className="catalog-banner">
-        <p className="title">Catálogo de cursos</p>
+        {/* Aquí está el cambio de tamaño del título */}
+        <p className="title">Catálogo de Cursos</p>
+        <p className="sub-title">Descubre una extensa colección de cursos de matemáticas y ciencias diseñados para impulsar tu aprendizaje.</p>
         <div className="filters">
           {['Álgebra', 'Cálculo', 'Física', 'Química'].map((cat) => (
             <button
@@ -78,9 +74,6 @@ function CoursesCatalog({ user }) {
           ))}
         </div>
       </div>
-
-      <h2 className="weekly-streak">Inicia una racha semanal</h2>
-      <p className="weekly-description">Visita 5 min de video o prueba al día para lograr tus objetivos</p>
 
       <div className="course-grid">
         {user?.planType !== 'Gratuito' ? (
@@ -109,14 +102,14 @@ function CoursesCatalog({ user }) {
             </div>
           ))
         ) : (
-          <h3 className="noItems">Cursos disponibles en el plan Mensual</h3>
+          <h3 className="noItems">Este contenido está disponible en el plan Mensual.<br/>¡Actualiza para acceder a todos los cursos!</h3>
         )}
 
         {searchTerm && filteredCourses.length === 0 && (
-          <div>
-          <p className="noItems">No se encontraron cursos para "{searchTerm}"</p>
-          <p className="noItems" onClick={() => {navigate('/main/catalogo/busqueda')}}>Desea una busqueda profunda</p>
-          </div>
+          <>
+            <p className="noItems">No se encontraron cursos que coincidan con "{searchTerm}"</p>
+            <p className="noItems" onClick={() => { navigate('/main/catalogo/busqueda') }}>¿Deseas realizar una búsqueda más profunda?</p>
+          </>
         )}
       </div>
     </div>

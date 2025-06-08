@@ -1,10 +1,8 @@
-// src/components/AdminDashboard.jsx
 import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, onSnapshot, doc, updateDoc, serverTimestamp } from 'firebase/firestore';
-import Swal from 'sweetalert2'; // Importa SweetAlert2
-import './styles/AdminDashboard.css';
+import Swal from 'sweetalert2';
+import './styles/AdminDashboard.css'; // Usaremos este CSS adaptado
 
-// Helper function to clean plan names (añadida para consistencia)
 const getCleanPlanName = (planName) => {
     if (typeof planName === 'string' && planName.startsWith('Plan ')) {
         return planName.replace('Plan ', '');
@@ -43,11 +41,9 @@ function AdminDashboard({user}) {
         const solicitudDocRef = doc(db, 'solicitudesPagos', solicitudId);
         const userDocRef = doc(db, 'users', userId);
 
-        // Asegurarse de que el planSolicitado esté limpio para la lógica
         const planSolicitado = getCleanPlanName(planSolicitadoRaw);
 
         try {
-            // Mostrar confirmación antes de aprobar con SweetAlert2
             const result = await Swal.fire({
                 title: '¿Estás seguro?',
                 text: `¿Deseas aprobar la solicitud de ${planSolicitado} para este usuario?`,
@@ -61,32 +57,27 @@ function AdminDashboard({user}) {
 
             if (result.isConfirmed) {
                 let planEndDate = null;
-                // La comparación ya se hace con el nombre limpio 'Mensual'
                 if (planSolicitado === 'Mensual') {
                     const now = new Date();
                     const oneMonthLater = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
                     planEndDate = oneMonthLater;
                 }
 
-                // 1. Actualizar el estado de la solicitud a 'aprobado'
                 await updateDoc(solicitudDocRef, {
                     estado: 'aprobado',
                     fechaAprobacion: serverTimestamp(),
                 });
 
-                // 2. Actualizar el plan del usuario
                 const updateUserData = {
-                    planType: planSolicitado, // Esto ya debería estar limpio si viene de Perfil.jsx
+                    planType: planSolicitado,
                     planStartDate: serverTimestamp(),
                 };
 
                 if (planEndDate) {
                     updateUserData.planEndDate = planEndDate;
                 } else {
-                    // Si el plan no tiene fecha de fin (ej. Gratuito), asegúrate de que se borre
                     updateUserData.planEndDate = null;
                 }
-
 
                 await updateDoc(userDocRef, updateUserData);
 
@@ -111,7 +102,6 @@ function AdminDashboard({user}) {
         const solicitudDocRef = doc(db, 'solicitudesPagos', solicitudId);
 
         try {
-            // Mostrar confirmación antes de rechazar con SweetAlert2
             const result = await Swal.fire({
                 title: '¿Estás seguro?',
                 text: '¿Deseas rechazar esta solicitud de pago? Esta acción no se puede deshacer.',
@@ -148,35 +138,38 @@ function AdminDashboard({user}) {
     if (error) return <div className="admin-error">{error}</div>;
 
     return (
-        <div className="admin-dashboard-container">
-            <h1>Solicitudes de Pago</h1>
+        <div className="admin-dashboard-container"> {/* Clase específica para el contenedor principal */}
+            <div className="admin-dashboard-title-wrapper"> {/* Clase específica para el contenedor del título */}
+                <h1 className="admin-dashboard-title">SOLICITUDES DE PAGO PENDIENTES</h1> {/* Clase específica para el título */}
+            </div>
+            
             {solicitudes.length === 0 ? (
-                <p>No hay solicitudes de pago pendientes.</p>
+                <p className="admin-dashboard-no-requests-message">No hay solicitudes de pago pendientes.</p>
             ) : (
-                <div className="solicitudes-list">
+                <div className="admin-dashboard-cards-grid"> {/* Clase específica para la cuadrícula de tarjetas */}
                     {solicitudes.map((solicitud) => (
-                        <div key={solicitud.id} className="solicitud-item bento-box">
+                        <div key={solicitud.id} className="admin-dashboard-card"> {/* Clase específica para cada tarjeta */}
+                            <h3>Solicitud de {solicitud.userName}</h3>
                             <p><strong>Usuario:</strong> {solicitud.userName} ({solicitud.userEmail})</p>
-                            {/* Mostrar el plan solicitado tal como está en la DB, ya debería venir limpio */}
                             <p><strong>Plan Solicitado:</strong> {solicitud.planSolicitado}</p>
                             <p><strong>Monto:</strong> {solicitud.monto} Bs.</p>
                             <p><strong>Estado:</strong> {solicitud.estado}</p>
                             <p><strong>Fecha Solicitud:</strong> {solicitud.fechaSolicitud?.toDate().toLocaleString()}</p>
-                            <div className="solicitud-actions">
+                            <div className="admin-dashboard-card-actions"> {/* Clase específica para el contenedor de acciones */}
                                 <a
                                     href={solicitud.urlComprobante}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="view-comprobante-button"
+                                    className="admin-dashboard-btn view-comprobante-btn" /* Clase específica para el botón Ver Comprobante */
                                 >
                                     Ver Comprobante
                                 </a>
                                 {solicitud.estado === 'pendiente' && (
                                     <>
-                                        <button onClick={() => handleApprove(solicitud.id, solicitud.userId, solicitud.planSolicitado)} className="approve-button">
+                                        <button onClick={() => handleApprove(solicitud.id, solicitud.userId, solicitud.planSolicitado)} className="admin-dashboard-btn approve-btn"> {/* Clase específica para Aprobar */}
                                             Aprobar
                                         </button>
-                                        <button onClick={() => handleReject(solicitud.id)} className="reject-button">
+                                        <button onClick={() => handleReject(solicitud.id)} className="admin-dashboard-btn reject-btn"> {/* Clase específica para Rechazar */}
                                             Rechazar
                                         </button>
                                     </>

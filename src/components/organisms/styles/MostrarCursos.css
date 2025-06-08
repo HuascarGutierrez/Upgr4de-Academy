@@ -1,248 +1,516 @@
+/* src/styles/MostrarCursos.css */
+
+/* Contenedor principal del componente MostrarCursos */
 .mostrar-cursos-container {
     padding: 20px;
-    background-color: white;
-
-  }
-
-  .contenedor-title-users {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--swans-down-200);
-    margin-bottom: 1rem;
+    background-color: var(--black-50); /* Fondo blanco suave para la página */
+    min-height: calc(100vh - 60px); /* Ajustar si hay un header/footer */
 }
 
-
-.users-unidad-title {
-    text-align: center;
-    font-size: var(--font-size-2xl);
-
+/* Contenedor del título principal */
+.contenedor-title-users {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--swans-down-200); /* Verde claro para el fondo del título */
+    margin-bottom: 2rem; /* Más espacio debajo del título */
+    border-radius: 10px; /* Bordes más redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Sombra más definida */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
 }
-  
-  .mostrar-cursos-title {
-    text-align: center;
-    font-size: 3rem;
 
-    color: #333;
-  }
-  
-  .tabla-cursos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  
-  .curso-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .curso-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .curso-imagen {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  .curso-card h3 {
-    font-size: 2rem;
-    margin: 15px;
-    color: #002851;
-  }
-  
-  .curso-card p {
-    margin: 0 15px 10px;
-    font-size: 1.3rem;
-    color: #555;
-  }
-  
-  .curso-actions {
+.users-unidad-title { /* Tu clase existente para el h1 del título */
+    text-align: center;
+    font-size: var(--font-size-3xl); /* Tamaño de fuente más grande para el título principal */
+    color: var(--swans-down-950); /* Texto oscuro para el título */
+    font-weight: 700;
+    letter-spacing: 1px; /* Mayor espaciado entre letras */
+    margin: 0; /* Eliminar margen predeterminado del h1 */
+    text-transform: uppercase; /* Mayúsculas para el título */
+}
+
+/* Mensajes de carga, error (si los hubiera en este componente) */
+/* (Añadir si es necesario, basándonos en tu AdminDashboard) */
+/* .loading-message, .error-message { ... } */
+
+
+/* Sección de crear curso y filtro */
+.boton-crear { /* Contenedor existente para el botón crear y el filtro */
     display: flex;
-    justify-content: space-between;
-    padding: 10px 15px;
-    background-color: #f9f9f9;
-  }
-  
-  .btn-editar, .btn-borrar {
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .btn-editar {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .btn-editar:hover {
-    background-color: #0056b3;
-  }
-  
-  .btn-borrar {
-    background-color: #dc3545;
-    color: #fff;
-  }
-  
-  .btn-borrar:hover {
-    background-color: #a71d2a;
-  }
-  
-  .editar-curso-form {
-    max-width: 600px;
-    margin: 0 auto;
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: black;
-  }
-  
-  .editar-curso-form h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-  }
-  
-  .editar-curso-form label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    justify-content: space-between; /* Espacio entre el botón y el filtro */
+    align-items: center;
+    margin-bottom: 2rem; /* Espacio debajo de esta sección */
+    gap: 15px; /* Espacio entre elementos envoltura */
+    max-width: 1300px; /* Limitar ancho para alineación con la cuadrícula */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px; /* Consistencia con el grid */
+}
 
-  .image-preview img, .current-image img {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-  }
-
-  input[type="file"] {
-    margin-top: 5px;
-  }
-  
-  .editar-curso-form input,
-  .editar-curso-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .btn-editar-curso, .btn-cancelar-edicion {
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .btn-editar-curso {
-    background-color: #28a745;
-    color: #fff;
-  }
-  
-  .btn-editar-curso:hover {
-    background-color: #218838;
-  }
-  
-  .btn-cancelar-edicion {
-    background-color: #6c757d;
-    color: #fff;
-  }
-  
-  .btn-cancelar-edicion:hover {
-    background-color: #5a6268;
-  }
-
-  .boton-crear{
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .btn-crear-curso {
-    text-align: center;
-    margin: 20px;
-    width: 50%;
-    padding: 0.8rem;
-    background-color: #319795;
-    color: #fff;
-    font-size: var(--font-size-sm);
+/* Botón "Crear Curso" */
+.btn-crear-curso {
+    padding: 12px 25px; /* Más padding */
+    background-color: var(--swans-down-600); /* Un verde más oscuro y llamativo */
+    color: var(--black-50);
+    font-size: var(--font-size-md); /* Tamaño de fuente consistente */
     font-weight: bold;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-  }
-
-  .btn-crear-evaluacion {
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-right: 10px;
-    background-color: var(--brandy-punch-400);
-    color: #fff;
-  }
-  
-  .btn-crear-curso:hover {
-    background-color: #2c7a7b;
-  }
-  
-  .btn-crear-curso:active {
-    background-color: #285e61;
-  }
-
-.filtro-categoria {
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.filtro-categoria select {
-  padding: 5px;
-  font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    flex-grow: 1; /* Permite que crezca un poco */
+    min-width: 180px; /* Ancho mínimo para el botón */
+    text-align: center; /* Asegura el centrado si el flexbox lo estira */
 }
 
+.btn-crear-curso:hover {
+    background-color: var(--swans-down-700);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Filtro de categoría */
 .filtro-categoria {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0;
-  background-color: #f9f9f9;
-  padding: 10px 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--black-100); /* Fondo gris claro */
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    flex-grow: 1; /* Permite que crezca un poco */
+    min-width: 250px; /* Ancho mínimo para el filtro */
+    justify-content: center; /* Centrar contenido dentro del filtro */
 }
 
 .filtro-label {
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--black-800);
 }
 
 .filtro-select {
-  padding: 8px 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: white;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    padding: 8px 12px;
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--black-300);
+    border-radius: 6px;
+    background-color: white;
+    color: var(--black-900);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .filtro-select:focus {
-  outline: none;
-  border-color: #3085d6;
-  box-shadow: 0 0 0 2px rgba(48, 133, 214, 0.3);
+    outline: none;
+    border-color: var(--swans-down-500); /* Verde al enfocar */
+    box-shadow: 0 0 0 3px rgba(78, 140, 138, 0.2); /* Sombra de enfoque con el color verde */
 }
- 
+
+/* Cuadrícula de tarjetas de curso */
+.tabla-cursos { /* Tu clase existente para el grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Min-width de 350px, se estiran */
+    gap: 30px; /* Mayor espacio entre las tarjetas */
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px; /* Padding horizontal para evitar que se peguen a los bordes */
+}
+
+/* Tarjeta individual de curso */
+.curso-card { /* Tu clase existente para la tarjeta */
+    background-color: var(--black-50); /* Fondo muy claro */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12); /* Sombra más pronunciada */
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura si están en la misma fila */
+}
+
+.curso-card:hover {
+    transform: translateY(-10px); /* Mayor efecto de levantamiento */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Sombra más intensa al hover */
+}
+
+.curso-imagen { /* Tu clase existente para la imagen */
+    width: 100%;
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Recorta la imagen para que quepa */
+    border-bottom: 1px solid var(--black-100); /* Separador sutil */
+}
+
+.curso-card h3 { /* Tu clase existente para el título del curso en la tarjeta */
+    font-size: var(--font-size-xl);
+    margin: 15px 20px 10px; /* Espacio alrededor del título */
+    color: var(--swans-down-800); /* Verde oscuro */
+    border-bottom: 2px solid var(--swans-down-200); /* Subrayado temático */
+    padding-bottom: 8px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.curso-card p { /* Tu clase existente para los párrafos de la tarjeta */
+    margin: 0 20px 10px;
+    font-size: var(--font-size-sm);
+    color: var(--black-700);
+    line-height: 1.6;
+    flex-grow: 1; /* Permite que la descripción ocupe el espacio restante */
+}
+
+.curso-card p strong { /* Estilo para el strong dentro de los párrafos de la tarjeta */
+    color: var(--swans-down-900);
+    font-weight: 700;
+}
+
+
+/* Acciones (botones) dentro de la tarjeta de curso */
+.curso-actions { /* Tu clase existente para las acciones de la tarjeta */
+    display: flex;
+    justify-content: space-between; /* Espacio entre los botones */
+    padding: 15px 20px;
+    background-color: var(--black-100); /* Fondo gris claro para la sección de botones */
+    border-top: 1px solid var(--black-200);
+    margin-top: auto; /* Empuja las acciones al final de la tarjeta */
+    flex-wrap: wrap; /* Permitir que los botones se envuelvan */
+    gap: 10px; /* Espacio entre botones si se envuelven */
+}
+
+/* Estilo base para los botones dentro de la tarjeta de curso */
+.btn-editar, .btn-borrar { /* Tus clases existentes para los botones de la tarjeta */
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--black-50);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; /* Permite que los botones crezcan para llenar el espacio */
+    text-align: center; /* Asegura que el texto esté centrado si el botón se estira */
+    min-width: 120px; /* Ancho mínimo para los botones en la tarjeta */
+    box-sizing: border-box; /* Asegura que padding y border no aumenten el tamaño final */
+}
+
+.btn-editar { /* Tu clase existente para el botón Editar */
+    background-color: var(--swans-down-500); /* Verde para editar */
+}
+
+.btn-editar:hover {
+    background-color: var(--swans-down-600);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-borrar { /* Tu clase existente para el botón Eliminar */
+    background-color: var(--brandy-punch-600); /* Naranja oscuro para eliminar */
+}
+
+.btn-borrar:hover {
+    background-color: var(--brandy-punch-700);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* --- Estilos del Formulario de Edición de Curso --- */
+.container { /* Tu clase existente que envuelve el formulario y EditUnitsForm */
+    max-width: 800px; /* Un poco más ancho para el formulario */
+    margin: 0 auto 30px auto; /* Centrar y añadir margen inferior */
+    padding: 30px; /* El padding será manejado por .editar-curso-form */
+    /* Eliminar background, border-radius, box-shadow de aquí para que solo .editar-curso-form lo tenga */
+    /* Se aplicarán directamente a .editar-curso-form */
+}
+
+.editar-curso-form { /* Tu clase existente para el formulario */
+    background: var(--black-50);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: var(--black-900);
+    padding: 30px; /* Movido de .container */
+}
+
+.editar-curso-form h2 { /* Tu clase existente para el título del formulario */
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--swans-down-800);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    border-bottom: 2px solid var(--swans-down-100);
+    padding-bottom: 10px;
+}
+
+.editar-curso-form label { /* Tu clase existente para las etiquetas del formulario */
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--black-700);
+    font-size: var(--font-size-sm);
+}
+
+.editar-curso-form input[type="text"],
+.editar-curso-form textarea,
+.editar-curso-form select { /* Tus clases existentes para inputs, textareas y selects */
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--black-300);
+    border-radius: 8px;
+    font-size: var(--font-size-sm);
+    color: var(--black-900);
+    background-color: white;
+    box-sizing: border-box; /* Incluir padding en el width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.editar-curso-form input[type="text"]:focus,
+.editar-curso-form textarea:focus,
+.editar-curso-form select:focus {
+    outline: none;
+    border-color: var(--swans-down-500);
+    box-shadow: 0 0 0 3px rgba(78, 140, 138, 0.2);
+}
+
+.editar-curso-form textarea {
+    min-height: 100px; /* Altura mínima para el área de texto */
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+/* Previsualización de imagen */
+.image-preview, .current-image { /* Tus clases existentes para previsualización de imagen */
+    margin-top: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.image-preview p, .current-image p {
+    font-weight: 600;
+    color: var(--black-700);
+    margin-bottom: 10px;
+    font-size: var(--font-size-sm);
+}
+
+.image-preview img, .current-image img { /* Tus clases existentes para las imágenes de previsualización */
+    max-width: 250px; /* Un poco más grande para la previsualización */
+    height: auto;
+    border: 1px solid var(--black-200);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Controles de archivo de imagen */
+.editar-curso-form input[type="file"] { /* Tu clase existente para input de tipo file */
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 8px;
+    border: 1px solid var(--black-300);
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    color: var(--black-700);
+}
+
+.editar-curso-form input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--swans-down-300);
+    color: var(--black-950);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.editar-curso-form input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: var(--swans-down-400);
+}
+
+
+/* Botones del formulario de edición (Guardar, Evaluaciones, Cancelar) */
+.btn-editar-curso, .btn-cancelar-edicion, .btn-crear-evaluacion { /* Tus clases existentes para los botones del formulario */
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: var(--font-size-md); /* Más grandes y legibles */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--black-50);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Por defecto, ocupan todo el ancho */
+    margin-bottom: 15px; /* Espacio entre ellos */
+    display: block; /* Asegura que cada botón esté en su propia línea */
+    box-sizing: border-box; /* Incluye padding y border en el width total */
+}
+
+/* Nota: el botón de "Guardar Cambios" usa '.btn-editar-curso' en tu JSX */
+.btn-editar-curso { /* Estilo para el botón Guardar Cambios */
+    background-color: var(--swans-down-700); /* Verde oscuro para Guardar */
+}
+
+.btn-editar-curso:hover {
+    background-color: var(--swans-down-800);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Tu botón de Evaluaciones. Nota: tienes un style={{backgroundColor: 'orange'}} inline en el JSX
+   Si quieres que este CSS tenga control, deberías quitar ese estilo inline del JSX. */
+.btn-crear-evaluacion {
+    background-color: var(--brandy-punch-500); /* Naranja para Evaluaciones */
+}
+
+.btn-crear-evaluacion:hover {
+    background-color: var(--brandy-punch-600);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-cancelar-edicion { /* Tu clase existente para el botón Cancelar */
+    background-color: var(--black-600); /* Gris oscuro para Cancelar */
+}
+
+.btn-cancelar-edicion:hover {
+    background-color: var(--black-700);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estado deshabilitado para botones */
+.btn-editar-curso[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: var(--black-400);
+    box-shadow: none;
+    transform: none;
+}
+
+
+/* Media Queries para responsividad */
+@media (max-width: 1024px) {
+    .tabla-cursos {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Un poco menos ancho en tablets */
+        gap: 25px;
+    }
+
+    .curso-imagen {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mostrar-cursos-container {
+        padding: 15px;
+    }
+
+    .contenedor-title-users {
+        padding: 10px;
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+    }
+
+    .users-unidad-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .boton-crear { /* Ajuste del contenedor de crear curso y filtro en móvil */
+        flex-direction: column; /* Apilar en móvil */
+        align-items: stretch; /* Estirar a ancho completo */
+        gap: 10px;
+    }
+    
+    .btn-crear-curso,
+    .filtro-categoria {
+        width: 100%;
+        min-width: unset; /* Reiniciar min-width */
+        flex-grow: unset; /* Reiniciar flex-grow */
+        justify-content: center;
+    }
+
+    .filtro-select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .tabla-cursos {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        gap: 20px;
+        padding: 0;
+    }
+
+    .curso-card {
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .curso-imagen {
+        height: 160px;
+    }
+
+    .curso-card h3 {
+        font-size: var(--font-size-lg);
+        margin: 12px 15px 8px;
+    }
+
+    .curso-card p {
+        font-size: var(--font-size-sm);
+        margin: 0 15px 8px;
+    }
+
+    .curso-actions {
+        flex-direction: column; /* Apilar botones en móvil */
+        gap: 8px;
+        padding: 12px 15px;
+    }
+
+    .btn-editar, .btn-borrar {
+        width: 100%; /* Estirar botones en móvil */
+        min-width: unset;
+        padding: 12px 15px;
+        font-size: var(--font-size-sm);
+    }
+
+    /* Formulario de edición en móvil */
+    .editar-curso-form {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .editar-curso-form h2 {
+        font-size: var(--font-size-xl);
+        margin-bottom: 20px;
+    }
+
+    .editar-curso-form label {
+        font-size: var(--font-size-xs);
+        margin-bottom: 5px;
+    }
+
+    .editar-curso-form input[type="text"],
+    .editar-curso-form textarea,
+    .editar-curso-form select {
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: var(--font-size-sm);
+    }
+
+    .editar-curso-form input[type="file"] {
+        padding: 6px;
+        font-size: var(--font-size-sm);
+    }
+
+    .image-preview img, .current-image img {
+        max-width: 180px;
+    }
+
+    .btn-editar-curso, .btn-cancelar-edicion, .btn-crear-evaluacion {
+        padding: 10px 15px;
+        font-size: var(--font-size-sm);
+        margin-bottom: 10px;
+    }
+}

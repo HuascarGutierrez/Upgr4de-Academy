@@ -4,6 +4,7 @@ import ReporteUsuarios from '../molecules/ReporteUsuarios';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
+import ReportePagos from '../molecules/ReportePagos';
 
 const Reportes = () => {
     const [selectedReport, setSelectedReport] = useState('');
@@ -14,7 +15,6 @@ const Reportes = () => {
     const reportRef = useRef(null);
 
     const LOGO_BASE64 = 'data:image/png;base64,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';
-    // Reemplaza esta cadena con el LOGO_BASE64 completo que tenías, es demasiado largo para incluirlo aquí directamente como ejemplo completo.
 
     // Resetear la previsualización cuando cambia el tipo de reporte
     useEffect(() => {
@@ -181,7 +181,6 @@ const Reportes = () => {
             pdf.text("Administrador", pageWidth / 2, signatureY + 5, { align: 'center' });
             // --- Fin de la sección del pie de firma ---
 
-
             pdf.save(`reporte_${selectedReport}_${new Date().toISOString().slice(0, 10)}.pdf`);
 
             Swal.fire({
@@ -225,13 +224,13 @@ const Reportes = () => {
                 return <p>Componente ReporteGeneral no definido</p>; // Placeholder
             case 'historial-pagos':
                 // Asegúrate de importar ReportePagos
-                // return (
-                //   <ReportePagos
-                //     reportType={selectedReport}
-                //     startDate={startDate}
-                //     endDate={endDate}
-                //   />
-                // );
+                return (
+                  <ReportePagos
+                    reportType={selectedReport}
+                    startDate={startDate}
+                    endDate={endDate}
+                  />
+                );
                 return <p>Componente ReportePagos no definido</p>; // Placeholder
             default:
                 return null;

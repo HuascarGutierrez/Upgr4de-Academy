@@ -293,13 +293,6 @@ function Perfil({ user }) {
             >
               SUSCRIPCIÓN
             </button>
-            <button
-              className={`menu-item ${activeView === "gamification" ? "active" : ""}`}
-              onClick={() => handleViewChange("gamification")}
-              type="button"
-            >
-              GAMIFICACIÓN
-            </button>
             <button onClick={handleSignOut} className="menu-item" type="button">
               CERRAR SESIÓN
             </button>

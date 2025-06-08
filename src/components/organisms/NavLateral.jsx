@@ -20,15 +20,6 @@ function NavLateral({user}) {
         <ul className="navLateral_list">
           <li
             onClick={() => {
-              navigate("/main/courses");
-            }}
-            className="navLateral_item"
-          >
-            <img src="/assets/navLateral_1.svg" alt="" />
-            <p>Mis Cursos</p>
-          </li>
-          <li
-            onClick={() => {
               navigate("/main/catalogo");
             }}
             className="navLateral_item"

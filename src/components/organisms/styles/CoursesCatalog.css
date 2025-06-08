@@ -164,7 +164,7 @@
 .course-banner-faded-title {
     width: 100%;
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: var(--swans-down-500);
     padding: var(--font-size-sm) var(--font-size-md);
 }
 

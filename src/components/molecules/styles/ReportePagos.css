@@ -1,0 +1,179 @@
+.reporte-container {
+    font-family: 'Inter', sans-serif; /* Fuente principal */
+    background-color: #ffffff; /* Fondo blanco para el reporte */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 30px; /* Centrar en la página */
+    box-sizing: border-box; /* Incluir padding y border en el ancho/alto */
+    color: #333; /* Color de texto general */
+}
+
+.reporte-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.reporte-title {
+    font-size: 2.2em;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.reporte-periodo {
+    font-size: 1.1em;
+    color: #555;
+    font-weight: 500;
+}
+
+.reporte-section {
+    margin-bottom: 30px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden; /* Para que los bordes de la tabla se vean bien */
+}
+
+.reporte-section h3 {
+    background-color: #f8f9fa;
+    color: #343a40;
+    padding: 15px 20px;
+    margin: 0;
+    font-size: 1.5em;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+}
+
+.reporte-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0; /* Eliminar margen superior para que se una al h3 */
+    table-layout: fixed; /* Ayuda a que las columnas no se desborden */
+}
+
+.reporte-table thead {
+    background-color: #e2e8f0; /* Fondo más claro para el encabezado */
+}
+
+.reporte-table th {
+    padding: 15px;
+    text-align: left;
+    font-size: 0.95em;
+    color: #4a5568;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.reporte-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Rayas para mejor legibilidad */
+}
+
+.reporte-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+    font-size: 0.9em;
+    word-wrap: break-word; /* Para evitar desbordamiento de texto largo */
+}
+
+.reporte-table tbody tr:hover {
+    background-color: #e6f7ff; /* Resaltar fila al pasar el ratón */
+    transition: background-color 0.2s ease;
+}
+
+.reporte-table td:last-child,
+.reporte-table th:last-child {
+    border-right: none;
+}
+
+.reporte-loading,
+.reporte-error {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    color: #555;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.reporte-error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* Estilos para cuando no hay datos */
+.reporte-section p {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: #777;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 0 0 8px 8px; /* Bordes redondeados solo abajo */
+    margin: 0;
+}
+
+/* Responsividad básica */
+@media (max-width: 768px) {
+    .reporte-container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .reporte-table thead {
+        display: none; /* Ocultar encabezados en pantallas pequeñas */
+    }
+
+    .reporte-table,
+    .reporte-table tbody,
+    .reporte-table tr,
+    .reporte-table td {
+        display: block; /* Convertir tabla en bloques */
+        width: 100%;
+    }
+
+    .reporte-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+    }
+
+    .reporte-table td {
+        text-align: right;
+        padding-left: 50%; /* Espacio para el label */
+        position: relative;
+        border: none;
+        border-bottom: 1px dashed #e9ecef;
+    }
+
+    .reporte-table td::before {
+        content: attr(data-label); /* Mostrar el label de la columna */
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px);
+        text-align: left;
+        font-weight: bold;
+        color: #555;
+        text-transform: uppercase;
+    }
+
+    /* Asignar data-label para cada td para mostrar en móvil */
+    .reporte-table td:nth-of-type(1)::before { content: "Nombre:"; }
+    .reporte-table td:nth-of-type(2)::before { content: "Email:"; }
+    .reporte-table td:nth-of-type(3)::before { content: "Monto:"; }
+    .reporte-table td:nth-of-type(4)::before { content: "Fecha Solicitud:"; }
+    .reporte-table td:nth-of-type(5)::before { content: "Fecha Aprobación:"; } /* Solo para aprobados */
+}
+
+/* Asegurar que el último td en móvil no tenga el border-bottom */
+@media (max-width: 768px) {
+    .reporte-table tr td:last-child {
+        border-bottom: none;
+    }
+}

@@ -5,6 +5,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
 import ReportePagos from '../molecules/ReportePagos';
+import ReporteCursos from '../molecules/ReporteCursos';
 
 const Reportes = () => {
     const [selectedReport, setSelectedReport] = useState('');
@@ -212,18 +213,16 @@ const Reportes = () => {
                         endDate={endDate}
                     />
                 );
-            case 'general':
-                // Asegúrate de importar ReporteGeneral
-                // return (
-                //   <ReporteGeneral
-                //     reportType={selectedReport}
-                //     startDate={startDate}
-                //     endDate={endDate}
-                //   />
-                // );
-                return <p>Componente ReporteGeneral no definido</p>; // Placeholder
+            case 'cursos':
+                return (
+                  <ReporteCursos
+                    reportType={selectedReport}
+                    startDate={startDate}
+                    endDate={endDate}
+                  />
+                );
+                return <p>Componente ReporteCursos no definido</p>; // Placeholder
             case 'historial-pagos':
-                // Asegúrate de importar ReportePagos
                 return (
                   <ReportePagos
                     reportType={selectedReport}
@@ -253,7 +252,7 @@ const Reportes = () => {
                         onChange={(e) => setSelectedReport(e.target.value)}
                     >
                         <option value="">-- Seleccionar --</option>
-                        <option value="general">Reporte general</option>
+                        <option value="cursos">Cursos existentes</option>
                         <option value="historial-pagos">Historial de pagos</option>
                         <option value="usuarios">Usuarios</option>
                     </select>

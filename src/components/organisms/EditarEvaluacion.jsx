@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { db } from "../../config/app";
 import { collection, getDocs, query, where, addDoc, setDoc, doc } from "firebase/firestore";
 
-function EditarEvaluacion() {
+function EditarEvaluacion({user}) {
     const navigate = useNavigate();
     const location = useLocation();
     const datos = location.state || {};

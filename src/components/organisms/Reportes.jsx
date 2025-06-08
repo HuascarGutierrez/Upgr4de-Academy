@@ -145,7 +145,7 @@ const DateSelector = ({
   );
 };
 
-const Reportes = () => {
+const Reportes = ({user}) => {
   // Estados
   const [recomendaciones, setRecomendaciones] = useState('Sin recomendaciones');
   const [mes, setMes] = useState('');

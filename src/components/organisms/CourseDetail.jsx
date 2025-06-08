@@ -158,7 +158,7 @@ function CourseDetail({user}) {
             <span className="course-category">{course.category}</span>
           </div>
           
-          <p className="instructor">{course.teacher}</p>
+          <p className="instructor">Docente: {course.teacher}</p>
           <div className="description">
             <p>{course.description}</p>
           </div>

@@ -8,7 +8,7 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import { storage } from "../../config/app2";
 
-function CrearDocente() {
+function CrearDocente({user}) {
   const [waiting, setWaiting] = useState(false);
   const [image, setImage] = useState(null);
   const [imageName, setImageName] = useState(null);

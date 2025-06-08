@@ -1,4 +1,5 @@
 // src/components/Perfil.jsx
+
 import React, { useState, useRef, useEffect } from "react";
 import "./styles/Perfil.css";
 import { getAuth, signOut } from "firebase/auth";
@@ -15,13 +16,13 @@ import {
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { handleUpdateImage } from "../../config/auth_functions";
 import { ClipLoader } from "react-spinners";
-import Swal from 'sweetalert2'; // <-- Importar SweetAlert2
+import Swal from 'sweetalert2';
 
 import SubscriptionSection from "./SubscriptionSection";
 import PaymentSimulationModal from "./PaymentSimulationModal";
-import GamificationSection from "./GamificationSection"; // Importa el componente
+import GamificationSection from "./GamificationSection";
 
-import { storage } from "../../config/app2"; // Asegúrate de que 'storage' de Firebase Storage esté correctamente exportado y sea accesible aquí.
+import { storage } from "../../config/app2";
 
 function Perfil({ user }) {
   const [activeView, setActiveView] = useState("myProfile");
@@ -34,11 +35,11 @@ function Perfil({ user }) {
         "Acceso a algunas las unidades",
         "Evaluaciones y ejercicios",
       ],
-      plan: "Gratuito", // Este campo 'plan' parece redundante si ya tienes 'name'. Podrías usar solo 'name'.
+      plan: "Gratuito",
       price: 0,
     },
     {
-      name: "Plan Mensual", // Mantengo "Plan Mensual" aquí para la UI, pero se limpia para DB si es necesario.
+      name: "Plan Mensual",
       description:
         "Te esperan nuevas oportunidades. Inscríbete en el plan Mensual para obtener muchos beneficios:",
       benefits: [
@@ -46,16 +47,15 @@ function Perfil({ user }) {
         "Acceso al apartado de supervisión",
         "Evaluaciones y ejercicios",
       ],
-      plan: "Mensual", // Este campo 'plan' parece redundante si ya tienes 'name'.
+      plan: "Mensual",
       price: 120,
     },
   ]);
 
   const fullNameRef = useRef(user?.userName || "");
-  const fileInputRef = useRef(null); // Ref para el input de archivo
+  const fileInputRef = useRef(null);
   const [wait, setWait] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-  // CAMBIO CLAVE: planToSubscribe ahora almacenará el OBJETO COMPLETO del plan
   const [planToSubscribe, setPlanToSubscribe] = useState(null);
 
   const navigate = useNavigate();
@@ -176,49 +176,12 @@ function Perfil({ user }) {
     }
   };
 
-  // Esta función 'updatePlanInFirestore' ya no sería necesaria para planes de pago,
-  // ya que SubscriptionSection y handlePaymentComplete manejan la lógica de Firebase.
-  // La mantengo comentada o como referencia si alguna vez necesitas actualizar el plan
-  // directamente sin pasar por el flujo de pago/solicitud.
-  /*
-  const updatePlanInFirestore = async (plan) => {
-    if (!user?.uid) {
-      alertWarning(
-        "No se pudo obtener la información del usuario para actualizar el plan."
-      );
-      return;
-    }
-    const db = getFirestore();
-    const userRef = doc(db, "users", user.uid);
-    try {
-      await setDoc(
-        userRef,
-        {
-          planType: plan,
-        },
-        { merge: true }
-      );
-      Swal.fire({
-        icon: 'success',
-        title: '¡Plan actualizado!',
-        text: 'Tu plan se ha actualizado correctamente.',
-        timer: 1500,
-        timerProgressBar: true
-      });
-    } catch (error) {
-      alertWarning(`Error al actualizar el plan: ${error.message}`);
-    }
-  };
-  */
-
-  // CAMBIO CLAVE: Ahora recibe el OBJETO COMPLETO del plan
   const handleInitiatePayment = (plan) => {
-    setPlanToSubscribe(plan); // Guardamos el objeto plan completo
+    setPlanToSubscribe(plan);
     setShowPaymentModal(true);
   };
 
   const handlePaymentComplete = async (fileComprobante) => {
-    // Verificamos que planToSubscribe sea un objeto y tenga las propiedades necesarias
     if (!planToSubscribe || typeof planToSubscribe !== 'object' || !planToSubscribe.name || typeof planToSubscribe.price === 'undefined') {
       Swal.fire({
         icon: 'warning',
@@ -249,7 +212,6 @@ function Perfil({ user }) {
     try {
       const timestamp = Date.now();
       const fileName = fileComprobante.name;
-      // Define una ruta de almacenamiento más específica si lo deseas, por ejemplo, incluyendo el ID de usuario
       const storagePath = `comprobantes/${user.uid}/${timestamp}-${fileName}`;
 
       const storageRef = ref(storage, storagePath);
@@ -259,7 +221,6 @@ function Perfil({ user }) {
       const db = getFirestore();
       const solicitudesRef = collection(db, "solicitudesPagos");
 
-      // CAMBIO CLAVE: Acceder directamente a las propiedades 'name' y 'price' del objeto planToSubscribe
       const planNameForDB = planToSubscribe.name;
       const montoPago = planToSubscribe.price;
 
@@ -267,8 +228,8 @@ function Perfil({ user }) {
         userId: user.uid,
         userName: user.userName || "Usuario Desconocido",
         userEmail: user.email,
-        planSolicitado: planNameForDB, // Utiliza el nombre del plan del objeto
-        monto: montoPago, // ¡Aquí está el monto correcto!
+        planSolicitado: planNameForDB,
+        monto: montoPago,
         urlComprobante: urlComprobante,
         estado: "pendiente",
         fechaSolicitud: serverTimestamp(),
@@ -290,7 +251,7 @@ function Perfil({ user }) {
     } finally {
       setWait(false);
       setShowPaymentModal(false);
-      setPlanToSubscribe(null); // Resetea el plan seleccionado
+      setPlanToSubscribe(null);
     }
   };
 
@@ -377,39 +338,41 @@ function Perfil({ user }) {
           <div className="content-wrapper bento-box">
             <div id="miPerfil" className="my-profile-card">
               <h2>Información Básica</h2>
-              <form onSubmit={handleSaveName}>
+
+              {/* SECCIÓN CAMBIAR FOTO DE PERFIL */}
+              <div className="form-section-group">
+                <span className="label-text">Cambiar foto de perfil</span>
                 {wait ? (
                   <div className="loader-container">
                     <ClipLoader color="var(--swans-down-400)" size={40} />
                   </div>
                 ) : (
                   <>
-                    <label className="form-label-box custom-file-upload">
-                      <span className="label-text">Cambiar foto de perfil</span>
-                      <button type="button" onClick={handleButtonClick} className="form-input-button">
-                        Seleccionar Archivo
-                      </button>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="form-input-file-hidden"
-                        ref={fileInputRef}
-                      />
-                    </label>
+                    <button type="button" onClick={handleButtonClick} className="form-input-button">
+                      Seleccionar Archivo
+                    </button>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="form-input-file-hidden"
+                      ref={fileInputRef}
+                    />
                   </>
                 )}
-                <label className="form-label-box">
-                  <span className="label-text">Cambiar nombre completo</span>
-                  <input
-                    minLength={8}
-                    type="text"
-                    ref={fullNameRef}
-                    placeholder={user?.userName || "Nombre completo"}
-                    className="form-input-text"
-                  />
-                  <button className="subscribe-button">Guardar Cambios</button>
-                </label>
+              </div>
+
+              {/* SECCIÓN CAMBIAR NOMBRE COMPLETO */}
+              <form onSubmit={handleSaveName} className="form-section-group">
+                <span className="label-text">Cambiar nombre completo</span>
+                <input
+                  minLength={8}
+                  type="text"
+                  ref={fullNameRef}
+                  placeholder={user?.userName || "Nombre completo"}
+                  className="form-input-text profile-name-input"
+                />
+                <button type="submit" className="subscribe-button">Guardar Cambios</button>
               </form>
             </div>
           </div>
@@ -420,7 +383,7 @@ function Perfil({ user }) {
             <SubscriptionSection
               user={user}
               subscriptionPlans={subscriptionPlans}
-              cambiarPlan={handleInitiatePayment} // Ahora pasa el OBJETO COMPLETO del plan
+              cambiarPlan={handleInitiatePayment}
             />
           </div>
         )}
@@ -433,7 +396,7 @@ function Perfil({ user }) {
 
         {showPaymentModal && (
           <PaymentSimulationModal
-            plan={planToSubscribe} // Pasa el OBJETO COMPLETO del plan al modal
+            plan={planToSubscribe}
             onPaymentComplete={handlePaymentComplete}
             onClose={handleClosePaymentModal}
             isLoading={wait}

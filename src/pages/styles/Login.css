@@ -17,9 +17,9 @@
     background-color: var(--black-50);
 }
 .buho_logo {
-    max-width: 200px;
+    max-width: 130px;
     height: auto;
-    margin-top: 50px; 
+    /*margin-top: 50px; */
     margin-left: auto; 
     margin-right: auto; 
     margin-bottom: 20px; 

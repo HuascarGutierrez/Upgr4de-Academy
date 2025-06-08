@@ -25,21 +25,24 @@ function UserTable() {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        const list = querySnapshot.docs.map((doc) => ({
+  const fetchData = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const list = querySnapshot.docs
+        .map((doc) => ({
           id: doc.id,
           ...doc.data(),
           createdAt: doc.data().createdAt?.toDate().toLocaleDateString('en-GB') || 'N/A',
-        }));
-        setData(list);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
+        }))
+        .filter(user => user.Rol === "Estudiante"); // 👈 FILTRO POR ROL
+
+      setData(list);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  fetchData();
+}, []);
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -195,7 +198,7 @@ function UserTable() {
     <div className="Tabla">
       <div className='Header_UserTable'>
       <h2>Lista de Estudiantes</h2>
-      <button className="btn btn-create" onClick={() => navigate("/admin/createuser")}>Crear Estudiante</button>
+      <button className="btn btn-create" onClick={() => navigate("/admin/createuser")}>Crear Usuario</button>
       {/*selectedUsers.length > 0 && (
         <button className="btn btn-delete" onClick={handleMassDelete}>Eliminar Seleccionados ({selectedUsers.length})</button>
       )*/}

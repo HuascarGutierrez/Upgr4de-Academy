@@ -27,18 +27,21 @@ function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      if (email === "admin@admin.com") {
+      if (email === "admin@admin.com" && password==="admin1234") {
         navigate('/admin/usersSection');
       } else {
         // Buscar al estudiante en Firestore
         const studentDocRef = doc(db, "users", user.uid);
-    const studentSnap = await getDoc(studentDocRef);
+        const studentSnap = await getDoc(studentDocRef);
 
     if (studentSnap.exists()) {
       const studentData = studentSnap.data();
-
       if (studentData.activo) {
-        navigate('/main/courses'); // Estudiante activo
+        if(studentData.Rol === "Administrador"){
+          navigate('/admin/usersSection');
+        }else{
+        navigate('/main/courses');
+      } // Estudiante activo
       } else {
         await auth.signOut();
         Swal.fire({
@@ -49,34 +52,6 @@ function Login() {
       }
       return; // Salimos porque ya encontramos al usuario
     }
-
-    // Si no está en estudiantes, buscamos en administradores
-    const adminDocRef = doc(db, "administrador", user.uid);
-    const adminSnap = await getDoc(adminDocRef);
-
-    if (adminSnap.exists()) {
-      const adminData = adminSnap.data();
-
-      if (adminData.activo) {
-        navigate('/admin/usersSection'); // Admin activo
-      } else {
-        await auth.signOut();
-        Swal.fire({
-          icon: "warning",
-          title: "Cuenta Inactiva",
-          text: "Tu cuenta aún no ha sido activada. Por favor, contacta a soporte.",
-        });
-      }
-      return;
-    }
-
-    // Si no está en ninguna colección
-    await auth.signOut();
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "No se encontró información del usuario.",
-    });
   }
     } catch (error) {
       console.error("Login error:", error);

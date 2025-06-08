@@ -8,7 +8,7 @@ import { db } from '../../config/app';
 import { toast } from 'react-toastify';
 import { col } from 'framer-motion/client';
 
-function CrearEvaluacion() {
+function CrearEvaluacion({user}) {
 
     const [formUnit, setFormUnit] = useState({
         title: "",

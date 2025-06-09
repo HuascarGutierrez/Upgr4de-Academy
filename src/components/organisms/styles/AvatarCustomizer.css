@@ -1,0 +1,459 @@
+/* src/components/organisms/styles/AvatarCustomizer.css */
+
+/* General styles */
+.avatar-customizer {
+    padding: var(--font-size-2xl);
+    background-color: var(--black-900); /* Vuelve al fondo oscuro principal */
+    border-radius: 12px; /* Mantenemos el redondeo original */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada para fondo oscuro */
+    max-width: 95%;
+    width: 1200px;
+    margin: var(--font-size-2xl) auto;
+    font-family: 'Raleway', sans-serif;
+    color: var(--black-50); /* Texto claro para fondo oscuro */
+    border: 1px solid var(--black-700); /* Borde más visible en oscuro */
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "points points"
+        "preview preview"
+        "actions actions"
+        "selection selection";
+    grid-template-columns: 1fr 1fr;
+    gap: var(--font-size-2xl);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de fondo sutil (bento-item-like) en oscuro */
+.avatar-customizer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, var(--black-800) 0%, var(--black-950) 100%); /* Degradado oscuro */
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0.9;
+    box-shadow: 0 0 40px rgba(var(--swans-down-500-rgb), 0.05); /* Sutil glow azulado en oscuro */
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+.customizer-title {
+    grid-area: header;
+    text-align: center;
+    margin-bottom: 0;
+    color: var(--swans-down-300); /* Color claro y llamativo para el título */
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(78, 140, 138, 0.4); /* Sombra de texto suave */
+    background: linear-gradient(90deg, var(--black-800) 0%, var(--black-700) 80%); /* Fondo sutil oscuro para el título */
+    border-radius: 10px;
+    padding: 1.2rem 2rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4); /* Sombra para el título */
+    border: 1px solid var(--black-600);
+}
+
+.available-points {
+    grid-area: points;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: var(--font-size-lg);
+    color: var(--black-200); /* Texto claro para el "Puntos Disponibles" */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.available-points span {
+    font-weight: bold;
+    color: var(--brandy-punch-300); /* Un naranja brillante para los puntos */
+    font-size: var(--font-size-xl);
+    text-shadow: 0 0 8px rgba(196, 132, 48, 0.5); /* Sombra para los puntos */
+}
+
+.available-points .points-icon {
+    width: var(--font-size-xl);
+    height: var(--font-size-xl);
+    color: var(--brandy-punch-500); /* Icono de monedas más vibrante */
+    filter: drop-shadow(0 0 5px rgba(196, 132, 48, 0.4));
+    animation: coinPulse 2s infinite ease-in-out alternate;
+}
+
+/* Current Avatar Preview */
+.current-avatar-preview {
+    grid-area: preview;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, var(--swans-down-950) 0%, var(--black-950) 100%); /* Fondo del círculo oscuro */
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid var(--swans-down-500);
+    box-shadow: 0 0 20px rgba(78, 140, 138, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.7);
+    animation: pulseBorder 2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseBorder {
+    0% {
+        border-color: var(--swans-down-500);
+        box-shadow: 0 0 20px rgba(78, 140, 138, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+    100% {
+        border-color: var(--swans-down-400);
+        box-shadow: 0 0 25px rgba(78, 140, 138, 0.8), inset 0 0 25px rgba(0, 0, 0, 0.8);
+    }
+}
+
+.avatar-part {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease-out;
+}
+
+.no-avatar-parts {
+    color: var(--black-400); /* Texto gris para "Crea tu avatar" */
+    font-style: italic;
+    font-size: var(--font-size-base);
+    text-align: center;
+    padding: 20px;
+}
+
+/* Customizer Actions (Buttons) */
+.customizer-actions {
+    grid-area: actions;
+    display: flex;
+    justify-content: center;
+    gap: var(--font-size-xl);
+    margin-top: var(--font-size-2xl);
+}
+
+.customizer-actions button {
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid transparent;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Sombra más intensa en oscuro */
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.customizer-actions button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.save-changes-btn {
+    background: linear-gradient(145deg, var(--swans-down-500) 0%, var(--swans-down-400) 100%);
+    color: var(--black-950); /* Texto oscuro para el botón brillante */
+    border-color: var(--swans-down-600);
+}
+
+.save-changes-btn:hover:not(:disabled) {
+    background: linear-gradient(145deg, var(--swans-down-400) 0%, var(--swans-down-300) 100%);
+    border-color: var(--swans-down-700);
+}
+
+.save-changes-btn:disabled {
+    background-color: var(--black-700); /* Color de fondo más suave para deshabilitado */
+    color: var(--black-500); /* Texto gris para deshabilitado */
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+    border-color: var(--black-600);
+}
+
+.cancel-changes-btn {
+    background-color: var(--black-600); /* Un gris oscuro para el botón de cancelar */
+    color: var(--black-50); /* Texto claro */
+    border: 1px solid var(--black-500);
+}
+
+.cancel-changes-btn:hover:not(:disabled) {
+    background-color: var(--black-500);
+    color: var(--black-100);
+    border-color: var(--black-400);
+}
+
+.cancel-changes-btn:disabled {
+    background-color: var(--black-800);
+    color: var(--black-600);
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+    border-color: var(--black-700);
+}
+
+/* Avatar Parts Selection */
+.avatar-parts-selection {
+    grid-area: selection;
+    display: flex;
+    flex-direction: column;
+    gap: var(--font-size-3xl);
+}
+
+.avatar-part-category h4 {
+    margin-bottom: var(--font-size-md);
+    color: var(--swans-down-200); /* Texto claro para el título de categoría */
+    font-size: var(--font-size-xl);
+    border-bottom: 2px solid var(--black-700); /* Línea divisoria oscura */
+    padding-bottom: 10px;
+    text-align: center;
+    position: relative;
+    /* Estilo para que se vea como un título de categoría bento en tema oscuro */
+    background: linear-gradient(90deg, var(--black-800) 0%, var(--black-900) 80%);
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--black-700);
+}
+
+.avatar-part-category h4::before,
+.avatar-part-category h4::after {
+    display: none; /* Quitamos las líneas si el h4 ya tiene fondo/borde */
+}
+
+.part-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.part-option {
+    border: 2px solid var(--black-600); /* Borde oscuro para las opciones */
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: var(--black-800); /* Fondo oscuro para las opciones */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra para las opciones */
+}
+
+.part-option:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    border-color: var(--swans-down-400); /* Borde brillante al hacer hover */
+    background-color: var(--black-700); /* Un poco más claro al hacer hover */
+}
+
+.part-option img {
+    max-width: 90%;
+    max-height: 70%;
+    object-fit: contain;
+    margin-bottom: 5px;
+    transition: transform 0.2s ease-out;
+}
+
+.part-option:hover img {
+    transform: scale(1.05);
+}
+
+.item-cost {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--brandy-punch-200); /* Color de costo claro y visible */
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0.9;
+}
+
+.part-option.selected {
+    border-color: var(--swans-down-500); /* Borde de selección vibrante */
+    box-shadow: 0 0 15px rgba(78, 140, 138, 0.8), inset 0 0 8px rgba(78, 140, 138, 0.4);
+    background-color: var(--swans-down-950); /* Fondo sutil para selección */
+    transform: scale(1.08);
+    z-index: 2;
+}
+
+.selected-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(78, 140, 138, 0.4); /* Capa de selección transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s ease-out;
+    border-radius: inherit;
+}
+
+.selected-overlay .checkmark {
+    font-size: var(--font-size-3xl);
+    color: var(--swans-down-100); /* Checkmark claro */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.part-option.locked-by-points {
+    opacity: 0.7;
+    cursor: not-allowed;
+    border-color: var(--brandy-punch-700); /* Borde más oscuro para bloqueado */
+    background-color: var(--black-950); /* Fondo casi negro para bloqueado */
+    position: relative;
+}
+
+.part-option.locked-by-points:hover {
+    transform: none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil al hacer hover en bloqueado */
+    border-color: var(--brandy-punch-600);
+    background-color: var(--black-900);
+}
+
+.locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro para el bloqueo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    font-size: var(--font-size-xl);
+    color: var(--brandy-punch-100); /* Candado claro */
+    z-index: 1;
+    transition: background-color 0.3s ease;
+    border-radius: inherit;
+}
+
+.part-option.locked-by-points:hover .locked-overlay {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.part-option.locked-by-points .item-cost {
+    color: var(--brandy-punch-500);
+    font-weight: 700;
+}
+
+/* Loading spinner */
+.avatar-customizer-loading {
+    text-align: center;
+    padding: 50px;
+    color: var(--black-100); /* Texto claro para loading */
+    font-size: var(--font-size-lg);
+    background-color: var(--black-900); /* Fondo oscuro */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid var(--swans-down-500);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite, glow 1.5s ease-in-out infinite alternate;
+    margin: 20px auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .avatar-customizer {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .avatar-customizer {
+        grid-template-areas:
+            "header"
+            "points"
+            "preview"
+            "actions"
+            "selection";
+        grid-template-columns: 1fr;
+        padding: var(--font-size-lg);
+        margin: var(--font-size-xl) 15px;
+    }
+
+    .customizer-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .current-avatar-preview {
+        width: 180px;
+        height: 180px;
+        margin-bottom: var(--font-size-3xl);
+    }
+
+    .customizer-actions {
+        flex-direction: column;
+        gap: var(--font-size-base);
+    }
+
+    .customizer-actions button {
+        width: 100%;
+        padding: 10px 20px;
+    }
+
+    .part-options {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+    }
+
+    .part-option {
+        width: 90px;
+        height: 90px;
+        padding: 5px;
+    }
+
+    .item-cost {
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* Animaciones compartidas */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px var(--swans-down-500), 0 0 10px var(--swans-down-400); }
+    100% { box-shadow: 0 0 10px var(--swans-down-500), 0 0 20px var(--swans-down-400); }
+}
+
+@keyframes coinPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}

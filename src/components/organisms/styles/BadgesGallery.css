@@ -1,0 +1,182 @@
+/* src/components/organisms/styles/BadgesGallery.css */
+
+/* Contenedor principal de la galería de insignias */
+.badges-gallery {
+    padding: var(--font-size-2xl); /* Espaciado interno generoso */
+    background-color: var(--black-900); /* **Fondo oscuro similar al AvatarCustomizer y AchievementsList** */
+    border-radius: 16px; /* Bordes redondeados */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* Sombra profunda */
+    color: var(--black-50); /* Texto claro */
+    font-family: 'Raleway', sans-serif; /* Consistente con el dashboard */
+    border: 1px solid var(--black-700); /* Borde sutil */
+    display: flex;
+    flex-direction: column;
+    gap: var(--font-size-xl); /* Espacio entre el título y la cuadrícula */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible del tab-content */
+}
+
+/* Título de la sección de insignias */
+.badges-gallery h3.badges-gallery-title {
+    text-align: center;
+    color: var(--swans-down-300); /* Color de acento para el título */
+    font-size: var(--font-size-3xl); /* Tamaño de título más grande */
+    margin-bottom: var(--font-size-lg); /* Espacio debajo del título */
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(78, 140, 138, 0.4); /* Sombra de texto suave */
+    font-weight: 700;
+}
+
+/* Cuadrícula de insignias */
+.badges-grid {
+    display: grid;
+    /* Ajuste el tamaño de los elementos de la cuadrícula para que se parezcan a las opciones del avatar/logros */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Tamaños de tarjeta de insignia */
+    gap: var(--font-size-xl); /* Espacio entre las tarjetas de insignias */
+    justify-content: center; /* Centrar elementos en la cuadrícula */
+    padding: 10px; /* Pequeño padding alrededor de la cuadrícula */
+}
+
+/* Estilos para el estado de carga */
+.badges-gallery-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; /* Asegurar una altura mínima */
+    color: var(--black-200);
+    font-size: var(--font-size-lg);
+    width: 100%; /* Asegurar que ocupe el ancho */
+}
+
+.badges-gallery-loading .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid var(--swans-down-500);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite, glow 1.5s ease-in-out infinite alternate;
+    margin: 20px auto;
+}
+
+/* Reutilizamos los keyframes de otros componentes */
+/* @keyframes spin y @keyframes glow ya están definidos en GamificationDashboard.css o AvatarCustomizer.css */
+/* Si este es el único archivo CSS que se carga, deberías incluirlos aquí. */
+
+/* Mensaje de no insignias */
+.badges-gallery.no-badges {
+    text-align: center;
+    padding: var(--font-size-3xl);
+    background-color: var(--black-800);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: var(--black-100);
+    font-style: italic;
+}
+
+/* Estilos para los SweetAlerts específicos de la galería de insignias */
+.swal-custom-popup {
+    background-color: var(--black-900) !important;
+    color: var(--black-50) !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--black-700) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.swal-custom-title {
+    color: var(--swans-down-300) !important;
+    font-size: var(--font-size-2xl) !important;
+    font-weight: 700 !important;
+    text-shadow: 0 0 5px rgba(78, 140, 138, 0.3) !important;
+}
+
+.swal-custom-html {
+    color: var(--black-100) !important;
+    font-size: var(--font-size-md) !important;
+}
+
+.swal-percentage {
+    font-weight: 600;
+    color: var(--brandy-punch-300); /* Color de acento para el porcentaje */
+    margin-top: 10px;
+}
+
+/* --- Estilos para BadgeItem (Asegúrate de que este componente también use estilos similares) --- */
+/* Los siguientes estilos deberían ir en BadgeItem.css, pero los incluyo aquí para referencia */
+/* para que veas la similitud con .part-option de AvatarCustomizer y AchievementItem */
+
+/* .badge-item {
+    border: 2px solid var(--black-600);
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: var(--black-800);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    min-height: 150px;
+    width: 140px; /* Asegura un tamaño consistente */
+
+
+.badge-item:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border-color: var(--swans-down-400);
+    background-color: var(--black-700);
+}
+
+.badge-item.unlocked {
+    border-color: var(--swans-down-500);
+    box-shadow: 0 0 18px rgba(78, 140, 138, 0.8), inset 0 0 10px rgba(78, 140, 138, 0.4);
+    background-color: var(--swans-down-950);
+}
+
+.badge-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: grayscale(100%); /* Desaturar si está bloqueada */
+    transition: filter 0.3s ease;
+}
+
+.badge-item.unlocked .badge-item-image {
+    filter: grayscale(0%); /* Color si está desbloqueada */
+}
+
+.badge-item-name {
+    font-size: var(--font-size-md);
+    font-weight: bold;
+    color: var(--swans-down-100);
+    margin: 0;
+}
+
+.badge-item.unlocked .badge-item-name {
+    color: var(--black-800);
+}
+
+.locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    font-size: var(--font-size-3xl);
+    color: var(--brandy-punch-100);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.badge-item.unlocked .locked-overlay {
+    display: none; /* Ocultar el overlay si está desbloqueada */
+}

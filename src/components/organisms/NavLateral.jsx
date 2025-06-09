@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/NavLateral.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Sigue usando useNavigate, es correcto para los clicks
 
 function NavLateral({user}) {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ function NavLateral({user}) {
     <div className="navLateral">
       <div
         onClick={() => {
-          navigate("/");
+          navigate("/main"); // Cambiado a /main para ir a la ruta base de SAPIMain
         }}
         className="navLateral_logo"
       >
@@ -18,7 +18,6 @@ function NavLateral({user}) {
       </div>
       <div className="navLateral_content">
         <ul className="navLateral_list">
-          
           <li
             onClick={() => {
               navigate("/main/catalogo");
@@ -39,6 +38,16 @@ function NavLateral({user}) {
           </li>
           <li
             onClick={() => {
+              navigate("/main/gamification"); // Ahora apunta a la ruta completa: /main/gamification
+            }}
+            className="navLateral_item"
+          >
+            {/* Puedes usar un icono relevante aquí, por ejemplo: */}
+            <img src="/assets/navLateral_1.svg" alt="Gamificación" /> {/* Asegúrate de tener este SVG */}
+            <p>Gamificación</p>
+          </li>
+          <li
+            onClick={() => {
               navigate("/main/perfil");
             }}
             className="navLateral_item"
@@ -46,11 +55,13 @@ function NavLateral({user}) {
             <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
             <p>{user?.userName ? user.userName.slice(0, 8) + "..." : "Usuario"}</p>
           </li>
+          {/* ¡AQUÍ ESTÁ EL CAMBIO PARA GAMIFICACIÓN! */}
+
         </ul>
       </div>
       <div
         onClick={() => {
-          navigate("/");
+          navigate("/"); // Si esto es para salir de la sesión, puede ser la ruta de logout o la raíz
         }}
         className="navLateral_exit"
       >

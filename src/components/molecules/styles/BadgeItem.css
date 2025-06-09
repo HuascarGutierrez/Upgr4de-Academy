@@ -1,0 +1,41 @@
+.badge-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    width: 140px;
+    /* Ancho fijo para las insignias */
+}
+
+.badge-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.badge-item.unlocked {
+    border-color: #ffc107;
+    /* Color dorado para insignias desbloqueadas */
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.2);
+}
+
+.badge-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.badge-info h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.badge-locked-text {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 0.9em;
+}

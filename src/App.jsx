@@ -8,8 +8,8 @@ import SignUp from './pages/SignUp'
 import SobreNosotros from './pages/SobreNosotros'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from './config/app'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { app } from './config/app'
 import SAPIMain from './pages/SAPIMain'
 import { getFirestore } from 'firebase/firestore'
 import { getDoc, doc } from 'firebase/firestore'
@@ -21,11 +21,9 @@ function App() {
 
   const [userdb, setUserdb] = useState(null);
 
-  
-
-
   useEffect(()=> {
     const db = getFirestore();
+    const auth = getAuth(app);
     
         const getUserData = async (uid) => {
           if (!auth.currentUser) return null; // Verificamos si hay un usuario autenticado

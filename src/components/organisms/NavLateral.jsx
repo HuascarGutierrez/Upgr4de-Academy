@@ -14,7 +14,7 @@ function NavLateral({user}) {
       >
         <img src="/assets/buho_verde.svg" alt="" />
         <h2>SAPI</h2>
-        <p>Sistema de Aprendizaje Práctico e Inteligente</p>
+        <p>Solución de Aprendizaje Práctico e Inteligente</p>
       </div>
       <div className="navLateral_content">
         <ul className="navLateral_list">

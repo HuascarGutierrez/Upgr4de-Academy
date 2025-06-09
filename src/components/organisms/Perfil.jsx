@@ -34,10 +34,10 @@ function Perfil({ user }) {
     {
       name: "Plan Gratuito",
       description:
-        "Inscríbete en el plan Gratuito para obtener los siguientes beneficios:",
+        "Plan por defecto",
       benefits: [
-        "Acceso a algunas las unidades",
-        "Evaluaciones y ejercicios",
+        "Acceso al avatar personalizado",
+
       ],
       plan: "Gratuito",
       price: 0,

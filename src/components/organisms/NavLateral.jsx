@@ -24,7 +24,7 @@ function NavLateral({user}) {
             }}
             className="navLateral_item"
           >
-            <img src="/assets/navLateral_2.svg" alt="" />
+            <img src="/assets/catalogo.svg" alt="" />
             <p>Catálogo</p>
           </li>
           <li
@@ -33,7 +33,7 @@ function NavLateral({user}) {
             }}
             className="navLateral_item"
           >
-            <img src="/assets/navLateral_3.svg" alt="" />
+            <img src="/assets/supervision.svg" alt="" />
             <p>Supervisión</p>
           </li>
           <li
@@ -43,7 +43,7 @@ function NavLateral({user}) {
             className="navLateral_item"
           >
             {/* Puedes usar un icono relevante aquí, por ejemplo: */}
-            <img src="/assets/navLateral_1.svg" alt="Gamificación" /> {/* Asegúrate de tener este SVG */}
+            <img src="/assets/gamificacion.svg" alt="Gamificación" /> {/* Asegúrate de tener este SVG */}
             <p>Gamificación</p>
           </li>
           <li

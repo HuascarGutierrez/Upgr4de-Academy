@@ -87,6 +87,8 @@
 }
 
 .navLateral_item > img {
+    max-width: 50px;
+    aspect-ratio: 1/1;
     padding: 10px;
     border: 2px solid var(--swans-down-900);
     background-color: var(--swans-down-400);

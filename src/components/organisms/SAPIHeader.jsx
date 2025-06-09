@@ -6,7 +6,7 @@ function SAPIHeader({ user }) {
     const navigate = useNavigate();
 
     const handleIngreso = () => {
-        user ? navigate("/main/courses") : navigate("/iniciodesesion");
+        user ? navigate("/main/perfil") : navigate("/iniciodesesion");
     };
 
     return (
@@ -25,7 +25,7 @@ function SAPIHeader({ user }) {
                 </div>
                 <div className="SAPIHeader_contenido">
                     <p>SAPI</p>
-                    <h3>Sistema de Aprendizaje Práctica e Inteligente</h3>
+                    <h3>Solución de Aprendizaje Práctica e Inteligente</h3>
                     <h2>SAPI es una plataforma educativa orientada a brindar cursos para </h2>
                     <h2>las materias de álgebra, cálculo física y química. Con el fin de</h2>
                     <h2>reforzar los conocimientos de los estudiantes.</h2>

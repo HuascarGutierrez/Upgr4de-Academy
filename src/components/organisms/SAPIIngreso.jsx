@@ -18,7 +18,7 @@ function SAPIIngreso({ user }) {
             <img src="/images/sapi-pet.webp" alt="sapi pet" />
         </div>
         <div className="SAPIIngreso_description">
-          <h3>Sistema de Aprendizaje Práctica e Inteligente</h3>
+          <h3>Solución de Aprendizaje Práctica e Inteligente</h3>
           <p>
             SAPI es una plataforma educativa orientada a brindar cursos para las
             materias de álgebra, cálculo física y química. Con el fin de

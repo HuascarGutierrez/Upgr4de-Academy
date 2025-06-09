@@ -26,8 +26,7 @@
 .catalog-header .name {
     font-size: var(--font-size-xl);
     font-weight: bold;
-    color: var(--black-800);
-    flex-shrink: 0;
+    color: #333333; /* Coincide con el color del encabezado en SAPIcurses */
 }
 
 .nav-bar {
@@ -68,6 +67,16 @@
     padding: var(--font-size-3xl) var(--font-size-lg);
     border-radius: 16px;
     margin: var(--font-size-2xl) 0;
+    background-color: #D2E6E4;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.title {
+    color: black;
+    font-size: var(--font-size-xl); /* Coincide con el tamaño de fuente en h1 */
+    font-weight: bold;
     text-align: center;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
 }
@@ -87,6 +96,12 @@
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px; /* Coincide con el espaciado del primer código */
+}
+
+.sub-title {
+    color: gray;
+    font-size: var(--font-size-xs);
 }
 
 .filters {
@@ -305,4 +320,9 @@
         padding: 10px 15px;
         font-size: var(--font-size-sm);
     }
+}
+
+.Catalogo-user{
+    color: var(--swans-down-800);
+    font-size: var(--font-size-lg);
 }

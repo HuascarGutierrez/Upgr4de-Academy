@@ -144,7 +144,7 @@ function MostrarCursos({user}) {
           <form className="editar-curso-form" onSubmit={handleEdit}>
             <h2>Editar Curso</h2>
             <label>
-              Nombre del Curso
+              <p className='title-edit'>Nombre del Curso</p>
               <input
                 type="text"
                 name="title"
@@ -154,7 +154,7 @@ function MostrarCursos({user}) {
               />
             </label>
             <label>
-              Descripción
+              <p className='title-edit'>Descripción</p>
               <textarea
                 name="description"
                 value={currentCourse.description}
@@ -163,7 +163,7 @@ function MostrarCursos({user}) {
               ></textarea>
             </label>
             <label>
-              Categoría
+              <p className='title-edit'>Categoría</p>
               <input
                 type="text"
                 name="category"
@@ -173,7 +173,7 @@ function MostrarCursos({user}) {
               />
             </label>
             <label>
-              Profesor
+              <p className='title-edit'>Profesor</p>
               <select
                 name="teacher"
                 value={currentCourse.teacher}
@@ -191,7 +191,8 @@ function MostrarCursos({user}) {
 
 
             <label>
-              Imagen del Curso
+              <p className='title-edit'>Imagen del Curso</p>
+              
               <input
                 type="file"
                 accept="image/*"
@@ -204,7 +205,6 @@ function MostrarCursos({user}) {
               )}
               {!imagePreview && currentCourse.link_image && (
                 <div className="current-image">
-                  <p>Imagen actual:</p>
                   <img src={currentCourse.link_image} alt="Actual" style={{maxWidth: '200px'}} />
                 </div>
               )}

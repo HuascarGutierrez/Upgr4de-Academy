@@ -40,7 +40,7 @@ function Login() {
         if(studentData.Rol === "Administrador"){
           navigate('/admin/usersSection');
         }else{
-        navigate('/main/courses');
+        navigate('/main/perfil');
       } // Estudiante activo
       } else {
         await auth.signOut();

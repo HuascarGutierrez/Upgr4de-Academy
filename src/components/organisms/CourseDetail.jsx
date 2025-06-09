@@ -150,7 +150,7 @@ function CourseDetail({ user }) {
           <div className="banner-content">
             <div>
               <h1 className="banner-title">{course.title}</h1>
-              <h2 className="banner-subtitle">CURSO PRÁCTICO</h2>
+              <h2 className="banner-subtitle">CURSO TEORICO Y PRÁCTICO</h2>
             </div>
             {/* Aquí puedes usar el logo de Zowl u otro logo relevante */}
             <img src={ZowlWhite} alt="Zowl Logo" className="react-logo" />
@@ -166,7 +166,7 @@ function CourseDetail({ user }) {
             <span role="img" aria-label="teacher icon">👨‍🏫</span> Docente: {course.teacher}
           </p>
           <div className="description">
-            <p>{course.description}</p>
+            <p>Objetivo: {course.description}</p>
           </div>
 
           <div className="actions">

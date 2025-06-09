@@ -131,7 +131,7 @@ const EditUnitsForm = ({ courseId }) => {
 
   return (
     <div className="units-edit-container">
-      <h2>Editar Unidades y Lecciones del Curso</h2>
+      <h2 >Editar Unidades y Lecciones del Curso</h2>
       <div className="units-list">
         {units.map(unit => (
           <div key={unit.id} className="unit-form-container">
@@ -149,7 +149,7 @@ const EditUnitsForm = ({ courseId }) => {
               {expandedUnits[unit.id] && (
                 <>
                   <label>
-                    Título:
+                    <p className='edit-secction'>Título:</p>
                     <input
                       type="text"
                       value={unit.title || ''}
@@ -159,7 +159,7 @@ const EditUnitsForm = ({ courseId }) => {
                   </label>
 
                   <label>
-                    Descripción:
+                    <p className='edit-secction'>Descripción:</p>
                     <textarea
                       value={unit.description || ''}
                       onChange={(e) => handleUnitChange(unit.id, 'description', e.target.value)}
@@ -168,7 +168,7 @@ const EditUnitsForm = ({ courseId }) => {
                   </label>
 
                   <label>
-                    Número de Unidad:
+                    <p className='edit-secction'>Número de Unidad:</p>
                     <input
                       type="number"
                       min="1"
@@ -198,7 +198,7 @@ const EditUnitsForm = ({ courseId }) => {
                       <h5>Lección {lesson.number_lesson}</h5>
                       
                       <label>
-                        Título:
+                        <p className='edit-lessons'>Título:</p>
                         <input
                           type="text"
                           value={lesson.title || ''}
@@ -208,7 +208,7 @@ const EditUnitsForm = ({ courseId }) => {
                       </label>
 
                       <label>
-                        Descripción:
+                        <p className='edit-lessons'>Descripción:</p>
                         <textarea
                           value={lesson.description || ''}
                           onChange={(e) => handleLessonChange(unit.id, lesson.id, 'description', e.target.value)}
@@ -217,7 +217,7 @@ const EditUnitsForm = ({ courseId }) => {
                       </label>
 
                       <label>
-                        Número de Lección:
+                        <p className='edit-lessons'>Número de Lección:</p>
                         <input
                           type="number"
                           min="1"
@@ -228,7 +228,7 @@ const EditUnitsForm = ({ courseId }) => {
                       </label>
 
                       <label>
-                        Enlace del Documento:
+                        <p className='edit-lessons'>Enlace del Documento:</p>
                         <input
                           type="url"
                           value={lesson.link_doc || ''}
@@ -237,7 +237,7 @@ const EditUnitsForm = ({ courseId }) => {
                       </label>
 
                       <label>
-                        Enlace del Video:
+                        <p className='edit-lessons'>Enlace del Video:</p>
                         <input
                           type="text"
                           value={lesson.link_video || ''}

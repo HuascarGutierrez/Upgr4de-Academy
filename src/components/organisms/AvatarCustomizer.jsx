@@ -1,12 +1,12 @@
-// src/components/organisms/AvatarCustomizer.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../config/app';
 import './styles/AvatarCustomizer.css';
 import Swal from 'sweetalert2';
 import { FaCoins } from 'react-icons/fa';
+import html2canvas from 'html2canvas';
 
-function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
+function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData, onAvatarExport }) {
     const [avatarItems, setAvatarItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentAvatar, setCurrentAvatar] = useState(userAvatarParts);
@@ -14,16 +14,15 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
     const [pendingChanges, setPendingChanges] = useState({});
     const [pointsDeductedInSession, setPointsDeductedInSession] = useState(0);
 
-    // Mapeo de nombres de tipo de parte a nombres de display en español
     const partTypeDisplayNames = {
-        body: 'Cuerpo', // Corregido: 'body' es 'Cuerpo'
+        body: 'Cuerpo',
         head: 'Cabeza',
         eyes: 'Ojos',
         mouth: 'Boca',
         hair: 'Cabello',
         outfit: 'Atuendo',
         accessory: 'Accesorio',
-        background: 'Fondo' // Corregido: 'background' es 'Fondo'
+        background: 'Fondo'
     };
 
     useEffect(() => {
@@ -70,7 +69,8 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
         }
 
         const isPartOwnedInitially = Object.values(userAvatarParts).includes(newAvatarPartId);
-        const isPartOwnedInPending = Object.values(pendingChanges).some(pendingId => pendingId === newAvatarPartId);
+        const isPartOwnedInPending = Object.values(pendingChanges).some(pendingId =>
+            pendingId === newAvatarPartId);
 
         const isCurrentlyOwned = isPartOwnedInitially || isPartOwnedInPending;
 
@@ -97,7 +97,6 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
         if (!isCurrentlyOwned && actualCost > 0) {
             setPointsDeductedInSession(prev => prev + actualCost);
         }
-
     }, [currentAvatar, availablePoints, pendingChanges, pointsDeductedInSession, userAvatarParts]);
 
     const handleSaveChanges = useCallback(async () => {
@@ -131,7 +130,6 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
         }
 
         finalUpdatedPoints = userPoints - totalCostForPendingChanges;
-
         if (finalUpdatedPoints < 0) {
             Swal.fire({
                 title: 'Error de cálculo',
@@ -149,7 +147,6 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
                 avatarParts: newAvatarPartsForDB,
                 points: finalUpdatedPoints
             });
-
             setAvailablePoints(finalUpdatedPoints);
             setCurrentAvatar(newAvatarPartsForDB);
             setPendingChanges({});
@@ -167,7 +164,6 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
                 background: 'var(--black-900)',
                 color: 'var(--black-50)'
             });
-
         } catch (error) {
             console.error("Error updating avatar or points:", error);
             Swal.fire({
@@ -196,6 +192,43 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
         });
     }, [userAvatarParts, userPoints]);
 
+    const handleExportAvatarAsProfilePicture = async () => {
+        if (!user || !user.uid) {
+            Swal.fire('Error', 'No se pudo obtener la información del usuario para guardar el avatar.', 'warning');
+            return;
+        }
+
+        const avatarPreviewElement = document.querySelector('.current-avatar-preview');
+        if (!avatarPreviewElement) {
+            Swal.fire('Error', 'No se encontró el previsualizador del avatar.', 'error');
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const canvas = await html2canvas(avatarPreviewElement, {
+                backgroundColor: null,
+                useCORS: true,
+            });
+
+            canvas.toBlob(async (blob) => {
+                if (blob) {
+                    if (onAvatarExport) {
+                        await onAvatarExport(blob);
+                        Swal.fire('Éxito', 'Avatar guardado como foto de perfil.', 'success');
+                    }
+                } else {
+                    Swal.fire('Error', 'No se pudo generar la imagen del avatar.', 'error');
+                }
+                setLoading(false);
+            }, 'image/png');
+        } catch (error) {
+            console.error("Error al exportar el avatar:", error);
+            Swal.fire('Error', 'Hubo un error al exportar el avatar.', 'error');
+            setLoading(false);
+        }
+    };
+
 
     if (loading) {
         return (
@@ -210,13 +243,9 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
         (acc[item.type] = acc[item.type] || []).push(item);
         return acc;
     }, {});
-
     const hasPendingChanges = Object.keys(pendingChanges).length > 0;
 
-    // Definir el orden de renderizado de las capas del avatar (de atrás hacia adelante)
     const renderOrder = ['background', 'body', 'outfit', 'head', 'hair', 'eyes', 'mouth', 'accessory'];
-
-    // Definir el orden de visualización de las categorías en la UI (el orden de personalización)
     const categoryDisplayOrder = ['eyes', 'head', 'background', 'body', 'outfit', 'hair', 'mouth', 'accessory'];
 
     return (
@@ -230,10 +259,10 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
             <div className="current-avatar-preview">
                 {renderOrder.map(type => {
                     const itemId = currentAvatar[type];
-                    if (!itemId) return null; // No renderizar si la parte no está definida
+                    if (!itemId) return null;
                     const item = avatarItems.find(i => i.id === itemId && i.type === type);
-                    // Asignar zIndex basado en el orden de renderizado para asegurar la superposición correcta
-                    return item ? <img key={item.id} src={item.imageUrl} alt={type} className={`avatar-part ${type}`} style={{ zIndex: renderOrder.indexOf(type) }} /> : null;
+                    return item ? <img key={item.id} src={item.imageUrl} alt={type} className={`avatar-part ${type}`} style={{ zIndex: renderOrder.indexOf(type) }} /> :
+                        null;
                 })}
                 {Object.keys(currentAvatar).length === 0 && (
                     <p className="no-avatar-parts">Crea tu avatar seleccionando partes.</p>
@@ -255,16 +284,22 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
                 >
                     Descartar
                 </button>
+                <button
+                    className="export-profile-pic-btn"
+                    onClick={handleExportAvatarAsProfilePicture}
+                    disabled={loading}
+                >
+                    Establecer como Foto de Perfil
+                </button>
             </div>
 
-            <div className="avatar-parts-selection">
+            <div
+                className="avatar-parts-selection">
                 {Object.keys(groupedItems).length === 0 && <p className="no-items-message">No hay partes de avatar disponibles para personalizar.</p>}
-                {/* Iterar sobre el orden de categorías definido para la visualización */}
                 {categoryDisplayOrder.map(type => {
-                    if (!groupedItems[type]) return null; // Si no hay items para esta categoría, no la renderizar
+                    if (!groupedItems[type]) return null;
                     return (
                         <div key={type} className="avatar-part-category">
-                            {/* Usar los nombres de display en español */}
                             <h4>{partTypeDisplayNames[type] || type.charAt(0).toUpperCase() + type.slice(1)}</h4>
                             <div className="part-options">
                                 {groupedItems[type].map(item => {
@@ -277,7 +312,8 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
                                             key={item.id}
                                             className={`part-option ${isSelected ? 'selected' : ''} ${isLockedByPoints ? 'locked-by-points' : ''}`}
                                             onClick={() => !isLockedByPoints && handlePartSelect(item)}
-                                            aria-label={`${partTypeDisplayNames[item.type] || item.type}: ${item.id} - ${isLockedByPoints ? 'Bloqueado' : 'Seleccionar'}`}
+                                            aria-label={`${partTypeDisplayNames[item.type] || item.type}: ${item.id} - ${isLockedByPoints ?
+                                                'Bloqueado' : 'Seleccionar'}`}
                                         >
                                             <img src={item.imageUrl} alt={item.id} />
                                             {item.pointsCost > 0 && !isOwned && (
@@ -285,7 +321,7 @@ function AvatarCustomizer({ user, userAvatarParts, userPoints, setUserData }) {
                                             )}
                                             {isSelected && (
                                                 <div className="selected-overlay">
-                                                    <span className="checkmark">✔</span>
+                                                    <span className="checkmark" >✔</ span>
                                                 </div>
                                             )}
                                             {isLockedByPoints && (

@@ -53,7 +53,7 @@ function NavLateral({user}) {
             className="navLateral_item"
           >
             <img style = {{padding: '0'}} src={user?.imageUrl} alt="profi" className="profile_photo" />
-            <p>Perfil</p>
+            <p>{user?.userName ? user.userName.slice(0, 8) + "..." : "Usuario"}</p>
           </li>
           {/* ¡AQUÍ ESTÁ EL CAMBIO PARA GAMIFICACIÓN! */}
 

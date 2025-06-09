@@ -41,7 +41,7 @@ function UsersSection({user}) {
   return (
     <div className="users-section">
       <div className='contenedor-title-users'>
-        <h1 className="users-unidad-title">Usuarios</h1>
+        <h1 className="users-unidad-title">Gestión de Usuarios</h1>
       </div>
 
       <div className="users-summary">

@@ -1,5 +1,6 @@
 // src/components/Perfil.jsx
 
+
 import React, { useState, useRef, useEffect } from "react";
 import "./styles/Perfil.css";
 import { getAuth, signOut } from "firebase/auth";
@@ -18,11 +19,14 @@ import { handleUpdateImage } from "../../config/auth_functions";
 import { ClipLoader } from "react-spinners";
 import Swal from 'sweetalert2';
 
+
 import SubscriptionSection from "./SubscriptionSection";
 import PaymentSimulationModal from "./PaymentSimulationModal";
 import GamificationSection from "./GamificationSection";
 
+
 import { storage } from "../../config/app2";
+
 
 function Perfil({ user }) {
   const [activeView, setActiveView] = useState("myProfile");
@@ -52,19 +56,28 @@ function Perfil({ user }) {
     },
   ]);
 
+
   const fullNameRef = useRef(user?.userName || "");
   const fileInputRef = useRef(null);
+  const phoneRef = useRef(user?.phone || "");
+  const cityRef = useRef(user?.city || "");
+  const birthDateRef = useRef(user?.birthDate || "");
   const [wait, setWait] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [planToSubscribe, setPlanToSubscribe] = useState(null);
 
+
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    if (user?.userName) {
-      fullNameRef.current.value = user.userName;
+    if (user) {
+      if (user.userName) fullNameRef.current.value = user.userName;
+      if (user.phone) phoneRef.current.value = user.phone;
+      if (user.city) cityRef.current.value = user.city;
+      if (user.birthDate) birthDateRef.current.value = user.birthDate;
     }
-  }, [user?.userName]);
+  }, [user]);
 
   const handleSignOut = async () => {
     const result = await Swal.fire({
@@ -77,6 +90,7 @@ function Perfil({ user }) {
       confirmButtonText: 'Sí, cerrar sesión',
       cancelButtonText: 'Cancelar'
     });
+
 
     if (result.isConfirmed) {
       const auth = getAuth();
@@ -91,13 +105,16 @@ function Perfil({ user }) {
     }
   };
 
+
   const handleViewChange = (view) => {
     setActiveView(view);
   };
 
+
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+
 
   const handleImageChange = async (e) => {
     setWait(true);
@@ -138,33 +155,42 @@ function Perfil({ user }) {
     setWait(false);
   };
 
-  const handleSaveName = async (e) => {
+
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
     const fullName = fullNameRef.current.value.trim();
+    const phone = phoneRef.current.value.trim();
+    const city = cityRef.current.value.trim();
+    const birthDate = birthDateRef.current.value;
+
     if (fullName.length < 8) {
       alertWarning("El nombre debe tener al menos 8 caracteres");
       return;
     }
+
     if (!user?.uid) {
-      alertWarning(
-        "No se pudo obtener la información del usuario para actualizar el nombre."
-      );
+      alertWarning("No se pudo obtener la información del usuario.");
       return;
     }
+
     const db = getFirestore();
     const userRef = doc(db, "users", user.uid);
+
     try {
       await setDoc(
         userRef,
         {
           userName: fullName,
+          phone,
+          city,
+          birthDate,
         },
         { merge: true }
       );
       Swal.fire({
         icon: 'success',
-        title: '¡Nombre guardado!',
-        text: 'Tu nombre ha sido actualizado correctamente. Se recargará la página.',
+        title: '¡Datos guardados!',
+        text: 'Tu información ha sido actualizada correctamente. Se recargará la página.',
         timer: 2000,
         timerProgressBar: true,
         didClose: () => {
@@ -172,7 +198,7 @@ function Perfil({ user }) {
         }
       });
     } catch (error) {
-      alertWarning(`Error al guardar el nombre: ${error.message}`);
+      alertWarning(`Error al guardar los datos: ${error.message}`);
     }
   };
 
@@ -180,6 +206,7 @@ function Perfil({ user }) {
     setPlanToSubscribe(plan);
     setShowPaymentModal(true);
   };
+
 
   const handlePaymentComplete = async (fileComprobante) => {
     if (!planToSubscribe || typeof planToSubscribe !== 'object' || !planToSubscribe.name || typeof planToSubscribe.price === 'undefined') {
@@ -207,22 +234,28 @@ function Perfil({ user }) {
       return;
     }
 
+
     setWait(true);
+
 
     try {
       const timestamp = Date.now();
       const fileName = fileComprobante.name;
       const storagePath = `comprobantes/${user.uid}/${timestamp}-${fileName}`;
 
+
       const storageRef = ref(storage, storagePath);
       const uploadResult = await uploadBytes(storageRef, fileComprobante);
       const urlComprobante = await getDownloadURL(uploadResult.ref);
 
+
       const db = getFirestore();
       const solicitudesRef = collection(db, "solicitudesPagos");
 
+
       const planNameForDB = planToSubscribe.name;
       const montoPago = planToSubscribe.price;
+
 
       await addDoc(solicitudesRef, {
         userId: user.uid,
@@ -234,6 +267,7 @@ function Perfil({ user }) {
         estado: "pendiente",
         fechaSolicitud: serverTimestamp(),
       });
+
 
       Swal.fire({
         icon: 'success',
@@ -255,16 +289,19 @@ function Perfil({ user }) {
     }
   };
 
+
   const handleClosePaymentModal = () => {
     setShowPaymentModal(false);
     setPlanToSubscribe(null);
   };
+
 
   return (
     <div className="profile-page-wrapper">
       <div className="profile-title-card bento-box">
         <h1 className="profile-main-title">Perfil</h1>
       </div>
+
 
       <div className="profile-container bento-grid">
         <div className="menu-card bento-box">
@@ -299,6 +336,7 @@ function Perfil({ user }) {
           </div>
         </div>
 
+
         {activeView === "publicProfile" && (
           <div className="content-wrapper bento-box">
             <div id="perfilPublico" className="public-profile-card">
@@ -327,10 +365,12 @@ function Perfil({ user }) {
           </div>
         )}
 
+
         {activeView === "myProfile" && (
           <div className="content-wrapper bento-box">
             <div id="miPerfil" className="my-profile-card">
               <h2>Información Básica</h2>
+
 
               {/* SECCIÓN CAMBIAR FOTO DE PERFIL */}
               <div className="form-section-group">
@@ -355,21 +395,28 @@ function Perfil({ user }) {
                 )}
               </div>
 
+
               {/* SECCIÓN CAMBIAR NOMBRE COMPLETO */}
-              <form onSubmit={handleSaveName} className="form-section-group">
+              <form onSubmit={handleSaveProfile} className="form-section-group">
                 <span className="label-text">Cambiar nombre completo</span>
-                <input
-                  minLength={8}
-                  type="text"
-                  ref={fullNameRef}
-                  placeholder={user?.userName || "Nombre completo"}
-                  className="form-input-text profile-name-input"
-                />
+                <input type="text" ref={fullNameRef} className="form-input-text" placeholder={user?.userName || "Nombre completo"} minLength={8} />
+
+                <span className="label-text">Número de celular</span>
+                <input type="tel" ref={phoneRef} className="form-input-text" placeholder={user?.phone || "Ej: 71555555"} />
+
+                <span className="label-text">Ciudad de residencia</span>
+                <input type="text" ref={cityRef} className="form-input-text" placeholder={user?.city || "Ej: La Paz"} />
+
+                <span className="label-text">Fecha de nacimiento</span>
+                <input type="date" ref={birthDateRef} className="form-input-text" placeholder={user?.birthDate}/>
+
                 <button type="submit" className="subscribe-button">Guardar Cambios</button>
               </form>
+
             </div>
           </div>
         )}
+
 
         {activeView === "subscription" && (
           <div className="content-wrapper bento-box">
@@ -381,11 +428,6 @@ function Perfil({ user }) {
           </div>
         )}
 
-        {activeView === "gamification" && (
-          <div className="content-wrapper bento-box">
-            <GamificationSection user={user} />
-          </div>
-        )}
 
         {showPaymentModal && (
           <PaymentSimulationModal
@@ -399,5 +441,6 @@ function Perfil({ user }) {
     </div>
   );
 }
+
 
 export default Perfil;

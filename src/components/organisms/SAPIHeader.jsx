@@ -6,7 +6,7 @@ function SAPIHeader({ user }) {
     const navigate = useNavigate();
 
     const handleIngreso = () => {
-        user ? navigate("/main/courses") : navigate("/iniciodesesion");
+        user ? navigate("/main/perfil") : navigate("/iniciodesesion");
     };
 
     return (

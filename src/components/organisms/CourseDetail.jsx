@@ -175,20 +175,13 @@ function CourseDetail({ user }) {
               className={`action-button ${enrolled ? 'actions_enrollCourse-enrolled' : 'actions_enrollCourse'}`}
             >
               {enrolled ? (
-                <>Quitar de las estadísticas <span role="img" aria-label="remove icon">❌</span></>
+                <>Quitar de <i>Supervisión</i> <span role="img" aria-label="remove icon"></span></>
               ) : (
-                <>Agregar a las estadísticas <span role="img" aria-label="add icon">✅</span></>
+                <>Agregar a <i>Supervisión</i> <span role="img" aria-label="add icon"></span></>
               )}
             </button>
           </div>
 
-          {enrolled && (
-            <div className="rating">
-              <span className="rating-label">Calificación:</span>
-              <span className="rating-value">{"N/A"}</span>
-              <span className="star" role="img" aria-label="star">&#9733;</span>
-            </div>
-          )}
 
           <div className="topics">
             <h3>Temario del Curso</h3>

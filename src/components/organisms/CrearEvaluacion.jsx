@@ -312,7 +312,7 @@ const handleSubmitExercise = async (e) => {
           <div>        
             <h1 className="crear-curso-title">Crear Ejercicio</h1>
           </div>
-            <button type="button" className="btn-crear-evaluacion" style={{height: 'min-content', position: 'absolute', top: '20px', right: '20px'}}
+            <button type="button" className="btn-crear-evaluacion" style={{height: 'min-content', position: 'absolute', top: '20px', right: '20px', width: 'auto'}}
             onClick={() => {actualizarListaEvaluaciones()}}
             >
               actualizar lista de evaluaciones
